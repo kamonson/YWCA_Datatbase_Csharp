@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace YWCA_Database_Software.Properties
+namespace YWCA_Software.Properties
 {
 
 
