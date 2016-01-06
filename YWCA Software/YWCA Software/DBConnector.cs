@@ -147,6 +147,7 @@ namespace YWCA_Software
         public void RunQueryLNameFromPID(string PID)
         {
             Connect();
+
             _dbCommand.CommandText = lNameFromParticipantID(PID);
 
             OleDbDataReader rdr = _dbCommand.ExecuteReader();
@@ -163,7 +164,7 @@ namespace YWCA_Software
                 }
                 Console.WriteLine(@"Found " + rowNum + @" results");
             }
-
+  
             Disconnect();
         }
     }

@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 
 namespace YWCA_Software
 {
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
