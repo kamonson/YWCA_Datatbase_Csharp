@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.OleDb;
 
@@ -8,6 +10,22 @@ namespace YWCA_Software
     {
         private static OleDbCommand _dbCommand = new OleDbCommand(); //commander for database
         public event PropertyChangedEventHandler PropertyChanged; //event handler for data binding to WPF
+        public List<string> listFirstNames = new List<string>();
+        public List<string> listLastNames = new List<string>();
+
+        private ObservableCollection<string> _listPids = new ObservableCollection<string> {@"results go here"};
+        public ObservableCollection<string> ListPiDs
+        {
+            get
+            {
+                return _listPids;
+            }
+            set
+            {
+                _listPids = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListPiDs"));
+            }
+        }
 
         /********************************************************************* Start Const Strings For DB Access *********************************************************************/
         private const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
@@ -165,6 +183,31 @@ namespace YWCA_Software
                 Console.WriteLine(@"Found " + rowNum + @" results");
             }
   
+            Disconnect();
+        }
+
+        public void RunQueryFindClient(string fname, string lname, string pid)
+        {
+            Connect();
+            string SELECT = @"SELECT * ";
+            string FROM = @"FROM tbl_Consumer_List_Entry ";
+            string WHERE = @"WHERE FIRST_NAME LIKE '*" + FirstName + @"*' AND LAST_NAME LIKE '*" + LastName + @"*';";
+
+            _dbCommand.CommandText = SELECT + FROM + WHERE;
+
+            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+
+            ListPiDs.Clear();
+
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    ListPiDs.Add((rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null);
+                }
+            }
+
             Disconnect();
         }
     }

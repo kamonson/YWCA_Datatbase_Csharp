@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YWCA_Software"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    
+        Title="MainWindow" Height="250" Width="525">
+
     <Grid>
-        <Button x:Name="ButtonRun" Content="Run" HorizontalAlignment="Center" Margin="221,3,221,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <TextBox x:Name="textBoxFName" HorizontalAlignment="Left" Height="23" Margin="96,0,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBoxLName" HorizontalAlignment="Left" Height="23" Margin="301,0,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBoxPID" HorizontalAlignment="Left" Height="23" Margin="205,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Name="ButtonADVP" Height="210" Width="210" BorderThickness="0" Background="Transparent" Click="ButtonADVP_Click">
+            <StackPanel>
+                <Image Source="/Resources/ADVP.png" Width="200" Height="200"/>
+            </StackPanel>
+        </Button>
     </Grid>
-    
+
 </Window>

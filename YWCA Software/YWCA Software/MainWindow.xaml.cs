@@ -25,14 +25,20 @@ namespace YWCA_Software
         public MainWindow()
         {
             InitializeComponent();
-            textBoxFName.DataContext = db;
-            textBoxLName.DataContext = db;
+            DataContext = db;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void ButtonADVP_Click(object sender, RoutedEventArgs e)
         {
-            db.RunQueryFNameFromPID(textBoxPID.Text);
-            db.RunQueryLNameFromPID(textBoxPID.Text);
+            ParticipantSelect ps = new ParticipantSelect();
+            ps.Show();
+            Close();
         }
+
+        //        private void button_Click(object sender, RoutedEventArgs e)
+        //        {
+        //            db.RunQueryFNameFromPID(textBoxPID.Text);
+        //            db.RunQueryLNameFromPID(textBoxPID.Text);
+        //        }
     }
 }
