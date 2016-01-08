@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YWCA_Software"
         mc:Ignorable="d"
-        Title="MainWindow" Height="250" Width="525">
+        Title="YWCA Database Select" Height="187" Width="339" ResizeMode="NoResize">
 
     <Grid>
-        <Button Name="ButtonADVP" Height="210" Width="210" BorderThickness="0" Background="Transparent" Click="ButtonADVP_Click">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="185*"/>
+            <ColumnDefinition Width="146*"/>
+        </Grid.ColumnDefinitions>
+        <Button Name="ButtonADVP" Height="120" Width="120" BorderThickness="0" Background="Transparent" Click="ButtonADVP_Click" Grid.ColumnSpan="2" Margin="110,23,111,23">
             <StackPanel>
-                <Image Source="/Resources/ADVP.png" Width="200" Height="200"/>
+                <Image Source="/Resources/ADVP.png" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </StackPanel>
         </Button>
     </Grid>

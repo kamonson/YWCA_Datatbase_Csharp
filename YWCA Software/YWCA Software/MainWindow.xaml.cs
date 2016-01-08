@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace YWCA_Software
 {
@@ -20,25 +7,23 @@ namespace YWCA_Software
     /// </summary>
     public partial class MainWindow : Window
     {
-        DbConnector db = new DbConnector();
-
+        /// <summary>
+        /// Initializes Main Window
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = db;
         }
-
+        /// <summary>
+        /// Open ADVP database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonADVP_Click(object sender, RoutedEventArgs e)
         {
             ParticipantSelect ps = new ParticipantSelect();
             ps.Show();
             Close();
         }
-
-        //        private void button_Click(object sender, RoutedEventArgs e)
-        //        {
-        //            db.RunQueryFNameFromPID(textBoxPID.Text);
-        //            db.RunQueryLNameFromPID(textBoxPID.Text);
-        //        }
     }
 }

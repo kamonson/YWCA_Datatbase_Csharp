@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace YWCA_Software
 {
     /// <summary>
     /// Interaction logic for ParticipantSelect.xaml
     /// </summary>
-    public partial class ParticipantSelect : Window
+    public partial class ParticipantSelect
     {
-        DbConnector AdvbDb = new DbConnector();
-
+        DbConnector AdvbDb = new DbConnector(); //ViewModel for data binding
+        /// <summary>
+        /// Initialize window and set dataContext
+        /// </summary>
         public ParticipantSelect()
         {
             InitializeComponent();
             DataContext = AdvbDb;
         }
-
+        /// <summary>
+        /// Clear text on focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxFirstName_GotFocus(object sender, RoutedEventArgs e)
         {
             if (textBoxFirstName.Text == @"First Name")
@@ -34,7 +30,11 @@ namespace YWCA_Software
                 textBoxFirstName.Text = "";
             }
         }
-
+        /// <summary>
+        /// Clear text on focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxLastName_GotFocus(object sender, RoutedEventArgs e)
         {
             if (textBoxLastName.Text == @"Last Name")
@@ -42,7 +42,11 @@ namespace YWCA_Software
                 textBoxLastName.Text = "";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxParticipantID_GotFocus(object sender, RoutedEventArgs e)
         {
             if (textBoxParticipantID.Text == @"Participant ID")
@@ -50,23 +54,75 @@ namespace YWCA_Software
                 textBoxParticipantID.Text = "";
             }
         }
-
+        /// <summary>
+        /// Fetch PID list from first name AND last name OR PID
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
-            AdvbDb.RunQueryFindClient(textBoxFirstName.Text, textBoxLastName.Text, textBoxParticipantID.Text);
+            AdvbDb.RunQueryFindClient();
         }
-
-        private void ButtonSearch_KeyDown(object sender, KeyEventArgs e)
+        /// <summary>
+        /// Create intake form with selected PID
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSelectParticipant_Click(object sender, RoutedEventArgs e)
+        {
+            IntakeForm intakeForm = new IntakeForm(textBoxParticipantID.Text);
+            intakeForm.Show();
+            Close();
+        }
+        /// <summary>
+        /// Update PID, First name, Last name eachtime different PID is changed in list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string pid = listBoxPID.SelectedItem?.ToString();
+            textBoxParticipantID.Text = pid;
+            AdvbDb.RunQueryFNameFromPid(pid);
+            AdvbDb.RunQueryLNameFromPid(pid);
+        }
+        /// <summary>
+        /// Run search with enter key
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxLastName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
+                ButtonSearch.Focus();
                 ButtonSearch_Click(sender, e);
             }
         }
-
-        private void buttonSelectParticipant_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Run search with enter key
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxParticipantID_KeyDown(object sender, KeyEventArgs e)
         {
-          
+            if (e.Key == Key.Enter)
+            {
+                ButtonSearch.Focus();
+                ButtonSearch_Click(sender, e);
+            }
+        }
+        /// <summary>
+        /// Start Intake with enter key
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBoxPID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                buttonSelectParticipant_Click(sender, e);
+            }
         }
     }
 }
