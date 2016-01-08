@@ -95,7 +95,7 @@ namespace YWCA_Software
         {
             if (e.Key == Key.Enter)
             {
-                ButtonSearch.Focus();
+                listBoxPID.Focus();
                 ButtonSearch_Click(sender, e);
             }
         }
@@ -108,7 +108,7 @@ namespace YWCA_Software
         {
             if (e.Key == Key.Enter)
             {
-                ButtonSearch.Focus();
+                listBoxPID.Focus();
                 ButtonSearch_Click(sender, e);
             }
         }
