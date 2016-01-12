@@ -29,7 +29,7 @@
                 <Image Source="/Resources/Search.png" Width="72" Height="72"/>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonSelectParticipant" Content="Thats The One" Margin="0,115,10,0" Click="buttonSelectParticipant_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" Grid.RowSpan="2"/>
+        <Button x:Name="buttonSelectParticipant" Content="Thats The One" Margin="0,115,10,0" Click="buttonSelectParticipant_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" Grid.RowSpan="2" BorderThickness="0"/>
         <TextBlock x:Name="textBlockFname" Margin="0,115,274,0" TextWrapping="Wrap" Text="{Binding FirstName}" Height="20" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="100"/>
         <TextBlock x:Name="textBlockLname" Margin="0,115,119,0" TextWrapping="Wrap" Text="{Binding LastName}" Height="20" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="150"/>
 
