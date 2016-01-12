@@ -10,6 +10,7 @@ namespace YWCA_Software
     /// </summary>
     public class DbConnector : INotifyPropertyChanged
     {
+        Sql _sql = new Sql();
         private static OleDbCommand _dbCommand = new OleDbCommand(); //commander for database
         public event PropertyChangedEventHandler PropertyChanged; //event handler for data binding to WPF
 
@@ -24,25 +25,46 @@ namespace YWCA_Software
         ////////////////////////////////////////////////////////////////////// END Const Strings For DB Access //////////////////////////////////////////////////////////////////////
 
 
-
-        /********************************************************************* Start SQL Strings *********************************************************************/
-        private string _fName = "First Name"; //Participant first name
+        /********************************************************************* Start SQL Data Sections *********************************************************************/
+        private string _mi = "MI"; //Participant date of birth
         /// <summary>
-        /// Pass pid to obtain a SQL string for obtaining first name of person with given pid
+        /// Participant DOB for WPF databinding
         /// </summary>
-        /// <param name="participantId"></param>
-        /// <returns>SQL string to obtain first name</returns>
-        private string FNameFromParticipantId(string participantId)
+        public string Mi//Participant date of birth
         {
-            return Select("FIRST_NAME") +
-                   From("tbl_Consumer_List_Entry") +
-                   Where("Consumer_ID" + Equals(participantId)) +
-                   EndQuery();
+            get
+            {
+                return _mi;
+            }
+            set
+            {
+                _mi = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Mi"));
+            }
         }
+
+        private string _dob; //Participant date of birth
+        /// <summary>
+        /// Participant DOB for WPF databinding
+        /// </summary>
+        public string Dob//Participant date of birth
+        {
+            get
+            {
+                return _dob;
+            }
+            set
+            {
+                _dob = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Dob"));
+            }
+        }
+
+        private string _fName = "First Name"; //Participant first name
         /// <summary>
         /// Participant first name for WPF databinding
         /// </summary>
-        public string FirstName
+        public string FirstName//Participant first name
         {
             get
             {
@@ -57,21 +79,9 @@ namespace YWCA_Software
 
         private string _lName = "Last Name"; //Participant last name
         /// <summary>
-        /// Pass pid to obtain a SQL string for obtaining last name of person with given pid
-        /// </summary>
-        /// <param name="participantId"></param>
-        /// <returns>SQL string to obtain last name</returns>
-        private string LNameFromParticipantId(string participantId)
-        {
-            return Select("LAST_NAME") +
-                   From("tbl_Consumer_List_Entry") +
-                   Where("Consumer_ID" + Equals(participantId)) +
-                   EndQuery();
-        }
-        /// <summary>
         /// Participant last name for WPF databinding
         /// </summary>
-        public string LastName
+        public string LastName //Participant last name
         {
             get
             {
@@ -88,7 +98,7 @@ namespace YWCA_Software
         /// <summary>
         /// Participant ID for WPF databinding
         /// </summary>
-        public string Pid
+        public string Pid //Participant last name
         {
             get
             {
@@ -100,7 +110,6 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastName"));
             }
         }
-
         /// <summary>
         /// Set pid to input
         /// </summary>
@@ -109,12 +118,12 @@ namespace YWCA_Software
         {
             Pid = pid;
         }
-
+		
         private ObservableCollection<string> _listPids = new ObservableCollection<string> { @"results go here" }; //pid search results list
         /// <summary>
         /// Participant id for WPF databinding
         /// </summary>
-        public ObservableCollection<string> ListPiDs
+        public ObservableCollection<string> ListPiDs//List for displaying search results of pids
         {
             get
             {
@@ -126,51 +135,10 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListPiDs"));
             }
         }
-        ////////////////////////////////////////////////////////////////////// End SQL Strings //////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////// End SQL Data Sections //////////////////////////////////////////////////////////////////////
 
-        /********************************************************************* Start SQL Operators *********************************************************************/
-
-        private string Select(string conditions)
-        {
-            return @"SELECT " + conditions + @" ";
-        }
-
-        private string From(string conditions)
-        {
-            return @" FROM " + conditions + @" ";
-        }
-
-        private string Where(string conditions)
-        {
-            return @" WHERE " + conditions + @" ";
-        }
-
-        private string EndQuery()
-        {
-            return @";";
-        }
-
-        private string Like(string word)
-        {
-            return @" LIKE '%" + word + @"%' ";
-        }
-
-        private string And(string expr)
-        {
-            return @"AND " + expr + @" ";
-        }
-
-        private string Or(string expr)
-        {
-            return @"OR " + expr + @" ";
-        }
-
-        private string Equals(string expr)
-        {
-            return " = '" + expr + "'";
-        }
-        ////////////////////////////////////////////////////////////////////// End SQL Operators //////////////////////////////////////////////////////////////////////
-
+		
+		/********************************************************************* Start ADVP View Mode Methods *********************************************************************/
         /// <summary>
         /// Constructor, when initialized test DB connection
         /// </summary>
@@ -206,55 +174,93 @@ namespace YWCA_Software
         /// <summary>
         /// Get first name from DB with given DB and set FirstName for WPF update
         /// </summary>
-        /// <param name="pid"></param>
-        public void RunQueryFNameFromPid(string pid)
+        public void RunQueryFNameFromPid(string selectUpdate)
         {
             Connect();
-            _dbCommand.CommandText = FNameFromParticipantId(pid);
-
+            _dbCommand.CommandText = _sql.FirstNameFromPid(selectUpdate, Pid, FirstName);
             OleDbDataReader rdr = _dbCommand.ExecuteReader();
-
             rdr?.GetSchemaTable();
-
             if (rdr != null)
             {
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
                     FirstName = (rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null;
-                    Console.WriteLine(@"{0}", _fName);
+                    Console.WriteLine(@"{0}", FirstName);
                 }
                 Console.WriteLine(@"Found " + rowNum + @" results");
             }
-
             Disconnect();
         }
 
         /// <summary>
-        /// Get last name from DB with given DB and set LastName for WPF update
+        /// Get first name from DB with given DB and Update FirstName for WPF update
         /// </summary>
-        /// <param name="pid"></param>
-        public void RunQueryLNameFromPid(string pid)
+        public void RunQueryMInitialFromPid(string selectUpdate)
         {
             Connect();
-
-            _dbCommand.CommandText = LNameFromParticipantId(pid);
-
+            _dbCommand.CommandText = _sql.MiddleInitialFromPid(selectUpdate, Pid, Mi);
             OleDbDataReader rdr = _dbCommand.ExecuteReader();
-
             rdr?.GetSchemaTable();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    Mi = (rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null;
+                    Console.WriteLine(@"{0}", Mi);
+                }
+                Console.WriteLine(@"Found " + rowNum + @" results");
+            }
+            Disconnect();
+        }
 
+        /// <summary>
+        /// Get last name from DB with given DB and Update LastName for WPF update
+        /// </summary>
+        public void RunQueryLNameFromPid(string selectUpdate)
+        {
+            Connect();
+            _dbCommand.CommandText = _sql.LastNameFromPid(selectUpdate, Pid, LastName);
+            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            rdr?.GetSchemaTable();
             if (rdr != null)
             {
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
                     LastName = (rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null;
-                    Console.WriteLine(@"{0}", _lName);
+                    Console.WriteLine(@"{0}", LastName);
                 }
                 Console.WriteLine(@"Found " + rowNum + @" results");
             }
+            Disconnect();
+        }
 
+        /// <summary>
+        /// Get DOB from DB with given DB and Update LastName for WPF update
+        /// </summary>
+        public void RunQueryDobFromPid(string selectUpdate)
+        {
+            DateTime dtDob = new DateTime();
+            Connect();
+            _dbCommand.CommandText = _sql.DobFromPid(selectUpdate, Pid, Dob);
+            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            rdr?.GetSchemaTable();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    dtDob = (rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0) : DateTime.Now;   
+                    Console.WriteLine(@"{0}", Dob);
+                }
+                Console.WriteLine(@"Found " + rowNum + @" results");
+                if (rowNum > 0)
+                {
+                    Dob = dtDob.ToShortDateString();
+                }
+            }
             Disconnect();
         }
 
@@ -264,17 +270,9 @@ namespace YWCA_Software
         public void RunQueryFindClient()
         {
             Connect();
-
-            _dbCommand.CommandText =
-                Select("*") +
-                From("tbl_Consumer_List_Entry") +
-                Where("FIRST_NAME" + Like(FirstName) + And("LAST_NAME") + Like(LastName) + Or("Consumer_ID" + Equals(Pid))) +
-                EndQuery();
-
+            _dbCommand.CommandText = _sql.FindClientPid(FirstName, LastName, Pid);
             OleDbDataReader rdr = _dbCommand.ExecuteReader();
-
             ListPiDs.Clear();
-
             if (rdr != null)
             {
                 int rowNum;
@@ -285,5 +283,11 @@ namespace YWCA_Software
             }
             Disconnect();
         }
+        ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
+		
+		
+		 /********************************************************************* Start *********************************************************************/
+		 
+		  ////////////////////////////////////////////////////////////////////// END //////////////////////////////////////////////////////////////////////
     }
 }

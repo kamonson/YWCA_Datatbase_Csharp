@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YWCA_Software"
         mc:Ignorable="d"
-        Title="YWCA Database Select" Height="187" Width="339" ResizeMode="NoResize">
+        Title="YWCA Database Select" Height="221" Width="413" ResizeMode="NoResize">
 
     <Grid>
         <Grid.ColumnDefinitions>

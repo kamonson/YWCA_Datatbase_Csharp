@@ -1,4 +1,6 @@
-﻿namespace YWCA_Software
+﻿using System.Windows.Controls;
+
+namespace YWCA_Software
 {
     /// <summary>
     /// Interaction logic for IntakeForm.xaml
@@ -23,6 +25,33 @@
             InitializeComponent();
             DataContext = _advbDb;
             _advbDb.SetPid(pid);
+            _advbDb.RunQueryFNameFromPid(@"select");
+            _advbDb.RunQueryMInitialFromPid(@"select");
+            _advbDb.RunQueryLNameFromPid(@"select");
+            _advbDb.RunQueryDobFromPid(@"select");
+        }
+
+        private void buttonUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            
+            _advbDb.SetPid(textBlockPid.Text);
+            _advbDb.RunQueryFNameFromPid(@"Set");
+            _advbDb.RunQueryMInitialFromPid(@"Set");
+            _advbDb.RunQueryLNameFromPid(@"Set");
+            _advbDb.RunQueryDobFromPid(@"Set");
+        }
+
+        private new void GotFocus(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var s = (TextBox) sender;
+            s.SelectAll();
+        }
+
+        private void buttonBack_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ParticipantSelect psWindow = new ParticipantSelect();
+            psWindow.Show();
+            Close();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace YWCA_Software
     {
         DbConnector AdvbDb = new DbConnector(); //ViewModel for data binding
         /// <summary>
-        /// Initialize window and set dataContext
+        /// Initialize window and Update dataContext
         /// </summary>
         public ParticipantSelect()
         {
@@ -83,8 +83,9 @@ namespace YWCA_Software
         {
             string pid = listBoxPID.SelectedItem?.ToString();
             textBoxParticipantID.Text = pid;
-            AdvbDb.RunQueryFNameFromPid(pid);
-            AdvbDb.RunQueryLNameFromPid(pid);
+            AdvbDb.SetPid(pid);
+            AdvbDb.RunQueryFNameFromPid(@"select");
+            AdvbDb.RunQueryLNameFromPid(@"select");
         }
         /// <summary>
         /// Run search with enter key
