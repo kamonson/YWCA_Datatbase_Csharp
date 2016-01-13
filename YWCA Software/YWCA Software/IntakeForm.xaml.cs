@@ -25,15 +25,11 @@ namespace YWCA_Software
             InitializeComponent();
             DataContext = _advbDb;
             _advbDb.SetPid(pid);
-            _advbDb.RunQueryFNameFromPid(@"select");
-            _advbDb.RunQueryMInitialFromPid(@"select");
-            _advbDb.RunQueryLNameFromPid(@"select");
-            _advbDb.RunQueryDobFromPid(@"select");
+            _advbDb.GetIntakeForm(pid);
         }
 
         private void buttonUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            
             _advbDb.SetPid(textBlockPid.Text);
             _advbDb.RunQueryFNameFromPid(@"Set");
             _advbDb.RunQueryMInitialFromPid(@"Set");

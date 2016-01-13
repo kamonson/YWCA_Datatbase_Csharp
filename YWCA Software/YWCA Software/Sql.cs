@@ -127,6 +127,21 @@
         }
 
         /// <summary>
+        /// Pass pid to obtain a SQL string for obtaining last name of person with given pid
+        /// </summary>
+        /// <param name="selectOrUpdate"></param>
+        /// <param name="participantId"></param>
+        /// <param name="hmisId"></param>
+        /// <returns>SQL string to obtain last name</returns>
+        public string HmisIdNameFromPid(string selectOrUpdate, string participantId, string hmisId)
+        {
+            string query = (selectOrUpdate == @"select")
+                ? Prefix(selectOrUpdate, @"HMIS_ID") + Root(selectOrUpdate, @"tbl_Consumer_List_Entry")
+                : Root(selectOrUpdate, @"tbl_Consumer_List_Entry") + Prefix(selectOrUpdate, @"HMIS_ID = '" + hmisId + @"' ");
+            return query + Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
+        }
+
+        /// <summary>
         /// Pass pid to obtain a SQL string for obtaining dob of person with given pid
         /// </summary>
         /// <param name="selectOrUpdate"></param>

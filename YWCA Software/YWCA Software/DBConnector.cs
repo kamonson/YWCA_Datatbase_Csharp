@@ -107,7 +107,7 @@ namespace YWCA_Software
             set
             {
                 _pid = value ?? "";
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastName"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PID"));
             }
         }
         /// <summary>
@@ -118,7 +118,24 @@ namespace YWCA_Software
         {
             Pid = pid;
         }
-		
+
+        private string _hmisId = " "; //Participant last name
+        /// <summary>
+        /// HMIS ID for WPF databinding
+        /// </summary>
+        public string HmisId //Participant last name
+        {
+            get
+            {
+                return _hmisId;
+            }
+            set
+            {
+                _pid = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HmisId"));
+            }
+        }
+
         private ObservableCollection<string> _listPids = new ObservableCollection<string> { @"results go here" }; //pid search results list
         /// <summary>
         /// Participant id for WPF databinding
@@ -283,6 +300,35 @@ namespace YWCA_Software
             }
             Disconnect();
         }
+
+        /// <summary>
+        /// Search for pid based off FirstName AND LastName OR Pid
+        /// </summary>
+        public void RunQuery(ref string target, string query)
+        {
+            Connect();
+            _dbCommand.CommandText = query;
+            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                   target = ((rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null);
+                }
+            }
+            Disconnect();
+        }
+
+        public void GetIntakeForm(string pid)
+        {
+            RunQueryDobFromPid("select");
+            RunQuery(ref _fName, _sql.FirstNameFromPid("select", pid, FirstName));
+            RunQuery(ref _lName, _sql.LastNameFromPid("select", pid, LastName));
+            RunQuery(ref _hmisId, _sql.HmisIdNameFromPid("select", pid, HmisId));
+            RunQuery(ref _mi, _sql.MiddleInitialFromPid("select", pid, HmisId));
+        }           
         ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
 		
 		
