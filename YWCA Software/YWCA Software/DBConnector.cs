@@ -27,11 +27,8 @@ namespace YWCA_Software
 
         /********************************************************************* Start SQL Data Sections *********************************************************************/
 
-        private string _mi = "MI"; //Participant date of birth
-        /// <summary>
-        /// Participant DOB for WPF databinding
-        /// </summary>
-        public string Mi//Participant date of birth
+        private string _mi = "MI";
+        public string Mi
         {
             get
             {
@@ -44,11 +41,106 @@ namespace YWCA_Software
             }
         }
 
-        private string _staff = "None"; //Participant date of birth
-        /// <summary>
-        /// Staff Updating DB for WPF databinding
-        /// </summary>
-        public string Staff//Participant date of birth
+        private string _streetAddress = "Homeless";
+        public string StreetAddress
+        {
+            get
+            {
+                return _streetAddress;
+            }
+            set
+            {
+                _streetAddress = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("StreetAddress"));
+            }
+        }
+
+        private string _city = "Spokane";
+        public string City
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                _city = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("City"));
+            }
+        }
+
+        private string _state = "Washington";
+        public string State
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                _state = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("State"));
+            }
+        }
+
+        private int _zip;
+        public int Zip
+        {
+            get
+            {
+                return _zip;
+            }
+            set
+            {
+                _zip = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Zip"));
+            }
+        }
+
+        private string _housingStatus = "Homeless";
+        public string HousingStatus
+        {
+            get
+            {
+                return _housingStatus;
+            }
+            set
+            {
+                _housingStatus = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HousingStatus"));
+            }
+        }
+
+        private string _neighborhood = "Unknown"; 
+        public string Neighborhood
+        {
+            get
+            {
+                return _neighborhood;
+            }
+            set
+            {
+                _neighborhood = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Neighborhood"));
+            }
+        }
+
+        private string _countyDetail = "Unknown";
+        public string CountyDetail
+        {
+            get
+            {
+                return _countyDetail;
+            }
+            set
+            {
+                _countyDetail = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CountyDetail"));
+            }
+        }
+
+        private string _staff = "None";
+        public string Staff
         {
             get
             {
@@ -61,10 +153,21 @@ namespace YWCA_Software
             }
         }
 
-        private string _dateDataEntered; //Participant date of birth
-        /// <summary>
-        /// Date data was updated for WPF databinding
-        /// </summary>
+        private string _ssn = "Unknown"; 
+        public string Ssn
+        {
+            get
+            {
+                return _ssn;
+            }
+            set
+            {
+                _ssn = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Ssn"));
+            }
+        }
+
+        private string _dateDataEntered; 
         public string DateDataEntered
         {
             get
@@ -78,11 +181,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _dob; //Participant date of birth
-        /// <summary>
-        /// Participant DOB for WPF databinding
-        /// </summary>
-        public string Dob//Participant date of birth
+        private string _dob; 
+        public string Dob
         {
             get
             {
@@ -95,11 +195,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _fName = "First Name"; //Participant first name
-        /// <summary>
-        /// Participant first name for WPF databinding
-        /// </summary>
-        public string FirstName//Participant first name
+        private string _fName = "First Name"; 
+        public string FirstName
         {
             get
             {
@@ -112,11 +209,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _lName = "Last Name"; //Participant last name
-        /// <summary>
-        /// Participant last name for WPF databinding
-        /// </summary>
-        public string LastName //Participant last name
+        private string _lName = "Last Name"; 
+        public string LastName 
         {
             get
             {
@@ -129,11 +223,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _pid = "PID"; //Participant last name
-        /// <summary>
-        /// Participant ID for WPF databinding
-        /// </summary>
-        public string Pid //Participant last name
+        private string _pid = "PID"; 
+        public string Pid 
         {
             get
             {
@@ -145,7 +236,6 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PID"));
             }
         }
-
         /// <summary>
         /// Set pid to input
         /// </summary>
@@ -155,11 +245,8 @@ namespace YWCA_Software
             Pid = pid;
         }
 
-        private string _hmisId = " "; //Participant last name
-        /// <summary>
-        /// HMIS ID for WPF databinding
-        /// </summary>
-        public string HmisId //Participant last name
+        private string _hmisId = " "; 
+        public string HmisId 
         {
             get
             {
@@ -172,11 +259,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _infoNetId = " "; //Participant last name
-        /// <summary>
-        /// INFO NET ID for WPF databinding
-        /// </summary>
-        public string InfoNetId //Participant last name
+        private string _infoNetId = " "; 
+        public string InfoNetId 
         {
             get
             {
@@ -333,8 +417,10 @@ namespace YWCA_Software
         }
 
         /// <summary>
-        /// Search for pid based off FirstName AND LastName OR Pid
+        /// Runs the qurry passed to it
         /// </summary>
+        /// <param name="target"></param>
+        /// <param name="query"></param>
         public void RunQuery(ref string target, string query)
         {
             Connect();
@@ -347,6 +433,28 @@ namespace YWCA_Software
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
                     target = ((rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null);
+                }
+            }
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="query"></param>
+        public void RunQuery(ref int target, string query)
+        {
+            Connect();
+            _dbCommand.CommandText = query;
+            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555;
                 }
             }
             Disconnect();
@@ -397,7 +505,7 @@ namespace YWCA_Software
         public void IntakeForm(string selectUpdateAdd, string pid)
         {
             QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "DOB", ref _dob);
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Date", ref _dateDataEntered);
+            QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "LastUpdated", ref _dateDataEntered);
 
             RunQuery(ref _fName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "FIRST_NAME", pid, FirstName));
             RunQuery(ref _mi, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "MIDDLE_INITIAL", pid, Mi));
@@ -405,6 +513,14 @@ namespace YWCA_Software
             RunQuery(ref _hmisId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "HMIS_ID", pid, HmisId));
             RunQuery(ref _infoNetId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "INFO_NET_ID", pid, InfoNetId));
             RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Staff", pid, Staff));
+            RunQuery(ref _ssn, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "NO_SSN_Reason", pid, Ssn));
+            RunQuery(ref _housingStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Currently Living In", pid, _housingStatus));
+            RunQuery(ref _neighborhood, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane City", pid, Neighborhood));
+            RunQuery(ref _countyDetail, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane County", pid, CountyDetail));
+            RunQuery(ref _streetAddress, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Street_Address", pid, StreetAddress));
+            RunQuery(ref _city, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "city", pid, City));
+            RunQuery(ref _state, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "state", pid, State));
+            RunQuery(ref _zip, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Zip", pid, Zip));
         }
         ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
 

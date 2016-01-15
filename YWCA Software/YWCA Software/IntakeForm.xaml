@@ -9,7 +9,7 @@
     <Grid>
         <!--///////////////////////////////////////////////////////////////////////////// Start Demographic Info /////////////////////////////////////////////////////////////////////////////-->
 
-        <Image x:Name="image" HorizontalAlignment="Left" Height="1020" VerticalAlignment="Top" Width="910" Source="Resources/IntakeBKG.png" Stretch="Fill" Margin="-10,-50,-8,-101" />
+        <!--<Image x:Name="image" HorizontalAlignment="Left" Height="1020" VerticalAlignment="Top" Width="910" Source="Resources/IntakeBKG.png" Stretch="Fill" Margin="-10,-50,-8,-101" />-->
         <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="16" Margin="66,3,0,0" TextWrapping="Wrap" Text="Participant ID:" VerticalAlignment="Top" Width="86" BorderThickness="0" IsReadOnly="True"/>
         <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="152,3,0,0" TextWrapping="Wrap" Text="{Binding Pid}" Width="70" VerticalAlignment="Top" Height="16"/>
         <TextBox x:Name="textBlockHMISIdLabel" HorizontalAlignment="Left" Height="16" Margin="228,3,0,0" TextWrapping="Wrap" Text="HMIS ID:" VerticalAlignment="Top" Width="53" BorderThickness="0" IsReadOnly="True"/>
@@ -28,28 +28,28 @@
         <TextBox x:Name="textBoxLName" HorizontalAlignment="Left" Height="16" Margin="356,27,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="145" BorderThickness="0" GotFocus="GotFocus"/>
         <TextBlock x:Name="textBlockDOB" HorizontalAlignment="Left" Margin="540,26,0,0" TextWrapping="Wrap" Text="DOB:" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxDOB" HorizontalAlignment="Left" Height="16" Margin="572,26,0,0" TextWrapping="Wrap" Text="{Binding Dob}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus"/>
-        <ComboBox x:Name="comboBoxSSN" HorizontalAlignment="Left" Margin="758,26,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
+        <ComboBox x:Name="comboBoxSSN" HorizontalAlignment="Left" Margin="758,26,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Text="{Binding Ssn}">
             <ComboBoxItem Name="Refused">Refused</ComboBoxItem>
             <ComboBoxItem Name="DontKnow">Don't Know</ComboBoxItem>
             <ComboBoxItem Name="Missing">Missing</ComboBoxItem>
         </ComboBox>
-        <TextBlock x:Name="textBlockHomeResidence" HorizontalAlignment="Left" Margin="12,46,0,0" TextWrapping="Wrap" Text="Home Residence:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxHomeResidence" HorizontalAlignment="Left" Height="16" Margin="108,46,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBlock x:Name="textBlockHousingStatus" HorizontalAlignment="Left" Margin="12,46,0,0" TextWrapping="Wrap" Text="Housing Status:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxHomeHousingStatus" HorizontalAlignment="Left" Height="16" Margin="99,47,0,0" TextWrapping="Wrap" Text="{Binding HousingStatus}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockNeighborhood" HorizontalAlignment="Left" Margin="308,46,0,0" TextWrapping="Wrap" Text="Spokane Neighborhood:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxHomeNeighborhood" HorizontalAlignment="Left" Height="16" Margin="443,46,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxHomeNeighborhood" HorizontalAlignment="Left" Height="16" Margin="443,46,0,0" TextWrapping="Wrap" Text="{Binding Neighborhood}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockCountyDetail" HorizontalAlignment="Left" Margin="644,46,0,0" TextWrapping="Wrap" Text="County Detail:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxCountyDetail" HorizontalAlignment="Left" Height="16" Margin="723,46,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxCountyDetail" HorizontalAlignment="Left" Height="16" Margin="723,46,0,0" TextWrapping="Wrap" Text="{Binding CountyDetail}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockSSN" HorizontalAlignment="Left" Margin="734,26,0,0" TextWrapping="Wrap" Text="SSN:" VerticalAlignment="Top" Height="16"/>
         <TextBlock x:Name="textBlockStreetAddress" HorizontalAlignment="Left" Margin="12,67,0,0" TextWrapping="Wrap" Text="Street Address:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxStreetAddress" HorizontalAlignment="Left" Margin="96,67,0,0" VerticalAlignment="Top" Width="226" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
+        <ComboBox x:Name="comboBoxStreetAddress" HorizontalAlignment="Left" Margin="96,67,0,0" VerticalAlignment="Top" Width="226" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Text="{Binding StreetAddress}">
             <ComboBoxItem Name="Homeless">Homeless</ComboBoxItem>
         </ComboBox>
         <TextBlock x:Name="textBlockCity" HorizontalAlignment="Left" Margin="357,67,0,0" TextWrapping="Wrap" Text="City:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxCity" HorizontalAlignment="Left" Height="16" Margin="385,67,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="113"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxCity" HorizontalAlignment="Left" Height="16" Margin="385,67,0,0" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Top" Width="113"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockState" HorizontalAlignment="Left" Margin="540,67,0,0" TextWrapping="Wrap" Text="State:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxState" HorizontalAlignment="Left" Height="16" Margin="574,67,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxState" HorizontalAlignment="Left" Height="16" Margin="574,67,0,0" TextWrapping="Wrap" Text="{Binding State}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockZip" HorizontalAlignment="Left" Margin="751,67,0,0" TextWrapping="Wrap" Text="Zip:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxZip" HorizontalAlignment="Left" Height="16" Margin="775,67,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxZip" HorizontalAlignment="Left" Height="16" Margin="775,67,0,0" TextWrapping="Wrap" Text="{Binding Zip}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockHomePhone" HorizontalAlignment="Left" Margin="12,88,0,0" TextWrapping="Wrap" Text="Home Phone:" VerticalAlignment="Top" Height="16"/>
         <TextBox x:Name="textBoxHomePhone" HorizontalAlignment="Left" Height="16" Margin="89,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockWork" HorizontalAlignment="Left" Margin="193,88,0,0" TextWrapping="Wrap" Text="Work/Message Phone:" VerticalAlignment="Top" Height="16"/>

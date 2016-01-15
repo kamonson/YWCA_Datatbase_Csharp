@@ -11,17 +11,17 @@ namespace YWCA_Software
 
         private string ColumnEquals(string cName, string target)
         {
-            return @"[" + cName + @"]" + @" = '" + target + @"' ";
+            return @"[" + cName + @"]" + " = \"" + target + "\" ";
         }
 
         private string Values(string conditions)
         {
-            return @"Values ( '" + conditions + @"' ) ";
+            return "Values ( \"" + conditions + "\" ) ";
         }
 
         private string Select(string conditions)
         {
-            return @"SELECT " + conditions + @" ";
+            return (conditions != "*") ? @"SELECT [" + conditions + @"] " : @"SELECT " + conditions + @" ";
         }
 
         private string InsertInto(string conditions)
@@ -145,6 +145,31 @@ namespace YWCA_Software
         {
             string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
             string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
+            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
+
+            if (selectOrUpdate == "update" && !QueryTest(Select(columnName) + From(table) + end))
+            {
+                RunQuery(InsertInto(table) + TblIntakeCollumns + Values(participantId) + EndQuery());
+                Console.WriteLine(@"One item added to the database");
+            }
+
+            string query = (selectOrUpdate == @"select") ? select : update;
+            return query + end;
+        }
+
+        /// <summary>
+        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
+        /// </summary>
+        /// <param name="selectOrUpdate"></param>
+        /// <param name="table"></param>
+        /// <param name="columnName"></param>
+        /// <param name="participantId"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, int value)
+        {
+            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
+            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString()));
             string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
 
             if (selectOrUpdate == "update" && !QueryTest(Select(columnName) + From(table) + end))
