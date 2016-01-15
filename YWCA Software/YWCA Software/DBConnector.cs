@@ -722,42 +722,42 @@ namespace YWCA_Software
             QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "LastUpdated", ref _dateDataEntered);
             
             //ints
-            RunQuery(ref _zip, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Zip", pid, Zip));
-
+            RunQuery(ref        _zip,                    _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Zip",                      pid,    Zip                 ));
+                                                            
             //decimals
-            RunQuery(ref _totalMonthlyIncome, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Total Mo Income", pid, TotalMonthlyIncome));
+            RunQuery(ref        _totalMonthlyIncome,     _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Total Mo Income",          pid,    TotalMonthlyIncome  ));
+                                                                                        
+            //bools                                                                         
+            RunQuery(ref        _msgOk,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "MSG_OK",                   pid,    MsgOk               ));
+                                                          
+            RunQuery(ref        _veteranStatus,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Vet",                      pid,    VeteranStatus       ));
+                                                          
+            //text                                        
+            RunQuery(ref        _fName,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "FIRST_NAME",               pid,    FirstName           ));
+            RunQuery(ref        _mi,                     _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "MIDDLE_INITIAL",           pid,    Mi                  ));
+            RunQuery(ref        _lName,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "LAST_NAME",                pid,    LastName            ));
+            RunQuery(ref        _hmisId,                 _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "HMIS_ID",                  pid,    HmisId              ));
+            RunQuery(ref        _infoNetId,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "INFO_NET_ID",              pid,    InfoNetId           ));
+            RunQuery(ref        _ssn,                    _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "NO_SSN_Reason",            pid,    Ssn                 ));
+            RunQuery(ref        _gender,                 _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "Gender",                   pid,    Gender              ));
 
-            //bools
-            RunQuery(ref _msgOk, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "MSG_OK", pid, MsgOk));
 
-            RunQuery(ref _veteranStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Vet", pid, VeteranStatus));
+            RunQuery(ref        _city,                   _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "city",                     pid,    City                ));
+            RunQuery(ref        _state,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "state",                    pid,    State               ));
+            RunQuery(ref        _homePhone,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Home_Phone",               pid,    HomePhone           ));
+            RunQuery(ref        _workPhone,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Work_MSG",                 pid,    WorkPhone           ));
+            RunQuery(ref        _callTime,               _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Call_Time",                pid,    CallTime            ));
+            RunQuery(ref        _streetAddress,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Street_Address",           pid,    StreetAddress       ));
+            RunQuery(ref        _maritalStatus,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Marital_Status",           pid,    MaritalStatus       ));
+            RunQuery(ref        _ethnicity,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Ethnicity",                pid,    Ethnicity           ));
 
-            //text
-            RunQuery(ref _fName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "FIRST_NAME", pid, FirstName));
-            RunQuery(ref _mi, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "MIDDLE_INITIAL", pid, Mi));
-            RunQuery(ref _lName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "LAST_NAME", pid, LastName));
-            RunQuery(ref _hmisId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "HMIS_ID", pid, HmisId));
-            RunQuery(ref _infoNetId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "INFO_NET_ID", pid, InfoNetId));
-            RunQuery(ref _ssn, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "NO_SSN_Reason", pid, Ssn));
-            RunQuery(ref _gender, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "Gender", pid, Gender));
-
-
-            RunQuery(ref _city, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "city", pid, City));
-            RunQuery(ref _state, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "state", pid, State));
-            RunQuery(ref _homePhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Home_Phone", pid, HomePhone));
-            RunQuery(ref _workPhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Work_MSG", pid, WorkPhone));
-            RunQuery(ref _callTime, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Call_Time", pid, CallTime));
-            RunQuery(ref _streetAddress, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Street_Address", pid, StreetAddress));
-            RunQuery(ref _maritalStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Marital_Status", pid, MaritalStatus));
-            RunQuery(ref _ethnicity, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Ethnicity", pid, Ethnicity));
-
-            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Staff", pid, Staff));
-            RunQuery(ref _housingStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Currently Living In", pid, _housingStatus));
-            RunQuery(ref _neighborhood, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane City", pid, Neighborhood));
-            RunQuery(ref _countyDetail, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane County", pid, CountyDetail));
-            RunQuery(ref _disability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability", pid, Disability));
-            RunQuery(ref _secondDisability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability 1", pid, SecondDisability));
-            RunQuery(ref _incomeType, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "income 1", pid, IncomeType));
+            RunQuery(ref        _staff,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Staff",                    pid,    Staff               ));
+            RunQuery(ref        _housingStatus,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Currently Living In",      pid,    HousingStatus       ));
+            RunQuery(ref        _neighborhood,           _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Spokane City",             pid,    Neighborhood        ));
+            RunQuery(ref        _countyDetail,           _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Spokane County",           pid,    CountyDetail        ));
+            RunQuery(ref        _disability,             _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Adult 1 Disability",       pid,    Disability          ));
+            RunQuery(ref        _secondDisability,       _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Adult 1 Disability 1",     pid,    SecondDisability    ));
+            RunQuery(ref        _incomeType,             _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "income 1",                 pid,    IncomeType          ));
         }
         ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
 
