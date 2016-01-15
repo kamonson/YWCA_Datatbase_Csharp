@@ -27,59 +27,45 @@ namespace YWCA_Software
 
         /********************************************************************* Start SQL Data Sections *********************************************************************/
 
-        private string _mi = "MI";
-        public string Mi
+        private bool _msgOk;
+        public bool MsgOk
         {
             get
             {
-                return _mi;
+                return _msgOk;
             }
             set
             {
-                _mi = value ?? "";
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Mi"));
+                _msgOk = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MsgOk"));
             }
         }
 
-        private string _streetAddress = "Homeless";
-        public string StreetAddress
+        private bool _veteranStatus;
+        public bool VeteranStatus
         {
             get
             {
-                return _streetAddress;
+                return _veteranStatus;
             }
             set
             {
-                _streetAddress = value ?? "";
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("StreetAddress"));
+                _veteranStatus = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VeteranStatus"));
             }
         }
 
-        private string _city = "Spokane";
-        public string City
+        private decimal _totalMonthlyIncome;
+        public decimal TotalMonthlyIncome
         {
             get
             {
-                return _city;
+                return _totalMonthlyIncome;
             }
             set
             {
-                _city = value ?? "";
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("City"));
-            }
-        }
-
-        private string _state = "Washington";
-        public string State
-        {
-            get
-            {
-                return _state;
-            }
-            set
-            {
-                _state = value ?? "";
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("State"));
+                _totalMonthlyIncome = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalMonthlyIncome"));
             }
         }
 
@@ -97,6 +83,189 @@ namespace YWCA_Software
             }
         }
 
+        private string _mi = "MI";
+        public string Mi
+        {
+            get
+            {
+                return _mi;
+            }
+            set
+            {
+                _mi = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Mi"));
+            }
+        }
+
+        private string _gender = " ";
+        public string Gender
+        {
+            get
+            {
+                return _gender;
+            }
+            set
+            {
+                _gender = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Gender"));
+            }
+        }
+
+        private string _maritalStatus = " ";
+        public string MaritalStatus
+        {
+            get
+            {
+                return _maritalStatus;
+            }
+            set
+            {
+                _maritalStatus = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MaritalStatus"));
+            }
+        }
+
+        private string _ethnicity = " ";
+        public string Ethnicity
+        {
+            get
+            {
+                return _ethnicity;
+            }
+            set
+            {
+                _ethnicity = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Ethnicity"));
+            }
+        }
+
+        private string _disability = " ";
+        public string Disability
+        {
+            get
+            {
+                return _disability;
+            }
+            set
+            {
+                _disability = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Disability"));
+            }
+        }
+
+        private string _secondDisability = " ";
+        public string SecondDisability
+        {
+            get
+            {
+                return _secondDisability;
+            }
+            set
+            {
+                _secondDisability = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SecondDisability"));
+            }
+        }
+
+        private string _incomeType = "None";
+        public string IncomeType
+        {
+            get
+            {
+                return _incomeType;
+            }
+            set
+            {
+                _incomeType = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IncomeType"));
+            }
+        }
+
+        private string _homePhone = "None Listed";
+        public string HomePhone
+        {
+            get
+            {
+                return _homePhone;
+            }
+            set
+            {
+                _homePhone = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HomePhone"));
+            }
+        }
+
+        private string _workPhone = "None Listed";
+        public string WorkPhone
+        {
+            get
+            {
+                return _workPhone;
+            }
+            set
+            {
+                _workPhone = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WorkPhone"));
+            }
+        }
+
+        private string _callTime = "Do not call";
+        public string CallTime
+        {
+            get
+            {
+                return _callTime;
+            }
+            set
+            {
+                _callTime = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CallTime"));
+            }
+        }
+
+        private string _streetAddress = "Homeless";
+        public string StreetAddress
+        {
+            get
+            {
+                return _streetAddress;
+            }
+            set
+            {
+                _streetAddress = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("StreetAddress"));
+            }
+        }
+
+        private string _city = "Spokane";
+        public string City
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                _city = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("City"));
+            }
+        }
+
+        private string _state = "Washington";
+        public string State
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                _state = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("State"));
+            }
+        }
+
+
         private string _housingStatus = "Homeless";
         public string HousingStatus
         {
@@ -106,7 +275,7 @@ namespace YWCA_Software
             }
             set
             {
-                _housingStatus = value ?? "";
+                _housingStatus = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HousingStatus"));
             }
         }
@@ -120,7 +289,7 @@ namespace YWCA_Software
             }
             set
             {
-                _neighborhood = value ?? "";
+                _neighborhood = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Neighborhood"));
             }
         }
@@ -134,7 +303,7 @@ namespace YWCA_Software
             }
             set
             {
-                _countyDetail = value ?? "";
+                _countyDetail = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CountyDetail"));
             }
         }
@@ -148,7 +317,7 @@ namespace YWCA_Software
             }
             set
             {
-                _staff = value ?? "";
+                _staff = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Staff"));
             }
         }
@@ -162,7 +331,7 @@ namespace YWCA_Software
             }
             set
             {
-                _ssn = value ?? "";
+                _ssn = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Ssn"));
             }
         }
@@ -204,7 +373,7 @@ namespace YWCA_Software
             }
             set
             {
-                _fName = value ?? "";
+                _fName = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FirstName"));
             }
         }
@@ -218,7 +387,7 @@ namespace YWCA_Software
             }
             set
             {
-                _lName = value ?? "";
+                _lName = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastName"));
             }
         }
@@ -232,7 +401,7 @@ namespace YWCA_Software
             }
             set
             {
-                _pid = value ?? "";
+                _pid = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PID"));
             }
         }
@@ -254,7 +423,7 @@ namespace YWCA_Software
             }
             set
             {
-                _hmisId = value ?? "";
+                _hmisId = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HmisId"));
             }
         }
@@ -268,7 +437,7 @@ namespace YWCA_Software
             }
             set
             {
-                _infoNetId = value ?? "";
+                _infoNetId = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("InfoNetId"));
             }
         }
@@ -454,7 +623,51 @@ namespace YWCA_Software
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
-                    target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555;
+               target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555;                
+                }
+            }
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="query"></param>
+        public void RunQuery(ref decimal target, string query)
+        {
+            Connect();
+            _dbCommand.CommandText = query;
+            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                                          target = (rdr.IsDBNull(0) == false) ? rdr.GetDecimal(0) : 0; 
+                }
+            }
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="query"></param>
+        public void RunQuery(ref bool target, string query)
+        {
+            Connect();
+            _dbCommand.CommandText = query;
+            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    target = (rdr.IsDBNull(0) == false) && rdr.GetBoolean(0);
                 }
             }
             Disconnect();
@@ -502,25 +715,49 @@ namespace YWCA_Software
         /// </summary>
         /// <param name="selectUpdateAdd"></param>
         /// <param name="pid"></param>
-        public void IntakeForm(string selectUpdateAdd, string pid)
+        public void Demographics(string selectUpdateAdd, string pid)
         {
+            //date times
             QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "DOB", ref _dob);
             QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "LastUpdated", ref _dateDataEntered);
+            
+            //ints
+            RunQuery(ref _zip, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Zip", pid, Zip));
 
+            //decimals
+            RunQuery(ref _totalMonthlyIncome, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Total Mo Income", pid, TotalMonthlyIncome));
+
+            //bools
+            RunQuery(ref _msgOk, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "MSG_OK", pid, MsgOk));
+
+            RunQuery(ref _veteranStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Vet", pid, VeteranStatus));
+
+            //text
             RunQuery(ref _fName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "FIRST_NAME", pid, FirstName));
             RunQuery(ref _mi, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "MIDDLE_INITIAL", pid, Mi));
             RunQuery(ref _lName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "LAST_NAME", pid, LastName));
             RunQuery(ref _hmisId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "HMIS_ID", pid, HmisId));
             RunQuery(ref _infoNetId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "INFO_NET_ID", pid, InfoNetId));
-            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Staff", pid, Staff));
             RunQuery(ref _ssn, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "NO_SSN_Reason", pid, Ssn));
+            RunQuery(ref _gender, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "Gender", pid, Gender));
+
+
+            RunQuery(ref _city, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "city", pid, City));
+            RunQuery(ref _state, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "state", pid, State));
+            RunQuery(ref _homePhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Home_Phone", pid, HomePhone));
+            RunQuery(ref _workPhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Work_MSG", pid, WorkPhone));
+            RunQuery(ref _callTime, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Call_Time", pid, CallTime));
+            RunQuery(ref _streetAddress, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Street_Address", pid, StreetAddress));
+            RunQuery(ref _maritalStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Marital_Status", pid, MaritalStatus));
+            RunQuery(ref _ethnicity, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Ethnicity", pid, Ethnicity));
+
+            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Staff", pid, Staff));
             RunQuery(ref _housingStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Currently Living In", pid, _housingStatus));
             RunQuery(ref _neighborhood, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane City", pid, Neighborhood));
             RunQuery(ref _countyDetail, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane County", pid, CountyDetail));
-            RunQuery(ref _streetAddress, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Street_Address", pid, StreetAddress));
-            RunQuery(ref _city, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "city", pid, City));
-            RunQuery(ref _state, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "state", pid, State));
-            RunQuery(ref _zip, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Zip", pid, Zip));
+            RunQuery(ref _disability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability", pid, Disability));
+            RunQuery(ref _secondDisability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability 1", pid, SecondDisability));
+            RunQuery(ref _incomeType, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "income 1", pid, IncomeType));
         }
         ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
 

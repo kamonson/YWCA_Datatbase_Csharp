@@ -51,57 +51,52 @@
         <TextBlock x:Name="textBlockZip" HorizontalAlignment="Left" Margin="751,67,0,0" TextWrapping="Wrap" Text="Zip:" VerticalAlignment="Top" Height="16"/>
         <TextBox x:Name="textBoxZip" HorizontalAlignment="Left" Height="16" Margin="775,67,0,0" TextWrapping="Wrap" Text="{Binding Zip}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockHomePhone" HorizontalAlignment="Left" Margin="12,88,0,0" TextWrapping="Wrap" Text="Home Phone:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxHomePhone" HorizontalAlignment="Left" Height="16" Margin="89,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxHomePhone" HorizontalAlignment="Left" Height="16" Margin="89,88,0,0" TextWrapping="Wrap" Text="{Binding HomePhone}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockWork" HorizontalAlignment="Left" Margin="193,88,0,0" TextWrapping="Wrap" Text="Work/Message Phone:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxWork" HorizontalAlignment="Left" Height="16" Margin="317,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxWork" HorizontalAlignment="Left" Height="16" Margin="317,88,0,0" TextWrapping="Wrap" Text="{Binding WorkPhone}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
         <TextBlock x:Name="textBlockCallTime" HorizontalAlignment="Left" Margin="509,88,0,0" TextWrapping="Wrap" Text="Call Time:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxCallTime" HorizontalAlignment="Left" Height="16" Margin="565,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
-        <CheckBox x:Name="checkBoxSafeToLeaveMessage" Content="Safe To Leave Message" HorizontalAlignment="Left" Margin="734,88,0,0" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxCallTime" HorizontalAlignment="Left" Height="16" Margin="565,88,0,0" TextWrapping="Wrap" Text="{Binding CallTime}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
+        <CheckBox x:Name="checkBoxSafeToLeaveMessage" IsChecked="{Binding MsgOk}" Content="Safe To Leave Message" HorizontalAlignment="Left" Margin="734,88,0,0" VerticalAlignment="Top" Height="16"/>
         <TextBlock x:Name="textBlockGender" HorizontalAlignment="Left" Margin="14,109,0,0" TextWrapping="Wrap" Text="Gender:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxMaritalStatus_Copy" HorizontalAlignment="Left" Margin="60,109,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+        <ComboBox x:Name="comboBoxGender" HorizontalAlignment="Left" Text ="{Binding Gender}"  Margin="60,109,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
             <ComboBoxItem x:Name="Female" Content="Female"/>
             <ComboBoxItem x:Name="Male" Content="Male"/>
             <ComboBoxItem x:Name="Transgender" Content="Transgender"/>
             <ComboBoxItem x:Name="Other" Content="Other"/>
         </ComboBox>
-        <TextBlock x:Name="textBlockMaritalStatus" HorizontalAlignment="Left" Margin="209,109,0,0" TextWrapping="Wrap" Text="Marital Status:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxMaritalStatus" HorizontalAlignment="Left" Margin="289,109,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
+        <TextBlock x:Name="textBlockMaritalStatus" HorizontalAlignment="Left" Margin="228,109,0,0" TextWrapping="Wrap" Text="Marital Status:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxMaritalStatus" HorizontalAlignment="Left" Margin="308,109,0,0" Text="{Binding MaritalStatus}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
             <ComboBoxItem x:Name="Married" Content="Married"/>
             <ComboBoxItem x:Name="Single" Content="Single"/>
             <ComboBoxItem x:Name="Divorced" Content="Divorced"/>
             <ComboBoxItem x:Name="Widow" Content="Widow"></ComboBoxItem>
         </ComboBox>
-        <TextBlock x:Name="Ethnicity" HorizontalAlignment="Left" Margin="475,109,0,0" TextWrapping="Wrap" Text="Ethnicity:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="528,109,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
+        <TextBlock x:Name="Ethnicity" HorizontalAlignment="Left" Margin="512,109,0,0" TextWrapping="Wrap" Text="Ethnicity:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="565,109,0,0" Text="{Binding Ethnicity}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
             <ComboBoxItem x:Name="Caucasian" Content="Caucasian"/>
             <ComboBoxItem x:Name="AfricanAmerican" Content="African American"/>
             <ComboBoxItem x:Name="Hispanic" Content="Hispanic"/>
             <ComboBoxItem x:Name="Asian" Content="Asian"/>
         </ComboBox>
-        <TextBlock x:Name="textBlockVeteranStatus" HorizontalAlignment="Left" Margin="673,109,0,0" TextWrapping="Wrap" Text="Veteran Status:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxVeteranStatus" HorizontalAlignment="Left" Margin="760,109,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
-            <ComboBoxItem x:Name="None" Content="None"/>
-            <ComboBoxItem x:Name="Active" Content="Active"/>
-            <ComboBoxItem x:Name="GuardReserve" Content="Guard/Reserve"/>
-        </ComboBox>
+        <CheckBox x:Name="checkBoxSafeToLeaveMessage_Copy" IsChecked="{Binding VeteranStatus}" Content="Veteran Status" HorizontalAlignment="Left" Margin="775,110,0,0" VerticalAlignment="Top" Height="16"/>
         <TextBlock x:Name="textBlockDisability" HorizontalAlignment="Left" Margin="14,132,0,0" TextWrapping="Wrap" Text="Disability:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxDisability" HorizontalAlignment="Left" Margin="70,132,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+        <ComboBox x:Name="comboBoxDisability" HorizontalAlignment="Left" Margin="70,132,0,0" Text="{Binding Disability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
             <ComboBoxItem x:Name="Sight" Content="Sight"/>
             <ComboBoxItem x:Name="Hearing" Content="Hearing"/>
             <ComboBoxItem x:Name="Mental" Content="Mental"/>
             <ComboBoxItem x:Name="Physical" Content="Physical"/>
         </ComboBox>
-        <TextBlock x:Name="textBlockDisability2" HorizontalAlignment="Left" Margin="186,132,0,0" TextWrapping="Wrap" Text="2nd Disability:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxDisability2" HorizontalAlignment="Left" Margin="265,132,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+        <TextBlock x:Name="textBlockDisability2" HorizontalAlignment="Left" Margin="207,132,0,0" TextWrapping="Wrap" Text="2nd Disability:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxDisability2" HorizontalAlignment="Left" Margin="286,132,0,0" Text="{Binding SecondDisability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
             <ComboBoxItem x:Name="Sight2" Content="Sight"/>
             <ComboBoxItem x:Name="Hearing2" Content="Hearing"/>
             <ComboBoxItem x:Name="Mental2" Content="Mental"/>
             <ComboBoxItem x:Name="Physical2" Content="Physical"/>
         </ComboBox>
         <TextBlock x:Name="textBlockIncomeType" HorizontalAlignment="Left" Margin="427,132,0,0" TextWrapping="Wrap" Text="Income Type:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxIncomeType" HorizontalAlignment="Left" Height="16" Margin="504,132,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="135"  GotFocus="GotFocus" BorderThickness="0"/>
-        <TextBlock x:Name="textBlockTotalMonthlyIncome" HorizontalAlignment="Left" Margin="660,132,0,0" TextWrapping="Wrap" Text="Total Monthly Income:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxTotalMonthlyIncome" HorizontalAlignment="Left" Height="16" Margin="783,132,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBox x:Name="textBoxIncomeType" HorizontalAlignment="Left" Height="16" Margin="504,132,0,0" TextWrapping="Wrap" Text="{Binding IncomeType}" VerticalAlignment="Top" Width="135"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBlock x:Name="textBlockTotalMonthlyIncome" HorizontalAlignment="Left" Margin="652,131,0,0" TextWrapping="Wrap" Text="Total Monthly Income: $" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxTotalMonthlyIncome" HorizontalAlignment="Left" Height="16" Margin="783,132,0,0" TextWrapping="Wrap" Text="{Binding TotalMonthlyIncome}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
 
 
         <Button x:Name="buttonUpdate" Content="Update" Margin="0,0,10,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667" Click="buttonUpdate_Click" HorizontalAlignment="Right" Width="37"/>

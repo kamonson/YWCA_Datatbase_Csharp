@@ -25,7 +25,7 @@ namespace YWCA_Software
             InitializeComponent();
             DataContext = _advbDb;
             _advbDb.SetPid(pid);
-            _advbDb.IntakeForm("select", pid);
+            _advbDb.Demographics("select", pid);
         }
         /// <summary>
         /// Runs update intake form
@@ -34,7 +34,7 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            _advbDb.IntakeForm("update", textBlockPid.Text);
+            _advbDb.Demographics("update", textBlockPid.Text);
         }
         /// <summary>
         /// Highlight information if focused
