@@ -25,24 +25,32 @@ namespace YWCA_Software
             InitializeComponent();
             DataContext = _advbDb;
             _advbDb.SetPid(pid);
-            _advbDb.GetIntakeForm(pid);
+            _advbDb.IntakeForm("select", pid);
         }
-
+        /// <summary>
+        /// Runs update intake form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            _advbDb.SetPid(textBlockPid.Text);
-            _advbDb.RunQueryFNameFromPid(@"Set");
-            _advbDb.RunQueryMInitialFromPid(@"Set");
-            _advbDb.RunQueryLNameFromPid(@"Set");
-            _advbDb.RunQueryDobFromPid(@"Set");
+            _advbDb.IntakeForm("update", textBlockPid.Text);
         }
-
+        /// <summary>
+        /// Highlight information if focused
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private new void GotFocus(object sender, System.Windows.RoutedEventArgs e)
         {
-            var s = (TextBox) sender;
+            var s = (TextBox)sender;
             s.SelectAll();
         }
-
+        /// <summary>
+        /// Go back to participant select
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonBack_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             ParticipantSelect psWindow = new ParticipantSelect();

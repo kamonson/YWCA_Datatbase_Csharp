@@ -1,11 +1,32 @@
-﻿namespace YWCA_Software
+﻿using System;
+using static YWCA_Software.DbConnector;
+
+namespace YWCA_Software
 {
     class Sql
     {
         /********************************************************************* Start SQL Operators And Keywords*********************************************************************/
+        private const string TblIntakeCollumns =
+            @" ([CONSUMER_ID]) ";
+
+        private string ColumnEquals(string cName, string target)
+        {
+            return @"[" + cName + @"]" + @" = '" + target + @"' ";
+        }
+
+        private string Values(string conditions)
+        {
+            return @"Values ( '" + conditions + @"' ) ";
+        }
+
         private string Select(string conditions)
         {
             return @"SELECT " + conditions + @" ";
+        }
+
+        private string InsertInto(string conditions)
+        {
+            return @"INSERT INTO " + conditions + @" ";
         }
 
         private string Set(string conditions)
@@ -15,7 +36,7 @@
 
         private string From(string conditions)
         {
-            return @" FROM " + conditions + @" ";
+            return @" FROM [" + conditions + @"] ";
         }
 
         private string Where(string conditions)
@@ -55,7 +76,7 @@
 
         private string Prefix(string selectOrUpdate, string expr)
         {
-            if (selectOrUpdate.ToLower() == @"set")
+            if (selectOrUpdate.ToLower() == @"update")
             {
                 return Set(expr);
             }
@@ -67,7 +88,7 @@
 
         private string Root(string selectOrUpdate, string tbl)
         {
-            if (selectOrUpdate.ToLower() == @"set")
+            if (selectOrUpdate.ToLower() == @"update")
             {
                 return Update(tbl);
             }
@@ -101,21 +122,6 @@
         /// </summary>
         /// <param name="selectOrUpdate"></param>
         /// <param name="participantId"></param>
-        /// <param name="mi"></param>
-        /// <returns>SQL string to obtain last name</returns>
-        public string MiddleInitialFromPid(string selectOrUpdate, string participantId, string mi)
-        {
-            string query = (selectOrUpdate == @"select")
-                ? Prefix(selectOrUpdate, @"MIDDLE_INITIAL") + Root(selectOrUpdate, @"tbl_Consumer_List_Entry")
-                : Root(selectOrUpdate, @"tbl_Consumer_List_Entry") + Prefix(selectOrUpdate, @"MIDDLE_INITIAL = '" + mi + @"' ");
-            return query + Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-        }
-
-        /// <summary>
-        /// Pass pid to obtain a SQL string for obtaining last name of person with given pid
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="participantId"></param>
         /// <param name="lname"></param>
         /// <returns>SQL string to obtain last name</returns>
         public string LastNameFromPid(string selectOrUpdate, string participantId, string lname)
@@ -127,33 +133,28 @@
         }
 
         /// <summary>
-        /// Pass pid to obtain a SQL string for obtaining last name of person with given pid
+        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
         /// </summary>
         /// <param name="selectOrUpdate"></param>
+        /// <param name="table"></param>
+        /// <param name="columnName"></param>
         /// <param name="participantId"></param>
-        /// <param name="hmisId"></param>
-        /// <returns>SQL string to obtain last name</returns>
-        public string HmisIdNameFromPid(string selectOrUpdate, string participantId, string hmisId)
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string value)
         {
-            string query = (selectOrUpdate == @"select")
-                ? Prefix(selectOrUpdate, @"HMIS_ID") + Root(selectOrUpdate, @"tbl_Consumer_List_Entry")
-                : Root(selectOrUpdate, @"tbl_Consumer_List_Entry") + Prefix(selectOrUpdate, @"HMIS_ID = '" + hmisId + @"' ");
-            return query + Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-        }
+            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
+            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
+            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
 
-        /// <summary>
-        /// Pass pid to obtain a SQL string for obtaining dob of person with given pid
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="participantId"></param>
-        /// <param name="dob"></param>
-        /// <returns>SQL string to obtain last name</returns>
-        public string DobFromPid(string selectOrUpdate, string participantId, string dob)
-        {
-            string query = (selectOrUpdate == @"select")
-                ? Prefix(selectOrUpdate, @"DOB") + Root(selectOrUpdate, @"tbl_Consumer_List_Entry")
-                : Root(selectOrUpdate, @"tbl_Consumer_List_Entry") + Prefix(selectOrUpdate, @"DOB = #" + dob + @"# ");
-            return query + Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
+            if (selectOrUpdate == "update" && !QueryTest(Select(columnName) + From(table) + end))
+            {
+                RunQuery(InsertInto(table) + TblIntakeCollumns + Values(participantId) + EndQuery());
+                Console.WriteLine(@"One item added to the database");
+            }
+
+            string query = (selectOrUpdate == @"select") ? select : update;
+            return query + end;
         }
 
         /// <summary>

@@ -9,17 +9,17 @@
     <Grid>
         <!--///////////////////////////////////////////////////////////////////////////// Start Demographic Info /////////////////////////////////////////////////////////////////////////////-->
 
-        <!--<Image x:Name="image" HorizontalAlignment="Left" Height="1020" VerticalAlignment="Top" Width="910" Source="Resources/IntakeBKG.png" Stretch="Fill" Margin="-10,-50,-8,-101" />-->
-        <TextBlock x:Name="textBlockStaff" HorizontalAlignment="Left" Margin="502,3,0,0" TextWrapping="Wrap" Text="Staff:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312"/>
-        <TextBox x:Name="textBoxStaff" Height="16" Margin="533,3,279,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus"/>
-        <TextBlock x:Name="textBlockDateDataEntered" HorizontalAlignment="Left" Margin="618,3,0,0" TextWrapping="Wrap" Text="Date Data Entered:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxDateDataEntered" HorizontalAlignment="Left" Height="16" Margin="722,3,0,0" TextWrapping="Wrap" Text="Text Box" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="1020" VerticalAlignment="Top" Width="910" Source="Resources/IntakeBKG.png" Stretch="Fill" Margin="-10,-50,-8,-101" />
         <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="16" Margin="66,3,0,0" TextWrapping="Wrap" Text="Participant ID:" VerticalAlignment="Top" Width="86" BorderThickness="0" IsReadOnly="True"/>
         <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="152,3,0,0" TextWrapping="Wrap" Text="{Binding Pid}" Width="70" VerticalAlignment="Top" Height="16"/>
         <TextBox x:Name="textBlockHMISIdLabel" HorizontalAlignment="Left" Height="16" Margin="228,3,0,0" TextWrapping="Wrap" Text="HMIS ID:" VerticalAlignment="Top" Width="53" BorderThickness="0" IsReadOnly="True"/>
         <TextBlock x:Name="textBlockHMISId" HorizontalAlignment="Left" Margin="286,3,0,0" TextWrapping="Wrap" Text="{Binding HmisId}" Width="70" VerticalAlignment="Top" Height="16"/>
         <TextBox x:Name="textBlockInfoNeLabel" HorizontalAlignment="Left" Height="16" Margin="361,3,0,0" TextWrapping="Wrap" Text="Info Net:" VerticalAlignment="Top" Width="61" BorderThickness="0" IsReadOnly="True"/>
-        <TextBlock x:Name="textBlockInfoNet" HorizontalAlignment="Left" Margin="427,3,0,0" TextWrapping="Wrap" Text="Text Box" Width="70" VerticalAlignment="Top" Height="16"/>
+        <TextBlock x:Name="textBlockInfoNet" HorizontalAlignment="Left" Margin="427,3,0,0" TextWrapping="Wrap" Text="{Binding InfoNetId}" Width="70" VerticalAlignment="Top" Height="16"/>
+        <TextBlock x:Name="textBlockStaff" HorizontalAlignment="Left" Margin="502,3,0,0" TextWrapping="Wrap" Text="Staff:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312"/>
+        <TextBox x:Name="textBoxStaff" Height="16" Margin="533,3,279,0" TextWrapping="Wrap" Text="{Binding Staff}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus"/>
+        <TextBlock x:Name="textBlockDateDataEntered" HorizontalAlignment="Left" Margin="618,3,0,0" TextWrapping="Wrap" Text="Date Data Entered:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxDateDataEntered" HorizontalAlignment="Left" Height="16" Margin="722,3,0,0" TextWrapping="Wrap" Text="{Binding DateDataEntered}" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus"/>
         <TextBlock x:Name="textBlockFNameLabel" HorizontalAlignment="Left" Margin="12,26,0,0" TextWrapping="Wrap" Text="First Name:" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxFName" HorizontalAlignment="Left" Height="16" Margin="77,26,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="80" BorderThickness="0" GotFocus="GotFocus"/>
         <TextBlock x:Name="textBlockMI" HorizontalAlignment="Left" Margin="173,26,0,0" TextWrapping="Wrap" Text="Middle Initial:" VerticalAlignment="Top"/>

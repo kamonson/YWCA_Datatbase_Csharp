@@ -26,6 +26,7 @@ namespace YWCA_Software
 
 
         /********************************************************************* Start SQL Data Sections *********************************************************************/
+
         private string _mi = "MI"; //Participant date of birth
         /// <summary>
         /// Participant DOB for WPF databinding
@@ -40,6 +41,40 @@ namespace YWCA_Software
             {
                 _mi = value ?? "";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Mi"));
+            }
+        }
+
+        private string _staff = "None"; //Participant date of birth
+        /// <summary>
+        /// Staff Updating DB for WPF databinding
+        /// </summary>
+        public string Staff//Participant date of birth
+        {
+            get
+            {
+                return _staff;
+            }
+            set
+            {
+                _staff = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Staff"));
+            }
+        }
+
+        private string _dateDataEntered; //Participant date of birth
+        /// <summary>
+        /// Date data was updated for WPF databinding
+        /// </summary>
+        public string DateDataEntered
+        {
+            get
+            {
+                return _dateDataEntered;
+            }
+            set
+            {
+                _dateDataEntered = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DateDataEntered"));
             }
         }
 
@@ -110,6 +145,7 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PID"));
             }
         }
+
         /// <summary>
         /// Set pid to input
         /// </summary>
@@ -131,8 +167,25 @@ namespace YWCA_Software
             }
             set
             {
-                _pid = value ?? "";
+                _hmisId = value ?? "";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HmisId"));
+            }
+        }
+
+        private string _infoNetId = " "; //Participant last name
+        /// <summary>
+        /// INFO NET ID for WPF databinding
+        /// </summary>
+        public string InfoNetId //Participant last name
+        {
+            get
+            {
+                return _infoNetId;
+            }
+            set
+            {
+                _infoNetId = value ?? "";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("InfoNetId"));
             }
         }
 
@@ -154,8 +207,8 @@ namespace YWCA_Software
         }
         ////////////////////////////////////////////////////////////////////// End SQL Data Sections //////////////////////////////////////////////////////////////////////
 
-		
-		/********************************************************************* Start ADVP View Mode Methods *********************************************************************/
+
+        /********************************************************************* Start ADVP View Mode Methods *********************************************************************/
         /// <summary>
         /// Constructor, when initialized test DB connection
         /// </summary>
@@ -211,28 +264,6 @@ namespace YWCA_Software
         }
 
         /// <summary>
-        /// Get first name from DB with given DB and Update FirstName for WPF update
-        /// </summary>
-        public void RunQueryMInitialFromPid(string selectUpdate)
-        {
-            Connect();
-            _dbCommand.CommandText = _sql.MiddleInitialFromPid(selectUpdate, Pid, Mi);
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
-            rdr?.GetSchemaTable();
-            if (rdr != null)
-            {
-                int rowNum;
-                for (rowNum = 0; rdr.Read(); rowNum++)
-                {
-                    Mi = (rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null;
-                    Console.WriteLine(@"{0}", Mi);
-                }
-                Console.WriteLine(@"Found " + rowNum + @" results");
-            }
-            Disconnect();
-        }
-
-        /// <summary>
         /// Get last name from DB with given DB and Update LastName for WPF update
         /// </summary>
         public void RunQueryLNameFromPid(string selectUpdate)
@@ -257,25 +288,25 @@ namespace YWCA_Software
         /// <summary>
         /// Get DOB from DB with given DB and Update LastName for WPF update
         /// </summary>
-        public void RunQueryDobFromPid(string selectUpdate)
+        public void QueryDateFromPid(string selectUpdateAdd, string table, string column, ref string date)
         {
             DateTime dtDob = new DateTime();
             Connect();
-            _dbCommand.CommandText = _sql.DobFromPid(selectUpdate, Pid, Dob);
+            _dbCommand.CommandText = _sql.SelectUpdateOrAdd(selectUpdateAdd, table, column, Pid, date);
             OleDbDataReader rdr = _dbCommand.ExecuteReader();
-            rdr?.GetSchemaTable();
+
             if (rdr != null)
             {
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
-                    dtDob = (rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0) : DateTime.Now;   
-                    Console.WriteLine(@"{0}", Dob);
+                    dtDob = (rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0) : DateTime.Now;
+                    Console.WriteLine(@"{0}", date);
                 }
                 Console.WriteLine(@"Found " + rowNum + @" results");
                 if (rowNum > 0)
                 {
-                    Dob = dtDob.ToShortDateString();
+                    date = dtDob.ToShortDateString();
                 }
             }
             Disconnect();
@@ -315,25 +346,71 @@ namespace YWCA_Software
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
-                   target = ((rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null);
+                    target = ((rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null);
                 }
             }
             Disconnect();
         }
 
-        public void GetIntakeForm(string pid)
+        /// <summary>
+        /// Search for pid based off FirstName AND LastName OR Pid
+        /// </summary>
+        public static void RunQuery(string query)
         {
-            RunQueryDobFromPid("select");
-            RunQuery(ref _fName, _sql.FirstNameFromPid("select", pid, FirstName));
-            RunQuery(ref _lName, _sql.LastNameFromPid("select", pid, LastName));
-            RunQuery(ref _hmisId, _sql.HmisIdNameFromPid("select", pid, HmisId));
-            RunQuery(ref _mi, _sql.MiddleInitialFromPid("select", pid, HmisId));
-        }           
+            _dbCommand.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
+            _dbCommand.Connection.Open();
+            _dbCommand.CommandText = query;
+            _dbCommand.ExecuteReader();
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Used to test if table contains specified query data
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>false if is empty</returns>
+        public static bool QueryTest(string query)
+        {
+            try
+            {
+                OleDbCommand cmd = new OleDbCommand();
+                cmd.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
+                cmd.Connection.Open();
+                cmd.CommandText = query;
+                OleDbDataReader rdr = cmd.ExecuteReader();
+                bool  value = rdr != null && rdr.HasRows;
+                cmd.Connection.Close();
+                return value;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// Method to set, update, or add data to DB
+        /// </summary>
+        /// <param name="selectUpdateAdd"></param>
+        /// <param name="pid"></param>
+        public void IntakeForm(string selectUpdateAdd, string pid)
+        {
+            QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "DOB", ref _dob);
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Date", ref _dateDataEntered);
+
+            RunQuery(ref _fName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "FIRST_NAME", pid, FirstName));
+            RunQuery(ref _mi, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "MIDDLE_INITIAL", pid, Mi));
+            RunQuery(ref _lName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "LAST_NAME", pid, LastName));
+            RunQuery(ref _hmisId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "HMIS_ID", pid, HmisId));
+            RunQuery(ref _infoNetId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "INFO_NET_ID", pid, InfoNetId));
+            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Staff", pid, Staff));
+        }
         ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
-		
-		
-		 /********************************************************************* Start *********************************************************************/
-		 
-		  ////////////////////////////////////////////////////////////////////// END //////////////////////////////////////////////////////////////////////
+
+
+        /********************************************************************* Start *********************************************************************/
+
+        ////////////////////////////////////////////////////////////////////// END //////////////////////////////////////////////////////////////////////
     }
 }
