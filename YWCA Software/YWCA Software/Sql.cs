@@ -1,86 +1,84 @@
-﻿using System;
-using System.Globalization;
-using static YWCA_Software.DbConnector;
+﻿using System.Globalization;
 
 namespace YWCA_Software
 {
     class Sql
     {
         /********************************************************************* Start SQL Operators And Keywords*********************************************************************/
-        private const string TblIntakeCollumns =
+        public const string TblIntakeCollumns =
             @" ([CONSUMER_ID]) ";
 
-        private string ColumnEquals(string cName, string target)
+        public string ColumnEquals(string cName, string target)
         {
             return @"[" + cName + @"]" + " = \"" + target + "\" ";
         }
 
-        private string ColumnEquals(string cName, bool target)
+        public string ColumnEquals(string cName, bool target)
         {
             return @"[" + cName + @"]" + " = " + target.ToString() + " ";
         }
 
-        private string Values(string conditions)
+        public string Values(string conditions)
         {
             return "Values ( \"" + conditions + "\" ) ";
         }
 
-        private string Select(string conditions)
+        public string Select(string conditions)
         {
             return (conditions != "*") ? @"SELECT [" + conditions + @"] " : @"SELECT " + conditions + @" ";
         }
 
-        private string InsertInto(string conditions)
+        public string InsertInto(string conditions)
         {
             return @"INSERT INTO " + conditions + @" ";
         }
 
-        private string Set(string conditions)
+        public string Set(string conditions)
         {
             return @"SET " + conditions + @" ";
         }
 
-        private string From(string conditions)
+        public string From(string conditions)
         {
             return @" FROM [" + conditions + @"] ";
         }
 
-        private string Where(string conditions)
+        public string Where(string conditions)
         {
             return @" WHERE " + conditions + @" ";
         }
 
-        private string EndQuery()
+        public string EndQuery()
         {
             return @";";
         }
 
-        private string Like(string word)
+        public string Like(string word)
         {
             return @" LIKE '%" + word + @"%' ";
         }
 
-        private string And(string expr)
+        public string And(string expr)
         {
             return @"AND " + expr + @" ";
         }
 
-        private string Or(string expr)
+        public string Or(string expr)
         {
             return @"OR " + expr + @" ";
         }
 
-        private string Equals(string expr)
+        public string Equals(string expr)
         {
             return @" = '" + expr + @"'";
         }
 
-        private string Update(string tbl)
+        public string Update(string tbl)
         {
             return @"UPDATE " + tbl + @" ";
         }
 
-        private string Prefix(string selectOrUpdate, string expr)
+        public string Prefix(string selectOrUpdate, string expr)
         {
             if (selectOrUpdate.ToLower() == @"update")
             {
@@ -92,7 +90,7 @@ namespace YWCA_Software
             }
         }
 
-        private string Root(string selectOrUpdate, string tbl)
+        public string Root(string selectOrUpdate, string tbl)
         {
             if (selectOrUpdate.ToLower() == @"update")
             {
@@ -152,13 +150,6 @@ namespace YWCA_Software
             string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
             string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
             string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-
-            if (selectOrUpdate == "update" && !QueryTest(Select(columnName) + From(table) + end))
-            {
-                RunQuery(InsertInto(table) + TblIntakeCollumns + Values(participantId) + EndQuery());
-                Console.WriteLine(@"One item added to the database");
-            }
-
             string query = (selectOrUpdate == @"select") ? select : update;
             return query + end;
         }
@@ -177,13 +168,6 @@ namespace YWCA_Software
             string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
             string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString()));
             string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-
-            if (selectOrUpdate == "update" && !QueryTest(Select(columnName) + From(table) + end))
-            {
-                RunQuery(InsertInto(table) + TblIntakeCollumns + Values(participantId) + EndQuery());
-                Console.WriteLine(@"One item added to the database");
-            }
-
             string query = (selectOrUpdate == @"select") ? select : update;
             return query + end;
         }
@@ -202,13 +186,6 @@ namespace YWCA_Software
             string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
             string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString(CultureInfo.CurrentCulture)));
             string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-
-            if (selectOrUpdate == "update" && !QueryTest(Select(columnName) + From(table) + end))
-            {
-                RunQuery(InsertInto(table) + TblIntakeCollumns + Values(participantId) + EndQuery());
-                Console.WriteLine(@"One item added to the database");
-            }
-
             string query = (selectOrUpdate == @"select") ? select : update;
             return query + end;
         }
@@ -227,13 +204,6 @@ namespace YWCA_Software
             string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
             string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
             string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-
-            if (selectOrUpdate == "update" && !QueryTest(Select(columnName) + From(table) + end))
-            {
-                RunQuery(InsertInto(table) + TblIntakeCollumns + Values(participantId) + EndQuery());
-                Console.WriteLine(@"One item added to the database");
-            }
-
             string query = (selectOrUpdate == @"select") ? select : update;
             return query + end;
         }

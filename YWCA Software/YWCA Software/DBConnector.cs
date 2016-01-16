@@ -10,8 +10,8 @@ namespace YWCA_Software
     /// </summary>
     public class DbConnector : INotifyPropertyChanged
     {
-        Sql _sql = new Sql();
-        private static OleDbCommand _dbCommand = new OleDbCommand(); //commander for database
+        private readonly Sql _sql = new Sql();
+        static readonly OleDbCommand DbCommand = new OleDbCommand(); //commander for database
         public event PropertyChangedEventHandler PropertyChanged; //event handler for data binding to WPF
 
         /********************************************************************* Start Const Strings For DB Access *********************************************************************/
@@ -280,7 +280,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _neighborhood = "Unknown"; 
+        private string _neighborhood = "Unknown";
         public string Neighborhood
         {
             get
@@ -322,7 +322,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _ssn = "Unknown"; 
+        private string _ssn = "Unknown";
         public string Ssn
         {
             get
@@ -336,7 +336,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _dateDataEntered; 
+        private string _dateDataEntered;
         public string DateDataEntered
         {
             get
@@ -350,7 +350,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _dob; 
+        private string _dob;
         public string Dob
         {
             get
@@ -364,7 +364,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _fName = "First Name"; 
+        private string _fName = "First Name";
         public string FirstName
         {
             get
@@ -378,8 +378,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _lName = "Last Name"; 
-        public string LastName 
+        private string _lName = "Last Name";
+        public string LastName
         {
             get
             {
@@ -392,8 +392,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _pid = "PID"; 
-        public string Pid 
+        private string _pid = "PID";
+        public string Pid
         {
             get
             {
@@ -414,8 +414,8 @@ namespace YWCA_Software
             Pid = pid;
         }
 
-        private string _hmisId = " "; 
-        public string HmisId 
+        private string _hmisId = " ";
+        public string HmisId
         {
             get
             {
@@ -428,8 +428,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _infoNetId = " "; 
-        public string InfoNetId 
+        private string _infoNetId = " ";
+        public string InfoNetId
         {
             get
             {
@@ -482,8 +482,8 @@ namespace YWCA_Software
         /// </summary>
         private void Connect()
         {
-            _dbCommand.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
-            _dbCommand.Connection.Open();
+            DbCommand.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
+            DbCommand.Connection.Open();
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace YWCA_Software
         /// </summary>
         private static void Disconnect()
         {
-            _dbCommand.Connection.Close();
+            DbCommand.Connection.Close();
         }
 
         /// <summary>
@@ -500,8 +500,8 @@ namespace YWCA_Software
         public void RunQueryFNameFromPid(string selectUpdate)
         {
             Connect();
-            _dbCommand.CommandText = _sql.FirstNameFromPid(selectUpdate, Pid, FirstName);
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = _sql.FirstNameFromPid(selectUpdate, Pid, FirstName);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
             rdr?.GetSchemaTable();
             if (rdr != null)
             {
@@ -522,8 +522,8 @@ namespace YWCA_Software
         public void RunQueryLNameFromPid(string selectUpdate)
         {
             Connect();
-            _dbCommand.CommandText = _sql.LastNameFromPid(selectUpdate, Pid, LastName);
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = _sql.LastNameFromPid(selectUpdate, Pid, LastName);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
             rdr?.GetSchemaTable();
             if (rdr != null)
             {
@@ -545,8 +545,8 @@ namespace YWCA_Software
         {
             DateTime dtDob = new DateTime();
             Connect();
-            _dbCommand.CommandText = _sql.SelectUpdateOrAdd(selectUpdateAdd, table, column, Pid, date);
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = _sql.SelectUpdateOrAdd(selectUpdateAdd, table, column, Pid, date);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
 
             if (rdr != null)
             {
@@ -571,8 +571,8 @@ namespace YWCA_Software
         public void RunQueryFindClient()
         {
             Connect();
-            _dbCommand.CommandText = _sql.FindClientPid(FirstName, LastName, Pid);
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = _sql.FindClientPid(FirstName, LastName, Pid);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
             ListPiDs.Clear();
             if (rdr != null)
             {
@@ -593,8 +593,8 @@ namespace YWCA_Software
         public void RunQuery(ref string target, string query)
         {
             Connect();
-            _dbCommand.CommandText = query;
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
             ListPiDs.Clear();
             if (rdr != null)
             {
@@ -615,15 +615,15 @@ namespace YWCA_Software
         public void RunQuery(ref int target, string query)
         {
             Connect();
-            _dbCommand.CommandText = query;
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
             ListPiDs.Clear();
             if (rdr != null)
             {
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
-               target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555;                
+                    target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555;
                 }
             }
             Disconnect();
@@ -637,15 +637,15 @@ namespace YWCA_Software
         public void RunQuery(ref decimal target, string query)
         {
             Connect();
-            _dbCommand.CommandText = query;
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
             ListPiDs.Clear();
             if (rdr != null)
             {
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
-                                          target = (rdr.IsDBNull(0) == false) ? rdr.GetDecimal(0) : 0; 
+                    target = (rdr.IsDBNull(0) == false) ? rdr.GetDecimal(0) : 0;
                 }
             }
             Disconnect();
@@ -659,8 +659,8 @@ namespace YWCA_Software
         public void RunQuery(ref bool target, string query)
         {
             Connect();
-            _dbCommand.CommandText = query;
-            OleDbDataReader rdr = _dbCommand.ExecuteReader();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
             ListPiDs.Clear();
             if (rdr != null)
             {
@@ -678,10 +678,10 @@ namespace YWCA_Software
         /// </summary>
         public static void RunQuery(string query)
         {
-            _dbCommand.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
-            _dbCommand.Connection.Open();
-            _dbCommand.CommandText = query;
-            _dbCommand.ExecuteReader();
+            DbCommand.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
+            DbCommand.Connection.Open();
+            DbCommand.CommandText = query;
+            DbCommand.ExecuteReader();
             Disconnect();
         }
 
@@ -699,7 +699,7 @@ namespace YWCA_Software
                 cmd.Connection.Open();
                 cmd.CommandText = query;
                 OleDbDataReader rdr = cmd.ExecuteReader();
-                bool  value = rdr != null && rdr.HasRows;
+                bool value = rdr != null && rdr.HasRows;
                 cmd.Connection.Close();
                 return value;
             }
@@ -710,6 +710,10 @@ namespace YWCA_Software
 
         }
 
+        ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
+
+
+        /********************************************************************* Start Demographics *********************************************************************/
         /// <summary>
         /// Method to set, update, or add data to DB
         /// </summary>
@@ -720,47 +724,46 @@ namespace YWCA_Software
             //date times
             QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "DOB", ref _dob);
             QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "LastUpdated", ref _dateDataEntered);
-            
+
             //ints
-            RunQuery(ref        _zip,                    _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Zip",                      pid,    Zip                 ));
-                                                            
+            RunQuery(ref _zip, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Zip", pid, Zip));
+
             //decimals
-            RunQuery(ref        _totalMonthlyIncome,     _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Total Mo Income",          pid,    TotalMonthlyIncome  ));
-                                                                                        
+            RunQuery(ref _totalMonthlyIncome, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Total Mo Income", pid, TotalMonthlyIncome));
+
             //bools                                                                         
-            RunQuery(ref        _msgOk,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "MSG_OK",                   pid,    MsgOk               ));
-                                                          
-            RunQuery(ref        _veteranStatus,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Vet",                      pid,    VeteranStatus       ));
-                                                          
+            RunQuery(ref _msgOk, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "MSG_OK", pid, MsgOk));
+
+            RunQuery(ref _veteranStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Vet", pid, VeteranStatus));
+
             //text                                        
-            RunQuery(ref        _fName,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "FIRST_NAME",               pid,    FirstName           ));
-            RunQuery(ref        _mi,                     _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "MIDDLE_INITIAL",           pid,    Mi                  ));
-            RunQuery(ref        _lName,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "LAST_NAME",                pid,    LastName            ));
-            RunQuery(ref        _hmisId,                 _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "HMIS_ID",                  pid,    HmisId              ));
-            RunQuery(ref        _infoNetId,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "INFO_NET_ID",              pid,    InfoNetId           ));
-            RunQuery(ref        _ssn,                    _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "NO_SSN_Reason",            pid,    Ssn                 ));
-            RunQuery(ref        _gender,                 _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Consumer_List_Entry",      "Gender",                   pid,    Gender              ));
+            RunQuery(ref _fName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "FIRST_NAME", pid, FirstName));
+            RunQuery(ref _mi, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "MIDDLE_INITIAL", pid, Mi));
+            RunQuery(ref _lName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "LAST_NAME", pid, LastName));
+            RunQuery(ref _hmisId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "HMIS_ID", pid, HmisId));
+            RunQuery(ref _infoNetId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "INFO_NET_ID", pid, InfoNetId));
+            RunQuery(ref _ssn, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "NO_SSN_Reason", pid, Ssn));
+            RunQuery(ref _gender, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "Gender", pid, Gender));
 
 
-            RunQuery(ref        _city,                   _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "city",                     pid,    City                ));
-            RunQuery(ref        _state,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "state",                    pid,    State               ));
-            RunQuery(ref        _homePhone,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Home_Phone",               pid,    HomePhone           ));
-            RunQuery(ref        _workPhone,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Work_MSG",                 pid,    WorkPhone           ));
-            RunQuery(ref        _callTime,               _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Call_Time",                pid,    CallTime            ));
-            RunQuery(ref        _streetAddress,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Street_Address",           pid,    StreetAddress       ));
-            RunQuery(ref        _maritalStatus,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Marital_Status",           pid,    MaritalStatus       ));
-            RunQuery(ref        _ethnicity,              _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Forms_Flow_Table",         "Ethnicity",                pid,    Ethnicity           ));
+            RunQuery(ref _city, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "city", pid, City));
+            RunQuery(ref _state, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "state", pid, State));
+            RunQuery(ref _homePhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Home_Phone", pid, HomePhone));
+            RunQuery(ref _workPhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Work_MSG", pid, WorkPhone));
+            RunQuery(ref _callTime, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Call_Time", pid, CallTime));
+            RunQuery(ref _streetAddress, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Street_Address", pid, StreetAddress));
+            RunQuery(ref _maritalStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Marital_Status", pid, MaritalStatus));
+            RunQuery(ref _ethnicity, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Ethnicity", pid, Ethnicity));
 
-            RunQuery(ref        _staff,                  _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Staff",                    pid,    Staff               ));
-            RunQuery(ref        _housingStatus,          _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Currently Living In",      pid,    HousingStatus       ));
-            RunQuery(ref        _neighborhood,           _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Spokane City",             pid,    Neighborhood        ));
-            RunQuery(ref        _countyDetail,           _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Spokane County",           pid,    CountyDetail        ));
-            RunQuery(ref        _disability,             _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Adult 1 Disability",       pid,    Disability          ));
-            RunQuery(ref        _secondDisability,       _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "Adult 1 Disability 1",     pid,    SecondDisability    ));
-            RunQuery(ref        _incomeType,             _sql.SelectUpdateOrAdd(selectUpdateAdd,            "tbl_Intake",                   "income 1",                 pid,    IncomeType          ));
+            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Staff", pid, Staff));
+            RunQuery(ref _housingStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Currently Living In", pid, HousingStatus));
+            RunQuery(ref _neighborhood, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane City", pid, Neighborhood));
+            RunQuery(ref _countyDetail, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane County", pid, CountyDetail));
+            RunQuery(ref _disability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability", pid, Disability));
+            RunQuery(ref _secondDisability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability 1", pid, SecondDisability));
+            RunQuery(ref _incomeType, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "income 1", pid, IncomeType));
         }
-        ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
-
+        ////////////////////////////////////////////////////////////////////// END Demographics //////////////////////////////////////////////////////////////////////
 
         /********************************************************************* Start *********************************************************************/
 

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace YWCA_Software
 {
@@ -10,7 +12,8 @@ namespace YWCA_Software
         /// <summary>
         /// No arg constructor for blank form
         /// </summary>
-        readonly DbConnector _advbDb = new DbConnector();//viewModel for data binding
+        private readonly DbConnector _advbDb = new DbConnector();
+        private readonly Sql _sql = new Sql();
         public IntakeForm()
         {
             InitializeComponent();
@@ -34,6 +37,14 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            string[] table = { "tbl_Intake", "tbl_Forms_Flow_Table" };
+            var pid = textBlockPid.Text;
+            var end = @" Where Consumer_ID = " + pid + @";";
+            foreach (var i in table.Where(i => !DbConnector.QueryTest(_sql.Select(@"Consumer_ID") + _sql.From(i) + end)))
+            {
+                DbConnector.RunQuery(_sql.InsertInto(i) + @"(Consumer_ID) " + _sql.Values(pid) + @";");
+                Console.WriteLine(@"One item added to the database");
+            }
             _advbDb.Demographics("update", textBlockPid.Text);
         }
         /// <summary>
@@ -53,7 +64,7 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void buttonBack_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ParticipantSelect psWindow = new ParticipantSelect();
+            var psWindow = new ParticipantSelect();
             psWindow.Show();
             Close();
         }
