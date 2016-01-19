@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.OleDb;
+using System.Globalization;
 
 namespace YWCA_Software
 {
@@ -19,7 +20,7 @@ namespace YWCA_Software
 
         private const string Path = @"Data Source=" +
                                     @"C:\YWCADB\All\" +
-                                    @"13 ADVP - Database_20140718_1307.accdb" +
+                                    @"13 Advp - Database_20140718_1307.accdb" +
                                     @";";
         private const string Password = @"Jet OLEDB:Database Password=ywc@;";
         ////////////////////////////////////////////////////////////////////// END Const Strings For DB Access //////////////////////////////////////////////////////////////////////
@@ -66,6 +67,62 @@ namespace YWCA_Software
             {
                 _totalMonthlyIncome = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalMonthlyIncome"));
+            }
+        }
+
+        private double _totalAdultsInHousehold;
+        public double TotalAdultsInHousehold
+        {
+            get
+            {
+                return _totalAdultsInHousehold;
+            }
+            set
+            {
+                _totalAdultsInHousehold = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalAdultsInHousehold"));
+            }
+        }
+
+        private string _totalAdultsInHouseholdString;
+        public string TotalAdultsInHouseholdString
+        {
+            get
+            {
+                return _totalAdultsInHouseholdString;
+            }
+            set
+            {
+                _totalAdultsInHouseholdString = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalAdultsInHouseholdString"));
+            }
+        }
+
+        private string _totalChildrenInHouseholdString;
+        public string TotalChildrenInHouseholdString
+        {
+            get
+            {
+                return _totalChildrenInHouseholdString;
+            }
+            set
+            {
+                _totalChildrenInHouseholdString = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalChildrenInHouseholdString"));
+            }
+        }
+
+        private double _totalChildrenInHousehold;
+        public double TotalChildrenInHousehold
+        {
+            get
+            {
+                return _totalChildrenInHousehold;
+            }
+            set
+            {
+                _totalChildrenInHousehold = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalChildrenInHousehold"));
             }
         }
 
@@ -458,10 +515,27 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListPiDs"));
             }
         }
+
+        private ObservableCollection<string> _listDates = new ObservableCollection<string> { @"results go here" }; //pid search results list
+        /// <summary>
+        /// Participant Advp form date for WPF databinding
+        /// </summary>
+        public ObservableCollection<string> ListDates//List for displaying search results of dates for advp
+        {
+            get
+            {
+                return _listDates;
+            }
+            set
+            {
+                _listDates = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListDates"));
+            }
+        }
         ////////////////////////////////////////////////////////////////////// End SQL Data Sections //////////////////////////////////////////////////////////////////////
 
 
-        /********************************************************************* Start ADVP View Mode Methods *********************************************************************/
+        /********************************************************************* Start Advp View Mode Methods *********************************************************************/
         /// <summary>
         /// Constructor, when initialized test DB connection
         /// </summary>
@@ -586,6 +660,26 @@ namespace YWCA_Software
         }
 
         /// <summary>
+        /// Search for pid based off FirstName AND LastName OR Pid
+        /// </summary>
+        public void RunQueryFindDate()
+        {
+            Connect();
+            DbCommand.CommandText = _sql.FindClientDate(Pid);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListDates.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    ListDates.Add((rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0).ToShortDateString() : DateTime.Now.ToShortDateString());
+                }
+            }
+            Disconnect();
+        }
+
+        /// <summary>
         /// Runs the qurry passed to it
         /// </summary>
         /// <param name="target"></param>
@@ -626,6 +720,41 @@ namespace YWCA_Software
                     target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555;
                 }
             }
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it for doubles
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="query"></param>
+        public void RunQuery(ref double target, string query)
+        {
+            Connect();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            if (rdr != null)
+            {
+                rdr.Read();
+                if (rdr.HasRows)
+                {
+                    target = (rdr.IsDBNull(0) == false) ? rdr.GetDouble(0) : 0;
+                }
+            }
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Add an intake date to the data base
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="date"></param>
+        public void RunQueryAddDate(string pid, string date)
+        {
+            Connect();
+            DbCommand.CommandText = _sql.AddIntakeDate(pid, date);
+            DbCommand.ExecuteReader();
+            ListPiDs.Clear();
             Disconnect();
         }
 
@@ -710,7 +839,7 @@ namespace YWCA_Software
 
         }
 
-        ////////////////////////////////////////////////////////////////////// END ADVP View Model Methods //////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////// END Advp View Model Methods //////////////////////////////////////////////////////////////////////
 
 
         /********************************************************************* Start Demographics *********************************************************************/
@@ -765,8 +894,18 @@ namespace YWCA_Software
         }
         ////////////////////////////////////////////////////////////////////// END Demographics //////////////////////////////////////////////////////////////////////
 
-        /********************************************************************* Start *********************************************************************/
+        /********************************************************************* Start Advp *********************************************************************/
 
-        ////////////////////////////////////////////////////////////////////// END //////////////////////////////////////////////////////////////////////
+        public void Advp(string selectUpdateAdd, string pid, string date)
+        {
+            TotalAdultsInHousehold = Convert.ToDouble(TotalAdultsInHouseholdString);
+            TotalChildrenInHousehold = Convert.ToDouble(TotalChildrenInHouseholdString);
+            RunQuery(ref _totalAdultsInHousehold, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Tot Adults Household", pid, date, TotalAdultsInHousehold));
+            TotalAdultsInHouseholdString = TotalAdultsInHousehold.ToString(CultureInfo.InvariantCulture);
+            RunQuery(ref _totalChildrenInHousehold, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Tot Child Household", pid, date, TotalChildrenInHousehold));
+            TotalChildrenInHouseholdString = TotalChildrenInHousehold.ToString(CultureInfo.InvariantCulture);
+
+        }
+        ////////////////////////////////////////////////////////////////////// END Advp //////////////////////////////////////////////////////////////////////
     }
 }

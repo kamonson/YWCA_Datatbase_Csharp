@@ -22,6 +22,10 @@ namespace YWCA_Software
         {
             return "Values ( \"" + conditions + "\" ) ";
         }
+        public string ValuesNoQuote(string conditions)
+        {
+            return "Values (" + conditions + ") ";
+        }
 
         public string Select(string conditions)
         {
@@ -72,6 +76,12 @@ namespace YWCA_Software
         {
             return @" = '" + expr + @"'";
         }
+
+        public string EqualsNoQuote(string expr)
+        {
+            return @" = " + expr;
+        }
+
 
         public string Update(string tbl)
         {
@@ -179,6 +189,24 @@ namespace YWCA_Software
         /// <param name="table"></param>
         /// <param name="columnName"></param>
         /// <param name="participantId"></param>
+        /// <param name="date"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string date, double value)
+        {
+            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
+            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString(CultureInfo.CurrentCulture)));
+            string end = Where(@"Consumer_ID" + Equals(participantId) + @"AND [Date] " + EqualsNoQuote(@"#" + date + @"#")) + EndQuery();
+            string query = (selectOrUpdate == @"select") ? select : update;
+            return query + end;
+        }
+        /// <summary>
+        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
+        /// </summary>
+        /// <param name="selectOrUpdate"></param>
+        /// <param name="table"></param>
+        /// <param name="columnName"></param>
+        /// <param name="participantId"></param>
         /// <param name="value"></param>
         /// <returns></returns>
         public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, decimal value)
@@ -221,6 +249,22 @@ namespace YWCA_Software
                    From(@"tbl_Consumer_List_Entry") +
                    Where(@"FIRST_NAME" + Like(firstName) + And(@"LAST_NAME") + Like(lastName) + Or(@"Consumer_ID" + Equals(pid))) +
                    EndQuery();
+        }
+
+        public string FindClientDate(string pid )
+        {
+            return Select(@"Date") +
+                   From(@"tbl_Intake") +
+                   Where(@"Consumer_ID" + Equals(pid)) +
+                   EndQuery();
+        }
+
+        public string AddIntakeDate(string pid, string date)
+        {
+           return   InsertInto("tbl_Intake" + " (" +  @"[Consumer_ID]" + ", " + "[Date]" + ")") + 
+                    ValuesNoQuote("'" + pid + "', " + "#" + date + "# ") +
+                    EndQuery();
+
         }
         ////////////////////////////////////////////////////////////////////// End SQL Queries //////////////////////////////////////////////////////////////////////
 

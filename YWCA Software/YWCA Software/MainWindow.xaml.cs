@@ -5,7 +5,7 @@ namespace YWCA_Software
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         /// <summary>
         /// Initializes Main Window
@@ -15,7 +15,7 @@ namespace YWCA_Software
             InitializeComponent();
         }
         /// <summary>
-        /// Open ADVP database
+        /// Open Advp database
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

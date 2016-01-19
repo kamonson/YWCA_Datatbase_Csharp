@@ -106,9 +106,23 @@
 
         <!--///////////////////////////////////////////////////////////////////////////// Start ADVP Info /////////////////////////////////////////////////////////////////////////////-->
         <TextBlock x:Name="textBlockIntakeDate" HorizontalAlignment="Left" Margin="10,197,0,0" TextWrapping="Wrap" Text="IntakeDate:" VerticalAlignment="Top" Height="16"/>
-        <ComboBox x:Name="comboBoxIntakeDate" HorizontalAlignment="Left" Margin="77,195,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
-            <ComboBoxItem x:Name="Refused1" Content="To Be Bound"/>
-        </ComboBox>
+        <ListBox x:Name="listBoxIntakeDate" Margin="75,197,638,629" ItemsSource="{Binding ListDates}" SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock x:Name="textBlockNewDate" HorizontalAlignment="Left" Margin="10,245,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="16" Margin="75,245,0,0" TextWrapping="Wrap" Text="Date of Intake" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062"/>
+        <Button x:Name="buttonAddNewDate" Content="Add New Date" Margin="0,245,624,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="81" Click="buttonAddNewDate_Click"/>
+        <TextBlock x:Name="textBlockTotalAdultsInHousehold" HorizontalAlignment="Left" Margin="256,197,0,0" TextWrapping="Wrap" Text="Total Adults In Household:" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxTotalAdultsInHousehold" HorizontalAlignment="Left" Height="16" Margin="399,197,0,0" TextWrapping="Wrap" Text="{Binding TotalAdultsInHouseholdString}" VerticalAlignment="Top" Width="39" BorderThickness="0" GotFocus="GotFocus"/>
+        <TextBlock x:Name="textBlockTotalChildrenInHousehold" HorizontalAlignment="Left" Margin="256,224,0,0" TextWrapping="Wrap" Text="Total Children In Household:" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxTotalChildrenInHousehold" HorizontalAlignment="Left" Height="16" Margin="411,224,0,0" TextWrapping="Wrap" Text="{Binding TotalChildrenInHouseholdString}" VerticalAlignment="Top" Width="39" BorderThickness="0" GotFocus="GotFocus"/>
+        <Button x:Name="buttonUpdateADVP" Content="Update" Margin="0,200,10,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="37" Click="buttonUpdateADVP_Click"/>
 
 
 
