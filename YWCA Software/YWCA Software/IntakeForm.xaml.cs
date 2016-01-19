@@ -77,8 +77,10 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            DataContext = _advbDb;
             string date = listBoxIntakeDate.SelectedItem?.ToString();
             string pid = textBlockPid.Text;
+            _advbDb.SetIntakeDate(date);
 
             _advbDb.Advp(@"select", pid, date);
         }

@@ -16,19 +16,19 @@ namespace YWCA_Software
         public event PropertyChangedEventHandler PropertyChanged; //event handler for data binding to WPF
 
         /********************************************************************* Start Const Strings For DB Access *********************************************************************/
-        private const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
+        public const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
 
-        private const string Path = @"Data Source=" +
+        public const string Path = @"Data Source=" +
                                     @"C:\YWCADB\All\" +
                                     @"13 Advp - Database_20140718_1307.accdb" +
                                     @";";
-        private const string Password = @"Jet OLEDB:Database Password=ywc@;";
+        public const string Password = @"Jet OLEDB:Database Password=ywc@;";
         ////////////////////////////////////////////////////////////////////// END Const Strings For DB Access //////////////////////////////////////////////////////////////////////
 
 
         /********************************************************************* Start SQL Data Sections *********************************************************************/
 
-        private bool _msgOk;
+        public bool _msgOk;
         public bool MsgOk
         {
             get
@@ -42,7 +42,7 @@ namespace YWCA_Software
             }
         }
 
-        private bool _veteranStatus;
+        public bool _veteranStatus;
         public bool VeteranStatus
         {
             get
@@ -56,7 +56,7 @@ namespace YWCA_Software
             }
         }
 
-        private decimal _totalMonthlyIncome;
+        public decimal _totalMonthlyIncome;
         public decimal TotalMonthlyIncome
         {
             get
@@ -70,7 +70,7 @@ namespace YWCA_Software
             }
         }
 
-        private double _totalAdultsInHousehold;
+        public double _totalAdultsInHousehold;
         public double TotalAdultsInHousehold
         {
             get
@@ -84,7 +84,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _totalAdultsInHouseholdString;
+        public string _totalAdultsInHouseholdString;
         public string TotalAdultsInHouseholdString
         {
             get
@@ -98,7 +98,26 @@ namespace YWCA_Software
             }
         }
 
-        private string _totalChildrenInHouseholdString;
+        public string _intakeDate;
+        public string IntakeDate
+        {
+            get
+            {
+                return _intakeDate;
+            }
+            set
+            {
+                _intakeDate = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IntakeDate"));
+            }
+        }
+
+        public void SetIntakeDate(string date)
+        {
+            IntakeDate = date;
+        }
+
+        public string _totalChildrenInHouseholdString;
         public string TotalChildrenInHouseholdString
         {
             get
@@ -112,7 +131,7 @@ namespace YWCA_Software
             }
         }
 
-        private double _totalChildrenInHousehold;
+        public double _totalChildrenInHousehold;
         public double TotalChildrenInHousehold
         {
             get
@@ -126,7 +145,7 @@ namespace YWCA_Software
             }
         }
 
-        private int _zip;
+        public int _zip;
         public int Zip
         {
             get
@@ -140,7 +159,469 @@ namespace YWCA_Software
             }
         }
 
-        private string _mi = "MI";
+        public string _dischargeDate = "None";
+        public string DischargeDate
+        {
+            get
+            {
+                return _dischargeDate;
+            }
+            set
+            {
+                _dischargeDate = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DischargeDate"));
+            }
+        }
+
+        public string _dischargeLocation = "None";
+        public string DischargeLocation
+        {
+            get
+            {
+                return _dischargeLocation;
+            }
+            set
+            {
+                _dischargeLocation = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DischargeLocation"));
+            }
+        }
+
+        public string _personsInHomeRelationship = "None";
+        public string PersonsInHomeRelationship
+        {
+            get
+            {
+                return _personsInHomeRelationship;
+            }
+            set
+            {
+                _personsInHomeRelationship = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship"));
+            }
+        }
+
+        public string _personsInHomeGender = "NA";
+        public string PersonsInHomeGender
+        {
+            get
+            {
+                return _personsInHomeGender;
+            }
+            set
+            {
+                _personsInHomeGender = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender"));
+            }
+        }
+
+        public string _personsInHomeDob = "NA";
+        public string PersonsInHomeDob
+        {
+            get
+            {
+                return _personsInHomeDob;
+            }
+            set
+            {
+                _personsInHomeDob = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob"));
+            }
+        }
+
+        public string _personsInHomeRelationship2 = "None";
+        public string PersonsInHomeRelationship2
+        {
+            get
+            {
+                return _personsInHomeRelationship2;
+            }
+            set
+            {
+                _personsInHomeRelationship2 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship2"));
+            }
+        }
+
+        public string _personsInHomeGender2 = "NA";
+        public string PersonsInHomeGender2
+        {
+            get
+            {
+                return _personsInHomeGender2;
+            }
+            set
+            {
+                _personsInHomeGender2 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender2"));
+            }
+        }
+
+        public string _personsInHomeDob2 = "NA";
+        public string PersonsInHomeDob2
+        {
+            get
+            {
+                return _personsInHomeDob2;
+            }
+            set
+            {
+                _personsInHomeDob2 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob2"));
+            }
+        }
+
+        public string _personsInHomeRelationship3 = "None";
+        public string PersonsInHomeRelationship3
+        {
+            get
+            {
+                return _personsInHomeRelationship3;
+            }
+            set
+            {
+                _personsInHomeRelationship3 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship3"));
+            }
+        }
+
+        public string _personsInHomeGender3 = "NA";
+        public string PersonsInHomeGender3
+        {
+            get
+            {
+                return _personsInHomeGender3;
+            }
+            set
+            {
+                _personsInHomeGender3 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender3"));
+            }
+        }
+
+        public string _personsInHomeDob3 = "NA";
+        public string PersonsInHomeDob3
+        {
+            get
+            {
+                return _personsInHomeDob3;
+            }
+            set
+            {
+                _personsInHomeDob3 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob3"));
+            }
+        }
+        
+        public string _personsInHomeRelationship4 = "None";
+        public string PersonsInHomeRelationship4
+        {
+            get
+            {
+                return _personsInHomeRelationship4;
+            }
+            set
+            {
+                _personsInHomeRelationship = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship4"));
+            }
+        }
+
+        public string _personsInHomeGender4 = "NA";
+        public string PersonsInHomeGender4
+        {
+            get
+            {
+                return _personsInHomeGender4;
+            }
+            set
+            {
+                _personsInHomeGender4 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender4"));
+            }
+        }
+
+        public string _personsInHomeDob4 = "NA";
+        public string PersonsInHomeDob4
+        {
+            get
+            {
+                return _personsInHomeDob4;
+            }
+            set
+            {
+                _personsInHomeDob4 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob4"));
+            }
+        }
+
+        public string _personsInHomeRelationship5 = "None";
+        public string PersonsInHomeRelationship5
+        {
+            get
+            {
+                return _personsInHomeRelationship5;
+            }
+            set
+            {
+                _personsInHomeRelationship5 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship5"));
+            }
+        }
+
+        public string _personsInHomeGender5 = "NA";
+        public string PersonsInHomeGender5
+        {
+            get
+            {
+                return _personsInHomeGender5;
+            }
+            set
+            {
+                _personsInHomeGender5 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender5"));
+            }
+        }
+
+        public string _personsInHomeDob5 = "NA";
+        public string PersonsInHomeDob5
+        {
+            get
+            {
+                return _personsInHomeDob5;
+            }
+            set
+            {
+                _personsInHomeDob5 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob5"));
+            }
+        }
+
+        public string _personsInHomeRelationship6 = "None";
+        public string PersonsInHomeRelationship6
+        {
+            get
+            {
+                return _personsInHomeRelationship6;
+            }
+            set
+            {
+                _personsInHomeRelationship6 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship6"));
+            }
+        }
+
+        public string _personsInHomeGender6 = "NA";
+        public string PersonsInHomeGender6
+        {
+            get
+            {
+                return _personsInHomeGender6;
+            }
+            set
+            {
+                _personsInHomeGender6 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender6"));
+            }
+        }
+
+        public string _personsInHomeDob6 = "NA";
+        public string PersonsInHomeDob6
+        {
+            get
+            {
+                return _personsInHomeDob6;
+            }
+            set
+            {
+                _personsInHomeDob6 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob6"));
+            }
+        }
+
+        public string _personsInHomeRelationship7 = "None";
+        public string PersonsInHomeRelationship7
+        {
+            get
+            {
+                return _personsInHomeRelationship7;
+            }
+            set
+            {
+                _personsInHomeRelationship7 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship7"));
+            }
+        }
+
+        public string _personsInHomeGender7 = "NA";
+        public string PersonsInHomeGender7
+        {
+            get
+            {
+                return _personsInHomeGender7;
+            }
+            set
+            {
+                _personsInHomeGender7 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender7"));
+            }
+        }
+
+        public string _personsInHomeDob7 = "NA";
+        public string PersonsInHomeDob7
+        {
+            get
+            {
+                return _personsInHomeDob7;
+            }
+            set
+            {
+                _personsInHomeDob7 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob7"));
+            }
+        }
+
+        public string _personsInHomeRelationship8 = "None";
+        public string PersonsInHomeRelationship8
+        {
+            get
+            {
+                return _personsInHomeRelationship8;
+            }
+            set
+            {
+                _personsInHomeRelationship8 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship8"));
+            }
+        }
+
+        public string _personsInHomeGender8 = "NA";
+        public string PersonsInHomeGender8
+        {
+            get
+            {
+                return _personsInHomeGender8;
+            }
+            set
+            {
+                _personsInHomeGender8 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender8"));
+            }
+        }
+
+        public string _personsInHomeDob8 = "NA";
+        public string PersonsInHomeDob8
+        {
+            get
+            {
+                return _personsInHomeDob8;
+            }
+            set
+            {
+                _personsInHomeDob8 = value ?? " ";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob8"));
+            }
+        }
+
+        public bool _legal;
+        public bool Legal
+        {
+            get
+            {
+                return _legal;
+            }
+            set
+            {
+                _legal = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Legal"));
+            }
+        }
+
+        public bool _counseling;
+        public bool Counseling
+        {
+            get
+            {
+                return _counseling;
+            }
+            set
+            {
+                _counseling = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Counseling"));
+            }
+        }
+
+        public bool _shelter;
+        public bool Shelter
+        {
+            get
+            {
+                return _shelter;
+            }
+            set
+            {
+                _shelter = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Shelter"));
+            }
+        }
+
+        public bool _advocacy;
+        public bool Advocacy
+        {
+            get
+            {
+                return _advocacy;
+            }
+            set
+            {
+                _advocacy = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Advocacy"));
+            }
+        }
+
+        public bool _groupClass;
+        public bool GroupClass
+        {
+            get
+            {
+                return _groupClass;
+            }
+            set
+            {
+                _groupClass = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("GroupClass"));
+            }
+        }
+
+        public bool _childAdvocacy;
+        public bool ChildAdvocacy
+        {
+            get
+            {
+                return _childAdvocacy;
+            }
+            set
+            {
+                _childAdvocacy = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ChildAdvocacy"));
+            }
+        }
+
+        public string _comments;
+        public string Comments
+        {
+            get
+            {
+                return _comments;
+            }
+            set
+            {
+                _comments = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Comments"));
+            }
+        }
+
+        public string _mi = "MI";
         public string Mi
         {
             get
@@ -154,7 +635,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _gender = " ";
+        public string _gender = " ";
         public string Gender
         {
             get
@@ -168,7 +649,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _maritalStatus = " ";
+        public string _maritalStatus = " ";
         public string MaritalStatus
         {
             get
@@ -182,7 +663,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _ethnicity = " ";
+        public string _ethnicity = " ";
         public string Ethnicity
         {
             get
@@ -196,7 +677,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _disability = " ";
+        public string _disability = " ";
         public string Disability
         {
             get
@@ -210,7 +691,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _secondDisability = " ";
+        public string _secondDisability = " ";
         public string SecondDisability
         {
             get
@@ -224,7 +705,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _incomeType = "None";
+        public string _incomeType = "None";
         public string IncomeType
         {
             get
@@ -238,7 +719,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _homePhone = "None Listed";
+        public string _homePhone = "None Listed";
         public string HomePhone
         {
             get
@@ -252,7 +733,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _workPhone = "None Listed";
+        public string _workPhone = "None Listed";
         public string WorkPhone
         {
             get
@@ -266,7 +747,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _callTime = "Do not call";
+        public string _callTime = "Do not call";
         public string CallTime
         {
             get
@@ -280,7 +761,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _streetAddress = "Homeless";
+        public string _streetAddress = "Homeless";
         public string StreetAddress
         {
             get
@@ -294,7 +775,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _city = "Spokane";
+        public string _city = "Spokane";
         public string City
         {
             get
@@ -308,7 +789,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _state = "Washington";
+        public string _state = "Washington";
         public string State
         {
             get
@@ -323,7 +804,7 @@ namespace YWCA_Software
         }
 
 
-        private string _housingStatus = "Homeless";
+        public string _housingStatus = "Homeless";
         public string HousingStatus
         {
             get
@@ -337,7 +818,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _neighborhood = "Unknown";
+        public string _neighborhood = "Unknown";
         public string Neighborhood
         {
             get
@@ -351,7 +832,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _countyDetail = "Unknown";
+        public string _countyDetail = "Unknown";
         public string CountyDetail
         {
             get
@@ -365,7 +846,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _staff = "None";
+        public string _staff = "None";
         public string Staff
         {
             get
@@ -379,7 +860,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _ssn = "Unknown";
+        public string _ssn = "Unknown";
         public string Ssn
         {
             get
@@ -393,7 +874,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _dateDataEntered;
+        public string _dateDataEntered;
         public string DateDataEntered
         {
             get
@@ -407,7 +888,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _dob;
+        public string _dob;
         public string Dob
         {
             get
@@ -421,7 +902,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _fName = "First Name";
+        public string _fName = "First Name";
         public string FirstName
         {
             get
@@ -435,7 +916,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _lName = "Last Name";
+        public string _lName = "Last Name";
         public string LastName
         {
             get
@@ -449,7 +930,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _pid = "PID";
+        public string _pid = "PID";
         public string Pid
         {
             get
@@ -471,7 +952,7 @@ namespace YWCA_Software
             Pid = pid;
         }
 
-        private string _hmisId = " ";
+        public string _hmisId = " ";
         public string HmisId
         {
             get
@@ -485,7 +966,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _infoNetId = " ";
+        public string _infoNetId = " ";
         public string InfoNetId
         {
             get
@@ -499,7 +980,7 @@ namespace YWCA_Software
             }
         }
 
-        private ObservableCollection<string> _listPids = new ObservableCollection<string> { @"results go here" }; //pid search results list
+        public ObservableCollection<string> _listPids = new ObservableCollection<string> { @"results go here" }; //pid search results list
         /// <summary>
         /// Participant id for WPF databinding
         /// </summary>
@@ -516,7 +997,7 @@ namespace YWCA_Software
             }
         }
 
-        private ObservableCollection<string> _listDates = new ObservableCollection<string> { @"results go here" }; //pid search results list
+        public ObservableCollection<string> _listDates = new ObservableCollection<string> { @"results go here" }; //pid search results list
         /// <summary>
         /// Participant Advp form date for WPF databinding
         /// </summary>
@@ -554,7 +1035,7 @@ namespace YWCA_Software
         /// <summary>
         /// Open connection to DB
         /// </summary>
-        private void Connect()
+        public void Connect()
         {
             DbCommand.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
             DbCommand.Connection.Open();
@@ -563,7 +1044,7 @@ namespace YWCA_Software
         /// <summary>
         /// Close connection to DB
         /// </summary>
-        private static void Disconnect()
+        public static void Disconnect()
         {
             DbCommand.Connection.Close();
         }
@@ -620,6 +1101,33 @@ namespace YWCA_Software
             DateTime dtDob = new DateTime();
             Connect();
             DbCommand.CommandText = _sql.SelectUpdateOrAdd(selectUpdateAdd, table, column, Pid, date);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    dtDob = (rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0) : DateTime.Now;
+                    Console.WriteLine(@"{0}", date);
+                }
+                Console.WriteLine(@"Found " + rowNum + @" results");
+                if (rowNum > 0)
+                {
+                    date = dtDob.ToShortDateString();
+                }
+            }
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Get DOB from DB with given DB and Update LastName for WPF update
+        /// </summary>
+        public void QueryDateFromPid(string selectUpdateAdd, string table, string column, string pid, string dateString, ref string date)
+        {
+            DateTime dtDob = new DateTime();
+            Connect();
+            DbCommand.CommandText = _sql.SelectUpdateOrAdd(selectUpdateAdd, table, column, Pid, dateString, date);
             OleDbDataReader rdr = DbCommand.ExecuteReader();
 
             if (rdr != null)
@@ -898,12 +1406,98 @@ namespace YWCA_Software
 
         public void Advp(string selectUpdateAdd, string pid, string date)
         {
+            //Doubles
             TotalAdultsInHousehold = Convert.ToDouble(TotalAdultsInHouseholdString);
             TotalChildrenInHousehold = Convert.ToDouble(TotalChildrenInHouseholdString);
             RunQuery(ref _totalAdultsInHousehold, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Tot Adults Household", pid, date, TotalAdultsInHousehold));
             TotalAdultsInHouseholdString = TotalAdultsInHousehold.ToString(CultureInfo.InvariantCulture);
             RunQuery(ref _totalChildrenInHousehold, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Tot Child Household", pid, date, TotalChildrenInHousehold));
             TotalChildrenInHouseholdString = TotalChildrenInHousehold.ToString(CultureInfo.InvariantCulture);
+
+            //Participant relationships
+            RunQuery(ref _personsInHomeRelationship, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 2 Relationship", pid, date, PersonsInHomeRelationship));
+            PersonsInHomeRelationship = _personsInHomeRelationship;
+            RunQuery(ref _personsInHomeGender, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 2 Sex", pid, date, PersonsInHomeGender));
+            PersonsInHomeGender = _personsInHomeGender;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Adult 2 DOB", _personsInHomeDob, IntakeDate, ref _personsInHomeDob);
+            PersonsInHomeDob = _personsInHomeDob;
+
+            RunQuery(ref _personsInHomeRelationship2, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 1 Relationship", pid, date, PersonsInHomeRelationship2));
+            PersonsInHomeRelationship2 = _personsInHomeRelationship2;
+            RunQuery(ref _personsInHomeGender2, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 1 Sex", pid, date, PersonsInHomeGender2));
+            PersonsInHomeGender2 = _personsInHomeGender2;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 1 DOB", _personsInHomeDob2, IntakeDate, ref _personsInHomeDob2);
+            PersonsInHomeDob2 = _personsInHomeDob2;
+
+            RunQuery(ref _personsInHomeRelationship3, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 2 Relationship", pid, date, PersonsInHomeRelationship3));
+            PersonsInHomeRelationship3 = _personsInHomeRelationship3;
+            RunQuery(ref _personsInHomeGender3, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 2 Sex", pid, date, PersonsInHomeGender3));
+            PersonsInHomeGender3 = _personsInHomeGender3;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 2 DOB", _personsInHomeDob3, IntakeDate, ref _personsInHomeDob3);
+            PersonsInHomeDob3 = _personsInHomeDob3;
+
+            RunQuery(ref _personsInHomeRelationship4, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 3 Relationship", pid, date, PersonsInHomeRelationship4));
+            PersonsInHomeRelationship4 = _personsInHomeRelationship4;
+            RunQuery(ref _personsInHomeGender4, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 3 Sex", pid, date, PersonsInHomeGender4));
+            PersonsInHomeGender4 = _personsInHomeGender4;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 3 DOB", _personsInHomeDob4, IntakeDate, ref _personsInHomeDob4);
+            PersonsInHomeDob4 = _personsInHomeDob4;
+
+            RunQuery(ref _personsInHomeRelationship5, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 4 Relationship", pid, date, PersonsInHomeRelationship5));
+            PersonsInHomeRelationship5 = _personsInHomeRelationship5;
+            RunQuery(ref _personsInHomeGender5, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 4 Sex", pid, date, PersonsInHomeGender5));
+            PersonsInHomeGender5 = _personsInHomeGender5;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 4 DOB", _personsInHomeDob5, IntakeDate, ref _personsInHomeDob5);
+            PersonsInHomeDob5 = _personsInHomeDob5;
+
+            RunQuery(ref _personsInHomeRelationship6, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 5 Relationship", pid, date, PersonsInHomeRelationship6));
+            PersonsInHomeRelationship6 = _personsInHomeRelationship6;
+            RunQuery(ref _personsInHomeGender6, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 5 Sex", pid, date, PersonsInHomeGender6));
+            PersonsInHomeGender6 = _personsInHomeGender6;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 5 DOB", _personsInHomeDob6, IntakeDate, ref _personsInHomeDob6);
+            PersonsInHomeDob6 = _personsInHomeDob6;
+
+            RunQuery(ref _personsInHomeRelationship7, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 6 Relationship", pid, date, PersonsInHomeRelationship7));
+            PersonsInHomeRelationship7 = _personsInHomeRelationship7;
+            RunQuery(ref _personsInHomeGender7, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 6 Sex", pid, date, PersonsInHomeGender7));
+            PersonsInHomeGender7 = _personsInHomeGender7;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 6 DOB", _personsInHomeDob7, IntakeDate, ref _personsInHomeDob7);
+            PersonsInHomeDob7 = _personsInHomeDob7;
+
+            RunQuery(ref _personsInHomeRelationship8, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 7 Relationship", pid, date, PersonsInHomeRelationship8));
+            PersonsInHomeRelationship8 = _personsInHomeRelationship8;
+            RunQuery(ref _personsInHomeGender8, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 7 Sex", pid, date, PersonsInHomeGender8));
+            PersonsInHomeGender8 = _personsInHomeGender8;
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 7 DOB", _personsInHomeDob8, IntakeDate, ref _personsInHomeDob8);
+            PersonsInHomeDob8 = _personsInHomeDob8;
+
+            //Discharge
+            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Discharge Date", _dischargeDate, IntakeDate, ref _dischargeDate);
+            DischargeDate = _dischargeDate;
+
+            RunQuery(ref _dischargeLocation, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "DischargeLocation", pid, date, DischargeLocation));
+            DischargeLocation = _dischargeLocation;
+
+            RunQuery(ref _comments, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Comments", pid, date, Comments));
+            Comments = _comments;
+
+            RunQuery(ref _counseling, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "Outreach", pid, _counseling));
+            Counseling = _counseling;
+
+            RunQuery(ref _shelter, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "YWCA Shelter", pid, _shelter));
+            Shelter = _shelter;
+
+            RunQuery(ref _legal, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "Legal Office", pid, _legal));
+            Legal = _legal;
+
+            RunQuery(ref _advocacy, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "Advocacy", pid, _advocacy));
+            Advocacy = _advocacy;
+
+            RunQuery(ref _childAdvocacy, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "ChildAdvocacy", pid, _childAdvocacy));
+            ChildAdvocacy = _childAdvocacy;
+
+            RunQuery(ref _groupClass, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "GroupClass", pid, _groupClass));
+            GroupClass = _groupClass;
 
         }
         ////////////////////////////////////////////////////////////////////// END Advp //////////////////////////////////////////////////////////////////////

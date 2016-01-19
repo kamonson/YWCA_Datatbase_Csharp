@@ -200,6 +200,49 @@ namespace YWCA_Software
             string query = (selectOrUpdate == @"select") ? select : update;
             return query + end;
         }
+
+        /// <summary>
+        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
+        /// </summary>
+        /// <param name="selectOrUpdate"></param>
+        /// <param name="table"></param>
+        /// <param name="columnName"></param>
+        /// <param name="participantId"></param>
+        /// <param name="date"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string date, string value)
+        {
+            if (value == null)
+            {
+                value = " ";
+            }
+            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
+            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
+            string end = Where(@"Consumer_ID" + Equals(participantId) + @"AND [Date] " + EqualsNoQuote(@"#" + date + @"#")) + EndQuery();
+            string query = (selectOrUpdate == @"select") ? select : update;
+            return query + end;
+        }
+
+        /// <summary>
+        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
+        /// </summary>
+        /// <param name="selectOrUpdate"></param>
+        /// <param name="table"></param>
+        /// <param name="columnName"></param>
+        /// <param name="participantId"></param>
+        /// <param name="date"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string date, bool value)
+        {
+            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
+            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString()));
+            string end = Where(@"Consumer_ID" + Equals(participantId) + @"AND [Date] " + EqualsNoQuote(@"#" + date + @"#")) + EndQuery();
+            string query = (selectOrUpdate == @"select") ? select : update;
+            return query + end;
+        }
+
         /// <summary>
         /// Create query based on given information to add or update, if filed needs updating but does not exist create row
         /// </summary>
@@ -251,7 +294,12 @@ namespace YWCA_Software
                    EndQuery();
         }
 
-        public string FindClientDate(string pid )
+        /// <summary>
+        /// Get intake dates from pid
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public string FindClientDate(string pid)
         {
             return Select(@"Date") +
                    From(@"tbl_Intake") +
@@ -259,6 +307,12 @@ namespace YWCA_Software
                    EndQuery();
         }
 
+        /// <summary>
+        /// Add date to intakes
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public string AddIntakeDate(string pid, string date)
         {
            return   InsertInto("tbl_Intake" + " (" +  @"[Consumer_ID]" + ", " + "[Date]" + ")") + 
