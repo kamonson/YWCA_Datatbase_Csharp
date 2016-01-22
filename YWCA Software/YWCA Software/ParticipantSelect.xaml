@@ -32,6 +32,8 @@
         <Button x:Name="buttonSelectParticipant" Content="Thats The One" Margin="0,115,10,0" Click="buttonSelectParticipant_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" Grid.RowSpan="2" BorderThickness="0"/>
         <TextBlock x:Name="textBlockFname" Margin="0,115,274,0" TextWrapping="Wrap" Text="{Binding FirstName}" Height="20" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="100"/>
         <TextBlock x:Name="textBlockLname" Margin="0,115,119,0" TextWrapping="Wrap" Text="{Binding LastName}" Height="20" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="150"/>
+        <TextBox x:Name="textBoxNewParticipantID" Height="23" Margin="265,148,148,0" TextWrapping="Wrap" Text="{Binding Pid}" VerticalAlignment="Top" GotFocus="textBoxParticipantID_GotFocus" KeyDown="textBoxParticipantID_KeyDown" Grid.Row="1"/>
+        <Button x:Name="buttonNewParticipant" Content="I'll Just Make A New One" Margin="0,148,5,0"  Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138" BorderThickness="0" Grid.Row="1" Click="buttonNewParticipant_Click"/>
 
     </Grid>
 </Window>

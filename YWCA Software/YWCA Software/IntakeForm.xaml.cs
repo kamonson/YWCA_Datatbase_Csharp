@@ -38,7 +38,7 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            string[] table = { "tbl_Intake", "tbl_Forms_Flow_Table" };
+            string[] table = { "tbl_Forms_Flow_Table" };
             var pid = textBlockPid.Text;
             var end = @" Where Consumer_ID = " + pid + @";";
             foreach (var i in table.Where(i => !DbConnector.QueryTest(_sql.Select(@"Consumer_ID") + _sql.From(i) + end)))

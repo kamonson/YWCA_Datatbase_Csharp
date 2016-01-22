@@ -157,6 +157,7 @@ namespace YWCA_Software
         /// <returns></returns>
         public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string value)
         {
+            value = value ?? " ";
             string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
             string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
             string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
@@ -213,10 +214,7 @@ namespace YWCA_Software
         /// <returns></returns>
         public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string date, string value)
         {
-            if (value == null)
-            {
-                value = " ";
-            }
+            value = value ?? " ";
             string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
             string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
             string end = Where(@"Consumer_ID" + Equals(participantId) + @"AND [Date] " + EqualsNoQuote(@"#" + date + @"#")) + EndQuery();

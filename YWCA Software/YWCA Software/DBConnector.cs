@@ -19,8 +19,8 @@ namespace YWCA_Software
         public const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
 
         public const string Path = @"Data Source=" +
-                                    @"C:\YWCADB\All\" +
-                                    @"13 Advp - Database_20140718_1307.accdb" +
+                                    @"P:\ywcaDbSoftware\" +
+                                    @"YWCACounselingANDLegal.accdb" +
                                     @";";
         public const string Password = @"Jet OLEDB:Database Password=ywc@;";
         ////////////////////////////////////////////////////////////////////// END Const Strings For DB Access //////////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ namespace YWCA_Software
 
         /********************************************************************* Start SQL Data Sections *********************************************************************/
 
-        public bool _msgOk;
+        private bool _msgOk;
         public bool MsgOk
         {
             get
@@ -42,7 +42,7 @@ namespace YWCA_Software
             }
         }
 
-        public bool _veteranStatus;
+        private bool _veteranStatus;
         public bool VeteranStatus
         {
             get
@@ -56,7 +56,7 @@ namespace YWCA_Software
             }
         }
 
-        public decimal _totalMonthlyIncome;
+        private decimal _totalMonthlyIncome;
         public decimal TotalMonthlyIncome
         {
             get
@@ -70,7 +70,7 @@ namespace YWCA_Software
             }
         }
 
-        public double _totalAdultsInHousehold;
+        private double _totalAdultsInHousehold;
         public double TotalAdultsInHousehold
         {
             get
@@ -84,7 +84,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _totalAdultsInHouseholdString;
+        private string _totalAdultsInHouseholdString;
         public string TotalAdultsInHouseholdString
         {
             get
@@ -98,7 +98,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _intakeDate;
+        private string _intakeDate;
         public string IntakeDate
         {
             get
@@ -117,7 +117,7 @@ namespace YWCA_Software
             IntakeDate = date;
         }
 
-        public string _totalChildrenInHouseholdString;
+        private string _totalChildrenInHouseholdString;
         public string TotalChildrenInHouseholdString
         {
             get
@@ -131,7 +131,7 @@ namespace YWCA_Software
             }
         }
 
-        public double _totalChildrenInHousehold;
+        private double _totalChildrenInHousehold;
         public double TotalChildrenInHousehold
         {
             get
@@ -145,7 +145,7 @@ namespace YWCA_Software
             }
         }
 
-        public int _zip;
+        private int _zip;
         public int Zip
         {
             get
@@ -159,7 +159,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _dischargeDate = "None";
+        private string _dischargeDate = "None";
         public string DischargeDate
         {
             get
@@ -173,7 +173,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _dischargeLocation = "None";
+        private string _dischargeLocation = "None";
         public string DischargeLocation
         {
             get
@@ -187,7 +187,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeRelationship = "None";
+        private string _personsInHomeRelationship = "None";
         public string PersonsInHomeRelationship
         {
             get
@@ -201,7 +201,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeGender = "NA";
+        private string _personsInHomeGender = "NA";
         public string PersonsInHomeGender
         {
             get
@@ -215,7 +215,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob = "NA";
+        private string _personsInHomeDob = "NA";
         public string PersonsInHomeDob
         {
             get
@@ -229,7 +229,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeRelationship2 = "None";
+        private string _personsInHomeRelationship2 = "None";
         public string PersonsInHomeRelationship2
         {
             get
@@ -243,7 +243,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeGender2 = "NA";
+        private string _personsInHomeGender2 = "NA";
         public string PersonsInHomeGender2
         {
             get
@@ -257,7 +257,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob2 = "NA";
+        private string _personsInHomeDob2 = "NA";
         public string PersonsInHomeDob2
         {
             get
@@ -271,7 +271,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeRelationship3 = "None";
+        private string _personsInHomeRelationship3 = "None";
         public string PersonsInHomeRelationship3
         {
             get
@@ -285,7 +285,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeGender3 = "NA";
+        private string _personsInHomeGender3 = "NA";
         public string PersonsInHomeGender3
         {
             get
@@ -299,7 +299,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob3 = "NA";
+        private string _personsInHomeDob3 = "NA";
         public string PersonsInHomeDob3
         {
             get
@@ -312,8 +312,8 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob3"));
             }
         }
-        
-        public string _personsInHomeRelationship4 = "None";
+
+        private string _personsInHomeRelationship4 = "None";
         public string PersonsInHomeRelationship4
         {
             get
@@ -322,12 +322,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship = value ?? " ";
+                _personsInHomeRelationship4 = value ?? " ";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship4"));
             }
         }
 
-        public string _personsInHomeGender4 = "NA";
+        private string _personsInHomeGender4 = "NA";
         public string PersonsInHomeGender4
         {
             get
@@ -341,7 +341,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob4 = "NA";
+        private string _personsInHomeDob4 = "NA";
         public string PersonsInHomeDob4
         {
             get
@@ -355,7 +355,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeRelationship5 = "None";
+        private string _personsInHomeRelationship5 = "None";
         public string PersonsInHomeRelationship5
         {
             get
@@ -369,7 +369,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeGender5 = "NA";
+        private string _personsInHomeGender5 = "NA";
         public string PersonsInHomeGender5
         {
             get
@@ -383,7 +383,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob5 = "NA";
+        private string _personsInHomeDob5 = "NA";
         public string PersonsInHomeDob5
         {
             get
@@ -397,7 +397,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeRelationship6 = "None";
+        private string _personsInHomeRelationship6 = "None";
         public string PersonsInHomeRelationship6
         {
             get
@@ -411,7 +411,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeGender6 = "NA";
+        private string _personsInHomeGender6 = "NA";
         public string PersonsInHomeGender6
         {
             get
@@ -425,7 +425,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob6 = "NA";
+        private string _personsInHomeDob6 = "NA";
         public string PersonsInHomeDob6
         {
             get
@@ -439,7 +439,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeRelationship7 = "None";
+        private string _personsInHomeRelationship7 = "None";
         public string PersonsInHomeRelationship7
         {
             get
@@ -453,7 +453,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeGender7 = "NA";
+        private string _personsInHomeGender7 = "NA";
         public string PersonsInHomeGender7
         {
             get
@@ -467,7 +467,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob7 = "NA";
+        private string _personsInHomeDob7 = "NA";
         public string PersonsInHomeDob7
         {
             get
@@ -481,7 +481,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeRelationship8 = "None";
+        private string _personsInHomeRelationship8 = "None";
         public string PersonsInHomeRelationship8
         {
             get
@@ -495,7 +495,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeGender8 = "NA";
+        private string _personsInHomeGender8 = "NA";
         public string PersonsInHomeGender8
         {
             get
@@ -509,7 +509,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _personsInHomeDob8 = "NA";
+        private string _personsInHomeDob8 = "NA";
         public string PersonsInHomeDob8
         {
             get
@@ -523,7 +523,7 @@ namespace YWCA_Software
             }
         }
 
-        public bool _legal;
+        private bool _legal;
         public bool Legal
         {
             get
@@ -537,7 +537,7 @@ namespace YWCA_Software
             }
         }
 
-        public bool _counseling;
+        private bool _counseling;
         public bool Counseling
         {
             get
@@ -551,7 +551,7 @@ namespace YWCA_Software
             }
         }
 
-        public bool _shelter;
+        private bool _shelter;
         public bool Shelter
         {
             get
@@ -565,7 +565,7 @@ namespace YWCA_Software
             }
         }
 
-        public bool _advocacy;
+        private bool _advocacy;
         public bool Advocacy
         {
             get
@@ -579,7 +579,7 @@ namespace YWCA_Software
             }
         }
 
-        public bool _groupClass;
+        private bool _groupClass;
         public bool GroupClass
         {
             get
@@ -593,7 +593,7 @@ namespace YWCA_Software
             }
         }
 
-        public bool _childAdvocacy;
+        private bool _childAdvocacy;
         public bool ChildAdvocacy
         {
             get
@@ -607,7 +607,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _comments;
+        private string _comments;
         public string Comments
         {
             get
@@ -621,7 +621,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _mi = "MI";
+        private string _mi = "MI";
         public string Mi
         {
             get
@@ -635,7 +635,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _gender = " ";
+        private string _gender = " ";
         public string Gender
         {
             get
@@ -649,7 +649,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _maritalStatus = " ";
+        private string _maritalStatus = " ";
         public string MaritalStatus
         {
             get
@@ -663,7 +663,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _ethnicity = " ";
+        private string _ethnicity = " ";
         public string Ethnicity
         {
             get
@@ -677,7 +677,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _disability = " ";
+        private string _disability = " ";
         public string Disability
         {
             get
@@ -691,7 +691,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _secondDisability = " ";
+        private string _secondDisability = " ";
         public string SecondDisability
         {
             get
@@ -705,7 +705,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _incomeType = "None";
+        private string _incomeType = "None";
         public string IncomeType
         {
             get
@@ -719,7 +719,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _homePhone = "None Listed";
+        private string _homePhone = "None Listed";
         public string HomePhone
         {
             get
@@ -733,7 +733,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _workPhone = "None Listed";
+        private string _workPhone = "None Listed";
         public string WorkPhone
         {
             get
@@ -747,7 +747,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _callTime = "Do not call";
+        private string _callTime = "Do not call";
         public string CallTime
         {
             get
@@ -761,7 +761,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _streetAddress = "Homeless";
+        private string _streetAddress = "Homeless";
         public string StreetAddress
         {
             get
@@ -775,7 +775,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _city = "Spokane";
+        private string _city = "Spokane";
         public string City
         {
             get
@@ -789,7 +789,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _state = "Washington";
+        private string _state = "Washington";
         public string State
         {
             get
@@ -804,7 +804,7 @@ namespace YWCA_Software
         }
 
 
-        public string _housingStatus = "Homeless";
+        private string _housingStatus = "Homeless";
         public string HousingStatus
         {
             get
@@ -818,7 +818,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _neighborhood = "Unknown";
+        private string _neighborhood = "Unknown";
         public string Neighborhood
         {
             get
@@ -832,7 +832,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _countyDetail = "Unknown";
+        private string _countyDetail = "Unknown";
         public string CountyDetail
         {
             get
@@ -846,7 +846,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _staff = "None";
+        private string _staff = "None";
         public string Staff
         {
             get
@@ -860,7 +860,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _ssn = "Unknown";
+        private string _ssn = "Unknown";
         public string Ssn
         {
             get
@@ -874,7 +874,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _dateDataEntered;
+        private string _dateDataEntered;
         public string DateDataEntered
         {
             get
@@ -888,7 +888,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _dob;
+        private string _dob;
         public string Dob
         {
             get
@@ -902,7 +902,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _fName = "First Name";
+        private string _fName = "First Name";
         public string FirstName
         {
             get
@@ -916,7 +916,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _lName = "Last Name";
+        private string _lName = "Last Name";
         public string LastName
         {
             get
@@ -930,7 +930,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _pid = "PID";
+        private string _pid = "PID";
         public string Pid
         {
             get
@@ -952,7 +952,7 @@ namespace YWCA_Software
             Pid = pid;
         }
 
-        public string _hmisId = " ";
+        private string _hmisId = " ";
         public string HmisId
         {
             get
@@ -966,7 +966,7 @@ namespace YWCA_Software
             }
         }
 
-        public string _infoNetId = " ";
+        private string _infoNetId = " ";
         public string InfoNetId
         {
             get
@@ -980,7 +980,7 @@ namespace YWCA_Software
             }
         }
 
-        public ObservableCollection<string> _listPids = new ObservableCollection<string> { @"results go here" }; //pid search results list
+        private ObservableCollection<string> _listPids = new ObservableCollection<string> { @"results go here" }; //pid search results list
         /// <summary>
         /// Participant id for WPF databinding
         /// </summary>
@@ -997,7 +997,7 @@ namespace YWCA_Software
             }
         }
 
-        public ObservableCollection<string> _listDates = new ObservableCollection<string> { @"results go here" }; //pid search results list
+        private ObservableCollection<string> _listDates = new ObservableCollection<string> { @"results go here" }; //pid search results list
         /// <summary>
         /// Participant Advp form date for WPF databinding
         /// </summary>
@@ -1186,6 +1186,8 @@ namespace YWCA_Software
             }
             Disconnect();
         }
+
+
 
         /// <summary>
         /// Runs the qurry passed to it
@@ -1392,13 +1394,13 @@ namespace YWCA_Software
             RunQuery(ref _maritalStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Marital_Status", pid, MaritalStatus));
             RunQuery(ref _ethnicity, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Ethnicity", pid, Ethnicity));
 
-            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Staff", pid, Staff));
-            RunQuery(ref _housingStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Currently Living In", pid, HousingStatus));
-            RunQuery(ref _neighborhood, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane City", pid, Neighborhood));
-            RunQuery(ref _countyDetail, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Spokane County", pid, CountyDetail));
-            RunQuery(ref _disability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability", pid, Disability));
-            RunQuery(ref _secondDisability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 1 Disability 1", pid, SecondDisability));
-            RunQuery(ref _incomeType, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "income 1", pid, IncomeType));
+            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "Staff", pid, Staff));
+            RunQuery(ref _housingStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "CurrentlyLivingIn", pid, HousingStatus));
+            RunQuery(ref _neighborhood, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "SpokaneCity", pid, Neighborhood));
+            RunQuery(ref _countyDetail, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "SpokaneCounty", pid, CountyDetail));
+            RunQuery(ref _disability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "AdultDisability", pid, Disability));
+            RunQuery(ref _secondDisability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "AdultDisabilitySecond", pid, SecondDisability));
+            RunQuery(ref _incomeType, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "income1", pid, IncomeType));
         }
         ////////////////////////////////////////////////////////////////////// END Demographics //////////////////////////////////////////////////////////////////////
 
@@ -1498,7 +1500,6 @@ namespace YWCA_Software
 
             RunQuery(ref _groupClass, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "GroupClass", pid, _groupClass));
             GroupClass = _groupClass;
-
         }
         ////////////////////////////////////////////////////////////////////// END Advp //////////////////////////////////////////////////////////////////////
     }
