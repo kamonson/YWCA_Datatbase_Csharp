@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.OleDb;
@@ -19,7 +20,8 @@ namespace YWCA_Software
         public const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
 
         public const string Path = @"Data Source=" +
-                                    @"P:\ywcaDbSoftware\" +
+                                    //@"P:\ywcaDbSoftware\" +
+                                    @"C:\YWCADB\All\" +
                                     @"YWCACounselingANDLegal.accdb" +
                                     @";";
         public const string Password = @"Jet OLEDB:Database Password=ywc@;";
@@ -1346,7 +1348,151 @@ namespace YWCA_Software
             {
                 return false;
             }
+        }
 
+        /// <summary>
+        /// Used to test if table contains specified query data
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>false if is empty</returns>
+        private ArrayList BoolQuery(string query)
+        {
+            ArrayList target = new ArrayList();
+            Connect();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        target.Add((rdr.IsDBNull(i) == false) && rdr.GetBoolean(i));
+                    }
+                }
+            }
+            Disconnect();
+            return target;
+        }
+
+        /// <summary>
+        /// Used to test if table contains specified query data
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>false if is empty</returns>
+        private ArrayList DateQuery(string query)
+        {
+            ArrayList target = new ArrayList();
+            Connect();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetDateTime(i).ToShortDateString() : DateTime.Now.ToShortDateString());
+                    }
+                }
+            }
+            Disconnect();
+            return target;
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it
+        /// </summary>
+        /// <param name="query"></param>
+        private ArrayList IntQuery(string query)
+        {
+            ArrayList target = new ArrayList();
+            Connect();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555);
+                    }
+                }
+            }
+            Disconnect();
+            return target;
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it
+        /// </summary>
+        /// <param name="query"></param>
+        private ArrayList DecimalQuery(string query)
+        {
+            ArrayList target = new ArrayList();
+            Connect();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetDecimal(i) : 55555);
+                    }
+                }
+            }
+            Disconnect();
+            return target;
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it
+        /// </summary>
+        /// <param name="query"></param>
+        private ArrayList StringQuery(string query)
+        {
+            ArrayList target = new ArrayList();
+            Connect();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetString(i) : " ");
+                    }
+                }
+            }
+            Disconnect();
+            return target;
+        }
+
+        /// <summary>
+        /// Used to test if table contains specified query data
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>false if is empty</returns>
+        private void UpdateQuery(string query)
+        {
+            Connect();
+            DbCommand.CommandText = query;
+            DbCommand.ExecuteReader();
+            Disconnect();
         }
 
         ////////////////////////////////////////////////////////////////////// END Advp View Model Methods //////////////////////////////////////////////////////////////////////
@@ -1360,47 +1506,207 @@ namespace YWCA_Software
         /// <param name="pid"></param>
         public void Demographics(string selectUpdateAdd, string pid)
         {
-            //date times
-            QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "DOB", ref _dob);
-            QueryDateFromPid(selectUpdateAdd, "tbl_Consumer_List_Entry", "LastUpdated", ref _dateDataEntered);
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //Dates
+                UpdateQuery
+                    (
+                    @"UPDATE " +
+                        @"tbl_Consumer_List_Entry " +
+                    @"SET " +
+                        @"DOB = '" + Dob + "', " +
+                        @"LastUpdated = '" + DateDataEntered + "' " +
+                    @"Where " + 
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+                //Ints
+                UpdateQuery
+                    (
+                    @"UPDATE " +
+                        @"tbl_Forms_Flow_Table " +
+                    @"SET " +
+                        @"Zip = '" + Zip + "' " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+                //Decimal
+                UpdateQuery
+                    (
+                    @"UPDATE " +
+                        @"tbl_Consumer_List_Entry " +
+                    @"SET " +
+                        @"TotalMoIncome = '" + TotalMonthlyIncome + "' " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+                //bools
+                UpdateQuery
+                    (
+                    @"UPDATE " +
+                        @"tbl_Consumer_List_Entry " +
+                    @"SET " +
+                        @"VET = " + VeteranStatus + " " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
 
-            //ints
-            RunQuery(ref _zip, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Zip", pid, Zip));
+                UpdateQuery
+                    (
+                    @"UPDATE " +
+                        @"tbl_Forms_Flow_Table " +
+                    @"SET " +
+                        @"MSG_OK = " + MsgOk + " " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     @"UPDATE " +
+                        @"tbl_Consumer_List_Entry " +
+                    @"SET " +
+                       @"FIRST_NAME = '" + FirstName + "', " +
+                       @"MIDDLE_INITIAL = '" + Mi + "', " +
+                       @"LAST_NAME = '" + LastName + "', " +
+                       @"HMIS_ID = '" + HmisId + "', " +
+                       @"INFO_NET_ID = '" + InfoNetId + "', " +
+                       @"NO_SSN_Reason = '" + Ssn + "', " +
+                       @"Gender = '" + Gender + "', " +
+                       @"Staff = '" + Staff + "', " +
+                       @"CurrentlyLivingIn = '" + HousingStatus + "', " +
+                       @"SpokaneCity = '" + Neighborhood + "', " +
+                       @"SpokaneCounty = '" + CountyDetail + "', " +
+                       @"AdultDisability = '" + Disability + "', " +
+                       @"AdultDisabilitySecond = '" + SecondDisability + "', " +
+                       @"income1 = '" + TotalMonthlyIncome + "' " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
 
-            //decimals
-            RunQuery(ref _totalMonthlyIncome, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Total Mo Income", pid, TotalMonthlyIncome));
-
-            //bools                                                                         
-            RunQuery(ref _msgOk, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "MSG_OK", pid, MsgOk));
-
-            RunQuery(ref _veteranStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Vet", pid, VeteranStatus));
-
-            //text                                        
-            RunQuery(ref _fName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "FIRST_NAME", pid, FirstName));
-            RunQuery(ref _mi, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "MIDDLE_INITIAL", pid, Mi));
-            RunQuery(ref _lName, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "LAST_NAME", pid, LastName));
-            RunQuery(ref _hmisId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "HMIS_ID", pid, HmisId));
-            RunQuery(ref _infoNetId, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "INFO_NET_ID", pid, InfoNetId));
-            RunQuery(ref _ssn, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "NO_SSN_Reason", pid, Ssn));
-            RunQuery(ref _gender, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "Gender", pid, Gender));
-
-
-            RunQuery(ref _city, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "city", pid, City));
-            RunQuery(ref _state, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "state", pid, State));
-            RunQuery(ref _homePhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Home_Phone", pid, HomePhone));
-            RunQuery(ref _workPhone, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Work_MSG", pid, WorkPhone));
-            RunQuery(ref _callTime, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Call_Time", pid, CallTime));
-            RunQuery(ref _streetAddress, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Street_Address", pid, StreetAddress));
-            RunQuery(ref _maritalStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Marital_Status", pid, MaritalStatus));
-            RunQuery(ref _ethnicity, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Forms_Flow_Table", "Ethnicity", pid, Ethnicity));
-
-            RunQuery(ref _staff, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "Staff", pid, Staff));
-            RunQuery(ref _housingStatus, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "CurrentlyLivingIn", pid, HousingStatus));
-            RunQuery(ref _neighborhood, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "SpokaneCity", pid, Neighborhood));
-            RunQuery(ref _countyDetail, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "SpokaneCounty", pid, CountyDetail));
-            RunQuery(ref _disability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "AdultDisability", pid, Disability));
-            RunQuery(ref _secondDisability, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "AdultDisabilitySecond", pid, SecondDisability));
-            RunQuery(ref _incomeType, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Consumer_List_Entry", "income1", pid, IncomeType));
+                UpdateQuery
+                    (
+                     @"UPDATE " +
+                        @"tbl_Forms_Flow_Table " +
+                    @"SET " +
+                       @"city = '" + City + "', " +
+                       @"state = '" + State + "', " +
+                       @"Home_Phone = '" + HomePhone + "', " +
+                       @"Work_MSG = '" + WorkPhone + "', " +
+                       @"Call_Time = '" + CallTime + "', " +
+                       @"Street_Address = '" + StreetAddress + "', " +
+                       @"Marital_Status = '" + MaritalStatus + "', " +
+                       @"Ethnicity = '" + Ethnicity + "' " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+            }
+            else
+            {
+                //Dates
+                queryArray = DateQuery
+                    (
+                    @"SELECT " +
+                        @" DOB, " +
+                        @"LastUpdated " + 
+                    @"FROM " +
+                        @"tbl_Consumer_List_Entry " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+                Dob = queryArray[0].ToString();
+                DateDataEntered = queryArray[1].ToString();
+                //Ints
+                queryArray = IntQuery
+                    (
+                    @"SELECT " +
+                        @" Zip " +
+                     @"FROM " +
+                        @"tbl_Forms_Flow_Table " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+                Zip = (int) queryArray[0];
+                //Decimals
+                queryArray = DecimalQuery
+                    (
+                    @"SELECT " +
+                        @" TotalMoIncome " +
+                     @"FROM " +
+                        @"tbl_Consumer_List_Entry " +
+                    @"Where " +
+                        @"Consumer_ID = '" + Pid + @"';"
+                    );
+                TotalMonthlyIncome = (decimal)queryArray[0];
+                //bools
+                queryArray = BoolQuery
+                    (
+                    @"SELECT " +
+                        @" tbl_Forms_Flow_Table.MSG_OK, " +
+                        @"tbl_Consumer_List_Entry.Vet " +
+                    @"FROM " +
+                        @"tbl_Consumer_List_Entry, " +
+                        @"tbl_Forms_Flow_Table " +
+                    @"WHERE " +
+                        @"tbl_Forms_Flow_Table.Consumer_ID = '" + Pid + @"' AND tbl_Consumer_List_Entry.Consumer_ID = '" + Pid + @"';"
+                    );
+                MsgOk = (bool) queryArray[0];
+                VeteranStatus = (bool) queryArray[1];
+                //String
+                queryArray = StringQuery
+                    (
+                    @"SELECT " +
+                        @"tbl_Consumer_List_Entry.FIRST_NAME, " +
+                        @"tbl_Consumer_List_Entry.MIDDLE_INITIAL, " +
+                        @"tbl_Consumer_List_Entry.LAST_NAME, " +
+                        @"tbl_Consumer_List_Entry.HMIS_ID, " +
+                        @"tbl_Consumer_List_Entry.INFO_NET_ID, " +
+                        @"tbl_Consumer_List_Entry.NO_SSN_Reason, " +
+                        @"tbl_Consumer_List_Entry.Gender, " +
+                        @"tbl_Consumer_List_Entry.Staff, " +
+                        @"tbl_Consumer_List_Entry.CurrentlyLivingIn, " +
+                        @"tbl_Consumer_List_Entry.SpokaneCity, " +
+                        @"tbl_Consumer_List_Entry.SpokaneCounty, " +
+                        @"tbl_Consumer_List_Entry.AdultDisability, " +
+                        @"tbl_Consumer_List_Entry.AdultDisabilitySecond, " +
+                        @"tbl_Consumer_List_Entry.income1, " +
+                        @" tbl_Forms_Flow_Table.city, " +
+                        @" tbl_Forms_Flow_Table.state, " +
+                        @" tbl_Forms_Flow_Table.Home_Phone, " +
+                        @" tbl_Forms_Flow_Table.Work_MSG, " +
+                        @" tbl_Forms_Flow_Table.Call_Time, " +
+                        @" tbl_Forms_Flow_Table.Street_Address, " +
+                        @" tbl_Forms_Flow_Table.Marital_Status, " +
+                        @" tbl_Forms_Flow_Table.Ethnicity " +
+                    @"FROM " +
+                        @"tbl_Consumer_List_Entry, " +
+                        @"tbl_Forms_Flow_Table " +
+                    @"WHERE " +
+                        @"tbl_Forms_Flow_Table.Consumer_ID = '" + Pid + @"' AND tbl_Consumer_List_Entry.Consumer_ID = '" + Pid + @"';"
+                    );
+                FirstName = (string) queryArray[0];
+                Mi = (string) queryArray[1];
+                LastName = (string) queryArray[2];
+                HmisId = (string) queryArray[3];
+                InfoNetId = (string) queryArray[4];
+                Ssn = (string) queryArray[5];
+                Gender = (string) queryArray[6];
+                Staff = (string)queryArray[7];
+                HousingStatus = (string)queryArray[8];
+                Neighborhood = (string)queryArray[9];
+                CountyDetail = (string)queryArray[10];
+                Disability = (string)queryArray[11];
+                SecondDisability = (string)queryArray[12];
+                IncomeType = (string)queryArray[13];
+                City = (string)queryArray[14];
+                State = (string)queryArray[15];
+                HomePhone = (string)queryArray[16];
+                WorkPhone = (string)queryArray[17];
+                CallTime = (string)queryArray[18];
+                StreetAddress = (string)queryArray[19];
+                MaritalStatus = (string)queryArray[20];
+                Ethnicity = (string)queryArray[21];
+            }
         }
         ////////////////////////////////////////////////////////////////////// END Demographics //////////////////////////////////////////////////////////////////////
 
