@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="IntakeForm" Height="900" Width="900" SnapsToDevicePixels="True" ResizeMode="NoResize">
+        Title="IntakeForm" Height="671" Width="900" SnapsToDevicePixels="True" ResizeMode="CanMinimize">
     <Grid>
         <!--///////////////////////////////////////////////////////////////////////////// Start Demographic Info /////////////////////////////////////////////////////////////////////////////-->
 
-        <Image x:Name="image" HorizontalAlignment="Left" Height="1020" VerticalAlignment="Top" Width="910" Source="Resources/IntakeBKG.png" Stretch="Fill" Margin="-10,-50,-8,-101" />
+        <!--<Image x:Name="image" HorizontalAlignment="Left" Height="1020" VerticalAlignment="Top" Width="910" Source="Resources/IntakeBKG.png" Stretch="Fill" Margin="-10,-50,-8,-101" />-->
         <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="16" Margin="66,3,0,0" TextWrapping="Wrap" Text="Participant ID:" VerticalAlignment="Top" Width="86" BorderThickness="0" IsReadOnly="True"/>
         <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="152,3,0,0" TextWrapping="Wrap" Text="{Binding Pid}" Width="70" VerticalAlignment="Top" Height="16"/>
         <TextBox x:Name="textBlockHMISIdLabel" HorizontalAlignment="Left" Height="16" Margin="228,3,0,0" TextWrapping="Wrap" Text="HMIS ID:" VerticalAlignment="Top" Width="53" BorderThickness="0" IsReadOnly="True"/>
@@ -74,23 +74,26 @@
         <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="565,109,0,0" Text="{Binding Ethnicity}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667">
             <ComboBoxItem x:Name="Caucasian" Content="Caucasian"/>
             <ComboBoxItem x:Name="AfricanAmerican" Content="African American"/>
-            <ComboBoxItem x:Name="Hispanic" Content="Hispanic"/>
-            <ComboBoxItem x:Name="Asian" Content="Asian"/>
+            <ComboBoxItem x:Name="Hispanic" Content="Hispanic/Latino"/>
+            <ComboBoxItem x:Name="Asian" Content="Asian/Pacific Islander"/>
+            <ComboBoxItem x:Name="Multi" Content="Multi-racial"/>
         </ComboBox>
         <CheckBox x:Name="checkBoxVeteranStatus" IsChecked="{Binding VeteranStatus}" Content="Veteran Status" HorizontalAlignment="Left" Margin="775,110,0,0" VerticalAlignment="Top" Height="16"/>
         <TextBlock x:Name="textBlockDisability" HorizontalAlignment="Left" Margin="14,132,0,0" TextWrapping="Wrap" Text="Disability:" VerticalAlignment="Top" Height="16"/>
         <ComboBox x:Name="comboBoxDisability" HorizontalAlignment="Left" Margin="70,132,0,0" Text="{Binding Disability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
-            <ComboBoxItem x:Name="Sight" Content="Sight"/>
-            <ComboBoxItem x:Name="Hearing" Content="Hearing"/>
-            <ComboBoxItem x:Name="Mental" Content="Mental"/>
             <ComboBoxItem x:Name="Physical" Content="Physical"/>
+            <ComboBoxItem x:Name="Mental" Content="Mental"/>
+            <ComboBoxItem x:Name="Sensory" Content="Sensory"/>
+            <ComboBoxItem x:Name="Multiple" Content="Multiple"/>
+            <ComboBoxItem x:Name="OtherDisability" Content="Other"/>
         </ComboBox>
         <TextBlock x:Name="textBlockDisability2" HorizontalAlignment="Left" Margin="207,132,0,0" TextWrapping="Wrap" Text="2nd Disability:" VerticalAlignment="Top" Height="16"/>
         <ComboBox x:Name="comboBoxDisability2" HorizontalAlignment="Left" Margin="286,132,0,0" Text="{Binding SecondDisability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
-            <ComboBoxItem x:Name="Sight2" Content="Sight"/>
-            <ComboBoxItem x:Name="Hearing2" Content="Hearing"/>
-            <ComboBoxItem x:Name="Mental2" Content="Mental"/>
             <ComboBoxItem x:Name="Physical2" Content="Physical"/>
+            <ComboBoxItem x:Name="Mental2" Content="Mental"/>
+            <ComboBoxItem x:Name="Sensory2" Content="Sensory"/>
+            <ComboBoxItem x:Name="Multiple2" Content="Multiple"/>
+            <ComboBoxItem x:Name="OtherDisability2" Content="Other"/>
         </ComboBox>
         <TextBlock x:Name="textBlockIncomeType" HorizontalAlignment="Left" Margin="427,132,0,0" TextWrapping="Wrap" Text="Income Type:" VerticalAlignment="Top" Height="16"/>
         <TextBox x:Name="textBoxIncomeType" HorizontalAlignment="Left" Height="16" Margin="504,132,0,0" TextWrapping="Wrap" Text="{Binding IncomeType}" VerticalAlignment="Top" Width="135"  GotFocus="GotFocus" BorderThickness="0"/>
@@ -105,7 +108,7 @@
 
         <!--///////////////////////////////////////////////////////////////////////////// Start ADVP Info /////////////////////////////////////////////////////////////////////////////-->
         <TextBlock x:Name="textBlockIntakeDate" HorizontalAlignment="Left" Margin="10,197,0,0" TextWrapping="Wrap" Text="IntakeDate:" VerticalAlignment="Top" Height="16"/>
-        <ListBox x:Name="listBoxIntakeDate" Margin="75,197,0,0" ItemsSource="{Binding ListDates}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="326" Height="72" VerticalAlignment="Top">
+        <ListBox x:Name="listBoxIntakeDate" Margin="75,197,0,0" ItemsSource="{Binding ListDates, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="326" Height="72" VerticalAlignment="Top">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -115,7 +118,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock x:Name="textBlockNewDate" HorizontalAlignment="Left" Margin="20,283,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="16" Margin="85,283,0,0" TextWrapping="Wrap" Text="Date of Intake" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062"/>
+        <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="16" Margin="85,283,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062"/>
         <Button x:Name="buttonAddNewDate" Content="Add New Date" Margin="0,274,614,0" VerticalAlignment="Top" Height="30" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="81" Click="buttonAddNewDate_Click"/>
         <TextBlock x:Name="textBlockTotalAdultsInHousehold" HorizontalAlignment="Left" Margin="489,427,0,0" TextWrapping="Wrap" Text="Total Adults In Household:" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxTotalAdultsInHousehold" HorizontalAlignment="Left" Height="16" Margin="632,427,0,0" TextWrapping="Wrap" Text="{Binding TotalAdultsInHouseholdString}" VerticalAlignment="Top" Width="39" BorderThickness="0" GotFocus="GotFocus"/>

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.OleDb;
-using System.Globalization;
 
 namespace YWCA_Software
 {
@@ -20,8 +19,8 @@ namespace YWCA_Software
         public const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
 
         public const string Path = @"Data Source=" +
-                                    //@"P:\ywcaDbSoftware\" +
-                                    @"C:\YWCADB\All\" +
+                                    @"P:\ywcaDbSoftware\" +
+                                    //@"C:\YWCADB\All\" + //for local debuging
                                     @"YWCACounselingANDLegal.accdb" +
                                     @";";
         public const string Password = @"Jet OLEDB:Database Password=ywc@;";
@@ -100,6 +99,20 @@ namespace YWCA_Software
             }
         }
 
+        private string _dateNow = DateTime.Now.ToShortDateString();
+        public string DateNow
+        {
+            get
+            {
+                return _dateNow;
+            }
+            set
+            {
+                _dateNow = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DateNow"));
+            }
+        }
+
         private string _intakeDate;
         public string IntakeDate
         {
@@ -147,7 +160,7 @@ namespace YWCA_Software
             }
         }
 
-        private int _zip;
+        private int _zip = 55555;
         public int Zip
         {
             get
@@ -161,7 +174,7 @@ namespace YWCA_Software
             }
         }
 
-        private string _dischargeDate = "None";
+        private string _dischargeDate = "NoInfo";
         public string DischargeDate
         {
             get
@@ -170,12 +183,12 @@ namespace YWCA_Software
             }
             set
             {
-                _dischargeDate = value ?? " ";
+                _dischargeDate = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DischargeDate"));
             }
         }
 
-        private string _dischargeLocation = "None";
+        private string _dischargeLocation = "NoInfo";
         public string DischargeLocation
         {
             get
@@ -184,12 +197,12 @@ namespace YWCA_Software
             }
             set
             {
-                _dischargeLocation = value ?? " ";
+                _dischargeLocation = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DischargeLocation"));
             }
         }
 
-        private string _personsInHomeRelationship = "None";
+        private string _personsInHomeRelationship = "NoInfo";
         public string PersonsInHomeRelationship
         {
             get
@@ -198,12 +211,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship = value ?? " ";
+                _personsInHomeRelationship = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship"));
             }
         }
 
-        private string _personsInHomeGender = "NA";
+        private string _personsInHomeGender = "NoInfo";
         public string PersonsInHomeGender
         {
             get
@@ -212,12 +225,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender = value ?? " ";
+                _personsInHomeGender = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender"));
             }
         }
 
-        private string _personsInHomeDob = "NA";
+        private string _personsInHomeDob = "NoInfo";
         public string PersonsInHomeDob
         {
             get
@@ -226,12 +239,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob = value ?? " ";
+                _personsInHomeDob = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob"));
             }
         }
 
-        private string _personsInHomeRelationship2 = "None";
+        private string _personsInHomeRelationship2 = "NoInfo";
         public string PersonsInHomeRelationship2
         {
             get
@@ -240,12 +253,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship2 = value ?? " ";
+                _personsInHomeRelationship2 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship2"));
             }
         }
 
-        private string _personsInHomeGender2 = "NA";
+        private string _personsInHomeGender2 = "NoInfo";
         public string PersonsInHomeGender2
         {
             get
@@ -254,12 +267,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender2 = value ?? " ";
+                _personsInHomeGender2 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender2"));
             }
         }
 
-        private string _personsInHomeDob2 = "NA";
+        private string _personsInHomeDob2 = "NoInfo";
         public string PersonsInHomeDob2
         {
             get
@@ -268,12 +281,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob2 = value ?? " ";
+                _personsInHomeDob2 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob2"));
             }
         }
 
-        private string _personsInHomeRelationship3 = "None";
+        private string _personsInHomeRelationship3 = "NoInfo";
         public string PersonsInHomeRelationship3
         {
             get
@@ -282,12 +295,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship3 = value ?? " ";
+                _personsInHomeRelationship3 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship3"));
             }
         }
 
-        private string _personsInHomeGender3 = "NA";
+        private string _personsInHomeGender3 = "NoInfo";
         public string PersonsInHomeGender3
         {
             get
@@ -296,12 +309,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender3 = value ?? " ";
+                _personsInHomeGender3 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender3"));
             }
         }
 
-        private string _personsInHomeDob3 = "NA";
+        private string _personsInHomeDob3 = "NoInfo";
         public string PersonsInHomeDob3
         {
             get
@@ -310,12 +323,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob3 = value ?? " ";
+                _personsInHomeDob3 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob3"));
             }
         }
 
-        private string _personsInHomeRelationship4 = "None";
+        private string _personsInHomeRelationship4 = "NoInfo";
         public string PersonsInHomeRelationship4
         {
             get
@@ -324,12 +337,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship4 = value ?? " ";
+                _personsInHomeRelationship4 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship4"));
             }
         }
 
-        private string _personsInHomeGender4 = "NA";
+        private string _personsInHomeGender4 = "NoInfo";
         public string PersonsInHomeGender4
         {
             get
@@ -338,12 +351,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender4 = value ?? " ";
+                _personsInHomeGender4 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender4"));
             }
         }
 
-        private string _personsInHomeDob4 = "NA";
+        private string _personsInHomeDob4 = "NoInfo";
         public string PersonsInHomeDob4
         {
             get
@@ -352,12 +365,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob4 = value ?? " ";
+                _personsInHomeDob4 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob4"));
             }
         }
 
-        private string _personsInHomeRelationship5 = "None";
+        private string _personsInHomeRelationship5 = "NoInfo";
         public string PersonsInHomeRelationship5
         {
             get
@@ -366,12 +379,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship5 = value ?? " ";
+                _personsInHomeRelationship5 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship5"));
             }
         }
 
-        private string _personsInHomeGender5 = "NA";
+        private string _personsInHomeGender5 = "NoInfo";
         public string PersonsInHomeGender5
         {
             get
@@ -380,12 +393,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender5 = value ?? " ";
+                _personsInHomeGender5 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender5"));
             }
         }
 
-        private string _personsInHomeDob5 = "NA";
+        private string _personsInHomeDob5 = "NoInfo";
         public string PersonsInHomeDob5
         {
             get
@@ -394,12 +407,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob5 = value ?? " ";
+                _personsInHomeDob5 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob5"));
             }
         }
 
-        private string _personsInHomeRelationship6 = "None";
+        private string _personsInHomeRelationship6 = "NoInfo";
         public string PersonsInHomeRelationship6
         {
             get
@@ -408,12 +421,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship6 = value ?? " ";
+                _personsInHomeRelationship6 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship6"));
             }
         }
 
-        private string _personsInHomeGender6 = "NA";
+        private string _personsInHomeGender6 = "NoInfo";
         public string PersonsInHomeGender6
         {
             get
@@ -422,12 +435,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender6 = value ?? " ";
+                _personsInHomeGender6 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender6"));
             }
         }
 
-        private string _personsInHomeDob6 = "NA";
+        private string _personsInHomeDob6 = "NoInfo";
         public string PersonsInHomeDob6
         {
             get
@@ -436,12 +449,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob6 = value ?? " ";
+                _personsInHomeDob6 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob6"));
             }
         }
 
-        private string _personsInHomeRelationship7 = "None";
+        private string _personsInHomeRelationship7 = "NoInfo";
         public string PersonsInHomeRelationship7
         {
             get
@@ -450,12 +463,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship7 = value ?? " ";
+                _personsInHomeRelationship7 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship7"));
             }
         }
 
-        private string _personsInHomeGender7 = "NA";
+        private string _personsInHomeGender7 = "NoInfo";
         public string PersonsInHomeGender7
         {
             get
@@ -464,12 +477,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender7 = value ?? " ";
+                _personsInHomeGender7 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender7"));
             }
         }
 
-        private string _personsInHomeDob7 = "NA";
+        private string _personsInHomeDob7 = "NoInfo";
         public string PersonsInHomeDob7
         {
             get
@@ -478,12 +491,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob7 = value ?? " ";
+                _personsInHomeDob7 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob7"));
             }
         }
 
-        private string _personsInHomeRelationship8 = "None";
+        private string _personsInHomeRelationship8 = "NoInfo";
         public string PersonsInHomeRelationship8
         {
             get
@@ -492,12 +505,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeRelationship8 = value ?? " ";
+                _personsInHomeRelationship8 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeRelationship8"));
             }
         }
 
-        private string _personsInHomeGender8 = "NA";
+        private string _personsInHomeGender8 = "NoInfo";
         public string PersonsInHomeGender8
         {
             get
@@ -506,12 +519,12 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeGender8 = value ?? " ";
+                _personsInHomeGender8 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender8"));
             }
         }
 
-        private string _personsInHomeDob8 = "NA";
+        private string _personsInHomeDob8 = "NoInfo";
         public string PersonsInHomeDob8
         {
             get
@@ -520,7 +533,7 @@ namespace YWCA_Software
             }
             set
             {
-                _personsInHomeDob8 = value ?? " ";
+                _personsInHomeDob8 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob8"));
             }
         }
@@ -632,12 +645,12 @@ namespace YWCA_Software
             }
             set
             {
-                _mi = value ?? " ";
+                _mi = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Mi"));
             }
         }
 
-        private string _gender = " ";
+        private string _gender = "NoInfo";
         public string Gender
         {
             get
@@ -646,12 +659,12 @@ namespace YWCA_Software
             }
             set
             {
-                _gender = value ?? " ";
+                _gender = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Gender"));
             }
         }
 
-        private string _maritalStatus = " ";
+        private string _maritalStatus = "NoInfo";
         public string MaritalStatus
         {
             get
@@ -660,12 +673,12 @@ namespace YWCA_Software
             }
             set
             {
-                _maritalStatus = value ?? " ";
+                _maritalStatus = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MaritalStatus"));
             }
         }
 
-        private string _ethnicity = " ";
+        private string _ethnicity = "NoInfo";
         public string Ethnicity
         {
             get
@@ -674,12 +687,12 @@ namespace YWCA_Software
             }
             set
             {
-                _ethnicity = value ?? " ";
+                _ethnicity = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Ethnicity"));
             }
         }
 
-        private string _disability = " ";
+        private string _disability = "NoInfo";
         public string Disability
         {
             get
@@ -688,12 +701,12 @@ namespace YWCA_Software
             }
             set
             {
-                _disability = value ?? " ";
+                _disability = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Disability"));
             }
         }
 
-        private string _secondDisability = " ";
+        private string _secondDisability = "NoInfo";
         public string SecondDisability
         {
             get
@@ -702,12 +715,12 @@ namespace YWCA_Software
             }
             set
             {
-                _secondDisability = value ?? " ";
+                _secondDisability = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SecondDisability"));
             }
         }
 
-        private string _incomeType = "None";
+        private string _incomeType = "NoInfo";
         public string IncomeType
         {
             get
@@ -716,7 +729,7 @@ namespace YWCA_Software
             }
             set
             {
-                _incomeType = value ?? " ";
+                _incomeType = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IncomeType"));
             }
         }
@@ -730,7 +743,7 @@ namespace YWCA_Software
             }
             set
             {
-                _homePhone = value ?? " ";
+                _homePhone = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HomePhone"));
             }
         }
@@ -744,7 +757,7 @@ namespace YWCA_Software
             }
             set
             {
-                _workPhone = value ?? " ";
+                _workPhone = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WorkPhone"));
             }
         }
@@ -758,7 +771,7 @@ namespace YWCA_Software
             }
             set
             {
-                _callTime = value ?? " ";
+                _callTime = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CallTime"));
             }
         }
@@ -772,7 +785,7 @@ namespace YWCA_Software
             }
             set
             {
-                _streetAddress = value ?? " ";
+                _streetAddress = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("StreetAddress"));
             }
         }
@@ -786,7 +799,7 @@ namespace YWCA_Software
             }
             set
             {
-                _city = value ?? " ";
+                _city = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("City"));
             }
         }
@@ -800,7 +813,7 @@ namespace YWCA_Software
             }
             set
             {
-                _state = value ?? " ";
+                _state = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("State"));
             }
         }
@@ -815,7 +828,7 @@ namespace YWCA_Software
             }
             set
             {
-                _housingStatus = value ?? " ";
+                _housingStatus = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HousingStatus"));
             }
         }
@@ -829,7 +842,7 @@ namespace YWCA_Software
             }
             set
             {
-                _neighborhood = value ?? " ";
+                _neighborhood = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Neighborhood"));
             }
         }
@@ -843,12 +856,12 @@ namespace YWCA_Software
             }
             set
             {
-                _countyDetail = value ?? " ";
+                _countyDetail = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CountyDetail"));
             }
         }
 
-        private string _staff = "None";
+        private string _staff = "NoInfo";
         public string Staff
         {
             get
@@ -857,7 +870,7 @@ namespace YWCA_Software
             }
             set
             {
-                _staff = value ?? " ";
+                _staff = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Staff"));
             }
         }
@@ -871,7 +884,7 @@ namespace YWCA_Software
             }
             set
             {
-                _ssn = value ?? " ";
+                _ssn = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Ssn"));
             }
         }
@@ -913,7 +926,7 @@ namespace YWCA_Software
             }
             set
             {
-                _fName = value ?? " ";
+                _fName = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FirstName"));
             }
         }
@@ -927,7 +940,7 @@ namespace YWCA_Software
             }
             set
             {
-                _lName = value ?? " ";
+                _lName = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastName"));
             }
         }
@@ -941,7 +954,7 @@ namespace YWCA_Software
             }
             set
             {
-                _pid = value ?? " ";
+                _pid = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PID"));
             }
         }
@@ -954,7 +967,7 @@ namespace YWCA_Software
             Pid = pid;
         }
 
-        private string _hmisId = " ";
+        private string _hmisId = "NoInfo";
         public string HmisId
         {
             get
@@ -963,12 +976,12 @@ namespace YWCA_Software
             }
             set
             {
-                _hmisId = value ?? " ";
+                _hmisId = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HmisId"));
             }
         }
 
-        private string _infoNetId = " ";
+        private string _infoNetId = "NoInfo";
         public string InfoNetId
         {
             get
@@ -977,7 +990,7 @@ namespace YWCA_Software
             }
             set
             {
-                _infoNetId = value ?? " ";
+                _infoNetId = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("InfoNetId"));
             }
         }
@@ -1229,7 +1242,7 @@ namespace YWCA_Software
                 int rowNum;
                 for (rowNum = 0; rdr.Read(); rowNum++)
                 {
-                    target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555;
+                    target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 0;
                 }
             }
             Disconnect();
@@ -1396,7 +1409,7 @@ namespace YWCA_Software
                 {
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
-                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetDateTime(i).ToShortDateString() : DateTime.Now.ToShortDateString());
+                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetDateTime(i).ToShortDateString() : "NoInfo");
                     }
                 }
             }
@@ -1422,7 +1435,32 @@ namespace YWCA_Software
                 {
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
-                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 55555);
+                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 0);
+                    }
+                }
+            }
+            Disconnect();
+            return target;
+        }
+
+        /// <summary>
+        /// Runs the qurry passed to it
+        /// </summary>
+        /// <param name="query"></param>
+        private ArrayList DoubleQuery(string query)
+        {
+            ArrayList target = new ArrayList();
+            Connect();
+            DbCommand.CommandText = query;
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetDouble(0) : 0);
                     }
                 }
             }
@@ -1448,7 +1486,7 @@ namespace YWCA_Software
                 {
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
-                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetDecimal(i) : 55555);
+                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetDecimal(i) : 0);
                     }
                 }
             }
@@ -1474,7 +1512,7 @@ namespace YWCA_Software
                 {
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
-                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetString(i) : " ");
+                        target.Add((rdr.IsDBNull(i) == false) ? rdr.GetString(i) : "NoInfo");
                     }
                 }
             }
@@ -1512,93 +1550,93 @@ namespace YWCA_Software
                 //Dates
                 UpdateQuery
                     (
-                    @"UPDATE " +
-                        @"tbl_Consumer_List_Entry " +
-                    @"SET " +
-                        @"DOB = '" + Dob + "', " +
-                        @"LastUpdated = '" + DateDataEntered + "' " +
-                    @"Where " + 
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "UPDATE " +
+                        "tbl_Consumer_List_Entry " +
+                    "SET " +
+                        "DOB = " + DumpNoInfo(Dob) + ", " +
+                        "LastUpdated = " + DumpNoInfo(DateDataEntered) + "  " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
                 //Ints
                 UpdateQuery
                     (
-                    @"UPDATE " +
-                        @"tbl_Forms_Flow_Table " +
-                    @"SET " +
-                        @"Zip = '" + Zip + "' " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "UPDATE " +
+                        "tbl_Forms_Flow_Table " +
+                    "SET " +
+                        "Zip = \"" + Zip + "\"  " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
                 //Decimal
                 UpdateQuery
                     (
-                    @"UPDATE " +
-                        @"tbl_Consumer_List_Entry " +
-                    @"SET " +
-                        @"TotalMoIncome = '" + TotalMonthlyIncome + "' " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "UPDATE " +
+                        "tbl_Consumer_List_Entry " +
+                    "SET " +
+                        "TotalMoIncome = \"" + TotalMonthlyIncome + "\"  " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
                 //bools
                 UpdateQuery
                     (
-                    @"UPDATE " +
-                        @"tbl_Consumer_List_Entry " +
-                    @"SET " +
-                        @"VET = " + VeteranStatus + " " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "UPDATE " +
+                        "tbl_Consumer_List_Entry " +
+                    "SET " +
+                        "VET = " + VeteranStatus + "  " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
 
                 UpdateQuery
                     (
-                    @"UPDATE " +
-                        @"tbl_Forms_Flow_Table " +
-                    @"SET " +
-                        @"MSG_OK = " + MsgOk + " " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "UPDATE " +
+                        "tbl_Forms_Flow_Table " +
+                    "SET " +
+                        "MSG_OK = " + MsgOk + "  " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
                 //String
                 UpdateQuery
                     (
-                     @"UPDATE " +
-                        @"tbl_Consumer_List_Entry " +
-                    @"SET " +
-                       @"FIRST_NAME = '" + FirstName + "', " +
-                       @"MIDDLE_INITIAL = '" + Mi + "', " +
-                       @"LAST_NAME = '" + LastName + "', " +
-                       @"HMIS_ID = '" + HmisId + "', " +
-                       @"INFO_NET_ID = '" + InfoNetId + "', " +
-                       @"NO_SSN_Reason = '" + Ssn + "', " +
-                       @"Gender = '" + Gender + "', " +
-                       @"Staff = '" + Staff + "', " +
-                       @"CurrentlyLivingIn = '" + HousingStatus + "', " +
-                       @"SpokaneCity = '" + Neighborhood + "', " +
-                       @"SpokaneCounty = '" + CountyDetail + "', " +
-                       @"AdultDisability = '" + Disability + "', " +
-                       @"AdultDisabilitySecond = '" + SecondDisability + "', " +
-                       @"income1 = '" + TotalMonthlyIncome + "' " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                     "UPDATE " +
+                        "tbl_Consumer_List_Entry " +
+                    "SET " +
+                       "FIRST_NAME = \"" + FirstName + "\", " +
+                       "MIDDLE_INITIAL = \"" + Mi + "\", " +
+                       "LAST_NAME = \"" + LastName + "\", " +
+                       "HMIS_ID = \"" + HmisId + "\", " +
+                       "INFO_NET_ID = \"" + InfoNetId + "\", " +
+                       "NO_SSN_Reason = \"" + Ssn + "\", " +
+                       "Gender = \"" + Gender + "\", " +
+                       "Staff = \"" + Staff + "\", " +
+                       "CurrentlyLivingIn = \"" + HousingStatus + "\", " +
+                       "SpokaneCity = \"" + Neighborhood + "\", " +
+                       "SpokaneCounty = \"" + CountyDetail + "\", " +
+                       "AdultDisability = \"" + Disability + "\", " +
+                       "AdultDisabilitySecond = \"" + SecondDisability + "\", " +
+                       "income1 = \"" + IncomeType + "\"  " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
 
                 UpdateQuery
                     (
-                     @"UPDATE " +
-                        @"tbl_Forms_Flow_Table " +
-                    @"SET " +
-                       @"city = '" + City + "', " +
-                       @"state = '" + State + "', " +
-                       @"Home_Phone = '" + HomePhone + "', " +
-                       @"Work_MSG = '" + WorkPhone + "', " +
-                       @"Call_Time = '" + CallTime + "', " +
-                       @"Street_Address = '" + StreetAddress + "', " +
-                       @"Marital_Status = '" + MaritalStatus + "', " +
-                       @"Ethnicity = '" + Ethnicity + "' " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                     "UPDATE " +
+                        "tbl_Forms_Flow_Table " +
+                    "SET " +
+                       "city = \"" + City + "\", " +
+                       "state = \"" + State + "\", " +
+                       "Home_Phone = \"" + HomePhone + "\", " +
+                       "Work_MSG = \"" + WorkPhone + "\", " +
+                       "Call_Time = \"" + CallTime + "\", " +
+                       "Street_Address = \"" + StreetAddress + "\", " +
+                       "Marital_Status = \"" + MaritalStatus + "\", " +
+                       "Ethnicity = \"" + Ethnicity + "\"  " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
             }
             else
@@ -1606,91 +1644,91 @@ namespace YWCA_Software
                 //Dates
                 queryArray = DateQuery
                     (
-                    @"SELECT " +
-                        @" DOB, " +
-                        @"LastUpdated " + 
-                    @"FROM " +
-                        @"tbl_Consumer_List_Entry " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "SELECT " +
+                        " DOB, " +
+                        "LastUpdated " +
+                    "FROM " +
+                        "tbl_Consumer_List_Entry " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
                 Dob = queryArray[0].ToString();
                 DateDataEntered = queryArray[1].ToString();
                 //Ints
                 queryArray = IntQuery
                     (
-                    @"SELECT " +
-                        @" Zip " +
-                     @"FROM " +
-                        @"tbl_Forms_Flow_Table " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "SELECT " +
+                        " Zip " +
+                     "FROM " +
+                        "tbl_Forms_Flow_Table " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
-                Zip = (int) queryArray[0];
+                Zip = (int)queryArray[0];
                 //Decimals
                 queryArray = DecimalQuery
                     (
-                    @"SELECT " +
-                        @" TotalMoIncome " +
-                     @"FROM " +
-                        @"tbl_Consumer_List_Entry " +
-                    @"Where " +
-                        @"Consumer_ID = '" + Pid + @"';"
+                    "SELECT " +
+                        " TotalMoIncome " +
+                     "FROM " +
+                        "tbl_Consumer_List_Entry " +
+                    "Where " +
+                        "Consumer_ID = \"" + Pid + "\";"
                     );
                 TotalMonthlyIncome = (decimal)queryArray[0];
                 //bools
                 queryArray = BoolQuery
                     (
-                    @"SELECT " +
-                        @" tbl_Forms_Flow_Table.MSG_OK, " +
-                        @"tbl_Consumer_List_Entry.Vet " +
-                    @"FROM " +
-                        @"tbl_Consumer_List_Entry, " +
-                        @"tbl_Forms_Flow_Table " +
-                    @"WHERE " +
-                        @"tbl_Forms_Flow_Table.Consumer_ID = '" + Pid + @"' AND tbl_Consumer_List_Entry.Consumer_ID = '" + Pid + @"';"
+                    "SELECT " +
+                        " tbl_Forms_Flow_Table.MSG_OK, " +
+                        "tbl_Consumer_List_Entry.Vet " +
+                    "FROM " +
+                        "tbl_Consumer_List_Entry, " +
+                        "tbl_Forms_Flow_Table " +
+                    "WHERE " +
+                        "tbl_Forms_Flow_Table.Consumer_ID = \"" + Pid + "\" AND tbl_Consumer_List_Entry.Consumer_ID = \"" + Pid + "\";"
                     );
-                MsgOk = (bool) queryArray[0];
-                VeteranStatus = (bool) queryArray[1];
+                MsgOk = (bool)queryArray[0];
+                VeteranStatus = (bool)queryArray[1];
                 //String
                 queryArray = StringQuery
                     (
-                    @"SELECT " +
-                        @"tbl_Consumer_List_Entry.FIRST_NAME, " +
-                        @"tbl_Consumer_List_Entry.MIDDLE_INITIAL, " +
-                        @"tbl_Consumer_List_Entry.LAST_NAME, " +
-                        @"tbl_Consumer_List_Entry.HMIS_ID, " +
-                        @"tbl_Consumer_List_Entry.INFO_NET_ID, " +
-                        @"tbl_Consumer_List_Entry.NO_SSN_Reason, " +
-                        @"tbl_Consumer_List_Entry.Gender, " +
-                        @"tbl_Consumer_List_Entry.Staff, " +
-                        @"tbl_Consumer_List_Entry.CurrentlyLivingIn, " +
-                        @"tbl_Consumer_List_Entry.SpokaneCity, " +
-                        @"tbl_Consumer_List_Entry.SpokaneCounty, " +
-                        @"tbl_Consumer_List_Entry.AdultDisability, " +
-                        @"tbl_Consumer_List_Entry.AdultDisabilitySecond, " +
-                        @"tbl_Consumer_List_Entry.income1, " +
-                        @" tbl_Forms_Flow_Table.city, " +
-                        @" tbl_Forms_Flow_Table.state, " +
-                        @" tbl_Forms_Flow_Table.Home_Phone, " +
-                        @" tbl_Forms_Flow_Table.Work_MSG, " +
-                        @" tbl_Forms_Flow_Table.Call_Time, " +
-                        @" tbl_Forms_Flow_Table.Street_Address, " +
-                        @" tbl_Forms_Flow_Table.Marital_Status, " +
-                        @" tbl_Forms_Flow_Table.Ethnicity " +
-                    @"FROM " +
-                        @"tbl_Consumer_List_Entry, " +
-                        @"tbl_Forms_Flow_Table " +
-                    @"WHERE " +
-                        @"tbl_Forms_Flow_Table.Consumer_ID = '" + Pid + @"' AND tbl_Consumer_List_Entry.Consumer_ID = '" + Pid + @"';"
+                    "SELECT " +
+                        "tbl_Consumer_List_Entry.FIRST_NAME, " +
+                        "tbl_Consumer_List_Entry.MIDDLE_INITIAL, " +
+                        "tbl_Consumer_List_Entry.LAST_NAME, " +
+                        "tbl_Consumer_List_Entry.HMIS_ID, " +
+                        "tbl_Consumer_List_Entry.INFO_NET_ID, " +
+                        "tbl_Consumer_List_Entry.NO_SSN_Reason, " +
+                        "tbl_Consumer_List_Entry.Gender, " +
+                        "tbl_Consumer_List_Entry.Staff, " +
+                        "tbl_Consumer_List_Entry.CurrentlyLivingIn, " +
+                        "tbl_Consumer_List_Entry.SpokaneCity, " +
+                        "tbl_Consumer_List_Entry.SpokaneCounty, " +
+                        "tbl_Consumer_List_Entry.AdultDisability, " +
+                        "tbl_Consumer_List_Entry.AdultDisabilitySecond, " +
+                        "tbl_Consumer_List_Entry.income1, " +
+                        " tbl_Forms_Flow_Table.city, " +
+                        " tbl_Forms_Flow_Table.state, " +
+                        " tbl_Forms_Flow_Table.Home_Phone, " +
+                        " tbl_Forms_Flow_Table.Work_MSG, " +
+                        " tbl_Forms_Flow_Table.Call_Time, " +
+                        " tbl_Forms_Flow_Table.Street_Address, " +
+                        " tbl_Forms_Flow_Table.Marital_Status, " +
+                        " tbl_Forms_Flow_Table.Ethnicity " +
+                    "FROM " +
+                        "tbl_Consumer_List_Entry, " +
+                        "tbl_Forms_Flow_Table " +
+                    "WHERE " +
+                        "tbl_Forms_Flow_Table.Consumer_ID = \"" + Pid + "\" AND tbl_Consumer_List_Entry.Consumer_ID = \"" + Pid + "\";"
                     );
-                FirstName = (string) queryArray[0];
-                Mi = (string) queryArray[1];
-                LastName = (string) queryArray[2];
-                HmisId = (string) queryArray[3];
-                InfoNetId = (string) queryArray[4];
-                Ssn = (string) queryArray[5];
-                Gender = (string) queryArray[6];
+                FirstName = (string)queryArray[0];
+                Mi = (string)queryArray[1];
+                LastName = (string)queryArray[2];
+                HmisId = (string)queryArray[3];
+                InfoNetId = (string)queryArray[4];
+                Ssn = (string)queryArray[5];
+                Gender = (string)queryArray[6];
                 Staff = (string)queryArray[7];
                 HousingStatus = (string)queryArray[8];
                 Neighborhood = (string)queryArray[9];
@@ -1708,104 +1746,274 @@ namespace YWCA_Software
                 Ethnicity = (string)queryArray[21];
             }
         }
+
+        private string DumpNoInfo(string noInfo)
+        {
+            return (noInfo == "NoInfo") ? "NULL" : noInfo;
+        }
         ////////////////////////////////////////////////////////////////////// END Demographics //////////////////////////////////////////////////////////////////////
 
         /********************************************************************* Start Advp *********************************************************************/
 
         public void Advp(string selectUpdateAdd, string pid, string date)
         {
-            //Doubles
-            TotalAdultsInHousehold = Convert.ToDouble(TotalAdultsInHouseholdString);
-            TotalChildrenInHousehold = Convert.ToDouble(TotalChildrenInHouseholdString);
-            RunQuery(ref _totalAdultsInHousehold, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Tot Adults Household", pid, date, TotalAdultsInHousehold));
-            TotalAdultsInHouseholdString = TotalAdultsInHousehold.ToString(CultureInfo.InvariantCulture);
-            RunQuery(ref _totalChildrenInHousehold, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Tot Child Household", pid, date, TotalChildrenInHousehold));
-            TotalChildrenInHouseholdString = TotalChildrenInHousehold.ToString(CultureInfo.InvariantCulture);
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //Double
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "tbl_Intake " +
+                    "SET " +
+                        "[Tot Adults Household] = \"" + TotalAdultsInHouseholdString + "\", " +
+                        "[Tot Child Household] = \"" + TotalChildrenInHouseholdString + "\"  " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+                //Dates
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "tbl_Intake " +
+                    "SET " +
+                        "[Adult 2 DOB] = " + DumpNoInfo(PersonsInHomeDob) + ", " +
+                        "[Child 1 DOB] = " + DumpNoInfo(PersonsInHomeDob2) + ", " +
+                        "[Child 2 DOB] = " + DumpNoInfo(PersonsInHomeDob3) + ", " +
+                        "[Child 3 DOB] = " + DumpNoInfo(PersonsInHomeDob4) + ", " +
+                        "[Child 4 DOB] = " + DumpNoInfo(PersonsInHomeDob5) + ", " +
+                        "[Child 5 DOB] = " + DumpNoInfo(PersonsInHomeDob6) + ", " +
+                        "[Child 6 DOB] = " + DumpNoInfo(PersonsInHomeDob7) + ", " +
+                        "[Discharge Date] = " + DumpNoInfo(DischargeDate) + "  " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+                //bools
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "tbl_Intake " +
+                    "SET " +
+                        "Outreach = " + Counseling + ", " +
+                        "[YWCA Shelter] = " + Shelter + ", " +
+                        "[Legal Office] = " + Legal + ", " +
+                        "Advocacy = " + Advocacy + ", " +
+                        "ChildAdvocacy = " + ChildAdvocacy + ", " +
+                        "GroupClass = " + GroupClass + "  " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     "UPDATE " +
+                        "tbl_Intake " +
+                    "SET " +
+                       "[Adult 2 Relationship] = \"" + PersonsInHomeRelationship + "\", " +
+                       "[Adult 2 Sex] = \"" + PersonsInHomeGender + "\", " +
+                       "[Child 1 Relationship] = \"" + PersonsInHomeRelationship2 + "\", " +
+                       "[Child 1 Sex] = \"" + PersonsInHomeGender2 + "\", " +
+                       "[Child 2 Relationship] = \"" + PersonsInHomeRelationship3 + "\", " +
+                       "[Child 2 Sex] = \"" + PersonsInHomeGender3 + "\", " +
+                       "[Child 3 Relationship] = \"" + PersonsInHomeRelationship4 + "\", " +
+                       "[Child 3 Sex] = \"" + PersonsInHomeGender4 + "\", " +
+                       "[Child 4 Relationship] = \"" + PersonsInHomeRelationship5 + "\", " +
+                       "[Child 4 Sex] = \"" + PersonsInHomeGender5 + "\", " +
+                       "[Child 5 Relationship] = \"" + PersonsInHomeRelationship6 + "\", " +
+                       "[Child 5 Sex] = \"" + PersonsInHomeGender6 + "\", " +
+                       "[Child 6 Relationship] = \"" + PersonsInHomeRelationship7 + "\", " +
+                       "[Child 6 Sex] = \"" + PersonsInHomeGender7 + "\", " +
+                       "[Child 7 Relationship]  = \"" + PersonsInHomeRelationship8 + "\", " +
+                       "[Child 7 Sex] = \"" + PersonsInHomeGender8 + "\", " +
+                       "[DischargeLocation] = \"" + DischargeLocation + "\", " +
+                       "[Comments] = \"" + Comments + "\"  " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+            }
+            else
+            {
+                //doubles
+                queryArray = DoubleQuery
+                    (
+                    "SELECT " +
+                        " [Tot Adults Household], " +
+                        "[Tot Child Household] " +
+                     "FROM " +
+                        "tbl_Intake " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    TotalAdultsInHouseholdString = queryArray[0].ToString();
+                    TotalChildrenInHouseholdString = queryArray[1].ToString();
+                }
+                else
+                {
+                    TotalAdultsInHouseholdString = "NoInfo";
+                    TotalChildrenInHouseholdString = "NoInfo";
 
-            //Participant relationships
-            RunQuery(ref _personsInHomeRelationship, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 2 Relationship", pid, date, PersonsInHomeRelationship));
-            PersonsInHomeRelationship = _personsInHomeRelationship;
-            RunQuery(ref _personsInHomeGender, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Adult 2 Sex", pid, date, PersonsInHomeGender));
-            PersonsInHomeGender = _personsInHomeGender;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Adult 2 DOB", _personsInHomeDob, IntakeDate, ref _personsInHomeDob);
-            PersonsInHomeDob = _personsInHomeDob;
 
-            RunQuery(ref _personsInHomeRelationship2, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 1 Relationship", pid, date, PersonsInHomeRelationship2));
-            PersonsInHomeRelationship2 = _personsInHomeRelationship2;
-            RunQuery(ref _personsInHomeGender2, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 1 Sex", pid, date, PersonsInHomeGender2));
-            PersonsInHomeGender2 = _personsInHomeGender2;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 1 DOB", _personsInHomeDob2, IntakeDate, ref _personsInHomeDob2);
-            PersonsInHomeDob2 = _personsInHomeDob2;
-
-            RunQuery(ref _personsInHomeRelationship3, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 2 Relationship", pid, date, PersonsInHomeRelationship3));
-            PersonsInHomeRelationship3 = _personsInHomeRelationship3;
-            RunQuery(ref _personsInHomeGender3, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 2 Sex", pid, date, PersonsInHomeGender3));
-            PersonsInHomeGender3 = _personsInHomeGender3;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 2 DOB", _personsInHomeDob3, IntakeDate, ref _personsInHomeDob3);
-            PersonsInHomeDob3 = _personsInHomeDob3;
-
-            RunQuery(ref _personsInHomeRelationship4, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 3 Relationship", pid, date, PersonsInHomeRelationship4));
-            PersonsInHomeRelationship4 = _personsInHomeRelationship4;
-            RunQuery(ref _personsInHomeGender4, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 3 Sex", pid, date, PersonsInHomeGender4));
-            PersonsInHomeGender4 = _personsInHomeGender4;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 3 DOB", _personsInHomeDob4, IntakeDate, ref _personsInHomeDob4);
-            PersonsInHomeDob4 = _personsInHomeDob4;
-
-            RunQuery(ref _personsInHomeRelationship5, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 4 Relationship", pid, date, PersonsInHomeRelationship5));
-            PersonsInHomeRelationship5 = _personsInHomeRelationship5;
-            RunQuery(ref _personsInHomeGender5, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 4 Sex", pid, date, PersonsInHomeGender5));
-            PersonsInHomeGender5 = _personsInHomeGender5;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 4 DOB", _personsInHomeDob5, IntakeDate, ref _personsInHomeDob5);
-            PersonsInHomeDob5 = _personsInHomeDob5;
-
-            RunQuery(ref _personsInHomeRelationship6, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 5 Relationship", pid, date, PersonsInHomeRelationship6));
-            PersonsInHomeRelationship6 = _personsInHomeRelationship6;
-            RunQuery(ref _personsInHomeGender6, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 5 Sex", pid, date, PersonsInHomeGender6));
-            PersonsInHomeGender6 = _personsInHomeGender6;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 5 DOB", _personsInHomeDob6, IntakeDate, ref _personsInHomeDob6);
-            PersonsInHomeDob6 = _personsInHomeDob6;
-
-            RunQuery(ref _personsInHomeRelationship7, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 6 Relationship", pid, date, PersonsInHomeRelationship7));
-            PersonsInHomeRelationship7 = _personsInHomeRelationship7;
-            RunQuery(ref _personsInHomeGender7, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 6 Sex", pid, date, PersonsInHomeGender7));
-            PersonsInHomeGender7 = _personsInHomeGender7;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 6 DOB", _personsInHomeDob7, IntakeDate, ref _personsInHomeDob7);
-            PersonsInHomeDob7 = _personsInHomeDob7;
-
-            RunQuery(ref _personsInHomeRelationship8, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 7 Relationship", pid, date, PersonsInHomeRelationship8));
-            PersonsInHomeRelationship8 = _personsInHomeRelationship8;
-            RunQuery(ref _personsInHomeGender8, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Child 7 Sex", pid, date, PersonsInHomeGender8));
-            PersonsInHomeGender8 = _personsInHomeGender8;
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Child 7 DOB", _personsInHomeDob8, IntakeDate, ref _personsInHomeDob8);
-            PersonsInHomeDob8 = _personsInHomeDob8;
-
-            //Discharge
-            QueryDateFromPid(selectUpdateAdd, "tbl_Intake", "Discharge Date", _dischargeDate, IntakeDate, ref _dischargeDate);
-            DischargeDate = _dischargeDate;
-
-            RunQuery(ref _dischargeLocation, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "DischargeLocation", pid, date, DischargeLocation));
-            DischargeLocation = _dischargeLocation;
-
-            RunQuery(ref _comments, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_Intake", "Comments", pid, date, Comments));
-            Comments = _comments;
-
-            RunQuery(ref _counseling, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "Outreach", pid, _counseling));
-            Counseling = _counseling;
-
-            RunQuery(ref _shelter, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "YWCA Shelter", pid, _shelter));
-            Shelter = _shelter;
-
-            RunQuery(ref _legal, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "Legal Office", pid, _legal));
-            Legal = _legal;
-
-            RunQuery(ref _advocacy, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "Advocacy", pid, _advocacy));
-            Advocacy = _advocacy;
-
-            RunQuery(ref _childAdvocacy, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "ChildAdvocacy", pid, _childAdvocacy));
-            ChildAdvocacy = _childAdvocacy;
-
-            RunQuery(ref _groupClass, _sql.SelectUpdateOrAdd(selectUpdateAdd, "tbl_intake", "GroupClass", pid, _groupClass));
-            GroupClass = _groupClass;
+                }
+                //Dates
+                queryArray = DateQuery
+                    (
+                    "SELECT " +
+                        "[Adult 2 DOB], " +
+                        "[Child 1 DOB], " +
+                        "[Child 2 DOB], " +
+                        "[Child 3 DOB], " +
+                        "[Child 4 DOB], " +
+                        "[Child 5 DOB], " +
+                        "[Child 6 DOB], " +
+                        "[Discharge Date] " +
+                     "FROM " +
+                        "tbl_Intake " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    PersonsInHomeDob = queryArray[0].ToString();
+                    PersonsInHomeDob2 = queryArray[1].ToString();
+                    PersonsInHomeDob3 = queryArray[2].ToString();
+                    PersonsInHomeDob4 = queryArray[3].ToString();
+                    PersonsInHomeDob5 = queryArray[4].ToString();
+                    PersonsInHomeDob6 = queryArray[5].ToString();
+                    PersonsInHomeDob7 = queryArray[6].ToString();
+                    DischargeDate = queryArray[7].ToString();
+                }
+                else
+                {
+                    PersonsInHomeDob = "NoInfo";
+                    PersonsInHomeDob2 = "NoInfo";
+                    PersonsInHomeDob3 = "NoInfo";
+                    PersonsInHomeDob4 = "NoInfo";
+                    PersonsInHomeDob5 = "NoInfo";
+                    PersonsInHomeDob6 = "NoInfo";
+                    PersonsInHomeDob7 = "NoInfo";
+                    DischargeDate = "NoInfo";
+                }
+                //bools
+                queryArray = BoolQuery
+                    (
+                    "SELECT " +
+                        " Outreach, " +
+                        " [YWCA Shelter], " +
+                        " [Legal Office], " +
+                        " Advocacy, " +
+                        " ChildAdvocacy, " +
+                        "GroupClass " +
+                     "FROM " +
+                        "tbl_Intake " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    Counseling = (bool)queryArray[0];
+                    Shelter = (bool)queryArray[1];
+                    Legal = (bool)queryArray[2];
+                    Advocacy = (bool)queryArray[3];
+                    ChildAdvocacy = (bool)queryArray[4];
+                    GroupClass = (bool)queryArray[5];
+                }
+                else
+                {
+                    Counseling = false;
+                    Shelter = false;
+                    Legal = false;
+                    Advocacy = false;
+                    ChildAdvocacy = false;
+                    GroupClass = false;
+                }
+                //String
+                queryArray = StringQuery
+                    (
+                    "SELECT " +
+                        "[Adult 2 Relationship] , " +
+                        "[Adult 2 Sex] , " +
+                        "[Child 1 Relationship], " +
+                        "[Child 1 Sex]  , " +
+                        "[Child 2 Relationship], " +
+                        "[Child 2 Sex], " +
+                        "[Child 3 Relationship], " +
+                        "[Child 3 Sex], " +
+                        "[Child 4 Relationship], " +
+                        "[Child 4 Sex] , " +
+                        "[Child 5 Relationship]  , " +
+                        "[Child 5 Sex]    , " +
+                        "[Child 6 Relationship], " +
+                        "[Child 6 Sex] , " +
+                        "[Child 7 Relationship] , " +
+                        "[Child 7 Sex] , " +
+                        "[DischargeLocation] , " +
+                        "[Comments] " +
+                     "FROM " +
+                        "tbl_Intake " +
+                    "Where " +
+                       "Date = #" + date + "# " +
+                       "AND " +
+                       "Consumer_ID = \"" + Pid + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    PersonsInHomeRelationship = (string)queryArray[0];
+                    PersonsInHomeGender = (string)queryArray[1];
+                    PersonsInHomeRelationship2 = (string)queryArray[2];
+                    PersonsInHomeGender2 = (string)queryArray[3];
+                    PersonsInHomeRelationship3 = (string)queryArray[4];
+                    PersonsInHomeGender3 = (string)queryArray[5];
+                    PersonsInHomeRelationship4 = (string)queryArray[6];
+                    PersonsInHomeGender4 = (string)queryArray[7];
+                    PersonsInHomeRelationship5 = (string)queryArray[8];
+                    PersonsInHomeGender5 = (string)queryArray[9];
+                    PersonsInHomeRelationship6 = (string)queryArray[10];
+                    PersonsInHomeGender6 = (string)queryArray[11];
+                    PersonsInHomeRelationship7 = (string)queryArray[12];
+                    PersonsInHomeGender7 = (string)queryArray[13];
+                    PersonsInHomeRelationship8 = (string)queryArray[14];
+                    PersonsInHomeGender8 = (string)queryArray[15];
+                    DischargeLocation = (string)queryArray[16];
+                    Comments = (string)queryArray[17];
+                }
+                else
+                {
+                    PersonsInHomeRelationship = "NoInfo";
+                    PersonsInHomeGender = "NoInfo";
+                    PersonsInHomeRelationship2 = "NoInfo";
+                    PersonsInHomeGender2 = "NoInfo";
+                    PersonsInHomeRelationship3 = "NoInfo";
+                    PersonsInHomeGender3 = "NoInfo";
+                    PersonsInHomeRelationship4 = "NoInfo";
+                    PersonsInHomeGender4 = "NoInfo";
+                    PersonsInHomeRelationship5 = "NoInfo";
+                    PersonsInHomeGender5 = "NoInfo";
+                    PersonsInHomeRelationship6 = "NoInfo";
+                    PersonsInHomeGender6 = "NoInfo";
+                    PersonsInHomeRelationship7 = "NoInfo";
+                    PersonsInHomeGender7 = "NoInfo";
+                    PersonsInHomeRelationship8 = "NoInfo";
+                    PersonsInHomeGender8 = "NoInfo";
+                    DischargeLocation = "NoInfo";
+                    Comments = "NoInfo";
+                }
+            }
         }
         ////////////////////////////////////////////////////////////////////// END Advp //////////////////////////////////////////////////////////////////////
     }
