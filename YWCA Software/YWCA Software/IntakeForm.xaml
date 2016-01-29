@@ -1,0 +1,233 @@
+﻿<Window x:Class="YWCA_Software.IntakeForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Intake Form" Height="680" Width="900" SnapsToDevicePixels="True" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125*"/>
+            <ColumnDefinition Width="173*"/>
+        </Grid.ColumnDefinitions>
+        <!--///////////////////////////////////////////////////////////////////////////// Start Demographic Info /////////////////////////////////////////////////////////////////////////////-->
+
+        <Image x:Name="image" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="894" Source="Resources/YWCANewBKG.png" Stretch="Fill" Grid.ColumnSpan="2" />
+        <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="16" Margin="61,13,0,0" TextWrapping="Wrap" Text="Participant ID:" VerticalAlignment="Top" Width="86" BorderThickness="0" IsReadOnly="True" Background="Transparent"/>
+        <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="152,13,0,0" TextWrapping="Wrap" Text="{Binding Pid}" Width="70" VerticalAlignment="Top" Height="16" Background="Transparent"/>
+        <TextBox x:Name="textBlockHMISIdLabel" Background="Transparent" HorizontalAlignment="Left" Height="16" Margin="227,13,0,0" TextWrapping="Wrap" Text="HMIS ID:" VerticalAlignment="Top" Width="53" BorderThickness="0" IsReadOnly="True"/>
+        <TextBlock x:Name="textBlockHMISId" HorizontalAlignment="Left" Margin="280,13,0,0" TextWrapping="Wrap" Text="{Binding HmisId}" Width="70" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBlockInfoNeLabel" Background="Transparent" HorizontalAlignment="Left" Height="16" Margin="355,13,0,0" TextWrapping="Wrap" Text="Info Net:" VerticalAlignment="Top" Width="61" BorderThickness="0" IsReadOnly="True" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textBlockInfoNet" HorizontalAlignment="Left" Margin="46,13,0,0" TextWrapping="Wrap" Text="{Binding InfoNetId}" Width="70" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockStaff" HorizontalAlignment="Left" Margin="121,13,0,0" TextWrapping="Wrap" Text="Staff:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1"/>
+        <TextBox x:Name="textBoxStaff" Height="16" Margin="152,13,285,0" TextWrapping="Wrap" Text="{Binding Staff}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockDateDataEntered" HorizontalAlignment="Left" Margin="239,13,0,0" TextWrapping="Wrap" Text="Date Data Entered:" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBox  x:Name="textBoxDateDataEntered" HorizontalAlignment="Left" Height="16" Margin="343,13,0,0" TextWrapping="Wrap" Text="{Binding DateDataEntered}" VerticalAlignment="Top" Width="116" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockFNameLabel" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" Text="First Name:" VerticalAlignment="Top"/>
+        <TextBox  x:Name="textBoxFName" HorizontalAlignment="Left" Height="16" Margin="75,48,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="80" BorderThickness="0" GotFocus="GotFocus"/>
+        <TextBlock x:Name="textBlockMI" HorizontalAlignment="Left" Margin="190,48,0,0" TextWrapping="Wrap" Text="Middle Initial:" VerticalAlignment="Top"/>
+        <TextBox  x:Name="textBoxMI" HorizontalAlignment="Left" Height="16" Margin="267,48,0,0" TextWrapping="Wrap" Text="{Binding Mi}" VerticalAlignment="Top" Width="12" BorderThickness="0" GotFocus="GotFocus"/>
+        <TextBlock x:Name="textBlockLNameLabel" HorizontalAlignment="Left" Margin="306,48,0,0" TextWrapping="Wrap" Text="Last Name:" VerticalAlignment="Top"/>
+        <TextBox  x:Name="textBoxLName" HorizontalAlignment="Left" Height="16" Margin="0,48,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="145" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockDOB" HorizontalAlignment="Left" Margin="188,48,0,0" TextWrapping="Wrap" Text="DOB:" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBox  x:Name="textBoxDOB" HorizontalAlignment="Left" Height="16" Margin="220,48,0,0" TextWrapping="Wrap" Text="{Binding Dob}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox  x:Name="comboBoxSSN" HorizontalAlignment="Left" Margin="394,48,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Text="{Binding Ssn}" Grid.Column="1" >
+            <ComboBoxItem Name="Refused">Refused</ComboBoxItem>
+            <ComboBoxItem Name="DontKnow">Don't Know</ComboBoxItem>
+            <ComboBoxItem Name="Missing">Missing</ComboBoxItem>
+        </ComboBox>
+        <TextBlock x:Name="textBlockHousingStatus" HorizontalAlignment="Left" Margin="10,71,0,0" TextWrapping="Wrap" Text="Housing Status:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxHomeHousingStatus" HorizontalAlignment="Left" Height="16" Margin="99,71,0,0" TextWrapping="Wrap" Text="{Binding HousingStatus}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBlock x:Name="textBlockNeighborhood" HorizontalAlignment="Left" Margin="310,71,0,0" TextWrapping="Wrap" Text="Spokane Neighborhood:" VerticalAlignment="Top" Height="16" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBoxHomeNeighborhood" HorizontalAlignment="Left" Height="16" Margin="70,71,0,0" TextWrapping="Wrap" Text="{Binding Neighborhood}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockCountyDetail" HorizontalAlignment="Left" Margin="270,71,0,0" TextWrapping="Wrap" Text="County Detail:" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBox x:Name="textBoxCountyDetail" HorizontalAlignment="Left" Height="16" Margin="349,71,0,0" TextWrapping="Wrap" Text="{Binding CountyDetail}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockSSN" HorizontalAlignment="Left" Margin="365,48,0,0" TextWrapping="Wrap" Text="SSN:" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockStreetAddress" HorizontalAlignment="Left" Margin="10,92,0,0" TextWrapping="Wrap" Text="Street Address:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxStreetAddress" HorizontalAlignment="Left" Margin="99,92,0,0" VerticalAlignment="Top" Width="226" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Text="{Binding StreetAddress}">
+            <ComboBoxItem Name="Homeless">Homeless</ComboBoxItem>
+        </ComboBox>
+        <TextBlock x:Name="textBlockCity" HorizontalAlignment="Left" Margin="361,92,0,0" TextWrapping="Wrap" Text="City:" VerticalAlignment="Top" Height="16" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBoxCity" HorizontalAlignment="Left" Height="16" Margin="14,92,0,0" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Top" Width="113"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockState" HorizontalAlignment="Left" Margin="186,92,0,0" TextWrapping="Wrap" Text="State:" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBox x:Name="textBoxState" HorizontalAlignment="Left" Height="16" Margin="220,92,0,0" TextWrapping="Wrap" Text="{Binding State}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockZip" HorizontalAlignment="Left" Margin="386,92,0,0" TextWrapping="Wrap" Text="Zip:" VerticalAlignment="Top" Height="16" Grid.Column="1" RenderTransformOrigin="-0.567,0.5"/>
+        <TextBox x:Name="textBoxZip" HorizontalAlignment="Left" Height="16" Margin="410,92,0,0" TextWrapping="Wrap" Text="{Binding Zip}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockHomePhone" HorizontalAlignment="Left" Margin="10,113,0,0" TextWrapping="Wrap" Text="Home Phone:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxHomePhone" HorizontalAlignment="Left" Height="16" Margin="87,113,0,0" TextWrapping="Wrap" Text="{Binding HomePhone}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
+        <TextBlock x:Name="textBlockWork" HorizontalAlignment="Left" Margin="237,113,0,0" TextWrapping="Wrap" Text="Work/Message Phone:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxWork" HorizontalAlignment="Left" Height="16" Margin="361,113,0,0" TextWrapping="Wrap" Text="{Binding WorkPhone}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textBlockCallTime" HorizontalAlignment="Left" Margin="164,113,0,0" TextWrapping="Wrap" Text="Call Time:" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBox x:Name="textBoxCallTime" HorizontalAlignment="Left" Height="16" Margin="220,113,0,0" TextWrapping="Wrap" Text="{Binding CallTime}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+        <CheckBox x:Name="checkBoxSafeToLeaveMessage" IsChecked="{Binding MsgOk}" Content="Safe To Leave Message" HorizontalAlignment="Left" Margin="368,113,0,0" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockGender" HorizontalAlignment="Left" Margin="10,134,0,0" TextWrapping="Wrap" Text="Gender:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxGender" HorizontalAlignment="Left" Text ="{Binding Gender}"  Margin="58,134,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+            <ComboBoxItem x:Name="Female" Content="Female"/>
+            <ComboBoxItem x:Name="Male" Content="Male"/>
+            <ComboBoxItem x:Name="Transgender" Content="Transgender"/>
+            <ComboBoxItem x:Name="Other" Content="Other"/>
+        </ComboBox>
+        <TextBlock x:Name="textBlockMaritalStatus" HorizontalAlignment="Left" Margin="255,134,0,0" TextWrapping="Wrap" Text="Marital Status:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxMaritalStatus" HorizontalAlignment="Left" Margin="335,134,0,0" Text="{Binding MaritalStatus}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Grid.ColumnSpan="2">
+            <ComboBoxItem x:Name="Married" Content="Married"/>
+            <ComboBoxItem x:Name="Single" Content="Single"/>
+            <ComboBoxItem x:Name="Divorced" Content="Divorced"/>
+            <ComboBoxItem x:Name="Widow" Content="Widow"></ComboBoxItem>
+        </ComboBox>
+        <TextBlock x:Name="Ethnicity" HorizontalAlignment="Left" Margin="190,134,0,0" TextWrapping="Wrap" Text="Ethnicity:" VerticalAlignment="Top" Height="16" Grid.Column="1" RenderTransformOrigin="0.736,0.75"/>
+        <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="243,134,0,0" Text="{Binding Ethnicity}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Grid.Column="1">
+            <ComboBoxItem x:Name="Caucasian" Content="Caucasian"/>
+            <ComboBoxItem x:Name="AfricanAmerican" Content="African American"/>
+            <ComboBoxItem x:Name="Hispanic" Content="Hispanic/Latino"/>
+            <ComboBoxItem x:Name="Asian" Content="Asian/Pacific Islander"/>
+            <ComboBoxItem x:Name="Multi" Content="Multi-racial"/>
+        </ComboBox>
+        <CheckBox x:Name="checkBoxVeteranStatus" IsChecked="{Binding VeteranStatus}" Content="Veteran Status" HorizontalAlignment="Left" Margin="413,134,0,0" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockDisability" HorizontalAlignment="Left" Margin="10,155,0,0" TextWrapping="Wrap" Text="Disability:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxDisability" HorizontalAlignment="Left" Margin="66,155,0,0" Text="{Binding Disability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+            <ComboBoxItem x:Name="Physical" Content="Physical"/>
+            <ComboBoxItem x:Name="Mental" Content="Mental"/>
+            <ComboBoxItem x:Name="Sensory" Content="Sensory"/>
+            <ComboBoxItem x:Name="Multiple" Content="Multiple"/>
+            <ComboBoxItem x:Name="OtherDisability" Content="Other"/>
+        </ComboBox>
+        <TextBlock x:Name="textBlockDisability2" HorizontalAlignment="Left" Margin="209,155,0,0" TextWrapping="Wrap" Text="2nd Disability:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxDisability2" HorizontalAlignment="Left" Margin="288,155,0,0" Text="{Binding SecondDisability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.ColumnSpan="2">
+            <ComboBoxItem x:Name="Physical2" Content="Physical"/>
+            <ComboBoxItem x:Name="Mental2" Content="Mental"/>
+            <ComboBoxItem x:Name="Sensory2" Content="Sensory"/>
+            <ComboBoxItem x:Name="Multiple2" Content="Multiple"/>
+            <ComboBoxItem x:Name="OtherDisability2" Content="Other"/>
+        </ComboBox>
+        <TextBlock x:Name="textBlockIncomeType" HorizontalAlignment="Left" Margin="53,155,0,0" TextWrapping="Wrap" Text="Income Type:" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBox x:Name="textBoxIncomeType" HorizontalAlignment="Left" Height="16" Margin="128,155,0,0" TextWrapping="Wrap" Text="{Binding IncomeType}" VerticalAlignment="Top" Width="135"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockTotalMonthlyIncome" HorizontalAlignment="Left" Margin="278,155,0,0" TextWrapping="Wrap" Text="Total Monthly Income: $" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBox x:Name="textBoxTotalMonthlyIncome" HorizontalAlignment="Left" Height="16" Margin="410,155,0,0" TextWrapping="Wrap" Text="{Binding TotalMonthlyIncome}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+
+
+        <Button x:Name="buttonUpdate" Content="Update" Margin="464,10,0,0"  VerticalAlignment="Top" BorderThickness="0" Height="21" FontSize="10.667" HorizontalAlignment="Left" Width="45" Click="buttonUpdate_Click" Grid.Column="1" Background="OrangeRed" Foreground="White"/>
+        <Button x:Name="buttonBack" Content="Back" Margin="10,10,0,0" VerticalAlignment="Top" BorderThickness="0" Height="21" FontSize="10.667" HorizontalAlignment="Left" Width="45" Click="buttonBack_Click" Background="OrangeRed" Foreground="White"/>
+        <!--///////////////////////////////////////////////////////////////////////////// End Demographic Info /////////////////////////////////////////////////////////////////////////////-->
+
+
+        <!--///////////////////////////////////////////////////////////////////////////// Start ADVP Info /////////////////////////////////////////////////////////////////////////////-->
+        <TextBlock x:Name="textBlockIntakeDate" HorizontalAlignment="Left" Margin="10,197,0,0" TextWrapping="Wrap" Text="IntakeDate:" VerticalAlignment="Top" Height="16"/>
+        <ListBox x:Name="listBoxIntakeDate" Margin="75,197,0,0" ItemsSource="{Binding ListDates, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="326" Height="72" VerticalAlignment="Top" Grid.ColumnSpan="2" BorderThickness="0" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock x:Name="textBlockNewDate" HorizontalAlignment="Left" Margin="31,197,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
+        <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="16" Margin="91,197,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" Grid.Column="1" />
+        <Button x:Name="buttonAddNewDate" Content="Add New Date" Margin="0,194,232,0" VerticalAlignment="Top" Height="21" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="75" Click="buttonAddNewDate_Click" RenderTransformOrigin="0.867,1.238" Grid.Column="1" Background="OrangeRed" Foreground="White"/>
+        <TextBlock x:Name="textBlockTotalAdultsInHousehold" HorizontalAlignment="Left" Margin="137,450,0,0" TextWrapping="Wrap" Text="Total Adults In Household:" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBox x:Name="textBoxTotalAdultsInHousehold" HorizontalAlignment="Left" Height="16" Margin="277,450,0,0" TextWrapping="Wrap" Text="{Binding TotalAdultsInHouseholdString}" VerticalAlignment="Top" Width="37" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockTotalChildrenInHousehold" HorizontalAlignment="Left" Margin="317,450,0,0" TextWrapping="Wrap" Text="Total Children In Household:" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBox x:Name="textBoxTotalChildrenInHousehold" HorizontalAlignment="Left" Height="16" Margin="472,450,0,0" TextWrapping="Wrap" Text="{Binding TotalChildrenInHouseholdString}" VerticalAlignment="Top" Width="37" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockLablePersonsInHome" HorizontalAlignment="Left" Margin="137,230,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Persons In Home:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1" Width="372" FontSize="16"/>
+        <TextBlock x:Name="textBlockLablePersonInHomeRelationship" HorizontalAlignment="Left" Margin="140,247,0,0" TextWrapping="Wrap" Text="Relationship:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockLablePersonInHomeGender" HorizontalAlignment="Left" Margin="297,247,0,0" TextWrapping="Wrap" Text="Gender:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockLablePersonInHomeDOB" HorizontalAlignment="Left" Margin="425,247,0,0" TextWrapping="Wrap" Text="DOB:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship" Height="16" Margin="137,268,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender}"  Margin="297,268,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB" HorizontalAlignment="Left" Height="16" Margin="425,268,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship2" Height="16" Margin="137,289,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship2}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender2" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender2}"  Margin="297,289,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale2" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale2" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender2" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther2" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB2" HorizontalAlignment="Left" Height="16" Margin="425,289,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob2}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship3" Height="16" Margin="137,310,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship3}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender3" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender3}"  Margin="297,310,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale3" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale3" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender3" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther3" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB3" HorizontalAlignment="Left" Height="16" Margin="425,310,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob3}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship4" Height="16" Margin="137,331,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship4}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender4" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender4}"  Margin="297,331,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale4" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale4" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender4" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther4" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB4" HorizontalAlignment="Left" Height="16" Margin="425,331,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob4}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship5" Height="16" Margin="137,352,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship5}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender5" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender5}"  Margin="297,352,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale5" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale5" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender5" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther5" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB5" HorizontalAlignment="Left" Height="16" Margin="425,352,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob5}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship6" Height="16" Margin="137,373,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship6}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender6" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender6}"  Margin="297,373,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale6" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale6" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender6" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther6" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB6" HorizontalAlignment="Left" Height="16" Margin="425,373,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob6}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship7" Height="16" Margin="137,394,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship7}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender7" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender7}"  Margin="297,394,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale7" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale7" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender7" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther7" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB7" HorizontalAlignment="Left" Height="16" Margin="425,394,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob7}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBox x:Name="textBoxPersonsInHomeRelationship8" Height="16" Margin="137,415,232,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship8}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxPersonsInHomeGender8" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender8}"  Margin="297,415,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <ComboBoxItem x:Name="PersonsInHomeFemale8" Content="Female"/>
+            <ComboBoxItem x:Name="PersonsInHomeMale8" Content="Male"/>
+            <ComboBoxItem x:Name="PersonsInHomeTransgender8" Content="Transgender"/>
+            <ComboBoxItem x:Name="PersonsInHomeOther8" Content="Other"/>
+        </ComboBox>
+        <TextBox x:Name="textBoxPersonsInHomeDOB8" HorizontalAlignment="Left" Height="16" Margin="425,415,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob8}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockDischargeDate" HorizontalAlignment="Left" Margin="10,274,0,0" TextWrapping="Wrap" Text="Discharge Date:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxDischargeDate" HorizontalAlignment="Left" Height="16" Margin="99,274,0,0" TextWrapping="Wrap" Text="{Binding DischargeDate}" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062"/>
+        <TextBlock x:Name="textBlockBedNights" HorizontalAlignment="Left" Margin="295,274,0,0" TextWrapping="Wrap" Text="Bed Nights:" VerticalAlignment="Top" Height="16"/>
+        <TextBox x:Name="textBoxBedNights" HorizontalAlignment="Left" Height="16" Margin="361,274,0,0" TextWrapping="Wrap" Text="?" VerticalAlignment="Top" Width="34" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textBlockDischargeLocation" HorizontalAlignment="Left" Margin="10,295,0,0" TextWrapping="Wrap" Text="Discharge Location:" VerticalAlignment="Top" Height="16"/>
+        <ComboBox x:Name="comboBoxDischargeLocation" HorizontalAlignment="Left" Text ="{Binding DischargeLocation}"  Margin="118,296,0,0" VerticalAlignment="Top" Width="212" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+            <ComboBoxItem x:Name="OtherShelter" Content="OtherShelter"/>
+            <ComboBoxItem x:Name="HomeRental" Content="Home/Rental"/>
+            <ComboBoxItem x:Name="TransitionalHousing" Content="Transitional Housing"/>
+            <ComboBoxItem x:Name="FamilyFriends" Content="Family/Friends"/>
+            <ComboBoxItem x:Name="Abuser" Content="Return To Abuser"/>
+            <ComboBoxItem x:Name="Relocated" Content="Relocated Out Of Area"/>
+        </ComboBox>
+        <TextBlock x:Name="textBlockLableProgram" HorizontalAlignment="Left" Margin="10,316,0,0" TextWrapping="Wrap" Text="Program:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312"/>
+        <CheckBox x:Name="checkBoxLegal" IsChecked="{Binding Legal}" Content="Legal" HorizontalAlignment="Left" Margin="74,319,0,0" VerticalAlignment="Top" Height="16"/>
+        <CheckBox x:Name="checkBoxCounseling" IsChecked="{Binding Counseling}" Content="Counseling" HorizontalAlignment="Left" Margin="127,319,0,0" VerticalAlignment="Top" Height="16"/>
+        <CheckBox x:Name="checkBoxShelter" IsChecked="{Binding Shelter}" Content="Shelter" HorizontalAlignment="Left" Margin="211,319,0,0" VerticalAlignment="Top" Height="16"/>
+        <TextBlock x:Name="textBlockLableServicesProvided" HorizontalAlignment="Left" Margin="10,340,0,0" TextWrapping="Wrap" Text="Services Provided:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312"/>
+        <CheckBox x:Name="checkBoxAdvocacy" IsChecked="{Binding Advocacy}" Content="Advocacy" HorizontalAlignment="Left" Margin="115,340,0,0" VerticalAlignment="Top" Height="16"/>
+        <CheckBox x:Name="checkBoxGroupClass" IsChecked="{Binding GroupClass}" Content="Group/Class" HorizontalAlignment="Left" Margin="191,341,0,0" VerticalAlignment="Top" Height="16"/>
+        <CheckBox x:Name="checkBoxChildAdvocacy" IsChecked="{Binding ChildAdvocacy}" Content="Child Advocacy" HorizontalAlignment="Left" Margin="280,340,0,0" VerticalAlignment="Top" Height="16" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textBlockLableComments" HorizontalAlignment="Left" Margin="10,361,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312"/>
+        <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="77" Margin="74,361,0,0" VerticalAlignment="Top" Width="327" BorderThickness="0" Grid.ColumnSpan="2">
+            <FlowDocument>
+                <Paragraph>
+                    <Run  Text="{Binding Comments}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Button x:Name="buttonUpdateADVP" Content="Update" Margin="0,194,10,0" VerticalAlignment="Top" Height="21" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="50" Click="buttonUpdateADVP_Click" Grid.Column="1" Background="OrangeRed" Foreground="White"/>
+
+
+        <!--///////////////////////////////////////////////////////////////////////////// End ADVP Info /////////////////////////////////////////////////////////////////////////////-->
+    </Grid>
+</Window>

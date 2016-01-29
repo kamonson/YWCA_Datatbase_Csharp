@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YWCA_Software"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="YWCA Database Select" Height="221" Width="413" ResizeMode="NoResize">
+
     <Grid>
-        <Button x:Name="ButtonRun" Content="Run" HorizontalAlignment="Center" Margin="221,3,221,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <TextBox x:Name="textBoxFName" HorizontalAlignment="Left" Height="23" Margin="96,0,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBoxLName" HorizontalAlignment="Left" Height="23" Margin="301,0,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBoxPID" HorizontalAlignment="Left" Height="23" Margin="205,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="185*"/>
+            <ColumnDefinition Width="146*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="image" Height="192" VerticalAlignment="Top" Source="Resources/YWCANewBKG.png" Stretch="Fill" Grid.ColumnSpan="2" />
+        <Button Name="ButtonADVP" BorderThickness="0" Content="ADVP" Click="ButtonADVP_Click" Margin="165,65,165,52" Background="OrangeRed" Foreground="White" Grid.ColumnSpan="2" FontSize="24"/>
     </Grid>
+
 </Window>
