@@ -59,7 +59,7 @@ namespace YWCA_Software
 
         public string Like(string word)
         {
-            return @" LIKE '%" + word + @"%' ";
+            return @" LIKE '" + word + @"%' ";
         }
 
         public string And(string expr)

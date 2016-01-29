@@ -12,11 +12,8 @@
             <ColumnDefinition Width="185*"/>
             <ColumnDefinition Width="146*"/>
         </Grid.ColumnDefinitions>
-        <Button Name="ButtonADVP" Height="120" Width="120" BorderThickness="0" Background="Transparent" Click="ButtonADVP_Click" Grid.ColumnSpan="2" Margin="110,23,111,23">
-            <StackPanel>
-                <Image Source="/Resources/ADVP.png" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </StackPanel>
-        </Button>
+        <Image x:Name="image" Height="192" VerticalAlignment="Top" Source="Resources/YWCANewBKG.png" Stretch="Fill" Grid.ColumnSpan="2" />
+        <Button Name="ButtonADVP" BorderThickness="0" Content="ADVP" Click="ButtonADVP_Click" Margin="165,65,165,52" Background="OrangeRed" Foreground="White" Grid.ColumnSpan="2" FontSize="24"/>
     </Grid>
 
 </Window>
