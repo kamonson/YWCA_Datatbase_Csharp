@@ -88,7 +88,7 @@ namespace YWCA_Software
         private void buttonAddNewDate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _advbDb.RunQueryAddDate(textBlockPid.Text, textBoxNewDate.Text);
-            //_advbDb.RunQueryFindDate(); //needs to be re worked some
+            _advbDb.RunQueryFindDate(); //needs to be re worked some
         }
 
         private void buttonUpdateADVP_Click(object sender, System.Windows.RoutedEventArgs e)

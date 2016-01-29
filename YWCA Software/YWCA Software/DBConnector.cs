@@ -19,8 +19,8 @@ namespace YWCA_Software
         public const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
 
         public const string Path = @"Data Source=" +
-                                    //@"P:\ywcaDbSoftware\" +
-                                    @"C:\YWCADB\All\" + //for local debuging
+                                    @"P:\ywcaDbSoftware\" +
+                                    //@"C:\YWCADB\All\" + //for local debuging
                                     @"YWCACounselingANDLegal.accdb" +
                                     @";";
         public const string Password = @"Jet OLEDB:Database Password=ywc@;";
@@ -1162,6 +1162,21 @@ namespace YWCA_Software
             Disconnect();
         }
 
+        public static bool CheckForExistingPid(string pid)
+        {
+            bool exists = true;
+            DbCommand.Connection = new OleDbConnection(Provider + Path + Password); //provider and data source path and password;
+            DbCommand.Connection.Open();
+            DbCommand.CommandText = "SELECT Consumer_ID FROM tbl_Consumer_List_Entry WHERE Consumer_ID = '" + pid + "';";
+            var oleDbDataReader = DbCommand.ExecuteReader();
+            if (oleDbDataReader != null && oleDbDataReader.HasRows == false)
+            {
+                exists = false;
+            }
+            Disconnect();
+            return exists;
+        }
+
         /// <summary>
         /// Search for pid based off FirstName AND LastName OR Pid
         /// </summary>
@@ -1652,8 +1667,11 @@ namespace YWCA_Software
                     "Where " +
                         "Consumer_ID = \"" + Pid + "\";"
                     );
-                Dob = queryArray[0].ToString();
-                DateDataEntered = queryArray[1].ToString();
+                if (queryArray.Count > 0)
+                {
+                    Dob = queryArray[0].ToString();
+                    DateDataEntered = queryArray[1].ToString();
+                }
                 //Ints
                 queryArray = IntQuery
                     (
@@ -1664,7 +1682,10 @@ namespace YWCA_Software
                     "Where " +
                         "Consumer_ID = \"" + Pid + "\";"
                     );
-                Zip = (int)queryArray[0];
+                if (queryArray.Count > 0)
+                {
+                    Zip = (int)queryArray[0];
+                }
                 //Decimals
                 queryArray = DecimalQuery
                     (
@@ -1675,7 +1696,10 @@ namespace YWCA_Software
                     "Where " +
                         "Consumer_ID = \"" + Pid + "\";"
                     );
-                TotalMonthlyIncome = (decimal)queryArray[0];
+                if (queryArray.Count > 0)
+                {
+                    TotalMonthlyIncome = (decimal)queryArray[0];
+                }
                 //bools
                 queryArray = BoolQuery
                     (
@@ -1688,8 +1712,11 @@ namespace YWCA_Software
                     "WHERE " +
                         "tbl_Forms_Flow_Table.Consumer_ID = \"" + Pid + "\" AND tbl_Consumer_List_Entry.Consumer_ID = \"" + Pid + "\";"
                     );
-                MsgOk = (bool)queryArray[0];
-                VeteranStatus = (bool)queryArray[1];
+                if (queryArray.Count > 0)
+                {
+                    MsgOk = (bool)queryArray[0];
+                    VeteranStatus = (bool)queryArray[1];
+                }
                 //String
                 queryArray = StringQuery
                     (
@@ -1722,28 +1749,31 @@ namespace YWCA_Software
                     "WHERE " +
                         "tbl_Forms_Flow_Table.Consumer_ID = \"" + Pid + "\" AND tbl_Consumer_List_Entry.Consumer_ID = \"" + Pid + "\";"
                     );
-                FirstName = (string)queryArray[0];
-                Mi = (string)queryArray[1];
-                LastName = (string)queryArray[2];
-                HmisId = (string)queryArray[3];
-                InfoNetId = (string)queryArray[4];
-                Ssn = (string)queryArray[5];
-                Gender = (string)queryArray[6];
-                Staff = (string)queryArray[7];
-                HousingStatus = (string)queryArray[8];
-                Neighborhood = (string)queryArray[9];
-                CountyDetail = (string)queryArray[10];
-                Disability = (string)queryArray[11];
-                SecondDisability = (string)queryArray[12];
-                IncomeType = (string)queryArray[13];
-                City = (string)queryArray[14];
-                State = (string)queryArray[15];
-                HomePhone = (string)queryArray[16];
-                WorkPhone = (string)queryArray[17];
-                CallTime = (string)queryArray[18];
-                StreetAddress = (string)queryArray[19];
-                MaritalStatus = (string)queryArray[20];
-                Ethnicity = (string)queryArray[21];
+                if (queryArray.Count > 0)
+                {
+                    FirstName = (string)queryArray[0];
+                    Mi = (string)queryArray[1];
+                    LastName = (string)queryArray[2];
+                    HmisId = (string)queryArray[3];
+                    InfoNetId = (string)queryArray[4];
+                    Ssn = (string)queryArray[5];
+                    Gender = (string)queryArray[6];
+                    Staff = (string)queryArray[7];
+                    HousingStatus = (string)queryArray[8];
+                    Neighborhood = (string)queryArray[9];
+                    CountyDetail = (string)queryArray[10];
+                    Disability = (string)queryArray[11];
+                    SecondDisability = (string)queryArray[12];
+                    IncomeType = (string)queryArray[13];
+                    City = (string)queryArray[14];
+                    State = (string)queryArray[15];
+                    HomePhone = (string)queryArray[16];
+                    WorkPhone = (string)queryArray[17];
+                    CallTime = (string)queryArray[18];
+                    StreetAddress = (string)queryArray[19];
+                    MaritalStatus = (string)queryArray[20];
+                    Ethnicity = (string)queryArray[21];
+                }
             }
         }
 

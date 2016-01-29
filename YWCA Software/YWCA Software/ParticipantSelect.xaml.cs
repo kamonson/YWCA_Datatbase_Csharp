@@ -128,7 +128,11 @@ namespace YWCA_Software
 
         private void buttonNewParticipant_Click(object sender, RoutedEventArgs e)
         {
-            DbConnector.RunQuery(@"INSERT INTO tbl_Consumer_List_Entry (Consumer_Id) VALUES ('" + textBoxNewParticipantID.Text + @"');");
+            if (!DbConnector.CheckForExistingPid(textBoxNewParticipantID.Text))
+            {
+                DbConnector.RunQuery(@"INSERT INTO tbl_Consumer_List_Entry (Consumer_Id) VALUES ('" +
+                                     textBoxNewParticipantID.Text + @"');");
+            }
             IntakeForm intakeForm = new IntakeForm(textBoxNewParticipantID.Text);
             intakeForm.Show();
             Close();
