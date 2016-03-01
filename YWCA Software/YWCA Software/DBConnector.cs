@@ -19,8 +19,8 @@ namespace YWCA_Software
         public const string Provider = @"Provider=Microsoft.ACE.OLEDB.12.0;";
 
         public const string Path = @"Data Source=" +
-                                    @"P:\ywcaDbSoftware\" +
-                                    //@"C:\YWCADB\All\" + //for local debuging
+                                    //@"P:\ywcaDbSoftware\" +
+                                    @"C:\YWCADB\All\" + //for local debuging
                                     @"YWCACounselingANDLegal.accdb" +
                                     @";";
         public const string Password = @"Jet OLEDB:Database Password=ywc@;";
