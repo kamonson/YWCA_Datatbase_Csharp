@@ -71,20 +71,6 @@ namespace YWCA_Software
             }
         }
 
-        private double _totalAdultsInHousehold;
-        public double TotalAdultsInHousehold
-        {
-            get
-            {
-                return _totalAdultsInHousehold;
-            }
-            set
-            {
-                _totalAdultsInHousehold = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalAdultsInHousehold"));
-            }
-        }
-
         private string _totalAdultsInHouseholdString;
         public string TotalAdultsInHouseholdString
         {
@@ -96,20 +82,6 @@ namespace YWCA_Software
             {
                 _totalAdultsInHouseholdString = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalAdultsInHouseholdString"));
-            }
-        }
-
-        private string _dateNow = DateTime.Now.ToShortDateString();
-        public string DateNow
-        {
-            get
-            {
-                return _dateNow;
-            }
-            set
-            {
-                _dateNow = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DateNow"));
             }
         }
 
@@ -143,20 +115,6 @@ namespace YWCA_Software
             {
                 _totalChildrenInHouseholdString = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalChildrenInHouseholdString"));
-            }
-        }
-
-        private double _totalChildrenInHousehold;
-        public double TotalChildrenInHousehold
-        {
-            get
-            {
-                return _totalChildrenInHousehold;
-            }
-            set
-            {
-                _totalChildrenInHousehold = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalChildrenInHousehold"));
             }
         }
 
@@ -521,20 +479,6 @@ namespace YWCA_Software
             {
                 _personsInHomeGender8 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender8"));
-            }
-        }
-
-        private string _personsInHomeDob8 = "NoInfo";
-        public string PersonsInHomeDob8
-        {
-            get
-            {
-                return _personsInHomeDob8;
-            }
-            set
-            {
-                _personsInHomeDob8 = value ?? "NoInfo";
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob8"));
             }
         }
 
@@ -958,8 +902,9 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PID"));
             }
         }
+
         /// <summary>
-        /// Set pid to input
+        /// Set Pid to Input
         /// </summary>
         /// <param name="pid"></param>
         public void SetPid(string pid)
@@ -1109,59 +1054,10 @@ namespace YWCA_Software
         }
 
         /// <summary>
-        /// Get DOB from DB with given DB and Update LastName for WPF update
+        /// 
         /// </summary>
-        public void QueryDateFromPid(string selectUpdateAdd, string table, string column, ref string date)
-        {
-            DateTime dtDob = new DateTime();
-            Connect();
-            DbCommand.CommandText = _sql.SelectUpdateOrAdd(selectUpdateAdd, table, column, Pid, date);
-            OleDbDataReader rdr = DbCommand.ExecuteReader();
-
-            if (rdr != null)
-            {
-                int rowNum;
-                for (rowNum = 0; rdr.Read(); rowNum++)
-                {
-                    dtDob = (rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0) : DateTime.Now;
-                    Console.WriteLine(@"{0}", date);
-                }
-                Console.WriteLine(@"Found " + rowNum + @" results");
-                if (rowNum > 0)
-                {
-                    date = dtDob.ToShortDateString();
-                }
-            }
-            Disconnect();
-        }
-
-        /// <summary>
-        /// Get DOB from DB with given DB and Update LastName for WPF update
-        /// </summary>
-        public void QueryDateFromPid(string selectUpdateAdd, string table, string column, string pid, string dateString, ref string date)
-        {
-            DateTime dtDob = new DateTime();
-            Connect();
-            DbCommand.CommandText = _sql.SelectUpdateOrAdd(selectUpdateAdd, table, column, Pid, dateString, date);
-            OleDbDataReader rdr = DbCommand.ExecuteReader();
-
-            if (rdr != null)
-            {
-                int rowNum;
-                for (rowNum = 0; rdr.Read(); rowNum++)
-                {
-                    dtDob = (rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0) : DateTime.Now;
-                    Console.WriteLine(@"{0}", date);
-                }
-                Console.WriteLine(@"Found " + rowNum + @" results");
-                if (rowNum > 0)
-                {
-                    date = dtDob.ToShortDateString();
-                }
-            }
-            Disconnect();
-        }
-
+        /// <param name="pid"></param>
+        /// <returns></returns>
         public static bool CheckForExistingPid(string pid)
         {
             bool exists = true;
@@ -1217,73 +1113,6 @@ namespace YWCA_Software
             Disconnect();
         }
 
-
-
-        /// <summary>
-        /// Runs the qurry passed to it
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="query"></param>
-        public void RunQuery(ref string target, string query)
-        {
-            Connect();
-            DbCommand.CommandText = query;
-            OleDbDataReader rdr = DbCommand.ExecuteReader();
-            ListPiDs.Clear();
-            if (rdr != null)
-            {
-                int rowNum;
-                for (rowNum = 0; rdr.Read(); rowNum++)
-                {
-                    target = ((rdr.IsDBNull(0) == false) ? rdr.GetString(0) : null);
-                }
-            }
-            Disconnect();
-        }
-
-        /// <summary>
-        /// Runs the qurry passed to it
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="query"></param>
-        public void RunQuery(ref int target, string query)
-        {
-            Connect();
-            DbCommand.CommandText = query;
-            OleDbDataReader rdr = DbCommand.ExecuteReader();
-            ListPiDs.Clear();
-            if (rdr != null)
-            {
-                int rowNum;
-                for (rowNum = 0; rdr.Read(); rowNum++)
-                {
-                    target = (rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 0;
-                }
-            }
-            Disconnect();
-        }
-
-        /// <summary>
-        /// Runs the qurry passed to it for doubles
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="query"></param>
-        public void RunQuery(ref double target, string query)
-        {
-            Connect();
-            DbCommand.CommandText = query;
-            OleDbDataReader rdr = DbCommand.ExecuteReader();
-            if (rdr != null)
-            {
-                rdr.Read();
-                if (rdr.HasRows)
-                {
-                    target = (rdr.IsDBNull(0) == false) ? rdr.GetDouble(0) : 0;
-                }
-            }
-            Disconnect();
-        }
-
         /// <summary>
         /// Add an intake date to the data base
         /// </summary>
@@ -1295,50 +1124,6 @@ namespace YWCA_Software
             DbCommand.CommandText = _sql.AddIntakeDate(pid, date);
             DbCommand.ExecuteReader();
             ListPiDs.Clear();
-            Disconnect();
-        }
-
-        /// <summary>
-        /// Runs the qurry passed to it
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="query"></param>
-        public void RunQuery(ref decimal target, string query)
-        {
-            Connect();
-            DbCommand.CommandText = query;
-            OleDbDataReader rdr = DbCommand.ExecuteReader();
-            ListPiDs.Clear();
-            if (rdr != null)
-            {
-                int rowNum;
-                for (rowNum = 0; rdr.Read(); rowNum++)
-                {
-                    target = (rdr.IsDBNull(0) == false) ? rdr.GetDecimal(0) : 0;
-                }
-            }
-            Disconnect();
-        }
-
-        /// <summary>
-        /// Runs the qurry passed to it
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="query"></param>
-        public void RunQuery(ref bool target, string query)
-        {
-            Connect();
-            DbCommand.CommandText = query;
-            OleDbDataReader rdr = DbCommand.ExecuteReader();
-            ListPiDs.Clear();
-            if (rdr != null)
-            {
-                int rowNum;
-                for (rowNum = 0; rdr.Read(); rowNum++)
-                {
-                    target = (rdr.IsDBNull(0) == false) && rdr.GetBoolean(0);
-                }
-            }
             Disconnect();
         }
 

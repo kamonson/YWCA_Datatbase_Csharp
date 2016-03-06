@@ -1,22 +1,10 @@
-﻿using System.Globalization;
-
-namespace YWCA_Software
+﻿namespace YWCA_Software
 {
     class Sql
     {
         /********************************************************************* Start SQL Operators And Keywords*********************************************************************/
         public const string TblIntakeCollumns =
             @" ([CONSUMER_ID]) ";
-
-        public string ColumnEquals(string cName, string target)
-        {
-            return @"[" + cName + @"]" + " = \"" + target + "\" ";
-        }
-
-        public string ColumnEquals(string cName, bool target)
-        {
-            return @"[" + cName + @"]" + " = " + target.ToString() + " ";
-        }
 
         public string Values(string conditions)
         {
@@ -144,137 +132,6 @@ namespace YWCA_Software
                 ? Prefix(selectOrUpdate, @"LAST_NAME") + Root(selectOrUpdate, @"tbl_Consumer_List_Entry")
                 : Root(selectOrUpdate, @"tbl_Consumer_List_Entry") + Prefix(selectOrUpdate, @"LAST_NAME = '" + lname + @"' ");
             return query + Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string value)
-        {
-            value = value ?? " ";
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, int value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString()));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="date"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string date, double value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString(CultureInfo.CurrentCulture)));
-            string end = Where(@"Consumer_ID" + Equals(participantId) + @"AND [Date] " + EqualsNoQuote(@"#" + date + @"#")) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="date"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string date, string value)
-        {
-            value = value ?? " ";
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
-            string end = Where(@"Consumer_ID" + Equals(participantId) + @"AND [Date] " + EqualsNoQuote(@"#" + date + @"#")) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="date"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string date, bool value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString()));
-            string end = Where(@"Consumer_ID" + Equals(participantId) + @"AND [Date] " + EqualsNoQuote(@"#" + date + @"#")) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, decimal value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString(CultureInfo.CurrentCulture)));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, bool value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
         }
 
         /// <summary>
