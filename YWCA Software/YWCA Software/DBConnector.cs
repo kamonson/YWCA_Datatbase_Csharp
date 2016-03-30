@@ -170,21 +170,19 @@ namespace YWCA_Software
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private string _ecapHours;
+        public string EcapHours
+        {
+            get
+            {
+                return _ecapHours;
+            }
+            set
+            {
+                _ecapHours = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapSchoolYear"));
+            }
+        }
 
         private string _ecapSite;
         public string EcapSite
@@ -1477,7 +1475,7 @@ namespace YWCA_Software
                 {
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
-                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetInt32(i) : 0);
+                      target.Add((rdr.IsDBNull(0) == false) ? rdr.GetInt32(i) : 0);
                     }
                 }
             }
@@ -1806,7 +1804,7 @@ namespace YWCA_Software
 
         private string DumpNoInfo(string noInfo)
         {
-            return (noInfo == "NoInfo") ? "NULL" : noInfo;
+            return (noInfo == "NoInfo") ? "NULL" : "#"+noInfo+"#";
         }
         ////////////////////////////////////////////////////////////////////// END Demographics //////////////////////////////////////////////////////////////////////
 
@@ -2197,5 +2195,84 @@ namespace YWCA_Software
             }
         }
         ////////////////////////////////////////////////////////////////////// END ECAP //////////////////////////////////////////////////////////////////////
+
+        /********************************************************************* Start ECAP_V_Hours *********************************************************************/
+
+        public void EcapVHours(string selectUpdateAdd, string pid)
+        {
+            EcapSite = pid;
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //Double
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "ECAP_V_HOURS " +
+                    "SET " +
+                        "SCHOOL_YEAR = \"" + EcapSchoolYear + "\", " +
+                        "HOURS = \"" + EcapHours + "\"  " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     "UPDATE " +
+                        "ECAP_V_HOURS " +
+                    "SET " +
+                       "SCHOOL_MONTH = \"" + EcapSchoolMonth + "\", " +
+                       "VOLUNTEER_MEMBER = \"" + EcapVolunteerMember + "\"  " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+            }
+            else
+            {
+                //doubles
+                queryArray = IntQuery
+                    (
+                    "SELECT " +
+                        " SCHOOL_YEAR, " +
+                        " HOURS " +
+                     "FROM " +
+                        "ECAP_V_HOURS " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    EcapSchoolYear = queryArray[0].ToString();
+                    EcapHours = queryArray[1].ToString();
+                }
+                else
+                {
+                    EcapSchoolYear = "NoInfo";
+                    EcapHours = "NoInfo";
+                }
+                //String
+                queryArray = StringQuery
+                    (
+                    "SELECT " +
+                        "SCHOOL_MONTH  , " +
+                        "VOLUNTEER_MEMBER " +
+                     "FROM " +
+                        "ECAP_V_HOURS " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    EcapSchoolMonth = (string)queryArray[0];
+                    EcapVolunteerMember = (string)queryArray[1];
+                }
+                else
+                {
+                    EcapSchoolMonth = "NoInfo";
+                    EcapVolunteerMember = "NoInfo";
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////// END ECAP_V_Hours //////////////////////////////////////////////////////////////////////
     }
 }
