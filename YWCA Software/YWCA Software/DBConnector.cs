@@ -20,8 +20,8 @@ namespace YWCA_Software
 
         public const string Path = @"Data Source=" +
                                     //@"P:\ywcaDbSoftware\" +
-                                    @"C:\YWCADB\All\" + //for local debuging
-                                    @"YWCACounselingANDLegal.accdb" +
+                                    //@"C:\YWCADB\All\" + //for local debuging
+                                    @"L:\YWCACounselingANDLegal.accdb" +
                                     @";";
         public const string Password = @"Jet OLEDB:Database Password=ywc@;";
         ////////////////////////////////////////////////////////////////////// END Const Strings For DB Access //////////////////////////////////////////////////////////////////////

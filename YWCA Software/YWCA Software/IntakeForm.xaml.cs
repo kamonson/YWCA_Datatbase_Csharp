@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace YWCA_Software
 {
@@ -55,7 +57,7 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private new void GotFocus(object sender, System.Windows.RoutedEventArgs e)
         {
-            var s = (TextBox)sender;
+            var s = (System.Windows.Controls.TextBox)sender; /// explicitly says which class Textbox is from
             s.SelectAll();
         }
         /// <summary>
@@ -93,10 +95,23 @@ namespace YWCA_Software
 
         private void buttonUpdateADVP_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            string date = listBoxIntakeDate.SelectedItem?.ToString();
-            string pid = textBlockPid.Text;
+            /// Message box to make sure date (from bottom half) is selected
+            /// or that correct update button is pushed
+            if (listBoxIntakeDate.SelectedItem != null)
+            {
+                string date = listBoxIntakeDate.SelectedItem?.ToString();
+                string pid = textBlockPid.Text;
 
-            _advbDb.Advp(@"update", pid, date);
+                _advbDb.Advp(@"update", pid, date);
+            }
+            else
+            {
+                string message = "A date to store this information on is not selected. \n";
+                   string caption = "Please choose a date and try again.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+                
+            }
         }
     }
 }
