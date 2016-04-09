@@ -25,5 +25,17 @@ namespace YWCA_Software
             ps.Show();
             Close();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            DbConnector dc = new DbConnector();
+            dc.Ecap("select","aaatest1");
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            DbConnector dc = new DbConnector();
+            dc.EcapVHours("select", "spokane");
+        }
     }
 }

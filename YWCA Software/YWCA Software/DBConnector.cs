@@ -29,6 +29,218 @@ namespace YWCA_Software
 
         /********************************************************************* Start SQL Data Sections *********************************************************************/
 
+        private string _ecapId;
+        public string EcapId
+        {
+            get
+            {
+                return _ecapId;
+            }
+            set
+            {
+                _ecapId = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapId"));
+            }
+        }
+
+
+        private string _ecapFirstName;
+        public string EcapFirstName
+        {
+            get
+            {
+                return _ecapFirstName;
+            }
+            set
+            {
+                _ecapFirstName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapFirstName"));
+            }
+        }
+
+        private string _ecapLastName;
+        public string EcapLastName
+        {
+            get
+            {
+                return _ecapLastName;
+            }
+            set
+            {
+                _ecapLastName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapLastName"));
+            }
+        }
+
+        private string _ecapNumFamilyMembers;
+        public string EcapNumFamilyMembers
+        {
+            get
+            {
+                return _ecapNumFamilyMembers;
+            }
+            set
+            {
+                _ecapNumFamilyMembers = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapNumFamilyMembers"));
+            }
+        }
+
+        private string _ecapNumAdults;
+        public string EcapNumAdults
+        {
+            get
+            {
+                return _ecapNumAdults;
+            }
+            set
+            {
+                _ecapNumAdults = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapNumAdults"));
+            }
+        }
+
+        private string _ecapNumChildren;
+        public string EcapNumChildren
+        {
+            get
+            {
+                return _ecapNumChildren;
+            }
+            set
+            {
+                _ecapNumChildren = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapNumChildren"));
+            }
+        }
+
+        private string _ecapRace;
+        public string EcapRace
+        {
+            get
+            {
+                return _ecapRace;
+            }
+            set
+            {
+                _ecapRace = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapRace"));
+            }
+        }
+
+        private string _ecapFamilyStructure;
+        public string EcapFamilyStructure
+        {
+            get
+            {
+                return _ecapFamilyStructure;
+            }
+            set
+            {
+                _ecapFamilyStructure = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapFamilyStructure"));
+            }
+        }
+
+        private string _ecapEducationLevel;
+        public string EcapEducationLevel
+        {
+            get
+            {
+                return _ecapEducationLevel;
+            }
+            set
+            {
+                _ecapEducationLevel = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapEducationLevel"));
+            }
+        }
+
+        private bool _ecapEnglishSpeaking;
+        public bool EcapEnglishSpeaking
+        {
+            get
+            {
+                return _ecapEnglishSpeaking;
+            }
+            set
+            {
+                _ecapEnglishSpeaking = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapEnglishSpeaking"));
+            }
+        }
+
+        private string _ecapHours;
+        public string EcapHours
+        {
+            get
+            {
+                return _ecapHours;
+            }
+            set
+            {
+                _ecapHours = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapSchoolYear"));
+            }
+        }
+
+        private string _ecapSite;
+        public string EcapSite
+        {
+            get
+            {
+                return _ecapSite;
+            }
+            set
+            {
+                _ecapSite = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapSite"));
+            }
+        }
+
+        private string _ecapSchoolYear;
+        public string EcapSchoolYear
+        {
+            get
+            {
+                return _ecapSchoolYear;
+            }
+            set
+            {
+                _ecapSchoolYear = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapSchoolYear"));
+            }
+        }
+
+        private string _ecapSchoolMonth;
+        public string EcapSchoolMonth
+        {
+            get
+            {
+                return _ecapSchoolMonth;
+            }
+            set
+            {
+                _ecapSchoolMonth = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapSchoolMonth"));
+            }
+        }
+
+        private string _ecapVolunteerMember;
+        public string EcapVolunteerMember
+        {
+            get
+            {
+                return _ecapVolunteerMember;
+            }
+            set
+            {
+                _ecapVolunteerMember = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EcapVolunteerMember"));
+            }
+        }
+
+
         private bool _msgOk;
         public bool MsgOk
         {
@@ -469,18 +681,32 @@ namespace YWCA_Software
         }
 
         private string _personsInHomeGender8 = "NoInfo";
+
         public string PersonsInHomeGender8
         {
-            get
-            {
-                return _personsInHomeGender8;
-            }
+            get { return _personsInHomeGender8; }
             set
             {
                 _personsInHomeGender8 = value ?? "NoInfo";
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeGender8"));
             }
         }
+
+        private string _personsInHomeDob8 = "NoInfo";
+        public string PersonsInHomeDob8
+        {
+            get
+            {
+                return _personsInHomeDob8;
+            }
+            set
+            {
+                _personsInHomeDob8 = value ?? "NoInfo";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonsInHomeDob8"));
+            }
+        }
+
+
 
         private bool _legal;
         public bool Legal
@@ -903,6 +1129,20 @@ namespace YWCA_Software
             }
         }
 
+        private string _dateNow = "NoInfo";
+        public string DateNow
+        {
+            get
+            {
+                return _dateNow;
+            }
+            set
+            {
+                _dateNow = value ?? "NoInfo";
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Date Now"));
+            }
+        }
+
         /// <summary>
         /// Set Pid to Input
         /// </summary>
@@ -1235,7 +1475,7 @@ namespace YWCA_Software
                 {
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
-                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetInt32(0) : 0);
+                      target.Add((rdr.IsDBNull(0) == false) ? rdr.GetInt32(i) : 0);
                     }
                 }
             }
@@ -1260,7 +1500,7 @@ namespace YWCA_Software
                 {
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
-                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetDouble(0) : 0);
+                        target.Add((rdr.IsDBNull(0) == false) ? rdr.GetDouble(i) : 0);
                     }
                 }
             }
@@ -1564,7 +1804,7 @@ namespace YWCA_Software
 
         private string DumpNoInfo(string noInfo)
         {
-            return (noInfo == "NoInfo") ? "NULL" : noInfo;
+            return (noInfo == "NoInfo") ? "NULL" : "#"+noInfo+"#";
         }
         ////////////////////////////////////////////////////////////////////// END Demographics //////////////////////////////////////////////////////////////////////
 
@@ -1601,6 +1841,7 @@ namespace YWCA_Software
                         "[Child 4 DOB] = " + DumpNoInfo(PersonsInHomeDob5) + ", " +
                         "[Child 5 DOB] = " + DumpNoInfo(PersonsInHomeDob6) + ", " +
                         "[Child 6 DOB] = " + DumpNoInfo(PersonsInHomeDob7) + ", " +
+                        "[Child 7 DOB] = " + DumpNoInfo(PersonsInHomeDob8) + ", " +
                         "[Discharge Date] = " + DumpNoInfo(DischargeDate) + "  " +
                     "Where " +
                        "Date = #" + date + "# " +
@@ -1831,5 +2072,207 @@ namespace YWCA_Software
             }
         }
         ////////////////////////////////////////////////////////////////////// END Advp //////////////////////////////////////////////////////////////////////
+
+        /********************************************************************* Start ECAP *********************************************************************/
+
+        public void Ecap(string selectUpdateAdd, string pid)
+        {
+            EcapId = pid;
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //Double
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "ECAP " +
+                    "SET " +
+                        "NUM_FAMILY_MEMBERS = \"" + EcapNumFamilyMembers + "\", " +
+                        "NUM_ADULTS = \"" + EcapNumAdults + "\", " +
+                        "NUM_CHILDREN = \"" + EcapNumChildren + "\"  " +
+                    "Where " +
+                       "ECAP_ID = \"" + EcapId + "\";"
+                    );
+                //bools
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "ECAP " +
+                    "SET " +
+                        "ENGLISH_SPEAKING = " + EcapEnglishSpeaking + "  " +
+                    "Where " +
+                       "ECAP_ID = \"" + EcapId + "\";"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     "UPDATE " +
+                        "ECAP " +
+                    "SET " +
+                       "FIRST_NAME = \"" + EcapFirstName + "\", " +
+                       "LAST_NAME = \"" + EcapLastName + "\", " +
+                       "RACE = \"" + EcapRace + "\", " +
+                       "FAMILY_STRUCTURE = \"" + EcapFamilyStructure + "\", " +
+                       "EDUCATION_LEVEL = \"" + EcapEducationLevel + "\"  " +
+                    "Where " +
+                       "ECAP_ID = \"" + EcapId + "\";"
+                    );
+            }
+            else
+            {
+                //doubles
+                queryArray = IntQuery
+                    (
+                    "SELECT " +
+                        " NUM_FAMILY_MEMBERS, " +
+                        " NUM_ADULTS, " +
+                        "NUM_CHILDREN " +
+                     "FROM " +
+                        "ECAP " +
+                    "Where " +
+                       "ECAP_ID = \"" + EcapId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    EcapNumFamilyMembers = queryArray[0].ToString();
+                    EcapNumAdults = queryArray[1].ToString();
+                    EcapNumChildren = queryArray[2].ToString();
+                }
+                else
+                {
+                    EcapNumFamilyMembers = "NoInfo";
+                    EcapNumAdults = "NoInfo";
+                    EcapNumChildren = "NoInfo";
+                }
+                //bools
+                queryArray = BoolQuery
+                    (
+                    "SELECT " +
+                        "ENGLISH_SPEAKING " +
+                     "FROM " +
+                        "ECAP " +
+                    "Where " +
+                       "ECAP_ID = \"" + EcapId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    EcapEnglishSpeaking = (bool)queryArray[0];
+                }
+                else
+                {
+                    EcapEnglishSpeaking = false;
+                }
+                //String
+                queryArray = StringQuery
+                    (
+                    "SELECT " +
+                        "FIRST_NAME , " +
+                        "LAST_NAME , " +
+                        "RACE , " +
+                        "FAMILY_STRUCTURE  , " +
+                        "EDUCATION_LEVEL " +
+                     "FROM " +
+                        "ECAP " +
+                    "Where " +
+                       "ECAP_ID = \"" + EcapId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    EcapFirstName = (string)queryArray[0];
+                    EcapLastName = (string)queryArray[1];
+                    EcapRace = (string)queryArray[2];
+                    EcapFamilyStructure = (string)queryArray[3];
+                    EcapEducationLevel = (string)queryArray[4];
+                }
+                else
+                {
+                    EcapFirstName = "NoInfo";
+                    EcapLastName = "NoInfo";
+                    EcapRace = "NoInfo";
+                    EcapFamilyStructure = "NoInfo";
+                    EcapEducationLevel = "NoInfo";
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////// END ECAP //////////////////////////////////////////////////////////////////////
+
+        /********************************************************************* Start ECAP_V_Hours *********************************************************************/
+
+        public void EcapVHours(string selectUpdateAdd, string pid)
+        {
+            EcapSite = pid;
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //Double
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "ECAP_V_HOURS " +
+                    "SET " +
+                        "SCHOOL_YEAR = \"" + EcapSchoolYear + "\", " +
+                        "HOURS = \"" + EcapHours + "\"  " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     "UPDATE " +
+                        "ECAP_V_HOURS " +
+                    "SET " +
+                       "SCHOOL_MONTH = \"" + EcapSchoolMonth + "\", " +
+                       "VOLUNTEER_MEMBER = \"" + EcapVolunteerMember + "\"  " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+            }
+            else
+            {
+                //doubles
+                queryArray = IntQuery
+                    (
+                    "SELECT " +
+                        " SCHOOL_YEAR, " +
+                        " HOURS " +
+                     "FROM " +
+                        "ECAP_V_HOURS " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    EcapSchoolYear = queryArray[0].ToString();
+                    EcapHours = queryArray[1].ToString();
+                }
+                else
+                {
+                    EcapSchoolYear = "NoInfo";
+                    EcapHours = "NoInfo";
+                }
+                //String
+                queryArray = StringQuery
+                    (
+                    "SELECT " +
+                        "SCHOOL_MONTH  , " +
+                        "VOLUNTEER_MEMBER " +
+                     "FROM " +
+                        "ECAP_V_HOURS " +
+                    "Where " +
+                       "SITE = \"" + EcapSite + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    EcapSchoolMonth = (string)queryArray[0];
+                    EcapVolunteerMember = (string)queryArray[1];
+                }
+                else
+                {
+                    EcapSchoolMonth = "NoInfo";
+                    EcapVolunteerMember = "NoInfo";
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////// END ECAP_V_Hours //////////////////////////////////////////////////////////////////////
     }
 }
