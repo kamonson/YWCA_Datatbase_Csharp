@@ -125,11 +125,11 @@ namespace YWCA_Software
             }
         }
 
-        private void richTextBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                e.SuppressKeyPress = true;
+        //private void richTextBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //        e.SuppressKeyPress = true;
 
-        }
+        //}
     }
 }
