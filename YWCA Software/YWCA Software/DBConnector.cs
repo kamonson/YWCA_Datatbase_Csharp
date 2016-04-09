@@ -29,6 +29,7 @@ namespace YWCA_Software
 
         /********************************************************************* Start SQL Data Sections *********************************************************************/
 
+        #region Data Binding
         private string _ecapId;
         public string EcapId
         {
@@ -1180,6 +1181,8 @@ namespace YWCA_Software
             }
         }
 
+        #endregion
+
         private ObservableCollection<string> _listPids = new ObservableCollection<string> { @"results go here" }; //pid search results list
         /// <summary>
         /// Participant id for WPF databinding
@@ -1197,7 +1200,8 @@ namespace YWCA_Software
             }
         }
 
-        private ObservableCollection<string> _listDates = new ObservableCollection<string> { @"results go here" }; //pid search results list
+        private ObservableCollection<string> _listDates = new ObservableCollection<string> { @"results go here" }; //pid search results list\
+
         /// <summary>
         /// Participant Advp form date for WPF databinding
         /// </summary>
@@ -1213,6 +1217,7 @@ namespace YWCA_Software
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListDates"));
             }
         }
+
         ////////////////////////////////////////////////////////////////////// End SQL Data Sections //////////////////////////////////////////////////////////////////////
 
 
@@ -2275,4 +2280,5 @@ namespace YWCA_Software
         }
         ////////////////////////////////////////////////////////////////////// END ECAP_V_Hours //////////////////////////////////////////////////////////////////////
     }
+
 }

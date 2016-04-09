@@ -20,7 +20,9 @@ namespace YWCA_Software
         {
             InitializeComponent();
             DataContext = _advbDb;
+
         }
+
         /// <summary>
         /// Use PID to Generate form with data
         /// </summary>
@@ -33,6 +35,7 @@ namespace YWCA_Software
             _advbDb.Demographics("select", pid);
             _advbDb.RunQueryFindDate();
         }
+
         /// <summary>
         /// Runs update intake form
         /// </summary>
@@ -50,6 +53,7 @@ namespace YWCA_Software
             }
             _advbDb.Demographics("update", textBlockPid.Text);
         }
+
         /// <summary>
         /// Highlight information if focused
         /// </summary>
@@ -60,6 +64,7 @@ namespace YWCA_Software
             var s = (System.Windows.Controls.TextBox)sender; /// explicitly says which class Textbox is from
             s.SelectAll();
         }
+
         /// <summary>
         /// Go back to participant select
         /// </summary>
@@ -93,6 +98,12 @@ namespace YWCA_Software
             _advbDb.RunQueryFindDate(); //needs to be re worked some
         }
 
+        /// <summary>
+        /// update button for lower half of window
+        /// includes a message box to help reduce crashes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonUpdateADVP_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             /// Message box to make sure date (from bottom half) is selected
@@ -107,11 +118,18 @@ namespace YWCA_Software
             else
             {
                 string message = "A date to store this information on is not selected. \n";
-                   string caption = "Please choose a date and try again.";
+                string caption = "Please choose a date and try again.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 System.Windows.Forms.MessageBox.Show(message, caption, buttons);
-                
+
             }
+        }
+
+        private void richTextBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                e.SuppressKeyPress = true;
+
         }
     }
 }
