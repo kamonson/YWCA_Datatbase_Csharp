@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace YWCA_Software
+﻿namespace YWCA_Software
 {
     class Sql
     {
@@ -8,19 +6,13 @@ namespace YWCA_Software
         public const string TblIntakeCollumns =
             @" ([CONSUMER_ID]) ";
 
-        public string ColumnEquals(string cName, string target)
-        {
-            return @"[" + cName + @"]" + " = \"" + target + "\" ";
-        }
-
-        public string ColumnEquals(string cName, bool target)
-        {
-            return @"[" + cName + @"]" + " = " + target.ToString() + " ";
-        }
-
         public string Values(string conditions)
         {
             return "Values ( \"" + conditions + "\" ) ";
+        }
+        public string ValuesNoQuote(string conditions)
+        {
+            return "Values (" + conditions + ") ";
         }
 
         public string Select(string conditions)
@@ -55,7 +47,7 @@ namespace YWCA_Software
 
         public string Like(string word)
         {
-            return @" LIKE '%" + word + @"%' ";
+            return @" LIKE '" + word + @"%' ";
         }
 
         public string And(string expr)
@@ -72,6 +64,12 @@ namespace YWCA_Software
         {
             return @" = '" + expr + @"'";
         }
+
+        public string EqualsNoQuote(string expr)
+        {
+            return @" = " + expr;
+        }
+
 
         public string Update(string tbl)
         {
@@ -137,78 +135,6 @@ namespace YWCA_Software
         }
 
         /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, string value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, int value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString()));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, decimal value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value.ToString(CultureInfo.CurrentCulture)));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
-        /// Create query based on given information to add or update, if filed needs updating but does not exist create row
-        /// </summary>
-        /// <param name="selectOrUpdate"></param>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="participantId"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string SelectUpdateOrAdd(string selectOrUpdate, string table, string columnName, string participantId, bool value)
-        {
-            string select = Prefix(selectOrUpdate, columnName) + Root(selectOrUpdate, table);
-            string update = Root(selectOrUpdate, table) + Prefix(selectOrUpdate, ColumnEquals(columnName, value));
-            string end = Where(@"Consumer_ID" + Equals(participantId)) + EndQuery();
-            string query = (selectOrUpdate == @"select") ? select : update;
-            return query + end;
-        }
-
-        /// <summary>
         /// Pass in partial first AND last OR PID to have PID returned
         /// </summary>
         /// <param name="firstName"></param>
@@ -221,6 +147,33 @@ namespace YWCA_Software
                    From(@"tbl_Consumer_List_Entry") +
                    Where(@"FIRST_NAME" + Like(firstName) + And(@"LAST_NAME") + Like(lastName) + Or(@"Consumer_ID" + Equals(pid))) +
                    EndQuery();
+        }
+
+        /// <summary>
+        /// Get intake dates from pid
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public string FindClientDate(string pid)
+        {
+            return Select(@"Date") +
+                   From(@"tbl_Intake") +
+                   Where(@"Consumer_ID" + Equals(pid)) +
+                   EndQuery();
+        }
+
+        /// <summary>
+        /// Add date to intakes
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public string AddIntakeDate(string pid, string date)
+        {
+           return   InsertInto("tbl_Intake" + " (" +  @"[Consumer_ID]" + ", " + "[Date]" + ")") + 
+                    ValuesNoQuote("'" + pid + "', " + "#" + date + "# ") +
+                    EndQuery();
+
         }
         ////////////////////////////////////////////////////////////////////// End SQL Queries //////////////////////////////////////////////////////////////////////
 
