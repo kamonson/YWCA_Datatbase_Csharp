@@ -218,7 +218,9 @@
         <CheckBox x:Name="checkBoxGroupClass" IsChecked="{Binding GroupClass}" Content="Group/Class" HorizontalAlignment="Left" Margin="191,341,0,0" VerticalAlignment="Top" Height="16"/>
         <CheckBox x:Name="checkBoxChildAdvocacy" IsChecked="{Binding ChildAdvocacy}" Content="Child Advocacy" HorizontalAlignment="Left" Margin="280,340,0,0" VerticalAlignment="Top" Height="16" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="textBlockLableComments" HorizontalAlignment="Left" Margin="10,361,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312"/>
-        <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="77" Margin="74,361,0,0" VerticalAlignment="Top" Width="327" BorderThickness="0" Grid.ColumnSpan="2">
+        <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="77" Margin="74,361,0,0" 
+                     VerticalAlignment="Top" Width="327" BorderThickness="0" Grid.ColumnSpan="2" 
+                     AcceptsTab="True" AcceptsReturn="True">
             <FlowDocument>
                 <Paragraph>
                     <Run  Text="{Binding Comments}"/>
