@@ -4,32 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Participant Select" Height="302" Width="574" ResizeMode="CanMinimize">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="125*"/>
-            <RowDefinition Height="244*"/>
-        </Grid.RowDefinitions>
-        <Image x:Name="image" Height="273" VerticalAlignment="Top" Source="Resources/YWCANewBKG.png" Stretch="Fill" Grid.RowSpan="2" />
-        <TextBox x:Name="textBoxFirstName" Height="23" Margin="10,22,398,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" GotFocus="textBoxFirstName_GotFocus"/>
-        <TextBox x:Name="textBoxLastName" Height="23" Margin="175,22,203,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" GotFocus="textBoxLastName_GotFocus" KeyDown="textBoxLastName_KeyDown"/>
-        <TextBox x:Name="textBoxParticipantID" Height="23" Margin="370,22,78,0" TextWrapping="Wrap" Text="{Binding Pid}" VerticalAlignment="Top" GotFocus="textBoxParticipantID_GotFocus" KeyDown="textBoxParticipantID_KeyDown"/>
-        <ListBox x:Name="listBoxPID" Margin="10,85,379,10" ItemsSource="{Binding ListPiDs}" SelectionChanged="ListBox_SelectionChanged" KeyDown="listBoxPID_KeyDown" Grid.RowSpan="2">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        Title="Participant Select"  ResizeMode="CanResize">
+    <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="125*"/>
+                <RowDefinition Height="244*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="image" Height="273" VerticalAlignment="Top" Source="Resources/YWCANewBKG.png" Stretch="Fill" Grid.RowSpan="2" />
+            <TextBox x:Name="textBoxFirstName" Height="23" Margin="10,22,398,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" GotFocus="textBoxFirstName_GotFocus"/>
+            <TextBox x:Name="textBoxLastName" Height="23" Margin="175,22,203,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" GotFocus="textBoxLastName_GotFocus" KeyDown="textBoxLastName_KeyDown"/>
+            <TextBox x:Name="textBoxParticipantID" Height="23" Margin="370,22,78,0" TextWrapping="Wrap" Text="{Binding Pid}" VerticalAlignment="Top" GotFocus="textBoxParticipantID_GotFocus" KeyDown="textBoxParticipantID_KeyDown"/>
+            <ListBox x:Name="listBoxPID" Margin="10,85,379,10" ItemsSource="{Binding ListPiDs}" SelectionChanged="ListBox_SelectionChanged" KeyDown="listBoxPID_KeyDown" Grid.RowSpan="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-        <Button Name="ButtonSearch" Margin="0,22,10,0" HorizontalAlignment="Right" Content="Search" Width="50" Height="23" VerticalAlignment="Top" Click="ButtonSearch_Click" Background="OrangeRed" Foreground="White" />
-        <Button x:Name="buttonSelectParticipant" Content="Thats The One" Margin="0,85,270,0" Click="buttonSelectParticipant_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" BorderThickness="0" Grid.RowSpan="2" Background="OrangeRed" Foreground="White"/>
-        <TextBlock x:Name="textBlockFname" Margin="0,24,274,0" TextWrapping="Wrap" Text="{Binding FirstName}" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Grid.Row="1"/>
-        <TextBlock x:Name="textBlockLname" Margin="0,24,119,0" TextWrapping="Wrap" Text="{Binding LastName}" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="150" Grid.Row="1"/>
-        <TextBox x:Name="textBoxNewParticipantID" Height="23" Margin="403,49,10,0" TextWrapping="Wrap" Text="{Binding Pid}" VerticalAlignment="Top" GotFocus="textBoxParticipantID_GotFocus" KeyDown="textBoxParticipantID_KeyDown" Grid.Row="1"/>
-        <Button x:Name="buttonNewParticipant" Content="I'll Just Make A New One" Margin="0,77,10,0"  Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138" BorderThickness="0" Grid.Row="1" Click="buttonNewParticipant_Click" Background="OrangeRed" Foreground="White" />
+            <Button Name="ButtonSearch" Margin="0,22,10,0" HorizontalAlignment="Right" Content="Search" Width="50" Height="23" VerticalAlignment="Top" Click="ButtonSearch_Click" Background="OrangeRed" Foreground="White" />
+            <Button x:Name="buttonSelectParticipant" Content="Thats The One" Margin="0,85,270,0" Click="buttonSelectParticipant_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" BorderThickness="0" Grid.RowSpan="2" Background="OrangeRed" Foreground="White"/>
+            <TextBlock x:Name="textBlockFname" Margin="0,24,274,0" TextWrapping="Wrap" Text="{Binding FirstName}" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockLname" Margin="0,24,119,0" TextWrapping="Wrap" Text="{Binding LastName}" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="150" Grid.Row="1"/>
+            <TextBox x:Name="textBoxNewParticipantID" Height="23" Margin="403,49,10,0" TextWrapping="Wrap" Text="{Binding Pid}" VerticalAlignment="Top" GotFocus="textBoxParticipantID_GotFocus" KeyDown="textBoxParticipantID_KeyDown" Grid.Row="1"/>
+            <Button x:Name="buttonNewParticipant" Content="I'll Just Make A New One" Margin="0,77,10,0"  Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138" BorderThickness="0" Grid.Row="1" Click="buttonNewParticipant_Click" Background="OrangeRed" Foreground="White" />
 
-    </Grid>
+        </Grid>
+    </Viewbox>
 </Window>

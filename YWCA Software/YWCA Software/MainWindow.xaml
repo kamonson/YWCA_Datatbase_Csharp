@@ -4,17 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="YWCA Database Select" Height="221" Width="413" ResizeMode="NoResize">
+        Title="YWCA Database Select" ResizeMode="CanResize" Background="{x:Null}" Foreground="{x:Null}">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="185*"/>
-            <ColumnDefinition Width="146*"/>
-        </Grid.ColumnDefinitions>
-        <Image x:Name="image" Height="192" VerticalAlignment="Top" Source="Resources/YWCANewBKG.png" Stretch="Fill" Grid.ColumnSpan="2" />
-        <Button Name="ButtonADVP" BorderThickness="0" Content="ADVP" Click="ButtonADVP_Click" Margin="165,65,165,52" Background="OrangeRed" Foreground="White" Grid.ColumnSpan="2" FontSize="24"/>
-        <Button x:Name="button" Content="ECAP 1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <Button x:Name="button1" Content="ECAP 2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-    </Grid>
 
+    <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
+
+        <Grid x:Name="MainGrid" Height="1080" Width="1920">
+            <Grid.Background>
+                <ImageBrush ImageSource="Resources/ecap_snip.png"/>
+            </Grid.Background>
+           
+
+            <Button x:Name="ADVP_Button" Content="Button" HorizontalAlignment="Left" Height="344" Margin="190,368,0,0" VerticalAlignment="Top" Width="437" Click="ButtonADVP_Click" FontSize="0.01" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/advp_button.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="ECAP_Button" Content="Button" HorizontalAlignment="Left" Margin="742,368,0,0" VerticalAlignment="Top" Height="344" Width="437" FontSize="0.01" Click="button_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/ecap_button.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="WOC_Button" Content="Button" HorizontalAlignment="Left" Margin="1292,368,0,0" VerticalAlignment="Top" Height="344" Width="437" FontSize="0.01" Click="button1_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/woc_button.png"/>
+                </Button.Background>
+            </Button>
+
+        </Grid>
+    </Viewbox>
 </Window>
