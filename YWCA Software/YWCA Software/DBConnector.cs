@@ -371,20 +371,6 @@ namespace YWCA_Software
             }
         }
 
-        private string _wocClassId;
-        public string WocClassId
-        {
-            get
-            {
-                return _wocClassId;
-            }
-            set
-            {
-                _wocClassId = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocClassId"));
-            }
-        }
-
         private string _wocClassName;
         public string WocClassName
         {
@@ -427,8 +413,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _wocCompleted;
-        public string WocCompleted
+        private bool _wocCompleted;
+        public bool WocCompleted
         {
             get
             {
@@ -627,8 +613,8 @@ namespace YWCA_Software
             }
         }
 
-        private string _wocWage;
-        public string WocWage
+        private decimal _wocWage;
+        public decimal WocWage
         {
             get
             {
@@ -2960,7 +2946,7 @@ namespace YWCA_Software
             ArrayList queryArray;
             if (selectUpdateAdd == "update")
             {
-                //Double
+                //ints
                 UpdateQuery
                     (
                     "UPDATE " +
@@ -2985,7 +2971,7 @@ namespace YWCA_Software
             }
             else
             {
-                //doubles
+                //ints
                 queryArray = IntQuery
                     (
                     "SELECT " +
@@ -3030,6 +3016,513 @@ namespace YWCA_Software
             }
         }
         ////////////////////////////////////////////////////////////////////// END ECAP_V_Hours //////////////////////////////////////////////////////////////////////
+
+        /********************************************************************* Start WOCClass *********************************************************************/
+
+        public void WocClass(string selectUpdateAdd, string pid, string date)
+        {
+            WocId = pid;
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //Dates
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "WOCClass " +
+                    "SET " +
+                        "DateClass = " + DumpNoInfo(WocDateClass) + 
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                //bools
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "WOCClass " +
+                    "SET " +
+                        "Attended = " + WocAttended+ ", " +
+                        "Completed = " + WocCompleted + 
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     "UPDATE " +
+                        "WOCClass " +
+                    "SET " +
+                       "WOCID = \"" + WocId + "\", " +
+                       "Program = \"" + WocProgram + "\", " +
+                       "ClassName = \"" + WocClassName+ "\", " +
+                       "Supervisor = \"" + WocSupervisor + "\", " +
+                       "FutureDesc = \"" + WocFutureDesc + "\", " +
+                       "AppreciatedDesc = \"" + WocAppreciatedDesc + "\", " +
+                       "ChangeOrAddDesc = \"" + WocChangeOrAddDesc + "\", " +
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "WOCClass " +
+                    "SET " +
+                       "ClassID = \"" + WocClassId + "\", " +
+                       "FoundValue = \"" + WocFoundValue + "\", " +
+                       "IncreasedConfidence = \"" + WocIncreasedConfidence + "\", " +
+                       "PreparedForGoals = \"" + WocPreparedForGoals + "\", " +
+                       "StimulatedThinking = \"" + WocStimulatedThinking + "\", " +
+                       "ImprovedSkills = \"" + WocImprovedSkills + "\", " +
+                       "RecommendClass = \"" + WocRecommendClass + "\", " +
+                       "ApplyLearning = \"" + WocApplyLearning + "\", " +
+                       "MetExpectations = \"" + WocMetExpectations +
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+               
+            }
+            else
+            {
+                //Dates
+                queryArray = DateQuery
+                    (
+                    "SELECT " +
+                        "DateClass " +
+                     "FROM " +
+                        "WOCClass " +
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocDateClass = queryArray[0].ToString();
+
+                }
+                else
+                {
+                    WocDateClass = "NoInfo";
+                }
+                //bools
+                queryArray = BoolQuery
+                    (
+                    "SELECT " +
+                        " Attended, " +
+                        " Completed " +
+                     "FROM " +
+                        "WOCClass " +
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocAttended = (bool)queryArray[0];
+                    WocCompleted = (bool)queryArray[1];
+                }
+                else
+                {
+                    WocAttended = false;
+                    WocCompleted = false;
+                }
+                //String
+                queryArray = StringQuery
+                    (
+                    "SELECT " +
+                        "WOCID , " +
+                        "Program, " +
+                        "ClassName, " +
+                        "Supervisor, " +
+                        "FutureDesc, " +
+                        "AppreciatedDesc, " +
+                        "ChangeOrAddDesc " +
+                     "FROM " +
+                        "WOCClass " +
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    
+                    WocId = (string)queryArray[0];
+                    WocProgram = (string)queryArray[1];
+                    WocClassName = (string)queryArray[2];
+                    WocSupervisor = (string)queryArray[3];
+                    WocFutureDesc = (string)queryArray[4];
+                    WocAppreciatedDesc = (string)queryArray[5];
+                    WocChangeOrAddDesc = (string)queryArray[6];
+                    
+                }
+                else
+                {
+                    WocId = "NoInfo";
+                    WocProgram = "NoInfo";
+                    WocClassName = "NoInfo";
+                    WocSupervisor = "NoInfo";
+                    WocFutureDesc = "NoInfo";
+                    WocAppreciatedDesc = "NoInfo";
+                    WocChangeOrAddDesc = "NoInfo";
+                }
+                queryArray = IntQuery
+                    (
+                    "SELECT " +
+                        "ClassID, " +
+                        "FoundValue, " +
+                        "IncreasedConfidence, " +
+                        "PreparedForGoals, " +
+                        "StimulatedThinking, " +
+                        "ImprovedSkills, " +
+                        "RecommendClass, " +
+                        "ApplyLearning, " +
+                        "MetExpectations " +
+                     "FROM " +
+                        "WOCClass " +
+                    "Where " +
+                       "DateClass = #" + date + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocClassId = queryArray[0].ToString();
+                    WocFoundValue = queryArray[1].ToString();
+                    WocIncreasedConfidence = queryArray[2].ToString();
+                    WocPreparedForGoals = queryArray[3].ToString();
+                    WocStimulatedThinking = queryArray[4].ToString();
+                    WocImprovedSkills = queryArray[5].ToString();
+                    WocRecommendClass = queryArray[6].ToString();
+                    WocApplyLearning = queryArray[7].ToString();
+                    WocMetExpectations = queryArray[8].ToString();
+                }
+                else
+                {
+                    WocClassId = "NoInfo";
+                    WocFoundValue = "NoInfo";
+                    WocIncreasedConfidence = "NoInfo";
+                    WocPreparedForGoals = "NoInfo";
+                    WocStimulatedThinking = "NoInfo";
+                    WocImprovedSkills = "NoInfo";
+                    WocRecommendClass = "NoInfo";
+                    WocApplyLearning = "NoInfo";
+                    WocMetExpectations = "NoInfo";
+                }
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////// END WOCClass //////////////////////////////////////////////////////////////////////
+
+        /********************************************************************* Start WOCAppt *********************************************************************/
+        public void WocAppt(string selectUpdateAdd, string pid, string date)
+        {
+            WocDateScheduled = date; // editable field
+            WocId = pid;
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //int
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "WOCAppt " +
+                    "SET " +
+                        "PreparationBefore = \"" + WocPreparationBefore + "\", " +
+                        "FamilyMonthlyIncome = \"" + WocFamilyMonthlyIncome + "\", " +
+                        "ChildrenUnder18 = \"" + WocChildrenUnder18 + "\",  " +
+                        "PreparationAfter = \"" + WocPreparationAfter + "\"  " +
+                    "Where " +
+                       "DateScheduled = #" + WocDateScheduled + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                //bools
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "WOCAppt " +
+                    "SET " +
+                        "FirstVisit = " + WocFirstVisit + ",  " +
+                        "CurrentlyEmployed = " + WocCurrentlyEmployed + ", " +
+                        "MainProvider = " + WocMainProvider + ", " + 
+                        "Success = " + WocSuccess + ", " +
+                        "UseComment = " + WocUseComment + ", " +
+                        "Anonymous = " + WocAnonymous + ", " +
+                        "Contact = " + WocContact + 
+                    "Where " +
+                       "DateScheduled = #" + WocDateScheduled + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     "UPDATE " +
+                        "WOCAppt " +
+                    "SET " +
+                       "WOCID = \"" + WocId + "\", " +
+                       "Program = \"" + WocProgram + "\", " +
+                       "Goal = \"" + WocGoal + "\", " +
+                       "Referenced = \"" + WocReferenced + "\", " +
+                       "Race = \"" + WocRace + "\"  " +
+                       "Ethnicity = \"" + WocEthnicity+ "\", " +
+                       "MaritalStatus = \"" + WocMaritalStatus + "\", " +
+                       "Improvements = \"" + WocImprovements + "\",  " +
+                       "Comments = \"" + WocComments + "\",  " +
+                       "Email = \"" + WocEmail + "\"  " +
+                    "Where " +
+                       "DateScheduled = #" + WocDateScheduled + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+            }
+            else
+            {
+                //ints
+                queryArray = IntQuery
+                    (
+                    "SELECT " +
+                        "PreparationBefore, " +
+                        "FamilyMonthlyIncome, " +
+                        "ChildrenUnder18, " +
+                        "PreparationAfter " +
+                     "FROM " +
+                        "WOCAppt " +
+                    "Where " +
+                       "DateScheduled = #" + WocDateScheduled + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocPreparationBefore = queryArray[0].ToString();
+                    WocFamilyMonthlyIncome = queryArray[1].ToString();
+                    WocChildrenUnder18 = queryArray[2].ToString();
+                    WocPreparationAfter = queryArray[3].ToString();
+                }
+                else
+                {
+                    WocPreparationBefore = "NoInfo";
+                    WocFamilyMonthlyIncome = "NoInfo";
+                    WocChildrenUnder18 = "NoInfo";
+                    WocPreparationAfter = "NoInfo";
+                }
+                //bools
+                queryArray = BoolQuery
+                    (
+                    "SELECT " +
+                        "FirstVisit, " +
+                        "CurrentlyEmployed, " +
+                        "MainProvider, " +
+                        "Success, " +
+                        "UseComment, " +
+                        "Anonymous, " +
+                        "Contact " + 
+                    "FROM " +
+                        "WOCAppt " +
+                    "Where " +
+                       "DateScheduled = #" + WocDateScheduled + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocFirstVisit = (bool)queryArray[0];
+                    WocCurrentlyEmployed = (bool)queryArray[1];
+                    WocMainProvider = (bool)queryArray[2];
+                    WocSuccess = (bool)queryArray[3];
+                    WocUseComment = (bool)queryArray[4];
+                    WocAnonymous = (bool)queryArray[5];
+                    WocContact = (bool)queryArray[6];
+                }
+                else
+                {
+                    WocFirstVisit = false;
+                    WocCurrentlyEmployed = false;
+                    WocMainProvider = false;
+                    WocSuccess = false;
+                    WocUseComment = false;
+                    WocAnonymous = false;
+                    WocContact = false;
+                }
+                //String
+                queryArray = StringQuery
+                    (
+                    "SELECT " +
+                        "WOCID, " +
+                        "Program, " +
+                        "Goal, " +
+                        "Referenced, " +
+                        "Race," +
+                        "Ethnicity, " +
+                        "MaritalStatus, " +
+                        "Improvements, " +
+                        "Comments, " +
+                        "Email " +
+                     "FROM " +
+                        "WOCAppt " +
+                    "Where " +
+                       "DateScheduled = #" + WocDateScheduled + "# " +
+                       "AND " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocId = (string)queryArray[0];
+                    WocProgram = (string)queryArray[1];
+                    WocGoal = (string)queryArray[2];
+                    WocReferenced = (string)queryArray[3];
+                    WocRace = (string)queryArray[4];
+                    WocEthnicity = (string)queryArray[5];
+                    WocMaritalStatus = (string)queryArray[6];
+                    WocImprovements = (string)queryArray[7];
+                    WocComments = (string)queryArray[8];
+                    WocEmail = (string)queryArray[9];
+                }
+                else
+                {
+                    WocId = "NoInfo";
+                    WocProgram = "NoInfo";
+                    WocGoal = "NoInfo";
+                    WocReferenced = "NoInfo";
+                    WocRace = "NoInfo";
+                    WocEthnicity = "NoInfo";
+                    WocMaritalStatus = "NoInfo";
+                    WocImprovements = "NoInfo";
+                    WocComments = "NoInfo";
+                    WocEmail = "NoInfo";
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////// END WOCAppt //////////////////////////////////////////////////////////////////////
+
+        /********************************************************************* Start WOCAppt *********************************************************************/
+        public void WocCompLog(string selectUpdateAdd, string pid)
+        {
+            WocId = pid;
+            ArrayList queryArray;
+            if (selectUpdateAdd == "update")
+            {
+                //Decimal
+                UpdateQuery
+                    (
+                    "UPDATE " +
+                        "WOCCompLog " +
+                    "SET " +
+                        "Wage = \"" + WocWage + "\"  " +
+                    "Where " +
+                        "WOCID = \"" + WocId + "\";"
+                    );
+                //String
+                UpdateQuery
+                    (
+                     "UPDATE " +
+                        "WOCCompLog " +
+                    "SET " +
+                       "WOCID = \"" + WocId + "\", " +
+                       "[Position] = \"" + WocPosition + "\",  " +
+                       "HoursWeekly = \"" + WocHoursWeekly + "\", " +
+                       "HearAboutPosition = \"" + WocHearAboutPosition + "\",  " +
+                       "TrainingSchool = \"" + WocTrainingSchool + "\", " +
+                       "TrainSchoolStartDate = \"" + WocTrainSchoolStartDate + "\",  " +
+                       "FavoriteClass = \"" + WocFavoriteClass + "\", " +
+                       "MostHelpfulClass= \"" + WocMostHelpfulClass+ "\",  " +
+                       "OtherJobSupportServices = \"" + WocOtherJobSupportServices + "\",  " +
+                       "CompareServices = \"" + WocCompareServices + "\", " +
+                       "CompareServicesReason = \"" + WocCompareServicesReason + "\",  " +
+                       "DoBetter = \"" + WocDoBetter+ "\", " +
+                       "OfferOtherServices = \"" + WocOfferOtherServices+ "\"  " +
+                    "Where " +
+                        "WOCID = \"" + WocId + "\";"
+                    );
+            }
+            else
+            {
+                //Decimals
+                queryArray = DecimalQuery
+                    (
+                    "SELECT" +
+                        " Wage " +
+                     "FROM " +
+                        "WOCCompLog " +
+                    "Where " +
+                        "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocWage = (decimal)queryArray[0];
+                }
+                else
+                {
+                    WocWage = 0;
+                }
+                //String
+                queryArray = StringQuery
+                    (
+                    "SELECT " +
+                        "[wocid], " +
+                        "[Position], " +
+                        "[HoursWeekly], " +
+                        "[HearAboutPosition], " +
+                        "[TrainingSchool], " +
+                        "[TrainSchoolStartDate], " +
+                        "[FavoriteClass], " +
+                        "[MostHelpfulClass], " +
+                        "[OtherJobSupportServices], " +
+                        "[CompareServices], " +
+                        "[CompareServicesReason], " +
+                        "[DoBetter], " +
+                        "[OfferOtherServices] " +
+                     "FROM " +
+                        "WOCCompLog " +
+                    "Where " +
+                       "WOCID = \"" + WocId + "\";"
+                    );
+                if (queryArray.Count > 0)
+                {
+                    WocId = (string)queryArray[0];
+                    WocPosition = (string)queryArray[1];
+                    WocHoursWeekly = (string)queryArray[2];
+                    WocHearAboutPosition = (string)queryArray[3];
+                    WocTrainingSchool = (string)queryArray[4];
+                    WocTrainSchoolStartDate = (string)queryArray[5];
+                    WocFavoriteClass = (string)queryArray[6];
+                    WocMostHelpfulClass = (string)queryArray[7];
+                    WocOtherJobSupportServices = (string)queryArray[8];
+                    WocCompareServices = (string)queryArray[9];
+                    WocCompareServicesReason = (string)queryArray[10];
+                    WocDoBetter = (string)queryArray[11];
+                    WocOfferOtherServices = (string)queryArray[12];
+                }
+                else
+                {
+                    WocId = "NoInfo";
+                    WocPosition = "NoInfo";
+                    WocHoursWeekly = "NoInfo";
+                    WocHearAboutPosition = "NoInfo";
+                    WocTrainingSchool = "NoInfo";
+                    WocTrainSchoolStartDate = "NoInfo";
+                    WocFavoriteClass = "NoInfo";
+                    WocMostHelpfulClass = "NoInfo";
+                    WocOtherJobSupportServices = "NoInfo";
+                    WocCompareServices = "NoInfo";
+                    WocCompareServicesReason = "NoInfo";
+                    WocDoBetter = "NoInfo";
+                    WocOfferOtherServices = "NoInfo";
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////// END WOCAppt //////////////////////////////////////////////////////////////////////
     }
 
 }

@@ -133,27 +133,5 @@ namespace YWCA_Software
             }
         }
 
-
-
-
-
-        //private void checkForEnter(object sender, System.Windows.Input.KeyEventArgs e)
-        //{
-        //    if (e.Key == (System.Windows.Input.Key)Keys.Enter)
-        //    {
-        //        richTextBox.AppendText("\n");
-        //    }
-        //}
-
-        //private void checkForEnter(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        //{
-        //    if ( == Keys.Enter)
-        //    {
-        //        richTextBox.AppendText("\n");
-        //    }
-        //}
-
-
-
     }
 }
