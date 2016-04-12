@@ -13,29 +13,34 @@ namespace YWCA_Software
         public MainWindow()
         {
             InitializeComponent();
+            DbConnector dc = new DbConnector();
         }
         /// <summary>
         /// Open Advp database
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonADVP_Click(object sender, RoutedEventArgs e)
-        {
-            ParticipantSelect ps = new ParticipantSelect();
-            ps.Show();
-            Close();
-        }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            DbConnector dc = new DbConnector();
-            dc.Ecap("select","aaatest1");
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            DbConnector dc = new DbConnector();
-            dc.EcapVHours("select", "spokane");
+            if (sender == ADVP_Button)
+            {
+                ParticipantSelect ps = new ParticipantSelect(@"ADVP");
+                ps.Show();
+            }
+            else if(sender == ECAP_Button)
+            {
+                EcapMenu em = new EcapMenu();
+                em.Show();
+            }
+            else if(sender == WOC_Button)
+            {
+                WocMenu wm = new WocMenu();
+                wm.Show();
+            }
+            
+ 
+            Close();
         }
 
         private void WOCClass_Click(object sender, RoutedEventArgs e)

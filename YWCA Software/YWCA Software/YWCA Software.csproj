@@ -60,7 +60,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateNewParticipant.xaml.cs">
+      <DependentUpon>CreateNewParticipant.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ecap.xaml.cs">
+      <DependentUpon>Ecap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EcapMenu.xaml.cs">
+      <DependentUpon>EcapMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EcapVolunteer.xaml.cs">
+      <DependentUpon>EcapVolunteer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sql.cs" />
+    <Compile Include="WocMenu.xaml.cs">
+      <DependentUpon>WocMenu.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CreateNewParticipant.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ecap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EcapMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EcapVolunteer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="IntakeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -82,6 +113,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ParticipantSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WocMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,51 +163,63 @@
     <Resource Include="Resources\IntakeBKG.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\YWCANewBKG.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="YwcaIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\advp_button.png" />
-    <Resource Include="Resources\back_button-01 %281%29.png" />
-    <Resource Include="Resources\ecap_back %283%29.png" />
-    <Resource Include="Resources\ecap_button.png" />
-    <Resource Include="Resources\search_button %281%29.png" />
-    <Resource Include="Resources\update_button.png" />
-    <Resource Include="Resources\woc_back %282%29.png" />
-    <Resource Include="Resources\woc_button.png" />
-    <Resource Include="ywca_menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ywca_menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ecap_back_flat.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Resources\advp_snip.png" />
     <Resource Include="Resources\ecap_snip.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Resources\search_snip.png" />
     <Resource Include="Resources\ywca_menu_snip.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\search_snip.png" />
+    <Resource Include="Resources\advp_button.png" />
+    <Resource Include="Resources\ecap_button.png" />
+    <Resource Include="Resources\woc_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\select_button-01.png" />
+    <Resource Include="Resources\select_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\search_text_button.png" />
+    <Resource Include="Resources\search_text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\back_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\update_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\newdate_button.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\createnew_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\createNewParticipant.png" />
+    <Resource Include="Resources\search_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\advp_snip.png" />
+    <Resource Include="Resources\advp_button - Copy.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\newdate_button-01.png" />
+    <Resource Include="Resources\ecap_button - Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\woc_button - Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\createnewparticipant_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\volunteer_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\intake_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ecapmenu_snip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

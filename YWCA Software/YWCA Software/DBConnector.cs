@@ -2058,10 +2058,10 @@ namespace YWCA_Software
         /// <summary>
         /// Search for pid based off FirstName AND LastName OR Pid
         /// </summary>
-        public void RunQueryFindClient()
+        public void RunQueryFindClient(string department)
         {
             Connect();
-            DbCommand.CommandText = _sql.FindClientPid(FirstName, LastName, Pid);
+            DbCommand.CommandText = _sql.FindClientPid(department, FirstName, LastName, Pid);
             OleDbDataReader rdr = DbCommand.ExecuteReader();
             ListPiDs.Clear();
             if (rdr != null)

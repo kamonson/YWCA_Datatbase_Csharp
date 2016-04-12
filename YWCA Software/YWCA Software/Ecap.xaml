@@ -1,0 +1,176 @@
+﻿<Window x:Class="YWCA_Software.Ecap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YWCA_Software"
+        mc:Ignorable="d"
+        Title="ECAP" SnapsToDevicePixels="True" Height="930" Width="1284"  ResizeMode="CanResize">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
+        <Style x:Key="OptionMarkFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#FF212121"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#FF212121"/>
+    </Window.Resources>
+
+    <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
+
+        <Grid x:Name="MainGrid" Height="1080" Width="1920">
+            <Grid.Background>
+                <ImageBrush ImageSource="Resources/ecap_snip.png"/>
+            </Grid.Background>
+
+            <Rectangle HorizontalAlignment="Left" Height="701" Margin="250,238,0,0" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="#FFD98633" StrokeLineJoin="Round" VerticalAlignment="Top" Width="1401" StrokeThickness="5">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#4C000000" Offset="0.011"/>
+                        <GradientStop Color="#99FFFFFF"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Button x:Name="Back_Button" Content="" HorizontalAlignment="Left" Height="75" Margin="1788,26,0,0" VerticalAlignment="Top" Width="84" Click="button_Click" FontSize="0.01" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources\back_button.png"/>
+                </Button.Background>
+                <Button.Foreground>
+                    <ImageBrush ImageSource="Resources/back_button.png" Stretch="Uniform"/>
+                </Button.Foreground>
+            </Button>
+
+            <TextBox x:Name="ECAP_ID" HorizontalAlignment="Left" Height="51" Margin="279,296,0,0" TextWrapping="Wrap" Text="{Binding EcapId}" VerticalAlignment="Top" Width="400" FontSize="32" />
+            <TextBox x:Name="FIRST_NAME" HorizontalAlignment="Left" Height="51" Margin="750,296,0,0" TextWrapping="Wrap" Text="{Binding EcapFirstName}" VerticalAlignment="Top" Width="400" FontSize="32" />
+            <TextBox x:Name="LAST_NAME" HorizontalAlignment="Left" Height="51" Margin="1227,296,0,0" TextWrapping="Wrap" Text="{Binding EcapLastName}" VerticalAlignment="Top" Width="400" FontSize="32" />
+            <TextBox x:Name="NUM_FAMILY" HorizontalAlignment="Left" Height="51" Margin="279,517,0,0" TextWrapping="Wrap" Text="{Binding EcapNumFamilyMembers}" VerticalAlignment="Top" Width="400" FontSize="32" />
+            <TextBox x:Name="NUM_ADULT" HorizontalAlignment="Left" Height="51" Margin="750,517,0,0" TextWrapping="Wrap" Text="{Binding EcapNumAdults}" VerticalAlignment="Top" Width="400" FontSize="32" />
+            <TextBox x:Name="NUM_CHILD" HorizontalAlignment="Left" Height="51" Margin="1227,517,0,0" TextWrapping="Wrap" Text="{Binding EcapNumChildren}" VerticalAlignment="Top" Width="400" FontSize="32" />
+
+            <ComboBox x:Name="FAMILY_STRUCTURE" HorizontalAlignment="Left" Margin="750,732,0,0" VerticalAlignment="Top" Text="{Binding EcapFamilyStructure}" Width="400" Height="51" IsDropDownOpen="True" FontSize="32">
+                <ComboBoxItem x:Name="Other" Content="Other"/>
+                <ComboBoxItem x:Name="SingleParent" Content="Single Parent"/>
+                <ComboBoxItem x:Name="TwoParent" Content="Two Parent"/>
+                <ComboBoxItem x:Name="GrandParent" Content="Grandparent(s)"/>
+            </ComboBox>
+
+            <ComboBox x:Name="Race" HorizontalAlignment="Left" Margin="279,732,0,0" VerticalAlignment="Top" Width="400" Height="51" Text="{Binding EcapRace}" IsDropDownOpen="True" FontSize="32">
+                <ComboBoxItem x:Name="Other1" Content="Other"/>
+                <ComboBoxItem x:Name="AmericanIndianorAlaskaNative" Content="American Indian or Alaska Native"/>
+                <ComboBoxItem x:Name="Asian" Content="Asian"/>
+                <ComboBoxItem x:Name="BlackorAfricanAmerican" Content="Black or African American"/>
+                <ComboBoxItem x:Name="NativeHawaiianorOtherPacificIslander" Content="Native Hawaiian or Other Pacific Islander"/>
+                <ComboBoxItem x:Name="White" Content="White"/>
+            </ComboBox>
+
+            <ComboBox x:Name="EducationLevel" HorizontalAlignment="Left" Margin="1227,732,0,0" VerticalAlignment="Top" Width="400" Height="51"  Text="{Binding EcapEducationLevel}" IsDropDownOpen="True" FontSize="32">
+                <ComboBoxItem x:Name="Other2" Content="Other"/>
+                <ComboBoxItem x:Name="HighSchoolDiploma" Content="High School Diploma or GED Equivalent"/>
+                <ComboBoxItem x:Name="collegea" Content="Associates Degree"/>
+                <ComboBoxItem x:Name="collegeb" Content="Bachelors Degree"/>
+                <ComboBoxItem x:Name="college3" Content="Masters Degree"/>
+                <ComboBoxItem x:Name="college4" Content="PhD"/>
+            </ComboBox>
+
+            <Button x:Name="ecapupdate_button" Content="" HorizontalAlignment="Left" Height="51" Margin="1427,869,0,0" VerticalAlignment="Top" Width="200" Foreground="White" FontSize="33.333" Click="ecapupdate_button_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/update_button.png"/>
+                </Button.Background>
+            </Button>
+
+            <CheckBox Margin="279,878,1604,175" Content="" RenderTransformOrigin="-0.996,8.318" IsChecked="{Binding EcapEnglishSpeaking}">
+                <CheckBox.Template>
+                    <ControlTemplate   
+        				TargetType="{x:Type CheckBox}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+        					BorderThickness="{TemplateBinding BorderThickness}" 
+        					Background="{TemplateBinding Background}">
+                            <Grid>
+                                <!-- ContentPresenter displays content of CheckBox -->
+                                <ContentPresenter 
+        							Content="{TemplateBinding Content}" 
+        							ContentTemplate="{TemplateBinding ContentTemplate}" 
+        							Margin="{TemplateBinding Padding}" 
+        							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+        							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                <!-- This Border displays a semi-transparent red X -->
+                                <Border>
+                                    <Border.Background>
+                                        <VisualBrush Opacity="0.5">
+                                            <VisualBrush.Visual>
+                                                <Path x:Name="path" 
+        											Data="M 0 0 L 10 10 M 10 0 L 0 10" 
+        											Stroke="White"  
+        											StrokeStartLineCap="Round" 
+        											StrokeEndLineCap="Round" 
+        											StrokeLineJoin="Round" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="path" 
+        							Property="Data" 
+        							Value="M 0 5 L 3 10 10 0" />
+                                <Setter TargetName="path" 
+        							Property="Stroke" 
+        							Value="Black" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter TargetName="path" 
+        							Property="Data" 
+        							Value="M 0 2.5 A 5 2.5 0 1 1 5 5                          L 5 8 M 5 10 L 5 10" />
+                                <Setter TargetName="path" 
+        							Property="Stroke" 
+        							Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground"  
+        							Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="279,249,0,0" TextWrapping="Wrap" Text="Ecap Id" VerticalAlignment="Top" Height="41" Width="161" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="750,249,0,0" TextWrapping="Wrap" Text="First Name" VerticalAlignment="Top" Height="41" Width="161" Foreground="White" FontSize="33.333" RenderTransformOrigin="0.766,0.589"/>
+            <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="1227,250,0,0" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Height="41" Width="161" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="279,471,0,0" TextWrapping="Wrap" Text="Count of Family Members" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="750,471,0,0" TextWrapping="Wrap" Text="Count of Adults" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="1227,471,0,0" TextWrapping="Wrap" Text="Count of Children" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Margin="279,686,0,0" TextWrapping="Wrap" Text="Race" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Margin="750,686,0,0" TextWrapping="Wrap" Text="Family Structure" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="1227,686,0,0" TextWrapping="Wrap" Text="Education Level" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <TextBlock x:Name="textBlock_Copy8" HorizontalAlignment="Left" Margin="337,869,0,0" TextWrapping="Wrap" Text="English Speaking" VerticalAlignment="Top" Height="60" Width="400" Foreground="White" FontSize="33.333"/>
+
+
+        </Grid>
+    </Viewbox>
+</Window>

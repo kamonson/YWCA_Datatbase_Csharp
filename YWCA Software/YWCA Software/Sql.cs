@@ -141,11 +141,42 @@
         /// <param name="lastName"></param>
         /// <param name="pid"></param>
         /// <returns></returns>
-        public string FindClientPid(string firstName, string lastName, string pid)
+        public string FindClientPid(string department, string firstName, string lastName, string pid)
         {
+            string fLocation = null;
+            string id = null;
+
+            if (department == @"ADVP")
+            {
+                fLocation = @"tbl_Consumer_List_Entry";
+                id = @"Consumer_ID";
+            }
+            else if (department == @"ECAP")
+            {
+                fLocation = @"ECAP";
+                id = @"ECAP_ID";
+            }
+            else if (department == @"ECAP_VHOURS")
+            {
+
+            }
+            else if (department == @"WOC_EPT")
+            {
+
+            }
+            else if (department == @"WOC_CLASS")
+            {
+
+            }
+            else if (department == @"WOC_COMPLOG")
+            {
+
+            }
+
+
             return Select(@"*") +
-                   From(@"tbl_Consumer_List_Entry") +
-                   Where(@"FIRST_NAME" + Like(firstName) + And(@"LAST_NAME") + Like(lastName) + Or(@"Consumer_ID" + Equals(pid))) +
+                   From(fLocation) +
+                   Where(@"FIRST_NAME" + Like(firstName) + And(@"LAST_NAME") + Like(lastName) + Or(id + Equals(pid))) +
                    EndQuery();
         }
 

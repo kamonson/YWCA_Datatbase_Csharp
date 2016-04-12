@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="YWCA Main Menu" ResizeMode="CanResize" Background="{x:Null}" Foreground="{x:Null}">
+        Title="YWCA Main Menu" ResizeMode="CanResize" Background="{x:Null}" Foreground="{x:Null}" Height="930" Width="1284">
 
 
     <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
@@ -13,19 +13,19 @@
             <Grid.Background>
                 <ImageBrush ImageSource="Resources/ywca_menu_snip.png"/>
             </Grid.Background>
-           
 
-            <Button x:Name="ADVP_Button" Content="Button" HorizontalAlignment="Left" Height="344" Margin="190,368,0,0" VerticalAlignment="Top" Width="437" Click="ButtonADVP_Click" FontSize="0.01" Foreground="{x:Null}" BorderBrush="{x:Null}">
+
+            <Button x:Name="ADVP_Button" Content="Button" HorizontalAlignment="Left" Height="344" Margin="190,368,0,0" VerticalAlignment="Top" Width="437" Click="button_Click"  FontSize="0.01" Foreground="{x:Null}" BorderBrush="{x:Null}">
                 <Button.Background>
                     <ImageBrush Stretch="Fill" ImageSource="Resources/advp_button.png"/>
-                </Button.Background>
+                 </Button.Background>
             </Button>
             <Button x:Name="ECAP_Button" Content="Button" HorizontalAlignment="Left" Margin="742,368,0,0" VerticalAlignment="Top" Height="344" Width="437" FontSize="0.01" Click="button_Click">
                 <Button.Background>
                     <ImageBrush Stretch="Fill" ImageSource="Resources/ecap_button.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="WOC_Button" Content="Button" HorizontalAlignment="Left" Margin="1292,368,0,0" VerticalAlignment="Top" Height="344" Width="437" FontSize="0.01" Click="button1_Click">
+            <Button x:Name="WOC_Button" Content="Button" HorizontalAlignment="Left" Margin="1292,368,0,0" VerticalAlignment="Top" Height="344" Width="437" FontSize="0.01" Click="button_Click">
                 <Button.Background>
                     <ImageBrush Stretch="Fill" ImageSource="Resources/woc_button.png"/>
                 </Button.Background>
