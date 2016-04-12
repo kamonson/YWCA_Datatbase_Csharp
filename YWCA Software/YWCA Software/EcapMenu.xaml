@@ -1,0 +1,27 @@
+﻿<Window x:Class="YWCA_Software.EcapMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YWCA_Software"
+        mc:Ignorable="d"
+        Title="EcapMenu" Height="930" Width="1284"  ResizeMode="CanResize">
+    <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
+
+        <Grid x:Name="MainGrid" Height="1080" Width="1920">
+            <Grid.Background>
+                <ImageBrush ImageSource="Resources/ecapmenu_snip.png"/>
+            </Grid.Background>
+            <Button x:Name="ecapvolunteer_Button" Content="Button" HorizontalAlignment="Left" Height="344" Margin="350,419,0,0" VerticalAlignment="Top" Width="437" Click="button_Click"  FontSize="0.01" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/volunteer_button.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="ecapintake_Button" Content="Button" HorizontalAlignment="Left" Height="344" Margin="1055,419,0,0" VerticalAlignment="Top" Width="437" Click="button_Click"  FontSize="0.01" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/intake_button.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </Viewbox>
+</Window>

@@ -4,125 +4,215 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Intake Form" SnapsToDevicePixels="True" ResizeMode="CanResize">
+        Title="Intake Form" SnapsToDevicePixels="True" ResizeMode="CanResize" Height="930" Width="1284">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
+        <Style x:Key="OptionMarkFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#FF212121"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#FF212121"/>
+        <Style x:Key="CheckBoxStyle1_ywca" TargetType="{x:Type CheckBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid x:Name="markGrid">
+                                    <Path x:Name="optionMark" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="{StaticResource OptionMark.Static.Glyph}" Margin="1" Opacity="0" Stretch="None"/>
+                                    <Rectangle x:Name="indeterminateMark" Fill="{StaticResource OptionMark.Static.Glyph}" Margin="2" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
+                                <Setter Property="Padding" Value="4,-1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="125*"/>
-                <ColumnDefinition Width="173*"/>
-            </Grid.ColumnDefinitions>
+
             <!--///////////////////////////////////////////////////////////////////////////// Start Demographic Info /////////////////////////////////////////////////////////////////////////////-->
 
-            <Image x:Name="image" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="894" Source="Resources/advp_snip.png" Stretch="Fill" Grid.ColumnSpan="2" />
-            <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="16" Margin="4,91,0,0" TextWrapping="Wrap" Text="Participant ID:" VerticalAlignment="Top" Width="86" BorderThickness="0" IsReadOnly="True" Background="Transparent" Foreground="White"/>
-            <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="95,91,0,0" TextWrapping="Wrap" Text="{Binding Pid}" Width="70" VerticalAlignment="Top" Height="16" Background="Transparent" Foreground="White"/>
-            <TextBox x:Name="textBlockHMISIdLabel" Background="Transparent" HorizontalAlignment="Left" Height="16" Margin="170,91,0,0" TextWrapping="Wrap" Text="HMIS ID:" VerticalAlignment="Top" Width="53" BorderThickness="0" IsReadOnly="True" Foreground="White"/>
-            <TextBlock x:Name="textBlockHMISId" HorizontalAlignment="Left" Margin="223,91,0,0" TextWrapping="Wrap" Text="{Binding HmisId}" Width="70" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <TextBox x:Name="textBlockInfoNeLabel" Background="Transparent" HorizontalAlignment="Left" Height="16" Margin="298,91,0,0" TextWrapping="Wrap" Text="Info Net:" VerticalAlignment="Top" Width="61" BorderThickness="0" IsReadOnly="True" Foreground="White"/>
-            <TextBlock x:Name="textBlockInfoNet" HorizontalAlignment="Left" Margin="361,91,0,0" TextWrapping="Wrap" Text="{Binding InfoNetId}" Width="70" VerticalAlignment="Top" Height="16" Foreground="White" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="textBlockStaff" HorizontalAlignment="Left" Margin="64,91,0,0" TextWrapping="Wrap" Text="Staff:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxStaff" Height="16" Margin="95,91,342,0" TextWrapping="Wrap" Text="{Binding Staff}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockDateDataEntered" HorizontalAlignment="Left" Margin="182,91,0,0" TextWrapping="Wrap" Text="Date Data Entered:" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBox  x:Name="textBoxDateDataEntered" HorizontalAlignment="Left" Height="16" Margin="286,91,0,0" TextWrapping="Wrap" Text="{Binding DateDataEntered}" VerticalAlignment="Top" Width="116" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockFNameLabel" HorizontalAlignment="Left" Margin="5,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="First "/><Run Text="Name:"/></TextBlock>
-            <TextBox  x:Name="textBoxFName" HorizontalAlignment="Left" Height="16" Margin="70,122,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="80" BorderThickness="0" GotFocus="GotFocus"/>
-            <TextBlock x:Name="textBlockMI" HorizontalAlignment="Left" Margin="185,122,0,0" TextWrapping="Wrap" Text="Middle Initial:" VerticalAlignment="Top" Foreground="White"/>
-            <TextBox  x:Name="textBoxMI" HorizontalAlignment="Left" Height="16" Margin="262,122,0,0" TextWrapping="Wrap" Text="{Binding Mi}" VerticalAlignment="Top" Width="12" BorderThickness="0" GotFocus="GotFocus"/>
-            <TextBlock x:Name="textBlockLNameLabel" HorizontalAlignment="Left" Margin="301,122,0,0" TextWrapping="Wrap" Text="Last Name:" VerticalAlignment="Top" Foreground="White"/>
-            <TextBox  x:Name="textBoxLName" HorizontalAlignment="Left" Height="16" Margin="370,122,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="145" BorderThickness="0" GotFocus="GotFocus" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="textBlockDOB" HorizontalAlignment="Left" Margin="183,122,0,0" TextWrapping="Wrap" Text="DOB:" VerticalAlignment="Top" Grid.Column="1" Foreground="White"/>
-            <TextBox  x:Name="textBoxDOB" HorizontalAlignment="Left" Height="16" Margin="215,122,0,0" TextWrapping="Wrap" Text="{Binding Dob}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox  x:Name="comboBoxSSN" HorizontalAlignment="Left" Margin="389,122,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Text="{Binding Ssn}" Grid.Column="1" >
+            <Image x:Name="image" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="894" Source="Resources/advp_snip.png" Stretch="Fill" Margin="-5,0,0,0" />
+            <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="17" Margin="132,100,0,0" TextWrapping="Wrap" Text="Participant ID:" VerticalAlignment="Top" Width="79" BorderThickness="0" IsReadOnly="True" Background="Transparent" Foreground="White"/>
+            <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="221,100,0,0" TextWrapping="Wrap" Text="{Binding Pid}" Width="99" VerticalAlignment="Top" Height="17" Background="Transparent" Foreground="White"/>
+            <TextBox x:Name="textBlockHMISIdLabel" Background="Transparent" HorizontalAlignment="Left" Height="17" Margin="386,100,0,0" TextWrapping="Wrap" Text="HMIS ID:" VerticalAlignment="Top" Width="52" BorderThickness="0" IsReadOnly="True" Foreground="White"/>
+            <TextBlock x:Name="textBlockHMISId" HorizontalAlignment="Left" Margin="443,100,0,0" TextWrapping="Wrap" Text="{Binding HmisId}" Width="99" VerticalAlignment="Top" Height="17" Foreground="White"/>
+            <TextBox x:Name="textBlockInfoNeLabel" Background="Transparent" HorizontalAlignment="Left" Height="17" Margin="609,100,0,0" TextWrapping="Wrap" Text="Info Net:" VerticalAlignment="Top" Width="52" BorderThickness="0" IsReadOnly="True" Foreground="White"/>
+            <TextBlock x:Name="textBlockInfoNet" HorizontalAlignment="Left" Margin="666,100,0,0" TextWrapping="Wrap" Text="{Binding InfoNetId}" Width="99" VerticalAlignment="Top" Height="17" Foreground="White"/>
+            <TextBlock x:Name="textBlockStaff" HorizontalAlignment="Left" Margin="130,146,0,0" TextWrapping="Wrap" Text="Staff:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White" Height="16" Width="27"/>
+            <TextBox x:Name="textBoxStaff" Height="13" Margin="170,146,619,0" TextWrapping="Wrap" Text="{Binding Staff}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockDateDataEntered" HorizontalAlignment="Left" Margin="57,162,0,0" TextWrapping="Wrap" Text="Date Data Entered:" VerticalAlignment="Top" Height="16" Foreground="White" Width="100"/>
+            <TextBox  x:Name="textBoxDateDataEntered" HorizontalAlignment="Left" Height="13" Margin="170,162,0,0" TextWrapping="Wrap" Text="{Binding DateDataEntered}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockFNameLabel" HorizontalAlignment="Left" Margin="97,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Height="18" Width="60"><Run Text="First "/><Run Text="Name:"/></TextBlock>
+            <TextBox  x:Name="textBoxFName" HorizontalAlignment="Left" Height="13" Margin="170,178,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockMI" HorizontalAlignment="Left" Margin="85,196,0,0" TextWrapping="Wrap" Text="Middle Initial:" VerticalAlignment="Top" Foreground="White" Height="17" Width="73"/>
+            <TextBox  x:Name="textBoxMI" HorizontalAlignment="Left" Height="13" Margin="170,196,0,0" TextWrapping="Wrap" Text="{Binding Mi}" VerticalAlignment="Top" Width="20" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockLNameLabel" HorizontalAlignment="Left" Margin="98,211,0,0" TextWrapping="Wrap" Text="Last Name:" VerticalAlignment="Top" Foreground="White" Width="59" Height="15"/>
+            <TextBox  x:Name="textBoxLName" HorizontalAlignment="Left" Height="12" Margin="170,213,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockDOB" HorizontalAlignment="Left" Margin="130,228,0,0" TextWrapping="Wrap" Text="DOB:" VerticalAlignment="Top" Foreground="White" Height="16" Width="28"/>
+            <TextBox  x:Name="textBoxDOB" HorizontalAlignment="Left" Height="12" Margin="170,229,0,0" TextWrapping="Wrap" Text="{Binding Dob}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockSSN" HorizontalAlignment="Left" Margin="133,244,0,0" TextWrapping="Wrap" Text="SSN:" VerticalAlignment="Top" Height="16" Foreground="White" Width="25"/>
+            <ComboBox  x:Name="comboBoxSSN" HorizontalAlignment="Left" Margin="170,245,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" Text="{Binding Ssn}" >
                 <ComboBoxItem Name="Refused">Refused</ComboBoxItem>
                 <ComboBoxItem Name="DontKnow">Don't Know</ComboBoxItem>
                 <ComboBoxItem Name="Missing">Missing</ComboBoxItem>
             </ComboBox>
-            <TextBlock x:Name="textBlockHousingStatus" HorizontalAlignment="Left" Margin="4,160,0,0" TextWrapping="Wrap" Text="Housing Status:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <TextBox x:Name="textBoxHomeHousingStatus" HorizontalAlignment="Left" Height="16" Margin="93,160,0,0" TextWrapping="Wrap" Text="{Binding HousingStatus}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0"/>
-            <TextBlock x:Name="textBlockNeighborhood" HorizontalAlignment="Left" Margin="304,160,0,0" TextWrapping="Wrap" Text="Spokane Neighborhood:" VerticalAlignment="Top" Height="16" Grid.ColumnSpan="2" Foreground="White"/>
-            <TextBox x:Name="textBoxHomeNeighborhood" HorizontalAlignment="Left" Height="16" Margin="64,160,0,0" TextWrapping="Wrap" Text="{Binding Neighborhood}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockCountyDetail" HorizontalAlignment="Left" Margin="264,160,0,0" TextWrapping="Wrap" Text="County Detail:" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxCountyDetail" HorizontalAlignment="Left" Height="16" Margin="343,160,0,0" TextWrapping="Wrap" Text="{Binding CountyDetail}" VerticalAlignment="Top" Width="160"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockSSN" HorizontalAlignment="Left" Margin="360,122,0,0" TextWrapping="Wrap" Text="SSN:" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBlock x:Name="textBlockStreetAddress" HorizontalAlignment="Left" Margin="7,194,0,0" TextWrapping="Wrap" Text="Street Address:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <ComboBox x:Name="comboBoxStreetAddress" HorizontalAlignment="Left" Margin="96,194,0,0" VerticalAlignment="Top" Width="226" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Text="{Binding StreetAddress}">
+            <TextBlock x:Name="textBlockHousingStatus" HorizontalAlignment="Left" Margin="75,262,0,0" TextWrapping="Wrap" Text="Housing Status:" VerticalAlignment="Top" Height="17" Foreground="White" Width="83"/>
+            <TextBox x:Name="textBoxHomeHousingStatus" HorizontalAlignment="Left" Height="13" Margin="170,262,0,0" TextWrapping="Wrap" Text="{Binding HousingStatus}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockNeighborhood" HorizontalAlignment="Left" Margin="28,279,0,0" TextWrapping="Wrap" Text="Spokane Neighborhood:" VerticalAlignment="Top" Height="17" Foreground="White" Width="130"/>
+            <TextBox x:Name="textBoxHomeNeighborhood" HorizontalAlignment="Left" Height="13" Margin="170,280,0,0" TextWrapping="Wrap" Text="{Binding Neighborhood}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockCountyDetail" HorizontalAlignment="Left" Margin="83,296,0,0" TextWrapping="Wrap" Text="County Detail:" VerticalAlignment="Top" Height="19" Foreground="White" Width="75"/>
+            <TextBox x:Name="textBoxCountyDetail" HorizontalAlignment="Left" Height="13" Margin="170,297,0,0" TextWrapping="Wrap" Text="{Binding CountyDetail}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockStreetAddress" HorizontalAlignment="Left" Margin="78,313,0,0" TextWrapping="Wrap" Text="Street Address:" VerticalAlignment="Top" Height="14" Foreground="White" Width="80"/>
+            <ComboBox x:Name="comboBoxStreetAddress" HorizontalAlignment="Left" Margin="170,313,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="14" IsEditable="True" FontSize="8" Text="{Binding StreetAddress}">
                 <ComboBoxItem Name="Homeless">Homeless</ComboBoxItem>
             </ComboBox>
-            <TextBlock x:Name="textBlockCity" HorizontalAlignment="Left" Margin="358,194,0,0" TextWrapping="Wrap" Text="City:" VerticalAlignment="Top" Height="16" Grid.ColumnSpan="2" Foreground="White"/>
-            <TextBox x:Name="textBoxCity" HorizontalAlignment="Left" Height="16" Margin="11,194,0,0" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Top" Width="113"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockState" HorizontalAlignment="Left" Margin="183,194,0,0" TextWrapping="Wrap" Text="State:" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxState" HorizontalAlignment="Left" Height="16" Margin="217,194,0,0" TextWrapping="Wrap" Text="{Binding State}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockZip" HorizontalAlignment="Left" Margin="383,194,0,0" TextWrapping="Wrap" Text="Zip:" VerticalAlignment="Top" Height="16" Grid.Column="1" RenderTransformOrigin="-0.567,0.5" Foreground="White"/>
-            <TextBox x:Name="textBoxZip" HorizontalAlignment="Left" Height="16" Margin="407,194,0,0" TextWrapping="Wrap" Text="{Binding Zip}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockHomePhone" HorizontalAlignment="Left" Margin="7,224,0,0" TextWrapping="Wrap" Text="Home Phone:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <TextBox x:Name="textBoxHomePhone" HorizontalAlignment="Left" Height="16" Margin="84,224,0,0" TextWrapping="Wrap" Text="{Binding HomePhone}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0"/>
-            <TextBlock x:Name="textBlockWork" HorizontalAlignment="Left" Margin="234,224,0,0" TextWrapping="Wrap" Text="Work/Message Phone:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <TextBox x:Name="textBoxWork" HorizontalAlignment="Left" Height="16" Margin="358,224,0,0" TextWrapping="Wrap" Text="{Binding WorkPhone}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="textBlockCallTime" HorizontalAlignment="Left" Margin="161,224,0,0" TextWrapping="Wrap" Text="Call Time:" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxCallTime" HorizontalAlignment="Left" Height="16" Margin="217,224,0,0" TextWrapping="Wrap" Text="{Binding CallTime}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
-            <CheckBox x:Name="checkBoxSafeToLeaveMessage" IsChecked="{Binding MsgOk}" Content="Safe To Leave Message" HorizontalAlignment="Left" Margin="365,224,0,0" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBlock x:Name="textBlockGender" HorizontalAlignment="Left" Margin="7,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Foreground="White" Text="Gender"/><Run Text=":"/></TextBlock>
-            <ComboBox x:Name="comboBoxGender" HorizontalAlignment="Left" Text ="{Binding Gender}"  Margin="55,257,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+            <TextBlock x:Name="textBlockCity" HorizontalAlignment="Left" Margin="134,329,0,0" TextWrapping="Wrap" Text="City:" VerticalAlignment="Top" Height="16" Foreground="White" Width="23"/>
+            <TextBox x:Name="textBoxCity" HorizontalAlignment="Left" Height="11" Margin="170,331,0,0" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockState" HorizontalAlignment="Left" Margin="128,345,0,0" TextWrapping="Wrap" Text="State:" VerticalAlignment="Top" Height="16" Foreground="White" Width="31"/>
+            <TextBox x:Name="textBoxState" HorizontalAlignment="Left" Height="13" Margin="170,347,0,0" TextWrapping="Wrap" Text="{Binding State}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockZip" HorizontalAlignment="Left" Margin="138,361,0,0" TextWrapping="Wrap" Text="Zip:" VerticalAlignment="Top" Height="19" RenderTransformOrigin="-0.567,0.5" Foreground="White" Width="20"/>
+            <TextBox x:Name="textBoxZip" HorizontalAlignment="Left" Height="13" Margin="170,364,0,0" TextWrapping="Wrap" Text="{Binding Zip}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockHomePhone" HorizontalAlignment="Left" Margin="86,380,0,0" TextWrapping="Wrap" Text="Home Phone:" VerticalAlignment="Top" Height="15" Foreground="White" Width="72"/>
+            <TextBox x:Name="textBoxHomePhone" HorizontalAlignment="Left" Height="13" Margin="170,381,0,0" TextWrapping="Wrap" Text="{Binding HomePhone}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockWork" HorizontalAlignment="Left" Margin="39,395,0,0" TextWrapping="Wrap" Text="Work/Message Phone:" VerticalAlignment="Top" Height="17" Foreground="White" Width="119"/>
+            <TextBox x:Name="textBoxWork" HorizontalAlignment="Left" Height="13" Margin="170,397,0,0" TextWrapping="Wrap" Text="{Binding WorkPhone}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockCallTime" HorizontalAlignment="Left" Margin="107,412,0,0" TextWrapping="Wrap" Text="Call Time:" VerticalAlignment="Top" Height="16" Foreground="White" Width="52"/>
+            <TextBox x:Name="textBoxCallTime" HorizontalAlignment="Left" Height="13" Margin="170,415,0,0" TextWrapping="Wrap" Text="{Binding CallTime}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <CheckBox x:Name="checkBoxSafeToLeaveMessage" IsChecked="{Binding MsgOk}" Content=":Safe to Leave Message" HorizontalAlignment="Left" Margin="42,432,0,0" VerticalAlignment="Top" Height="16" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="143"  HorizontalContentAlignment="Center" FlowDirection="RightToLeft" IsThreeState="True" Style="{DynamicResource CheckBoxStyle1_ywca}"/>
+            <TextBlock x:Name="textBlockGender" HorizontalAlignment="Left" Margin="117,448,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="14" Width="42"><Run Foreground="White" Text="Gender:"/></TextBlock>
+            <ComboBox x:Name="comboBoxGender" HorizontalAlignment="Left" Text ="{Binding Gender}"  Margin="170,449,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="Female" Content="Female"/>
                 <ComboBoxItem x:Name="Male" Content="Male"/>
                 <ComboBoxItem x:Name="Transgender" Content="Transgender"/>
                 <ComboBoxItem x:Name="Other" Content="Other"/>
             </ComboBox>
-            <TextBlock x:Name="textBlockMaritalStatus" HorizontalAlignment="Left" Margin="252,257,0,0" TextWrapping="Wrap" Text="Marital Status:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <ComboBox x:Name="comboBoxMaritalStatus" HorizontalAlignment="Left" Margin="332,257,0,0" Text="{Binding MaritalStatus}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Grid.ColumnSpan="2">
+            <TextBlock x:Name="textBlockMaritalStatus" HorizontalAlignment="Left" Margin="83,463,0,0" TextWrapping="Wrap" Text="Marital Status:" VerticalAlignment="Top" Height="14" Foreground="White" Width="77"/>
+            <ComboBox x:Name="comboBoxMaritalStatus" HorizontalAlignment="Left" Margin="170,466,0,0" Text="{Binding MaritalStatus}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="12" IsEditable="True" FontSize="8">
                 <ComboBoxItem x:Name="Married" Content="Married"/>
                 <ComboBoxItem x:Name="Single" Content="Single"/>
                 <ComboBoxItem x:Name="Divorced" Content="Divorced"/>
                 <ComboBoxItem x:Name="Widow" Content="Widow"></ComboBoxItem>
             </ComboBox>
-            <TextBlock x:Name="Ethnicity" HorizontalAlignment="Left" Margin="187,257,0,0" TextWrapping="Wrap" Text="Ethnicity:" VerticalAlignment="Top" Height="16" Grid.Column="1" RenderTransformOrigin="0.736,0.75" Foreground="White"/>
-            <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="240,257,0,0" Text="{Binding Ethnicity}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" Grid.Column="1">
+            <TextBlock x:Name="Ethnicity" HorizontalAlignment="Left" Margin="111,482,0,0" TextWrapping="Wrap" Text="Ethnicity:" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.736,0.75" Foreground="White" Width="48"/>
+            <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="170,483,0,0" Text="{Binding Ethnicity}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8">
                 <ComboBoxItem x:Name="Caucasian" Content="Caucasian"/>
                 <ComboBoxItem x:Name="AfricanAmerican" Content="African American"/>
                 <ComboBoxItem x:Name="Hispanic" Content="Hispanic/Latino"/>
                 <ComboBoxItem x:Name="Asian" Content="Asian/Pacific Islander"/>
                 <ComboBoxItem x:Name="Multi" Content="Multi-racial"/>
             </ComboBox>
-            <CheckBox x:Name="checkBoxVeteranStatus" IsChecked="{Binding VeteranStatus}" Content="Veteran Status" HorizontalAlignment="Left" Margin="410,257,0,0" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBlock x:Name="textBlockDisability" HorizontalAlignment="Left" Margin="9,294,0,0" TextWrapping="Wrap" Text="Disability:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <ComboBox x:Name="comboBoxDisability" HorizontalAlignment="Left" Margin="65,294,0,0" Text="{Binding Disability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+            <CheckBox x:Name="checkBoxVeteranStatus" IsChecked="{Binding VeteranStatus}" Content=":Veteran Status" HorizontalAlignment="Left" Margin="75,501,0,0" VerticalAlignment="Top" Height="16" Foreground="White" FlowDirection="RightToLeft" Width="110"/>
+            <TextBlock x:Name="textBlockDisability" HorizontalAlignment="Left" Margin="107,520,0,0" TextWrapping="Wrap" Text="Disability:" VerticalAlignment="Top" Height="19" Foreground="White" Width="51"/>
+            <ComboBox x:Name="comboBoxDisability" HorizontalAlignment="Left" Margin="170,523,0,0" Text="{Binding Disability}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="Physical" Content="Physical"/>
                 <ComboBoxItem x:Name="Mental" Content="Mental"/>
                 <ComboBoxItem x:Name="Sensory" Content="Sensory"/>
                 <ComboBoxItem x:Name="Multiple" Content="Multiple"/>
                 <ComboBoxItem x:Name="OtherDisability" Content="Other"/>
             </ComboBox>
-            <TextBlock x:Name="textBlockDisability2" HorizontalAlignment="Left" Margin="208,294,0,0" TextWrapping="Wrap" Text="2nd Disability:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <ComboBox x:Name="comboBoxDisability2" HorizontalAlignment="Left" Margin="287,294,0,0" Text="{Binding SecondDisability}" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.ColumnSpan="2">
+            <TextBlock x:Name="textBlockDisability2" HorizontalAlignment="Left" Margin="83,539,0,0" TextWrapping="Wrap" Text="2nd Disability:" VerticalAlignment="Top" Height="18" Foreground="White" Width="77"/>
+            <ComboBox x:Name="comboBoxDisability2" HorizontalAlignment="Left" Margin="170,541,0,0" Text="{Binding SecondDisability}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="Physical2" Content="Physical"/>
                 <ComboBoxItem x:Name="Mental2" Content="Mental"/>
                 <ComboBoxItem x:Name="Sensory2" Content="Sensory"/>
                 <ComboBoxItem x:Name="Multiple2" Content="Multiple"/>
                 <ComboBoxItem x:Name="OtherDisability2" Content="Other"/>
             </ComboBox>
-            <TextBlock x:Name="textBlockIncomeType" HorizontalAlignment="Left" Margin="52,294,0,0" TextWrapping="Wrap" Text="Income Type:" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxIncomeType" HorizontalAlignment="Left" Height="16" Margin="127,294,0,0" TextWrapping="Wrap" Text="{Binding IncomeType}" VerticalAlignment="Top" Width="135"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockTotalMonthlyIncome" HorizontalAlignment="Left" Margin="277,294,0,0" TextWrapping="Wrap" Text="Total Monthly Income: $" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxTotalMonthlyIncome" HorizontalAlignment="Left" Height="16" Margin="409,294,0,0" TextWrapping="Wrap" Text="{Binding TotalMonthlyIncome}" VerticalAlignment="Top" Width="99"  GotFocus="GotFocus" BorderThickness="0" Grid.Column="1"/>
+            <TextBlock x:Name="textBlockIncomeType" HorizontalAlignment="Left" Margin="87,557,0,0" TextWrapping="Wrap" Text="Income Type:" VerticalAlignment="Top" Height="19" Foreground="White" Width="70"/>
+            <TextBox x:Name="textBoxIncomeType" HorizontalAlignment="Left" Height="13" Margin="170,560,0,0" TextWrapping="Wrap" Text="{Binding IncomeType}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockTotalMonthlyIncome" HorizontalAlignment="Left" Margin="39,575,0,0" TextWrapping="Wrap" Text="Total Monthly Income: $" VerticalAlignment="Top" Height="17" Foreground="White" Width="130"/>
+            <TextBox x:Name="textBoxTotalMonthlyIncome" HorizontalAlignment="Left" Height="13" Margin="170,578,0,0" TextWrapping="Wrap" Text="{Binding TotalMonthlyIncome}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333"/>
 
 
-            <Button x:Name="buttonUpdate" Content="" Margin="429,91,0,0"  VerticalAlignment="Top" BorderThickness="0" Height="22" FontSize="10.667" HorizontalAlignment="Left" Width="66" Click="buttonUpdate_Click" Grid.Column="1" Foreground="White">
+            <Button x:Name="buttonUpdate" Content="" Margin="123,599,0,0"  VerticalAlignment="Top" BorderThickness="0" Height="16" FontSize="10.667" HorizontalAlignment="Left" Width="56" Click="buttonUpdate_Click" Foreground="White">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources/update_button.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="buttonBack" Content="" Margin="343,40,0,0" VerticalAlignment="Top" BorderThickness="0" Height="37" FontSize="10.667" HorizontalAlignment="Left" Width="35" Click="buttonBack_Click" Foreground="White" Grid.Column="1">
+            <Button x:Name="buttonBack" Content="" Margin="834,25,0,0" VerticalAlignment="Top" BorderThickness="0" Height="37" FontSize="10.667" HorizontalAlignment="Left" Width="38" Click="buttonBack_Click" Foreground="White">
                 <Button.Background>
-                    <ImageBrush ImageSource="Resources/back_button-01 (1).png"/>
+                    <ImageBrush ImageSource="Resources/back_button.png"/>
                 </Button.Background>
             </Button>
+            <Rectangle Fill="#FFD67A1F" HorizontalAlignment="Left" Height="478" Margin="280,137,0,0" Stroke="#FFD67A1F" VerticalAlignment="Top" Width="3"/>
+
             <!--///////////////////////////////////////////////////////////////////////////// End Demographic Info /////////////////////////////////////////////////////////////////////////////-->
 
 
             <!--///////////////////////////////////////////////////////////////////////////// Start ADVP Info /////////////////////////////////////////////////////////////////////////////-->
-            <TextBlock x:Name="textBlockIntakeDate" HorizontalAlignment="Left" Margin="9,342,0,0" TextWrapping="Wrap" Text="IntakeDate:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <ListBox x:Name="listBoxIntakeDate" Margin="74,342,0,0" ItemsSource="{Binding ListDates, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="326" Height="72" VerticalAlignment="Top" Grid.ColumnSpan="2" BorderThickness="0" >
+
+            <TextBlock x:Name="textBlockIntakeDate" HorizontalAlignment="Left" Margin="303,141,0,0" TextWrapping="Wrap" Text="IntakeDate:" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <ListBox x:Name="listBoxIntakeDate" Margin="386,141,0,0" ItemsSource="{Binding ListDates, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="212" Height="119" VerticalAlignment="Top" BorderThickness="0" FontSize="9.333" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -131,91 +221,91 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBlock x:Name="textBlockNewDate" HorizontalAlignment="Left" Margin="30,342,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="16" Margin="90,342,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" Grid.Column="1" />
-            <Button x:Name="buttonAddNewDate" Content="" Margin="0,339,233,0" VerticalAlignment="Top" Height="21" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="75" Click="buttonAddNewDate_Click" RenderTransformOrigin="0.867,1.238" Grid.Column="1" Foreground="{x:Null}" BorderBrush="{x:Null}">
+            <TextBlock x:Name="textBlockNewDate" HorizontalAlignment="Left" Margin="308,280,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="13" Margin="386,283,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" FontSize="9.333" />
+            <Button x:Name="buttonAddNewDate" Content="" Margin="0,281,291,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="78" Click="buttonAddNewDate_Click" RenderTransformOrigin="0.867,1.238" Foreground="{x:Null}" BorderBrush="{x:Null}">
                 <Button.Background>
-                    <ImageBrush ImageSource="Resources/newdate_button-01.png"/>
+                    <ImageBrush ImageSource="Resources/newdate_button.png"/>
                 </Button.Background>
             </Button>
-            <TextBlock x:Name="textBlockTotalAdultsInHousehold" HorizontalAlignment="Left" Margin="108,597,0,0" TextWrapping="Wrap" Text="Total Adults In Household:" VerticalAlignment="Top" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxTotalAdultsInHousehold" HorizontalAlignment="Left" Height="16" Margin="248,597,0,0" TextWrapping="Wrap" Text="{Binding TotalAdultsInHouseholdString}" VerticalAlignment="Top" Width="37" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockTotalChildrenInHousehold" HorizontalAlignment="Left" Margin="288,597,0,0" TextWrapping="Wrap" Text="Total Children In Household:" VerticalAlignment="Top" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxTotalChildrenInHousehold" HorizontalAlignment="Left" Height="16" Margin="443,597,0,0" TextWrapping="Wrap" Text="{Binding TotalChildrenInHouseholdString}" VerticalAlignment="Top" Width="37" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockLablePersonsInHome" HorizontalAlignment="Left" Margin="108,377,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Persons In Home:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1" Width="372" FontSize="16" Foreground="White"/>
-            <TextBlock x:Name="textBlockLablePersonInHomeRelationship" HorizontalAlignment="Left" Margin="111,394,0,0" TextWrapping="Wrap" Text="Relationship:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1" Foreground="White"/>
-            <TextBlock x:Name="textBlockLablePersonInHomeGender" HorizontalAlignment="Left" Margin="268,394,0,0" TextWrapping="Wrap" Text="Gender:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1" Foreground="White"/>
-            <TextBlock x:Name="textBlockLablePersonInHomeDOB" HorizontalAlignment="Left" Margin="396,394,0,0" TextWrapping="Wrap" Text="DOB:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Grid.Column="1" Foreground="White"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship" Height="16" Margin="108,415,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender}"  Margin="268,415,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBlock x:Name="textBlockTotalAdultsInHousehold" HorizontalAlignment="Left" Margin="487,489,0,0" TextWrapping="Wrap" Text="Total Adults In Household:" VerticalAlignment="Top" Foreground="White"/>
+            <TextBox x:Name="textBoxTotalAdultsInHousehold" HorizontalAlignment="Left" Height="13" Margin="631,492,0,0" TextWrapping="Wrap" Text="{Binding TotalAdultsInHouseholdString}" VerticalAlignment="Top" Width="23" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockTotalChildrenInHousehold" HorizontalAlignment="Left" Margin="673,489,0,0" TextWrapping="Wrap" Text="Total Children In Household:" VerticalAlignment="Top" Foreground="White"/>
+            <TextBox x:Name="textBoxTotalChildrenInHousehold" HorizontalAlignment="Left" Height="13" Margin="828,492,0,0" TextWrapping="Wrap" Text="{Binding TotalChildrenInHouseholdString}" VerticalAlignment="Top" Width="23" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockLablePersonsInHome" HorizontalAlignment="Left" Margin="303,313,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Persons In Home:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Width="548" FontSize="16" Foreground="White" TextDecorations="Underline"/>
+            <TextBlock x:Name="textBlockLablePersonInHomeRelationship" HorizontalAlignment="Left" Margin="308,337,0,0" TextWrapping="Wrap" Text="Relationship:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
+            <TextBlock x:Name="textBlockLablePersonInHomeGender" HorizontalAlignment="Left" Margin="516,337,0,0" TextWrapping="Wrap" Text="Gender:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
+            <TextBlock x:Name="textBlockLablePersonInHomeDOB" HorizontalAlignment="Left" Margin="702,337,0,0" TextWrapping="Wrap" Text="DOB:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship" Height="13" Margin="308,354,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender}"  Margin="516,354,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB" HorizontalAlignment="Left" Height="16" Margin="396,415,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship2" Height="16" Margin="108,436,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship2}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender2" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender2}"  Margin="268,436,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBox x:Name="textBoxPersonsInHomeDOB" HorizontalAlignment="Left" Height="13" Margin="702,354,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship2" Height="13" Margin="308,371,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship2}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender2" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender2}"  Margin="516,371,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale2" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale2" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender2" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther2" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB2" HorizontalAlignment="Left" Height="16" Margin="396,436,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob2}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship3" Height="16" Margin="108,457,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship3}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender3" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender3}"  Margin="268,457,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBox x:Name="textBoxPersonsInHomeDOB2" HorizontalAlignment="Left" Height="13" Margin="702,371,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob2}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship3" Height="13" Margin="308,388,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship3}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender3" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender3}"  Margin="516,388,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale3" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale3" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender3" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther3" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB3" HorizontalAlignment="Left" Height="16" Margin="396,457,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob3}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship4" Height="16" Margin="108,478,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship4}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender4" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender4}"  Margin="268,478,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBox x:Name="textBoxPersonsInHomeDOB3" HorizontalAlignment="Left" Height="13" Margin="702,388,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob3}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship4" Height="13" Margin="308,405,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship4}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender4" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender4}"  Margin="516,405,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale4" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale4" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender4" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther4" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB4" HorizontalAlignment="Left" Height="16" Margin="396,478,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob4}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship5" Height="16" Margin="108,499,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship5}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender5" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender5}"  Margin="268,499,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBox x:Name="textBoxPersonsInHomeDOB4" HorizontalAlignment="Left" Height="13" Margin="702,405,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob4}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship5" Height="13" Margin="308,422,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship5}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender5" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender5}"  Margin="516,422,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale5" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale5" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender5" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther5" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB5" HorizontalAlignment="Left" Height="16" Margin="396,499,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob5}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship6" Height="16" Margin="108,520,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship6}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender6" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender6}"  Margin="268,520,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBox x:Name="textBoxPersonsInHomeDOB5" HorizontalAlignment="Left" Height="13" Margin="702,422,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob5}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship6" Height="13" Margin="308,439,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship6}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender6" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender6}"  Margin="516,439,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale6" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale6" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender6" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther6" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB6" HorizontalAlignment="Left" Height="16" Margin="396,520,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob6}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship7" Height="16" Margin="108,541,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship7}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender7" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender7}"  Margin="268,541,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBox x:Name="textBoxPersonsInHomeDOB6" HorizontalAlignment="Left" Height="13" Margin="702,439,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob6}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship7" Height="13" Margin="308,456,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship7}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender7" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender7}"  Margin="516,456,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale7" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale7" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender7" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther7" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB7" HorizontalAlignment="Left" Height="16" Margin="396,541,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob7}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBox x:Name="textBoxPersonsInHomeRelationship8" Height="16" Margin="108,562,261,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship8}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxPersonsInHomeGender8" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender8}"  Margin="268,562,0,0" VerticalAlignment="Top" Width="115" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556" Grid.Column="1">
+            <TextBox x:Name="textBoxPersonsInHomeDOB7" HorizontalAlignment="Left" Height="13" Margin="702,456,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob7}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBox x:Name="textBoxPersonsInHomeRelationship8" Height="13" Margin="308,473,386,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeRelationship8}" VerticalAlignment="Top" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <ComboBox x:Name="comboBoxPersonsInHomeGender8" HorizontalAlignment="Left" Text ="{Binding PersonsInHomeGender8}"  Margin="516,473,0,0" VerticalAlignment="Top" Width="172" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="PersonsInHomeFemale8" Content="Female"/>
                 <ComboBoxItem x:Name="PersonsInHomeMale8" Content="Male"/>
                 <ComboBoxItem x:Name="PersonsInHomeTransgender8" Content="Transgender"/>
                 <ComboBoxItem x:Name="PersonsInHomeOther8" Content="Other"/>
             </ComboBox>
-            <TextBox x:Name="textBoxPersonsInHomeDOB8" HorizontalAlignment="Left" Height="16" Margin="396,562,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob8}" VerticalAlignment="Top" Width="84" BorderThickness="0" GotFocus="GotFocus" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockDischargeDate" HorizontalAlignment="Left" Margin="26,449,0,0" TextWrapping="Wrap" Text="Discharge Date:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <TextBox x:Name="textBoxDischargeDate" HorizontalAlignment="Left" Height="16" Margin="115,449,0,0" TextWrapping="Wrap" Text="{Binding DischargeDate}" VerticalAlignment="Top" Width="107" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062"/>
-            <TextBlock x:Name="textBlockBedNights" HorizontalAlignment="Left" Margin="294,419,0,0" TextWrapping="Wrap" Text="Bed Nights:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <TextBox x:Name="textBoxBedNights" HorizontalAlignment="Left" Height="16" Margin="360,419,0,0" TextWrapping="Wrap" Text="?" VerticalAlignment="Top" Width="34" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="textBlockDischargeLocation" HorizontalAlignment="Left" Margin="24,470,0,0" TextWrapping="Wrap" Text="Discharge Location:" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <ComboBox x:Name="comboBoxDischargeLocation" HorizontalAlignment="Left" Text ="{Binding DischargeLocation}"  Margin="132,471,0,0" VerticalAlignment="Top" Width="212" BorderThickness="0" Height="18" IsEditable="True" FontSize="10.667" RenderTransformOrigin="-0.113,0.556">
+            <TextBox x:Name="textBoxPersonsInHomeDOB8" HorizontalAlignment="Left" Height="13" Margin="702,473,0,0" TextWrapping="Wrap" Text="{Binding PersonsInHomeDob8}" VerticalAlignment="Top" Width="149" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockDischargeDate" HorizontalAlignment="Left" Margin="629,141,0,0" TextWrapping="Wrap" Text="Discharge Date:" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <TextBox x:Name="textBoxDischargeDate" HorizontalAlignment="Left" Height="13" Margin="726,144,0,0" TextWrapping="Wrap" Text="{Binding DischargeDate}" VerticalAlignment="Top" Width="125" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockBedNights" HorizontalAlignment="Left" Margin="651,159,0,0" TextWrapping="Wrap" Text="Bed Nights:" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <TextBox x:Name="textBoxBedNights" HorizontalAlignment="Left" Height="13" Margin="726,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="21" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" FontSize="9.333"/>
+            <TextBlock x:Name="textBlockDischargeLocation" HorizontalAlignment="Left" Margin="609,175,0,0" TextWrapping="Wrap" Text="Discharge Location:" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <ComboBox x:Name="comboBoxDischargeLocation" HorizontalAlignment="Left" Text ="{Binding DischargeLocation}"  Margin="726,179,0,0" VerticalAlignment="Top" Width="125" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" RenderTransformOrigin="-0.113,0.556">
                 <ComboBoxItem x:Name="OtherShelter" Content="OtherShelter"/>
                 <ComboBoxItem x:Name="HomeRental" Content="Home/Rental"/>
                 <ComboBoxItem x:Name="TransitionalHousing" Content="Transitional Housing"/>
@@ -223,25 +313,25 @@
                 <ComboBoxItem x:Name="Abuser" Content="Return To Abuser"/>
                 <ComboBoxItem x:Name="Relocated" Content="Relocated Out Of Area"/>
             </ComboBox>
-            <TextBlock x:Name="textBlockLableProgram" HorizontalAlignment="Left" Margin="24,491,0,0" TextWrapping="Wrap" Text="Program:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
-            <CheckBox x:Name="checkBoxLegal" IsChecked="{Binding Legal}" Content="Legal" HorizontalAlignment="Left" Margin="129,495,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <CheckBox x:Name="checkBoxCounseling" IsChecked="{Binding Counseling}" Content="Counseling" HorizontalAlignment="Left" Margin="205,495,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <CheckBox x:Name="checkBoxShelter" IsChecked="{Binding Shelter}" Content="Shelter" HorizontalAlignment="Left" Margin="295,493,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <TextBlock x:Name="textBlockLableServicesProvided" HorizontalAlignment="Left" Margin="24,514,0,0" TextWrapping="Wrap" Text="Services Provided:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
-            <CheckBox x:Name="checkBoxAdvocacy" IsChecked="{Binding Advocacy}" Content="Advocacy" HorizontalAlignment="Left" Margin="129,514,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <CheckBox x:Name="checkBoxGroupClass" IsChecked="{Binding GroupClass}" Content="Group/Class" HorizontalAlignment="Left" Margin="205,515,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
-            <CheckBox x:Name="checkBoxChildAdvocacy" IsChecked="{Binding ChildAdvocacy}" Content="Child Advocacy" HorizontalAlignment="Left" Margin="294,514,0,0" VerticalAlignment="Top" Height="16" Grid.ColumnSpan="2" Foreground="White"/>
-            <TextBlock x:Name="textBlockLableComments" HorizontalAlignment="Left" Margin="22,541,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
-            <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="77" Margin="86,541,0,0" 
-                     VerticalAlignment="Top" Width="327" BorderThickness="0" Grid.ColumnSpan="2" 
-                     AcceptsTab="True" AcceptsReturn="True">
+            <TextBlock x:Name="textBlockLableProgram" HorizontalAlignment="Left" Margin="664,195,0,0" TextWrapping="Wrap" Text="Program:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
+            <CheckBox x:Name="checkBoxLegal" IsChecked="{Binding Legal}" Content="Legal" HorizontalAlignment="Left" Margin="724,197,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <CheckBox x:Name="checkBoxCounseling" IsChecked="{Binding Counseling}" Content="Counseling" HorizontalAlignment="Left" Margin="724,213,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <CheckBox x:Name="checkBoxShelter" IsChecked="{Binding Shelter}" Content="Shelter" HorizontalAlignment="Left" Margin="724,229,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <TextBlock x:Name="textBlockLableServicesProvided" HorizontalAlignment="Left" Margin="617,248,0,0" TextWrapping="Wrap" Text="Services Provided:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
+            <CheckBox x:Name="checkBoxAdvocacy" IsChecked="{Binding Advocacy}" Content="Advocacy" HorizontalAlignment="Left" Margin="724,249,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <CheckBox x:Name="checkBoxGroupClass" IsChecked="{Binding GroupClass}" Content="Group/Class" HorizontalAlignment="Left" Margin="724,265,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <CheckBox x:Name="checkBoxChildAdvocacy" IsChecked="{Binding ChildAdvocacy}" Content="Child Advocacy" HorizontalAlignment="Left" Margin="724,281,0,0" VerticalAlignment="Top" Height="16" Foreground="White"/>
+            <TextBlock x:Name="textBlockLableComments" HorizontalAlignment="Left" Margin="308,524,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White"/>
+            <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="60" Margin="373,524,0,0" 
+                     VerticalAlignment="Top" Width="478" BorderThickness="0" 
+                     AcceptsTab="True" AcceptsReturn="True" FontSize="9.333">
                 <FlowDocument>
                     <Paragraph>
                         <Run  Text="{Binding Comments}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Button x:Name="buttonUpdateADVP" Content="" Margin="0,342,26,0" VerticalAlignment="Top" Height="22" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="68" Click="buttonUpdateADVP_Click" Grid.Column="1" Foreground="White">
+            <Button x:Name="buttonUpdateADVP" Content="" Margin="0,599,273,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="56" Click="buttonUpdateADVP_Click" Foreground="White">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources/update_button.png"/>
                 </Button.Background>
@@ -252,3 +342,5 @@
         </Grid>
     </Viewbox>
 </Window>
+
+
