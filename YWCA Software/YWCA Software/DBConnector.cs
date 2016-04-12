@@ -30,6 +30,757 @@ namespace YWCA_Software
         /********************************************************************* Start SQL Data Sections *********************************************************************/
 
         #region Data Binding
+//////////////////////////////////////////////////////////////////////////////////////
+///// WOCAppt
+        private string _wocId;
+        public string WocId
+        {
+            get
+            {
+                return _wocId;
+            }
+            set
+            {
+                _wocId = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocId"));
+            }
+        }
+
+        private string _wocDateScheduled;
+        public string WocDateScheduled
+        {
+            get
+            {
+                return _wocDateScheduled;
+            }
+            set
+            {
+                _wocDateScheduled = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocDateScheduled"));
+            }
+        }
+
+        private string _wocProgram;
+        public string WocProgram
+        {
+            get
+            {
+                return _wocProgram;
+            }
+            set
+            {
+                _wocProgram = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocProgram"));
+            }
+        }
+
+        private bool _wocFirstVisit;
+        public bool WocFirstVisit
+        {
+            get
+            {
+                return _wocFirstVisit;
+            }
+            set
+            {
+                _wocFirstVisit = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocFirstVisit"));
+            }
+        }
+
+        private string _wocGoal;
+        public string WocGoal
+        {
+            get
+            {
+                return _wocGoal;
+            }
+            set
+            {
+                _wocGoal = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocGoal"));
+            }
+        }
+
+        private string _wocPreparationBefore;
+        public string WocPreparationBefore
+        {
+            get
+            {
+                return _wocPreparationBefore;
+            }
+            set
+            {
+                _wocPreparationBefore = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocPreparationBefore"));
+            }
+        }
+
+        private string _wocReferenced;
+        public string WocReferenced
+        {
+            get
+            {
+                return _wocReferenced;
+            }
+            set
+            {
+                _wocReferenced = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocReferenced"));
+            }
+        }
+
+        private string _wocRace;
+        public string WocRace
+        {
+            get
+            {
+                return _wocRace;
+            }
+            set
+            {
+                _wocRace = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocRace"));
+            }
+        }
+
+        private string _wocEthnicity;
+        public string WocEthnicity
+        {
+            get
+            {
+                return _wocEthnicity;
+            }
+            set
+            {
+                _wocEthnicity = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocEthnicity"));
+            }
+        }
+
+        private bool _wocCurrentlyEmployed;
+        public bool WocCurrentlyEmployed
+        {
+            get
+            {
+                return _wocCurrentlyEmployed;
+            }
+            set
+            {
+                _wocCurrentlyEmployed = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocCurrentlyEmployed"));
+            }
+        }
+
+        private bool _wocMainProvider;
+        public bool WocMainProvider
+        {
+            get
+            {
+                return _wocMainProvider;
+            }
+            set
+            {
+                _wocMainProvider = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocMainProvider"));
+            }
+        }
+
+        private string _wocFamilyMonthlyIncome;
+        public string WocFamilyMonthlyIncome
+        {
+            get
+            {
+                return _wocFamilyMonthlyIncome;
+            }
+            set
+            {
+                _wocFamilyMonthlyIncome = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocFamilyMonthlyIncome"));
+            }
+        }
+
+        private string _wocMaritalSTatus;
+        public string WocMaritalStatus
+        {
+            get
+            {
+                return _wocMaritalSTatus;
+            }
+            set
+            {
+                _wocMaritalSTatus = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocMaritalStatus"));
+            }
+        }
+
+        private string _wocChildrenUnder18;
+        public string WocChildrenUnder18
+        {
+            get
+            {
+                return _wocChildrenUnder18;
+            }
+            set
+            {
+                _wocChildrenUnder18 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocChildrenUnder18"));
+            }
+        }
+
+        private string _wocPreparationAfter;
+        public string WocPreparationAfter
+        {
+            get
+            {
+                return _wocPreparationAfter;
+            }
+            set
+            {
+                _wocPreparationAfter = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocPreparationAfter"));
+            }
+        }
+
+        private bool _wocSuccess;
+        public bool WocSuccess
+        {
+            get
+            {
+                return _wocSuccess;
+            }
+            set
+            {
+                _wocSuccess = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocSuccess"));
+            }
+        }
+
+        private string _wocImprovements;
+        public string WocImprovements
+        {
+            get
+            {
+                return _wocImprovements;
+            }
+            set
+            {
+                _wocImprovements = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocImprovements"));
+            }
+        }
+
+        private string _wocComments;
+        public string WocComments
+        {
+            get
+            {
+                return _wocComments;
+            }
+            set
+            {
+                _wocComments = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocComments"));
+            }
+        }
+
+        private bool _wocUseComment;
+        public bool WocUseComment
+        {
+            get
+            {
+                return _wocUseComment;
+            }
+            set
+            {
+                _wocUseComment = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocUseComment"));
+            }
+        }
+
+        private bool _wocAnonymous;
+        public bool WocAnonymous
+        {
+            get
+            {
+                return _wocAnonymous;
+            }
+            set
+            {
+                _wocAnonymous = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocAnonymous"));
+            }
+        }
+
+        private bool _wocContact;
+        public bool WocContact
+        {
+            get
+            {
+                return _wocContact;
+            }
+            set
+            {
+                _wocContact = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocContact"));
+            }
+        }
+
+        private string _wocEmail;
+        public string WocEmail
+        {
+            get
+            {
+                return _wocEmail;
+            }
+            set
+            {
+                _wocEmail = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocEmail"));
+            }
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////
+///// WOCClass
+
+        private string _wocDateClass;
+        public string WocDateClass
+        {
+            get
+            {
+                return _wocDateClass;
+            }
+            set
+            {
+                _wocDateClass = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocDateClass"));
+            }
+        }
+
+        private string _wocClassId;
+        public string WocClassId
+        {
+            get
+            {
+                return _wocClassId;
+            }
+            set
+            {
+                _wocClassId = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocClassId"));
+            }
+        }
+
+        private string _wocClassId;
+        public string WocClassId
+        {
+            get
+            {
+                return _wocClassId;
+            }
+            set
+            {
+                _wocClassId = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocClassId"));
+            }
+        }
+
+        private string _wocClassName;
+        public string WocClassName
+        {
+            get
+            {
+                return _wocClassName;
+            }
+            set
+            {
+                _wocClassName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocClassName"));
+            }
+        }
+
+        private bool _wocAttended;
+        public bool WocAttended
+        {
+            get
+            {
+                return _wocAttended;
+            }
+            set
+            {
+                _wocAttended = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocAttended"));
+            }
+        }
+
+        private string _wocSupervisor;
+        public string WocSupervisor
+        {
+            get
+            {
+                return _wocSupervisor;
+            }
+            set
+            {
+                _wocSupervisor = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocSupervisor"));
+            }
+        }
+
+        private string _wocCompleted;
+        public string WocCompleted
+        {
+            get
+            {
+                return _wocCompleted;
+            }
+            set
+            {
+                _wocCompleted = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocCompleted"));
+            }
+        }
+
+        private string _wocFoundValue;
+        public string WocFoundValue
+        {
+            get
+            {
+                return _wocFoundValue;
+            }
+            set
+            {
+                _wocFoundValue = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocFoundValue"));
+            }
+        }
+
+        private string _wocIncreasedConfidence;
+        public string WocIncreasedConfidence
+        {
+            get
+            {
+                return _wocIncreasedConfidence;
+            }
+            set
+            {
+                _wocIncreasedConfidence = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocIncreasedConfidence"));
+            }
+        }
+
+        private string _wocPreparedForGoals;
+        public string WocPreparedForGoals
+        {
+            get
+            {
+                return _wocPreparedForGoals;
+            }
+            set
+            {
+                _wocPreparedForGoals = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocPreparedForGoals"));
+            }
+        }
+
+        private string _wocStimulatedThinking;
+        public string WocStimulatedThinking
+        {
+            get
+            {
+                return _wocStimulatedThinking;
+            }
+            set
+            {
+                _wocStimulatedThinking = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocStimulatedThinking"));
+            }
+        }
+
+        private string _wocImprovedSkills;
+        public string WocImprovedSkills
+        {
+            get
+            {
+                return _wocImprovedSkills;
+            }
+            set
+            {
+                _wocImprovedSkills = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocImprovedSkills"));
+            }
+        }
+
+        private string _wocRecommendClass;
+        public string WocRecommendClass
+        {
+            get
+            {
+                return _wocRecommendClass;
+            }
+            set
+            {
+                _wocRecommendClass = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocRecommendClass"));
+            }
+        }
+
+        private string _wocApplyLearning;
+        public string WocApplyLearning
+        {
+            get
+            {
+                return _wocApplyLearning;
+            }
+            set
+            {
+                _wocApplyLearning = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocApplyLearning"));
+            }
+        }
+
+        private string _wocMetExpectations;
+        public string WocMetExpectations
+        {
+            get
+            {
+                return _wocMetExpectations;
+            }
+            set
+            {
+                _wocMetExpectations = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocMetExpectations"));
+            }
+        }
+
+        private string _wocFutureDesc;
+        public string WocFutureDesc
+        {
+            get
+            {
+                return _wocFutureDesc;
+            }
+            set
+            {
+                _wocFutureDesc = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocFutureDesc"));
+            }
+        }
+
+        private string _wocAppreciatedDesc;
+        public string WocAppreciatedDesc
+        {
+            get
+            {
+                return _wocAppreciatedDesc;
+            }
+            set
+            {
+                _wocAppreciatedDesc = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocAppreciatedDesc"));
+            }
+        }
+
+        private string _wocChangeOrAddDesc;
+        public string WocChangeOrAddDesc
+        {
+            get
+            {
+                return _wocChangeOrAddDesc;
+            }
+            set
+            {
+                _wocChangeOrAddDesc = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocChangeOrAddDesc"));
+            }
+        }
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+///// WOCClass
+
+        private string _wocPosition;
+        public string WocPosition
+        {
+            get
+            {
+                return _wocPosition;
+            }
+            set
+            {
+                _wocPosition = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocPosition"));
+            }
+        }
+
+        private string _wocHoursWeekly;
+        public string WocHoursWeekly
+        {
+            get
+            {
+                return _wocHoursWeekly;
+            }
+            set
+            {
+                _wocHoursWeekly = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocHoursWeekly"));
+            }
+        }
+
+        private string _wocWage;
+        public string WocWage
+        {
+            get
+            {
+                return _wocWage;
+            }
+            set
+            {
+                _wocWage = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocWage"));
+            }
+        }
+
+        private string _wocHearAboutPosition;
+        public string WocHearAboutPosition
+        {
+            get
+            {
+                return _wocHearAboutPosition;
+            }
+            set
+            {
+                _wocHearAboutPosition = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocHearAboutPosition"));
+            }
+        }
+
+        private string _wocTrainingSchool;
+        public string WocTrainingSchool
+        {
+            get
+            {
+                return _wocTrainingSchool;
+            }
+            set
+            {
+                _wocTrainingSchool = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocTrainingSchool"));
+            }
+        }
+
+        private string _wocTrainSchoolStartDate;
+        public string WocTrainSchoolStartDate
+        {
+            get
+            {
+                return _wocTrainSchoolStartDate;
+            }
+            set
+            {
+                _wocTrainSchoolStartDate = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocTrainSchoolStartDate"));
+            }
+        }
+
+        private string _wocFavoriteClass;
+        public string WocFavoriteClass
+        {
+            get
+            {
+                return _wocFavoriteClass;
+            }
+            set
+            {
+                _wocFavoriteClass = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocFavoriteClass"));
+            }
+        }
+
+        private string _wocMostHelpfulClass;
+        public string WocMostHelpfulClass
+        {
+            get
+            {
+                return _wocMostHelpfulClass;
+            }
+            set
+            {
+                _wocMostHelpfulClass = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocMostHelpfulClass"));
+            }
+        }
+
+        private string _wocOtherJobSupportServices;
+        public string WocOtherJobSupportServices
+        {
+            get
+            {
+                return _wocOtherJobSupportServices;
+            }
+            set
+            {
+                _wocOtherJobSupportServices = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocOtherJobSupportServices"));
+            }
+        }
+
+        private string _wocCompareServices;
+        public string WocCompareServices
+        {
+            get
+            {
+                return _wocCompareServices;
+            }
+            set
+            {
+                _wocCompareServices = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocCompareServices"));
+            }
+        }
+
+        private string _wocCompareServicesReason;
+        public string WocCompareServicesReason
+        {
+            get
+            {
+                return _wocCompareServicesReason;
+            }
+            set
+            {
+                _wocCompareServicesReason = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocCompareServicesReason"));
+            }
+        }
+
+        private string _wocDoBetter;
+        public string WocDoBetter
+        {
+            get
+            {
+                return _wocDoBetter;
+            }
+            set
+            {
+                _wocDoBetter = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocDoBetter"));
+            }
+        }
+
+        private string _wocOfferOtherServices;
+        public string WocOfferOtherServices
+        {
+            get
+            {
+                return _wocOfferOtherServices;
+            }
+            set
+            {
+                _wocOfferOtherServices = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocOfferOtherServices"));
+            }
+        }
+
         private string _ecapId;
         public string EcapId
         {
