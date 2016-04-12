@@ -128,10 +128,51 @@
     <Resource Include="Resources\IntakeBKG.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\YWCANewBKG.png" />
+    <Resource Include="YwcaIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="YwcaIcon.ico" />
+    <Resource Include="Resources\advp_button.png" />
+    <Resource Include="Resources\back_button-01 %281%29.png" />
+    <Resource Include="Resources\ecap_back %283%29.png" />
+    <Resource Include="Resources\ecap_button.png" />
+    <Resource Include="Resources\search_button %281%29.png" />
+    <Resource Include="Resources\update_button.png" />
+    <Resource Include="Resources\woc_back %282%29.png" />
+    <Resource Include="Resources\woc_button.png" />
+    <Resource Include="ywca_menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ywca_menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ecap_back_flat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ecap_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ywca_menu_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\search_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\select_button-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\search_text_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\createnew_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\createNewParticipant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\advp_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\newdate_button-01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
