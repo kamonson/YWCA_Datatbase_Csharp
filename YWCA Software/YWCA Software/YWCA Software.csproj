@@ -150,6 +150,30 @@
   <ItemGroup>
     <Resource Include="Resources\ecap_snip.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ywca_menu_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\search_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\select_button-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\search_text_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\createnew_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\createNewParticipant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\advp_snip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\newdate_button-01.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

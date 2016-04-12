@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="YWCA Database Select" ResizeMode="CanResize" Background="{x:Null}" Foreground="{x:Null}">
+        Title="YWCA Main Menu" ResizeMode="CanResize" Background="{x:Null}" Foreground="{x:Null}">
 
 
     <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
 
         <Grid x:Name="MainGrid" Height="1080" Width="1920">
             <Grid.Background>
-                <ImageBrush ImageSource="Resources/ecap_snip.png"/>
+                <ImageBrush ImageSource="Resources/ywca_menu_snip.png"/>
             </Grid.Background>
            
 
