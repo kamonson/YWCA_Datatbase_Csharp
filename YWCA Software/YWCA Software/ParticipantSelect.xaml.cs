@@ -93,9 +93,10 @@ namespace YWCA_Software
             {
 
             }
-            else if(_department == @"WOC_EPT")
+            else if(_department == @"WOCAPPT")
             {
-
+                WocMenu woc = new WocMenu(textBoxParticipantID.Text);
+                woc.Show();
             }
             else if(_department == @"WOC_CLASS")
             {

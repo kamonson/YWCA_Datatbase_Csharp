@@ -61,6 +61,34 @@ namespace YWCA_Software
             }
         }
 
+        private string _wocFName;
+        public string WOCFName
+        {
+            get
+            {
+                return _wocFName;
+            }
+            set
+            {
+                _wocFName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WOCFName"));
+            }
+        }
+
+        private string _wocLName;
+        public string WOCLName
+        {
+            get
+            {
+                return _wocLName;
+            }
+            set
+            {
+                _wocLName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WOCLName"));
+            }
+        }
+
         private string _wocProgram;
         public string WocProgram
         {
@@ -355,6 +383,17 @@ namespace YWCA_Software
             {
                 _wocDateClass = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocDateClass"));
+            }
+        }
+
+        private string _wocDateApt;
+        public string WocDateApt
+        {
+            get { return _wocDateApt; }
+            set
+            {
+                _wocDateApt = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WocDateApt"));
             }
         }
 
@@ -1891,6 +1930,15 @@ namespace YWCA_Software
             Pid = pid;
         }
 
+        /// <summary>
+        /// Set Pid to Input
+        /// </summary>
+        /// <param name="pid"></param>
+        public void SetWocPid(string pid)
+        {
+            WocId = pid;
+        }
+
         private string _hmisId = "NoInfo";
         public string HmisId
         {
@@ -1953,6 +2001,20 @@ namespace YWCA_Software
             {
                 _listDates = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListDates"));
+            }
+        }
+
+        private ObservableCollection<string> _listDatesSecond = new ObservableCollection<string> { @"results go here" }; //pid search results list\
+        public ObservableCollection<string> ListDatesSecond//List for displaying search results of dates for advp
+        {
+            get
+            {
+                return _listDatesSecond;
+            }
+            set
+            {
+                _listDatesSecond = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListDatesSecond"));
             }
         }
 
@@ -2093,6 +2155,48 @@ namespace YWCA_Software
                     ListDates.Add((rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0).ToShortDateString() : DateTime.Now.ToShortDateString());
                 }
             }
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Search for pid based off FirstName AND LastName OR Pid
+        /// </summary>
+        public void RunQueryFindDateWocApt()
+        {
+            Connect();
+            DbCommand.CommandText = _sql.FindWocAptDate(Pid);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListDates.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    ListDates.Add((rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0).ToShortDateString() : DateTime.Now.ToShortDateString());
+                }
+            }
+            WocDateApt = ListDates[0];
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Search for pid based off FirstName AND LastName OR Pid
+        /// </summary>
+        public void RunQueryFindDateWocClass()
+        {
+            Connect();
+            DbCommand.CommandText = _sql.FindWocClassDate(Pid);
+            OleDbDataReader rdr = DbCommand.ExecuteReader();
+            ListDatesSecond.Clear();
+            if (rdr != null)
+            {
+                int rowNum;
+                for (rowNum = 0; rdr.Read(); rowNum++)
+                {
+                    ListDatesSecond.Add((rdr.IsDBNull(0) == false) ? rdr.GetDateTime(0).ToShortDateString() : DateTime.Now.ToShortDateString());
+                }
+            }
+            WocDateClass = ListDates[0];
             Disconnect();
         }
 
@@ -3276,6 +3380,8 @@ namespace YWCA_Software
                         "WOCAppt " +
                     "SET " +
                        "WOCID = \"" + WocId + "\", " +
+                       "FIRST_NAME = \"" + WOCFName + "\", " +
+                       "LAST_NAME = \"" + WOCLName + "\", " +
                        "Program = \"" + WocProgram + "\", " +
                        "Goal = \"" + WocGoal + "\", " +
                        "Referenced = \"" + WocReferenced + "\", " +
@@ -3365,6 +3471,8 @@ namespace YWCA_Software
                     (
                     "SELECT " +
                         "WOCID, " +
+                        "FIRST_NAME, " +
+                        "Last_Name, " +
                         "Program, " +
                         "Goal, " +
                         "Referenced, " +
@@ -3384,19 +3492,23 @@ namespace YWCA_Software
                 if (queryArray.Count > 0)
                 {
                     WocId = (string)queryArray[0];
-                    WocProgram = (string)queryArray[1];
-                    WocGoal = (string)queryArray[2];
-                    WocReferenced = (string)queryArray[3];
-                    WocRace = (string)queryArray[4];
-                    WocEthnicity = (string)queryArray[5];
-                    WocMaritalStatus = (string)queryArray[6];
-                    WocImprovements = (string)queryArray[7];
-                    WocComments = (string)queryArray[8];
-                    WocEmail = (string)queryArray[9];
+                    WOCFName = (string) queryArray[1];
+                    WOCLName = (string) queryArray[2];
+                    WocProgram = (string)queryArray[3];
+                    WocGoal = (string)queryArray[4];
+                    WocReferenced = (string)queryArray[5];
+                    WocRace = (string)queryArray[6];
+                    WocEthnicity = (string)queryArray[7];
+                    WocMaritalStatus = (string)queryArray[8];
+                    WocImprovements = (string)queryArray[9];
+                    WocComments = (string)queryArray[10];
+                    WocEmail = (string)queryArray[11];
                 }
                 else
                 {
                     WocId = "NoInfo";
+                    WOCFName = "NoInfo";
+                    WOCLName = "NoInfo";
                     WocProgram = "NoInfo";
                     WocGoal = "NoInfo";
                     WocReferenced = "NoInfo";

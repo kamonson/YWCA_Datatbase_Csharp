@@ -160,9 +160,10 @@
             {
 
             }
-            else if (department == @"WOC_EPT")
+            else if (department == @"WOCAPPT")
             {
-
+                fLocation = @"WOCAPPT";
+                id = @"WOCID";
             }
             else if (department == @"WOC_CLASS")
             {
@@ -174,7 +175,7 @@
             }
 
 
-            return Select(@"*") +
+            return Select(id) +
                    From(fLocation) +
                    Where(@"FIRST_NAME" + Like(firstName) + And(@"LAST_NAME") + Like(lastName) + Or(id + Equals(pid))) +
                    EndQuery();
@@ -190,6 +191,32 @@
             return Select(@"Date") +
                    From(@"tbl_Intake") +
                    Where(@"Consumer_ID" + Equals(pid)) +
+                   EndQuery();
+        }
+
+        /// <summary>
+        /// Get intake dates from pid
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public string FindWocAptDate(string pid)
+        {
+            return Select(@"DateScheduled") +
+                   From(@"WOCAPPT") +
+                   Where(@"WOCID" + Equals(pid)) +
+                   EndQuery();
+        }
+
+        /// <summary>
+        /// Get intake dates from pid
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public string FindWocClassDate(string pid)
+        {
+            return Select(@"DateClass") +
+                   From(@"WOCClass") +
+                   Where(@"WOCID" + Equals(pid)) +
                    EndQuery();
         }
 

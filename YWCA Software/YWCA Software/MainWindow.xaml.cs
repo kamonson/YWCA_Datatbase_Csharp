@@ -35,8 +35,8 @@ namespace YWCA_Software
             }
             else if(sender == WOC_Button)
             {
-                WocMenu wm = new WocMenu();
-                wm.Show();
+                ParticipantSelect ps = new ParticipantSelect(@"WOCAPPT");
+                ps.Show();
             }
             
  
