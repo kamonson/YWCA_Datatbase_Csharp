@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace YWCA_Software
 {
@@ -2940,34 +2941,38 @@ namespace YWCA_Software
 
         /********************************************************************* Start ECAP_V_Hours *********************************************************************/
 
-        public void EcapVHours(string selectUpdateAdd, string pid)
+        public void EcapVHours(string selectUpdateAdd)
         {
-            EcapSite = pid;
             ArrayList queryArray;
             if (selectUpdateAdd == "update")
             {
                 //ints
-                UpdateQuery
-                    (
-                    "UPDATE " +
-                        "ECAP_V_HOURS " +
-                    "SET " +
-                        "SCHOOL_YEAR = \"" + EcapSchoolYear + "\", " +
-                        "HOURS = \"" + EcapHours + "\"  " +
-                    "Where " +
-                       "SITE = \"" + EcapSite + "\";"
+                RunQuery(
+                    "INSERT INTO ECAP_V_HOURS (SITE, SCHOOL_YEAR, SCHOOL_MONTH, VOLUNTEER_MEMBER, HOURS)  " +
+                    "VALUES (" + "'" + EcapSite + "'," + EcapSchoolYear + "," + "'" + EcapSchoolMonth + "'," + "'" + EcapVolunteerMember + "'," + EcapHours + ");"
                     );
-                //String
-                UpdateQuery
-                    (
-                     "UPDATE " +
-                        "ECAP_V_HOURS " +
-                    "SET " +
-                       "SCHOOL_MONTH = \"" + EcapSchoolMonth + "\", " +
-                       "VOLUNTEER_MEMBER = \"" + EcapVolunteerMember + "\"  " +
-                    "Where " +
-                       "SITE = \"" + EcapSite + "\";"
-                    );
+
+                //UpdateQuery
+                //    (
+                //    "UPDATE " +
+                //        "ECAP_V_HOURS " +
+                //    "SET " +
+                //        "SCHOOL_YEAR = \"" + EcapSchoolYear + "\", " +
+                //        "HOURS = \"" + EcapHours + "\"  " +
+                //    "Where " +
+                //       "SITE = \"" + EcapSite + "\";"
+                //    );
+                ////String
+                //UpdateQuery
+                //    (
+                //     "UPDATE " +
+                //        "ECAP_V_HOURS " +
+                //    "SET " +
+                //       "SCHOOL_MONTH = \"" + EcapSchoolMonth + "\", " +
+                //       "VOLUNTEER_MEMBER = \"" + EcapVolunteerMember + "\"  " +
+                //    "Where " +
+                //       "SITE = \"" + EcapSite + "\";"
+                //    );
             }
             else
             {

@@ -12,6 +12,64 @@
             <Grid.Background>
                 <ImageBrush ImageSource="Resources/ecap_snip.png"/>
             </Grid.Background>
+            <Rectangle HorizontalAlignment="Left" Height="417" Margin="85,200,0,0" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="#FFD98633" StrokeLineJoin="Round" VerticalAlignment="Top" Width="1745" StrokeThickness="5">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#4C000000" Offset="0.011"/>
+                        <GradientStop Color="#99FFFFFF"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button x:Name="Back_Button" Content="" HorizontalAlignment="Left" Height="75" Margin="1788,26,0,0" VerticalAlignment="Top" Width="84" Click="button_Click" FontSize="0.01" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/back_button.png"/>
+                </Button.Background>
+                <Button.Foreground>
+                    <ImageBrush ImageSource="Resources/back_button.png" Stretch="Uniform"/>
+                </Button.Foreground>
+            </Button>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="133,200,0,0" TextWrapping="Wrap" Text="Site" VerticalAlignment="Top" Height="41" Width="161" Foreground="White" FontSize="33.333"/>
+            <ComboBox  x:Name="EcapSite" HorizontalAlignment="Left" Height="51" Margin="133,247,0,0" Text="{Binding EcapSite}" VerticalAlignment="Top" Width="400" FontSize="32"  >
+                <ComboBoxItem Name="Downtown">Downtown</ComboBoxItem>
+                <ComboBoxItem Name="Windsor">Windsor</ComboBoxItem>
+                <ComboBoxItem Name="West_Plains">West Plains</ComboBoxItem>
+                <ComboBoxItem Name="Medical_Lake">Medical Lake</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="ecapupdate_button" Content="" HorizontalAlignment="Left" Height="51" Margin="1370,541,0,0" VerticalAlignment="Top" Width="200" Foreground="White" FontSize="33.333" Click="ecapupdate_button_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="Resources/update_button.png"/>
+                </Button.Background>
+            </Button>
+            <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="776,200,0,0" TextWrapping="Wrap" Text="School Year" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <ComboBox  x:Name="SCHOOL_YEAR" HorizontalAlignment="Left" Height="51" Margin="776,247,0,0" Text="{Binding EcapSchoolYear}" VerticalAlignment="Top" Width="400" FontSize="32"  >
+                <ComboBoxItem x:Name="_2016" Content="2016"/>
+                <ComboBoxItem x:Name="_2017" Content="2017"/>
+                <ComboBoxItem x:Name="_2018" Content="2018"/>
+                <ComboBoxItem x:Name="_2019" Content="2019"/>
+                <ComboBoxItem x:Name="_2020" Content="2020"/>
+            </ComboBox>
+            <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="1370,200,0,0" TextWrapping="Wrap" Text="School Month" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <ComboBox  x:Name="SCHOOL_YEAR_Copy" HorizontalAlignment="Left" Height="51" Margin="1370,247,0,0" Text="{Binding EcapSchoolMonth}" VerticalAlignment="Top" Width="400" FontSize="32"  >
+                <ComboBoxItem x:Name="January" Content="January"/>
+                <ComboBoxItem x:Name="February" Content="February"/>
+                <ComboBoxItem x:Name="March" Content="March"/>
+                <ComboBoxItem x:Name="April" Content="April"/>
+                <ComboBoxItem x:Name="May" Content="May"/>
+                <ComboBoxItem x:Name="June" Content="June"/>
+                <ComboBoxItem x:Name="July" Content="July"/>
+                <ComboBoxItem x:Name="August" Content="August"/>
+                <ComboBoxItem x:Name="September" Content="September"/>
+                <ComboBoxItem x:Name="October" Content="October"/>
+                <ComboBoxItem x:Name="November" Content="November"/>
+                <ComboBoxItem x:Name="December" Content="December"/>
+            </ComboBox>
+            <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="133,494,0,0" TextWrapping="Wrap" Text="Volunteer Member(s)" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <ComboBox  x:Name="Volunteer_Member" HorizontalAlignment="Left" Height="51" Margin="133,541,0,0" Text="{Binding EcapVolunteerMember}" VerticalAlignment="Top" Width="400" FontSize="32"  >
+                <ComboBoxItem x:Name="Parent_of_Enrolled" Content="Parent of Enrolled"/>
+                <ComboBoxItem x:Name="Community_Member" Content="Community Member"/>
+            </ComboBox>
+            <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="776,495,0,0" TextWrapping="Wrap" Text="Hours" VerticalAlignment="Top" Height="41" Width="400" Foreground="White" FontSize="33.333"/>
+            <TextBox x:Name="HOURS" HorizontalAlignment="Left" Height="51" Margin="776,541,0,0" TextWrapping="Wrap" Text="{Binding EcapHours}" VerticalAlignment="Top" Width="400" FontSize="32" />
         </Grid>
     </Viewbox>
 </Window>

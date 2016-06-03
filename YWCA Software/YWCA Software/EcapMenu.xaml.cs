@@ -33,7 +33,7 @@ namespace YWCA_Software
             }
             else if (sender == ecapvolunteer_Button)
             {
-                EcapMenu em = new EcapMenu();
+                EcapVolunteer em = new EcapVolunteer();
                 em.Show();
             }
 
