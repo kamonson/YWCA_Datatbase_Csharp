@@ -174,9 +174,24 @@ namespace YWCA_Software
 
         private void buttonNewParticipantWindow_Click(object sender, RoutedEventArgs e)
         {
-            CreateNewParticipant create = new CreateNewParticipant(_department);
-            create.Show();
-            Close();
+            if (_department == @"ADVP")
+            {
+                CreateNewParticipant create = new CreateNewParticipant(_department);
+                create.Show();
+                Close();
+            }
+            else if (_department == @"ECAP")
+            {
+                CreateNewParticipant create = new CreateNewParticipant(_department);
+                create.Show();
+                Close();
+            }
+            else if (_department == @"WOCAPPT")
+            {
+                CreateNewParticipant create = new CreateNewParticipant(_department);
+                create.Show();
+                Close();
+            }
         }
     }
 }

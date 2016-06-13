@@ -42,6 +42,9 @@ namespace YWCA_Software
         private void ecapupdate_button_Click(object sender, RoutedEventArgs e)
         {
             _ecapDB.EcapVHours("update");
+            EcapMenu ecapWindow = new EcapMenu();
+            ecapWindow.Show();
+            Close();
         }
     }
 }

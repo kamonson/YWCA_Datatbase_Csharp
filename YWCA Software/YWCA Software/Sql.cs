@@ -233,6 +233,34 @@
                     EndQuery();
 
         }
+
+        /// <summary>
+        /// Add date to intakes
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public string AddWOCAptDate(string pid, string date)
+        {
+            return InsertInto("WOCAPPT" + " (" + @"[WOCID]" + ", " + "[DateScheduled]" + ")") +
+                     ValuesNoQuote("'" + pid + "', " + "#" + date + "# ") +
+                     EndQuery();
+
+        }
+
+        /// <summary>
+        /// Add date to intakes
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public string AddWOClassDate(string pid, string date)
+        {
+            return InsertInto("WOCClass" + " (" + @"[WOCID]" + ", " + "[DateClass]" + ")") +
+                     ValuesNoQuote("'" + pid + "', " + "#" + date + "# ") +
+                     EndQuery();
+
+        }
         ////////////////////////////////////////////////////////////////////// End SQL Queries //////////////////////////////////////////////////////////////////////
 
 

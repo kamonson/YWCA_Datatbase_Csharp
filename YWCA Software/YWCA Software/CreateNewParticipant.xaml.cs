@@ -66,6 +66,16 @@ namespace YWCA_Software
                 Ecap ecap = new Ecap(textBoxNewParticipantID.Text);
                 ecap.Show();
             }
+            else if (_department == @"WOCAPPT")
+            {
+                if (!DbConnector.CheckForExistingPid(textBoxNewParticipantID.Text))
+                {
+                    DbConnector.RunQuery(@"INSERT INTO WOCAPPT (WocID, DateScheduled) VALUES ('" +
+                                         textBoxNewParticipantID.Text + @"', #" + DateTime.Now.ToShortDateString() + "#);");
+                }
+                WocMenu woc = new WocMenu(textBoxNewParticipantID.Text);
+                woc.Show();
+            }
             Close();
         }
 

@@ -42,6 +42,7 @@ namespace YWCA_Software
             _wocDb.WocAppt("select", pid, aptDate);
             _wocDb.WocClass("select", pid, classDate);
             _wocDb.WocCompLog("select", pid);
+            textBlockPid.Text = pid;
         }
 
         /// <summary>
@@ -51,15 +52,14 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            string[] table = { "tbl_Forms_Flow_Table" };
-            var pid = textBlockPid.Text;
-            var end = @" Where Consumer_ID = " + pid + @";";
-            foreach (var i in table.Where(i => !DbConnector.QueryTest(_sql.Select(@"Consumer_ID") + _sql.From(i) + end)))
+            if (sender == buttonUpdate)
             {
-                DbConnector.RunQuery(_sql.InsertInto(i) + @"(Consumer_ID) " + _sql.Values(pid) + @";");
-                Console.WriteLine(@"One item added to the database");
+                _wocDb.WocAppt("update", textBlockPid.Text, aptDate);
             }
-            _wocDb.Demographics("update", textBlockPid.Text);
+            if (sender == buttonUpdateADVP)
+            {
+                _wocDb.WocClass("update", textBlockPid.Text, classDate);
+            }
         }
 
         /// <summary>
@@ -92,18 +92,46 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataContext = _wocDb;
-            aptDate = listBoxAptDate.SelectedItem?.ToString();
-            string pid = textBlockPid.Text;
-            _wocDb.SetIntakeDate(aptDate);
+            if (sender == listBoxAptDate)
+            {
+                DataContext = _wocDb;
+                string pid = textBlockPid.Text;
+                aptDate = listBoxAptDate.SelectedItem?.ToString();
+                _wocDb.SetIntakeDate(aptDate);
 
-            _wocDb.WocAppt(@"select", pid, aptDate);
+                _wocDb.WocAppt(@"select", pid, aptDate);
+            }
+            if (sender == listBoxAptDate_Copy)
+            {
+                DataContext = _wocDb;
+                aptDate = listBoxAptDate.SelectedItem?.ToString();
+                string pid = textBlockPid.Text;
+                classDate = listBoxAptDate_Copy.SelectedItem?.ToString();
+                _wocDb.WocClass("select", pid, classDate);
+            }
         }
 
         private void buttonAddNewDate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            _wocDb.RunQueryAddDate(textBlockPid.Text, textBoxNewDate.Text);
-            _wocDb.RunQueryFindDate(); //needs to be re worked some
+            if (sender == buttonAddNewDate)
+            {
+                _wocDb.RunQueryAddWocAptDate(textBlockPid.Text, textBoxNewDate.Text);
+                _wocDb.RunQueryFindDateWocApt(); //needs to be re worked some
+            }
+            if (sender == buttonAddNewDate_Copy)
+            {
+                _wocDb.RunQueryAddWocClassDate(textBlockPid.Text, textBoxNewDate_Copy.Text);
+                _wocDb.RunQueryFindDateWocClass(); //needs to be re worked some
+            }
+            else
+            {
+                string message = "A date to store this information on is not selected. \n";
+                string caption = "Please choose a date and try again.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+            }
+
         }
 
         /// <summary>
@@ -133,11 +161,22 @@ namespace YWCA_Software
             }
         }
 
-        private void checkForEnter(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == (System.Windows.Input.Key)Keys.Enter)
             {
-                richTextBox.AppendText("\n");
+                if (richTextBox_Copy == sender)
+                {
+                    richTextBox_Copy.AppendText("\n");
+                }
+                if (richTextBox_Copy1 == sender)
+                {
+                    richTextBox_Copy1.AppendText("\n");
+                }
+                if (richTextBox_Copy2 == sender)
+                {
+                    richTextBox_Copy2.AppendText("\n");
+                }
             }
         }
     }

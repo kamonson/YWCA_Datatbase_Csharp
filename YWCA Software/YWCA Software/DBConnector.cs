@@ -2215,6 +2215,34 @@ namespace YWCA_Software
         }
 
         /// <summary>
+        /// Add an intake date to the data base
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="date"></param>
+        public void RunQueryAddWocAptDate(string pid, string date)
+        {
+            Connect();
+            DbCommand.CommandText = _sql.AddWOCAptDate(pid, date);
+            DbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Add an intake date to the data base
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="date"></param>
+        public void RunQueryAddWocClassDate(string pid, string date)
+        {
+            Connect();
+            DbCommand.CommandText = _sql.AddWOClassDate(pid, date);
+            DbCommand.ExecuteReader();
+            ListPiDs.Clear();
+            Disconnect();
+        }
+
+        /// <summary>
         /// Search for pid based off FirstName AND LastName OR Pid
         /// </summary>
         public static void RunQuery(string query)
@@ -3149,11 +3177,11 @@ namespace YWCA_Software
                 //bools
                 UpdateQuery
                     (
-                    "UPDATE " +
+                        "UPDATE " +
                         "WOCClass " +
-                    "SET " +
-                        "Attended = " + WocAttended+ ", " +
-                        "Completed = " + WocCompleted + 
+                        "SET " +
+                        "Attended = " + WocAttended + ", " +
+                        "Completed = " + WocCompleted + " " +
                     "Where " +
                        "DateClass = #" + date + "# " +
                        "AND " +
@@ -3169,9 +3197,7 @@ namespace YWCA_Software
                        "Program = \"" + WocProgram + "\", " +
                        "ClassName = \"" + WocClassName+ "\", " +
                        "Supervisor = \"" + WocSupervisor + "\", " +
-                       "FutureDesc = \"" + WocFutureDesc + "\", " +
-                       "AppreciatedDesc = \"" + WocAppreciatedDesc + "\", " +
-                       "ChangeOrAddDesc = \"" + WocChangeOrAddDesc + "\", " +
+                       "FutureDesc = \"" + WocFutureDesc + "\" " +
                     "Where " +
                        "DateClass = #" + date + "# " +
                        "AND " +
@@ -3190,7 +3216,7 @@ namespace YWCA_Software
                        "ImprovedSkills = \"" + WocImprovedSkills + "\", " +
                        "RecommendClass = \"" + WocRecommendClass + "\", " +
                        "ApplyLearning = \"" + WocApplyLearning + "\", " +
-                       "MetExpectations = \"" + WocMetExpectations +
+                       "MetExpectations = \"" + WocMetExpectations + "\" " +
                     "Where " +
                        "DateClass = #" + date + "# " +
                        "AND " +
@@ -3367,7 +3393,7 @@ namespace YWCA_Software
                         "Success = " + WocSuccess + ", " +
                         "UseComment = " + WocUseComment + ", " +
                         "Anonymous = " + WocAnonymous + ", " +
-                        "Contact = " + WocContact + 
+                        "Contact = " + WocContact + " " +
                     "Where " +
                        "DateScheduled = #" + WocDateScheduled + "# " +
                        "AND " +
@@ -3385,8 +3411,8 @@ namespace YWCA_Software
                        "Program = \"" + WocProgram + "\", " +
                        "Goal = \"" + WocGoal + "\", " +
                        "Referenced = \"" + WocReferenced + "\", " +
-                       "Race = \"" + WocRace + "\"  " +
-                       "Ethnicity = \"" + WocEthnicity+ "\", " +
+                       "Race = \"" + WocRace + "\", " +
+                       "Ethnicity = \"" + WocEthnicity + "\", " +
                        "MaritalStatus = \"" + WocMaritalStatus + "\", " +
                        "Improvements = \"" + WocImprovements + "\",  " +
                        "Comments = \"" + WocComments + "\",  " +
