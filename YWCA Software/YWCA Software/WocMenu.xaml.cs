@@ -41,7 +41,6 @@ namespace YWCA_Software
             classDate = _wocDb.WocDateClass;
             _wocDb.WocAppt("select", pid, aptDate);
             _wocDb.WocClass("select", pid, classDate);
-            _wocDb.WocCompLog("select", pid);
             textBlockPid.Text = pid;
         }
 
@@ -80,7 +79,7 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void buttonBack_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var psWindow = new ParticipantSelect();
+            var psWindow = new ParticipantSelect(@"WOCAPPT");
             psWindow.Show();
             Close();
         }
@@ -118,7 +117,7 @@ namespace YWCA_Software
                 _wocDb.RunQueryAddWocAptDate(textBlockPid.Text, textBoxNewDate.Text);
                 _wocDb.RunQueryFindDateWocApt(); //needs to be re worked some
             }
-            if (sender == buttonAddNewDate_Copy)
+           else if (sender == buttonAddNewDate_Copy)
             {
                 _wocDb.RunQueryAddWocClassDate(textBlockPid.Text, textBoxNewDate_Copy.Text);
                 _wocDb.RunQueryFindDateWocClass(); //needs to be re worked some
@@ -161,19 +160,19 @@ namespace YWCA_Software
             }
         }
 
-        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void checkForEnter(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == (System.Windows.Input.Key)Keys.Enter)
             {
-                if (richTextBox_Copy == sender)
+                if (richTextBox_Copy.IsFocused)
                 {
                     richTextBox_Copy.AppendText("\n");
                 }
-                if (richTextBox_Copy1 == sender)
+                if (richTextBox_Copy1.IsFocused)
                 {
                     richTextBox_Copy1.AppendText("\n");
                 }
-                if (richTextBox_Copy2 == sender)
+                if (richTextBox_Copy2.IsFocused)
                 {
                     richTextBox_Copy2.AppendText("\n");
                 }

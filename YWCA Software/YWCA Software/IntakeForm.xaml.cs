@@ -72,7 +72,7 @@ namespace YWCA_Software
         /// <param name="e"></param>
         private void buttonBack_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var psWindow = new ParticipantSelect();
+            var psWindow = new ParticipantSelect(@"ADVP");
             psWindow.Show();
             Close();
         }

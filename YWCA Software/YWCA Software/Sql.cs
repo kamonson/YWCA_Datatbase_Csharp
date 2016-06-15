@@ -177,7 +177,7 @@
 
             return Select(id) +
                    From(fLocation) +
-                   Where(@"FIRST_NAME" + Like(firstName) + And(@"LAST_NAME") + Like(lastName) + Or(id + Equals(pid))) +
+                   Where(@"FIRST_NAME" + Like(firstName) + And(@"LAST_NAME") + Like(lastName) + Or(id + Equals(pid)) + @"GROUP BY " + (id) + " ") +
                    EndQuery();
         }
 

@@ -41,9 +41,9 @@
 
     <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
 
-        <Grid x:Name="MainGrid" Height="1080" Width="1920">
+        <Grid x:Name="MainGrid" Height="1092" Width="1920">
             <Grid.Background>
-                <ImageBrush ImageSource="Resources/ecap_snip.png"/>
+                <ImageBrush ImageSource="Resources/ywca_menu_snip.png"/>
             </Grid.Background>
 
             <Rectangle HorizontalAlignment="Left" Height="701" Margin="250,238,0,0" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="#FFD98633" StrokeLineJoin="Round" VerticalAlignment="Top" Width="1401" StrokeThickness="5">

@@ -10,7 +10,7 @@
 
         <Grid x:Name="MainGrid" Height="1080" Width="1920">
             <Grid.Background>
-                <ImageBrush ImageSource="Resources/ecap_snip.png"/>
+                <ImageBrush ImageSource="Resources/ywca_menu_snip.png"/>
             </Grid.Background>
             <Rectangle HorizontalAlignment="Left" Height="417" Margin="85,200,0,0" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="#FFD98633" StrokeLineJoin="Round" VerticalAlignment="Top" Width="1745" StrokeThickness="5">
                 <Rectangle.Fill>
@@ -35,7 +35,7 @@
                 <ComboBoxItem Name="West_Plains">West Plains</ComboBoxItem>
                 <ComboBoxItem Name="Medical_Lake">Medical Lake</ComboBoxItem>
             </ComboBox>
-            <Button x:Name="ecapupdate_button" Content="" HorizontalAlignment="Left" Height="51" Margin="1630,968,0,0" VerticalAlignment="Top" Width="200" Foreground="White" FontSize="33.333" Click="ecapupdate_button_Click" RenderTransformOrigin="2.12,0.743">
+            <Button x:Name="ecapupdate_button" Content="" HorizontalAlignment="Left" Height="51" Margin="1630,917,0,0" VerticalAlignment="Top" Width="200" Foreground="White" FontSize="33.333" Click="ecapupdate_button_Click" RenderTransformOrigin="2.12,0.743">
                 <Button.Background>
                     <ImageBrush Stretch="Fill" ImageSource="Resources/update_button.png"/>
                 </Button.Background>

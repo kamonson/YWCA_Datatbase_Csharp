@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YWCA_Software"
         mc:Ignorable="d"
-        Title="WocMenu" Height="1342" Width="1869" KeyDown="Window_KeyDown">
+        Title="WocMenu" Height="1342" Width="1869" KeyDown="checkForEnter">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -99,115 +99,108 @@
 
     <Viewbox HorizontalAlignment="Left"  Stretch="Fill">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="107*"/>
+                <RowDefinition Height="544*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="19*"/>
                 <ColumnDefinition Width="114*"/>
                 <ColumnDefinition Width="756*"/>
             </Grid.ColumnDefinitions>
 
-            <!--///////////////////////////////////////////////////////////////////////////// Start Demographic Info /////////////////////////////////////////////////////////////////////////////-->
+            <!--///////////////////////////////////////////////////////////////////////////// Start WOC Appointment (renaming should occur if wrong named labels exist) /////////////////////////////////////////////////////////////////////////////-->
 
-            <Image x:Name="image" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="984" Source="Resources/ywca_menu_snip.png" Stretch="Fill" Margin="-5,0,-90,0" Grid.ColumnSpan="3" />
-            <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="17" Margin="13.892,25,0,0" TextWrapping="Wrap" Text="WOC ID:" VerticalAlignment="Top" Width="62" BorderThickness="0" IsReadOnly="True" Background="Transparent" Foreground="White" RenderTransformOrigin="0.535,-1.988" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="76.892,25,0,0" TextWrapping="Wrap" Text="{Binding WocId}" Width="98" VerticalAlignment="Top" Height="17" Background="Transparent" Foreground="White" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockDateDataEntered" HorizontalAlignment="Left" Margin="13.892,47,0,0" TextWrapping="Wrap" Text="Appointment Date:" VerticalAlignment="Top" Height="16" Foreground="White" Width="213" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockFNameLabel" HorizontalAlignment="Left" Margin="70.892,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Height="18" Width="60" Grid.ColumnSpan="2" Grid.Column="1"><Run Text="First "/><Run Text="Name:"/></TextBlock>
-            <TextBox  x:Name="textBoxFName" HorizontalAlignment="Left" Height="13" Margin="19,171,0,0" TextWrapping="Wrap" Text="{Binding WOCFName}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockLNameLabel" HorizontalAlignment="Left" Margin="70.892,185,0,0" TextWrapping="Wrap" Text="Last Name:" VerticalAlignment="Top" Foreground="White" Width="60" Height="15" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox  x:Name="textBoxLName" HorizontalAlignment="Left" Height="12" Margin="19,190,0,0" TextWrapping="Wrap" Text="{Binding WOCLName}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB" HorizontalAlignment="Left" Margin="80.892,226,0,0" TextWrapping="Wrap" Text="Program:" VerticalAlignment="Top" Foreground="White" Height="16" Width="50" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox  x:Name="textBoxDOB" HorizontalAlignment="Left" Height="13" Margin="19,250,0,0" TextWrapping="Wrap" Text="{Binding WocGoal}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockHousingStatus" HorizontalAlignment="Left" Margin="102.892,246,0,0" TextWrapping="Wrap" Text="Goal:" VerticalAlignment="Top" Height="17" Foreground="White" Width="28" RenderTransformOrigin="0.054,-0.162" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox x:Name="textBoxHomeHousingStatus" HorizontalAlignment="Left" Height="13" Margin="19,229,0,0" TextWrapping="Wrap" Text="{Binding WocProgram}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockCountyDetail" HorizontalAlignment="Left" Margin="47.892,265,0,0" TextWrapping="Wrap" Text="PrePreparation:" VerticalAlignment="Top" Height="19" Foreground="White" Width="83" RenderTransformOrigin="1.4,1.129" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox x:Name="textBoxCountyDetail" HorizontalAlignment="Left" Height="13" Margin="19,271,0,0" TextWrapping="Wrap" Text="{Binding WocPreparationBefore}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockCity" HorizontalAlignment="Left" Margin="66.892,289,0,0" TextWrapping="Wrap" Text="Referenced:" VerticalAlignment="Top" Height="16" Foreground="White" Width="64" RenderTransformOrigin="0.969,1.642" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox x:Name="textBoxCity" HorizontalAlignment="Left" Height="13" Margin="19,292,0,0" TextWrapping="Wrap" Text="{Binding WocReferenced}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <CheckBox x:Name="checkBoxSafeToLeaveMessage" IsChecked="{Binding WocFirstVisit}" Content=":First Visit" HorizontalAlignment="Left" Margin="52.892,205,0,0" VerticalAlignment="Top" Height="16" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="78"  HorizontalContentAlignment="Center" FlowDirection="RightToLeft" IsThreeState="True" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockMaritalStatus" HorizontalAlignment="Left" Margin="54.892,393,0,0" TextWrapping="Wrap" Text="Marital Status:" VerticalAlignment="Top" Height="14" Foreground="White" Width="76" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxMaritalStatus" HorizontalAlignment="Left" Margin="19,394,0,0" Text="{Binding WocMaritalStatus}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" Grid.Column="2">
-                <ComboBoxItem x:Name="Married" Content="Married"/>
-                <ComboBoxItem x:Name="Single" Content="Single"/>
-                <ComboBoxItem x:Name="Divorced" Content="Divorced"/>
-                <ComboBoxItem x:Name="Widow" Content="Widow"></ComboBoxItem>
-            </ComboBox>
-            <TextBlock x:Name="Ethnicity" HorizontalAlignment="Left" Margin="80.892,310,0,0" TextWrapping="Wrap" Text="Ethnicity:" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.736,0.75" Foreground="White" Width="48" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="19,313,0,0" Text="{Binding WocEthnicity}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" Grid.Column="2">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="690" VerticalAlignment="Top" Width="984" Source="Resources/ywca_menu_snip.png" Stretch="Fill" Margin="-5,0,-90,-39" Grid.ColumnSpan="3" Grid.RowSpan="2" />
+            <TextBlock x:Name="textBlockLablePersonsInHome" HorizontalAlignment="Left" Margin="-5,4,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="WOC Appointment " VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Width="389" FontSize="16" Foreground="White" TextDecorations="Underline" Grid.ColumnSpan="3"/>
+            <TextBox x:Name="textBlockPidLabel" HorizontalAlignment="Left" Height="17" Margin="14.297,25,0,0" TextWrapping="Wrap" Text="WOC ID:" VerticalAlignment="Top" Width="62" BorderThickness="0" IsReadOnly="True" Background="Transparent" Foreground="White" RenderTransformOrigin="0.535,-1.988" Grid.Column="1"/>
+            <TextBlock x:Name="textBlockPid" HorizontalAlignment="Left" Margin="77.297,25,0,0" TextWrapping="Wrap" Text="{Binding WocId}" Width="98" VerticalAlignment="Top" Height="17" Background="Transparent" Foreground="White" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <TextBlock x:Name="textBlockDateDataEntered" HorizontalAlignment="Left" Margin="14.297,47,0,0" TextWrapping="Wrap" Text="Appointment Date:" VerticalAlignment="Top" Height="16" Foreground="White" Width="213" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <ListBox x:Name="listBoxAptDate" Margin="14.297,68,0,0" ItemsSource="{Binding ListDates, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="213" Height="49" VerticalAlignment="Top" BorderThickness="0" FontSize="9.333" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock x:Name="textBlockNewDate" HorizontalAlignment="Left" Margin="14.297,18.238,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16" Foreground="White" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="13" Margin="74.297,21.238,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="80" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" FontSize="9.333" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" />
+            <Button x:Name="buttonAddNewDate" Content="" Margin="0,21.238,615,0" VerticalAlignment="Top" Height="13" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="78" Click="buttonAddNewDate_Click" RenderTransformOrigin="0.867,1.238" Foreground="{x:Null}" BorderBrush="{x:Null}" Grid.Column="2" Grid.Row="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/newdate_button.png"/>
+                </Button.Background>
+            </Button>
+            <TextBlock x:Name="textBlockFNameLabel" HorizontalAlignment="Left" Margin="71.297,61.238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Height="18" Width="60" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"><Run Text="First "/><Run Text="Name:"/></TextBlock>
+            <TextBox  x:Name="textBoxFName" HorizontalAlignment="Left" Height="13" Margin="18.703,64.238,0,0" TextWrapping="Wrap" Text="{Binding WOCFName}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockLNameLabel" HorizontalAlignment="Left" Margin="71.297,78.238,0,0" TextWrapping="Wrap" Text="Last Name:" VerticalAlignment="Top" Foreground="White" Width="60" Height="15" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox  x:Name="textBoxLName" HorizontalAlignment="Left" Height="12" Margin="18.703,83.238,0,0" TextWrapping="Wrap" Text="{Binding WOCLName}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <CheckBox x:Name="checkBoxSafeToLeaveMessage" IsChecked="{Binding WocFirstVisit}" Content=":First Visit" HorizontalAlignment="Left" Margin="53.297,98.238,0,0" VerticalAlignment="Top" Height="16" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="78"  HorizontalContentAlignment="Center" FlowDirection="RightToLeft" IsThreeState="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB" HorizontalAlignment="Left" Margin="81.297,119.238,0,0" TextWrapping="Wrap" Text="Program:" VerticalAlignment="Top" Foreground="White" Height="16" Width="50" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus" HorizontalAlignment="Left" Height="13" Margin="18.703,122.238,0,0" TextWrapping="Wrap" Text="{Binding WocProgram}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockHousingStatus" HorizontalAlignment="Left" Margin="103.297,139.238,0,0" TextWrapping="Wrap" Text="Goal:" VerticalAlignment="Top" Height="17" Foreground="White" Width="28" RenderTransformOrigin="0.054,-0.162" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox  x:Name="textBoxDOB" HorizontalAlignment="Left" Height="13" Margin="18.703,143.238,0,0" TextWrapping="Wrap" Text="{Binding WocGoal}" VerticalAlignment="Top" Width="100" BorderThickness="0" GotFocus="GotFocus" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockCountyDetail" HorizontalAlignment="Left" Margin="48.297,158.238,0,0" TextWrapping="Wrap" Text="PrePreparation:" VerticalAlignment="Top" Height="19" Foreground="White" Width="83" RenderTransformOrigin="1.4,1.129" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="textBoxCountyDetail" HorizontalAlignment="Left" Height="13" Margin="18.703,164.238,0,0" TextWrapping="Wrap" Text="{Binding WocPreparationBefore}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockCity" HorizontalAlignment="Left" Margin="67.297,182.238,0,0" TextWrapping="Wrap" Text="Referenced:" VerticalAlignment="Top" Height="16" Foreground="White" Width="64" RenderTransformOrigin="0.969,1.642" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="textBoxCity" HorizontalAlignment="Left" Height="13" Margin="18.703,185.238,0,0" TextWrapping="Wrap" Text="{Binding WocReferenced}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="Ethnicity" HorizontalAlignment="Left" Margin="81.297,203.238,0,0" TextWrapping="Wrap" Text="Ethnicity:" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.736,0.75" Foreground="White" Width="48" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <ComboBox x:Name="comboBoxEthnicity" HorizontalAlignment="Left" Margin="18.703,206.238,0,0" Text="{Binding WocEthnicity}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" Grid.Column="2" Grid.Row="1">
                 <ComboBoxItem x:Name="Caucasian" Content="Caucasian"/>
                 <ComboBoxItem x:Name="AfricanAmerican" Content="African American"/>
                 <ComboBoxItem x:Name="Hispanic" Content="Hispanic/Latino"/>
                 <ComboBoxItem x:Name="Asian" Content="Asian/Pacific Islander"/>
                 <ComboBoxItem x:Name="Multi" Content="Multi-racial"/>
             </ComboBox>
-            <CheckBox x:Name="checkBoxVeteranStatus" IsChecked="{Binding WocCurrentlyEmployed}" Content=":Employed" HorizontalAlignment="Left" Margin="4.892,334,0,0" VerticalAlignment="Top" Height="16" Foreground="White" FlowDirection="RightToLeft" Width="126" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockTotalMonthlyIncome" HorizontalAlignment="Left" Margin="30.892,371,0,0" TextWrapping="Wrap" Text="Monthly Income: $" VerticalAlignment="Top" Height="17" Foreground="White" Width="100" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox x:Name="textBoxTotalMonthlyIncome" HorizontalAlignment="Left" Height="13" Margin="19,375,0,0" TextWrapping="Wrap" Text="{Binding WocFamilyMonthlyIncome}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-
-
-            <Button x:Name="buttonUpdate" Content="" Margin="4.892,539,0,0"  VerticalAlignment="Top" BorderThickness="0" Height="16" FontSize="10.667" HorizontalAlignment="Left" Width="56" Click="buttonUpdate_Click" Foreground="White" Grid.Column="1">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/update_button.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="buttonBack" Content="" Margin="665,25,0,0" VerticalAlignment="Top" BorderThickness="0" Height="37" FontSize="10.667" HorizontalAlignment="Left" Width="38" Click="buttonBack_Click" Foreground="White" Grid.Column="2" RenderTransformOrigin="-3.864,0.532">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/back_button.png"/>
-                </Button.Background>
-            </Button>
-            <Rectangle Fill="#FFD67A1F" HorizontalAlignment="Left" Height="573" Margin="247,25,0,0" Stroke="#FFD67A1F" VerticalAlignment="Top" Width="4" Grid.Column="2"/>
-
-            <!--///////////////////////////////////////////////////////////////////////////// End Demographic Info /////////////////////////////////////////////////////////////////////////////-->
-
-
-            <!--///////////////////////////////////////////////////////////////////////////// Start ADVP Info /////////////////////////////////////////////////////////////////////////////-->
-            <ListBox x:Name="listBoxAptDate" Margin="13.892,68,0,0" ItemsSource="{Binding ListDates, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="213" Height="49" VerticalAlignment="Top" BorderThickness="0" FontSize="9.333" Grid.ColumnSpan="2" Grid.Column="1" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <TextBlock x:Name="textBlockNewDate" HorizontalAlignment="Left" Margin="13.892,125,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16" Foreground="White" Grid.Column="1"/>
-            <TextBox x:Name="textBoxNewDate" HorizontalAlignment="Left" Height="13" Margin="73.892,128,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="80" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" FontSize="9.333" Grid.ColumnSpan="2" Grid.Column="1" />
-            <Button x:Name="buttonAddNewDate" Content="" Margin="0,125,615,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="78" Click="buttonAddNewDate_Click" RenderTransformOrigin="0.867,1.238" Foreground="{x:Null}" BorderBrush="{x:Null}" Grid.Column="2">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/newdate_button.png"/>
-                </Button.Background>
-            </Button>
-            <TextBlock x:Name="textBlockLablePersonsInHome" HorizontalAlignment="Left" Margin="-5,4,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="WOC Appointment " VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Width="389" FontSize="16" Foreground="White" TextDecorations="Underline" Grid.ColumnSpan="3"/>
-            <Button x:Name="buttonUpdateADVP" Content="" Margin="0,539,422,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="56" Click="buttonUpdate_Click" Foreground="White" Grid.Column="2">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/update_button.png"/>
-                </Button.Background>
-            </Button>
-            <CheckBox x:Name="checkBoxVeteranStatus_Copy" IsChecked="{Binding WocMainProvider}" Content=":Main Provider" HorizontalAlignment="Left" Margin="4.892,355,0,0" VerticalAlignment="Top" Height="16" Foreground="White" FlowDirection="RightToLeft" Width="126" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockCountyDetail_Copy" HorizontalAlignment="Left" Margin="41.892,436,0,0" TextWrapping="Wrap" Text="PostPreparation:" VerticalAlignment="Top" Height="19" Foreground="White" Width="89" RenderTransformOrigin="1.4,1.129" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox x:Name="textBoxCountyDetail_Copy" HorizontalAlignment="Left" Height="19" Margin="18,436,0,0" TextWrapping="Wrap" Text="{Binding WocPreparationAfter}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <CheckBox x:Name="checkBoxVeteranStatus_Copy1" IsChecked="{Binding WocSuccess}" Content=":Success&#xA;" HorizontalAlignment="Left" Margin="8,455,0,0" VerticalAlignment="Top" Height="16" Foreground="White" FlowDirection="RightToLeft" Width="142" Grid.ColumnSpan="3"/>
-            <TextBlock x:Name="textBlockDOB_Copy" HorizontalAlignment="Left" Margin="48.333,476,0,0" TextWrapping="Wrap" Text="Improvements:" VerticalAlignment="Top" Foreground="White" Height="16" Width="80" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBlock x:Name="textBlockLableComments_Copy" HorizontalAlignment="Left" Margin="67.333,520,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <RichTextBox x:Name="richTextBox_Copy" HorizontalAlignment="Left" Height="32" Margin="17,479,0,0" 
+            <CheckBox x:Name="checkBoxVeteranStatus" IsChecked="{Binding WocCurrentlyEmployed}" Content=":Employed" HorizontalAlignment="Left" Margin="5.297,227.238,0,0" VerticalAlignment="Top" Height="16" Foreground="White" FlowDirection="RightToLeft" Width="126" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <CheckBox x:Name="checkBoxVeteranStatus_Copy" IsChecked="{Binding WocMainProvider}" Content=":Main Provider" HorizontalAlignment="Left" Margin="5.297,248.238,0,0" VerticalAlignment="Top" Height="16" Foreground="White" FlowDirection="RightToLeft" Width="126" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockTotalMonthlyIncome" HorizontalAlignment="Left" Margin="31.297,264.238,0,0" TextWrapping="Wrap" Text="Monthly Income: $" VerticalAlignment="Top" Height="17" Foreground="White" Width="100" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="textBoxTotalMonthlyIncome" HorizontalAlignment="Left" Height="13" Margin="18.703,268.238,0,0" TextWrapping="Wrap" Text="{Binding WocFamilyMonthlyIncome}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockMaritalStatus" HorizontalAlignment="Left" Margin="55.297,286.238,0,0" TextWrapping="Wrap" Text="Marital Status:" VerticalAlignment="Top" Height="14" Foreground="White" Width="76" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <ComboBox x:Name="comboBoxMaritalStatus" HorizontalAlignment="Left" Margin="18.703,287.238,0,0" Text="{Binding WocMaritalStatus}" VerticalAlignment="Top" Width="100" BorderThickness="0" Height="13" IsEditable="True" FontSize="8" Grid.Column="2" Grid.Row="1">
+                <ComboBoxItem x:Name="Married" Content="Married"/>
+                <ComboBoxItem x:Name="Single" Content="Single"/>
+                <ComboBoxItem x:Name="Divorced" Content="Divorced"/>
+                <ComboBoxItem x:Name="Widow" Content="Widow"></ComboBoxItem>
+            </ComboBox>
+            <TextBlock x:Name="textBlockTotalMonthlyIncome_Copy" HorizontalAlignment="Left" Margin="30.297,307.238,0,0" TextWrapping="Wrap" Text="Children Under 18:" VerticalAlignment="Top" Height="17" Foreground="White" Width="100" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="textBoxTotalMonthlyIncome_Copy" HorizontalAlignment="Left" Height="17" Margin="17.703,307.238,0,0" TextWrapping="Wrap" Text="{Binding WocChildrenUnder18}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockCountyDetail_Copy" HorizontalAlignment="Left" Margin="42.297,329.238,0,0" TextWrapping="Wrap" Text="PostPreparation:" VerticalAlignment="Top" Height="19" Foreground="White" Width="89" RenderTransformOrigin="1.4,1.129" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="textBoxCountyDetail_Copy" HorizontalAlignment="Left" Height="19" Margin="17.703,329.238,0,0" TextWrapping="Wrap" Text="{Binding WocPreparationAfter}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <CheckBox x:Name="checkBoxVeteranStatus_Copy1" IsChecked="{Binding WocSuccess}" Content=":Success&#xA;" HorizontalAlignment="Left" Margin="8,348.238,0,0" VerticalAlignment="Top" Height="16" Foreground="White" FlowDirection="RightToLeft" Width="142" Grid.ColumnSpan="3" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy" HorizontalAlignment="Left" Margin="48.297,369.238,0,0" TextWrapping="Wrap" Text="Improvements:" VerticalAlignment="Top" Foreground="White" Height="16" Width="80" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <RichTextBox x:Name="richTextBox_Copy" HorizontalAlignment="Left" Height="32" Margin="16.703,372.238,0,0" 
             	VerticalAlignment="Top" Width="225" BorderThickness="0" 
-            	AcceptsTab="True" AcceptsReturn="True" FontSize="9.333" Grid.Column="2">
+            	AcceptsTab="True" AcceptsReturn="True" FontSize="9.333" Grid.Column="2" KeyDown="checkForEnter" Grid.Row="1">
                 <FlowDocument>
                     <Paragraph>
                         <Run  Text="{Binding WocImprovements}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <RichTextBox x:Name="richTextBox_Copy1" HorizontalAlignment="Left" Height="32" Margin="17,523,0,0" 
+            <TextBlock x:Name="textBlockLableComments_Copy" HorizontalAlignment="Left" Margin="67.297,413.238,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+            <RichTextBox x:Name="richTextBox_Copy1" HorizontalAlignment="Left" Height="32" Margin="16.703,416.238,0,0" 
             	VerticalAlignment="Top" Width="225" BorderThickness="0" 
-            	AcceptsTab="True" AcceptsReturn="True" FontSize="9.333" Grid.Column="2">
+            	AcceptsTab="True" AcceptsReturn="True" FontSize="9.333" Grid.Column="2" KeyDown="checkForEnter" Grid.Row="1">
                 <FlowDocument>
                     <Paragraph>
                         <Run  Text="{Binding WocComments}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <TextBlock x:Name="textBlockDateDataEntered_Copy" HorizontalAlignment="Left" Margin="257,47,0,0" TextWrapping="Wrap" Text="Class Date:" VerticalAlignment="Top" Height="16" Foreground="White" Width="212" Grid.Column="2"/>
-            <ListBox x:Name="listBoxAptDate_Copy" Margin="257,68,0,0" ItemsSource="{Binding ListDatesSecond, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="212" Height="49" VerticalAlignment="Top" BorderThickness="0" FontSize="9.333" Grid.Column="2" >
+            <Button x:Name="buttonUpdate" Content="" Margin="178.667,485,0,0"  VerticalAlignment="Top" BorderThickness="0" Height="16" FontSize="10.667" HorizontalAlignment="Left" Width="56" Click="buttonUpdate_Click" Foreground="White" Grid.Column="2" Grid.Row="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/update_button.png"/>
+                </Button.Background>
+            </Button>
+            <TextBlock x:Name="textBlockLablePersonsInHome_Copy" HorizontalAlignment="Left" Margin="249.703,4,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="WOC Class Info" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Width="452" FontSize="16" Foreground="White" TextDecorations="Underline" Grid.Column="2"/>
+
+            <Rectangle Fill="#FFD67A1F" HorizontalAlignment="Left" Height="616" Margin="246.667,25,0,0" Stroke="#FFD67A1F" VerticalAlignment="Top" Width="4" Grid.Column="2" Grid.RowSpan="2"/>
+
+            <!--///////////////////////////////////////////////////////////////////////////// Start Class Info (renaming should occur if wrong named labels exist) /////////////////////////////////////////////////////////////////////////////-->
+            <TextBlock x:Name="textBlockDateDataEntered_Copy" HorizontalAlignment="Left" Margin="256.703,47,0,0" TextWrapping="Wrap" Text="Class Date:" VerticalAlignment="Top" Height="16" Foreground="White" Width="212" Grid.Column="2"/>
+            <ListBox x:Name="listBoxAptDate_Copy" Margin="256.703,68,0,0" ItemsSource="{Binding ListDatesSecond, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" Width="212" Height="49" VerticalAlignment="Top" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.RowSpan="2" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -216,53 +209,58 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBlock x:Name="textBlockNewDate_Copy" HorizontalAlignment="Left" Margin="477,65,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16" Foreground="White" Grid.Column="2"/>
-            <TextBox x:Name="textBoxNewDate_Copy" HorizontalAlignment="Left" Height="13" Margin="477,86,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="80" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" FontSize="9.333" Grid.Column="2" />
-            <Button x:Name="buttonAddNewDate_Copy" Content="" Margin="0,86,100,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="78" Click="buttonAddNewDate_Click" RenderTransformOrigin="0.867,1.238" Foreground="{x:Null}" BorderBrush="{x:Null}" Grid.Column="2">
+            <TextBlock x:Name="textBlockNewDate_Copy" HorizontalAlignment="Left" Margin="476.703,65,0,0" TextWrapping="Wrap" Text="New Date:" VerticalAlignment="Top" Height="16" Foreground="White" Grid.Column="2"/>
+            <TextBox x:Name="textBoxNewDate_Copy" HorizontalAlignment="Left" Height="13" Margin="476.703,86,0,0" TextWrapping="Wrap" Text="{Binding DateNow}" VerticalAlignment="Top" Width="80" BorderThickness="0" GotFocus="GotFocus" RenderTransformOrigin="1.215,4.062" FontSize="9.333" Grid.Column="2" />
+            <Button x:Name="buttonAddNewDate_Copy" Content="" Margin="0,86,100,0" VerticalAlignment="Top" Height="13" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="78" Click="buttonAddNewDate_Click" RenderTransformOrigin="0.867,1.238" Foreground="{x:Null}" BorderBrush="{x:Null}" Grid.Column="2">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources/newdate_button.png"/>
                 </Button.Background>
             </Button>
-            <TextBlock x:Name="textBlockDOB_Copy1" HorizontalAlignment="Left" Margin="317,143,0,0" TextWrapping="Wrap" Text="Program:" VerticalAlignment="Top" Foreground="White" Height="16" Width="50" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy" HorizontalAlignment="Left" Height="13" Margin="371,146,0,0" TextWrapping="Wrap" Text="{Binding WocProgram}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy2" HorizontalAlignment="Left" Margin="303,165,0,0" TextWrapping="Wrap" Text="Class Name:" VerticalAlignment="Top" Foreground="White" Height="16" Width="68" Grid.Column="2"/>
-            <CheckBox x:Name="checkBoxSafeToLeaveMessage_Copy" IsChecked="{Binding WocAttended}" Content=":Attended" HorizontalAlignment="Left" Margin="293,186,0,0" VerticalAlignment="Top" Height="16" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="78"  HorizontalContentAlignment="Center" FlowDirection="RightToLeft" IsThreeState="True" Style="{DynamicResource CheckBoxStyle1_ywca}" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy1" HorizontalAlignment="Left" Height="13" Margin="371,168,0,0" TextWrapping="Wrap" Text="{Binding WocClassName}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <CheckBox x:Name="checkBoxSafeToLeaveMessage_Copy1" IsChecked="{Binding WocCompleted}" Content=":Completed" HorizontalAlignment="Left" Margin="371,186,0,0" VerticalAlignment="Top" Height="16" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="100"  HorizontalContentAlignment="Center" FlowDirection="RightToLeft" IsThreeState="True" Style="{DynamicResource CheckBoxStyle1_ywca}" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy3" HorizontalAlignment="Left" Margin="305,204,0,0" TextWrapping="Wrap" Text="Supervisor:" VerticalAlignment="Top" Foreground="White" Height="16" Width="62" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy2" HorizontalAlignment="Left" Height="13" Margin="371,207,0,0" TextWrapping="Wrap" Text="{Binding WocSupervisor}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockLableComments_Copy1" HorizontalAlignment="Left" Margin="311,394,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White" Grid.Column="2"/>
-            <RichTextBox x:Name="richTextBox_Copy2" HorizontalAlignment="Left" Height="129" Margin="377,397,0,0" 
+            <TextBlock x:Name="textBlockDOB_Copy1" HorizontalAlignment="Left" Margin="316.703,36.238,0,0" TextWrapping="Wrap" Text="Program:" VerticalAlignment="Top" Foreground="White" Height="16" Width="50" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy" HorizontalAlignment="Left" Height="13" Margin="370.703,39.238,0,0" TextWrapping="Wrap" Text="{Binding WocProgram}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy2" HorizontalAlignment="Left" Margin="302.703,58.238,0,0" TextWrapping="Wrap" Text="Class Name:" VerticalAlignment="Top" Foreground="White" Height="16" Width="68" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy1" HorizontalAlignment="Left" Height="13" Margin="370.703,61.238,0,0" TextWrapping="Wrap" Text="{Binding WocClassName}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <CheckBox x:Name="checkBoxSafeToLeaveMessage_Copy" IsChecked="{Binding WocAttended}" Content=":Attended" HorizontalAlignment="Left" Margin="292.703,79.238,0,0" VerticalAlignment="Top" Height="16" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="78"  HorizontalContentAlignment="Center" FlowDirection="RightToLeft" IsThreeState="True" Style="{DynamicResource CheckBoxStyle1_ywca}" Grid.Column="2" Grid.Row="1"/>
+            <CheckBox x:Name="checkBoxSafeToLeaveMessage_Copy1" IsChecked="{Binding WocCompleted}" Content=":Completed" HorizontalAlignment="Left" Margin="370.703,79.238,0,0" VerticalAlignment="Top" Height="16" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="100"  HorizontalContentAlignment="Center" FlowDirection="RightToLeft" IsThreeState="True" Style="{DynamicResource CheckBoxStyle1_ywca}" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy3" HorizontalAlignment="Left" Margin="304.703,97.238,0,0" TextWrapping="Wrap" Text="Supervisor:" VerticalAlignment="Top" Foreground="White" Height="16" Width="62" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy2" HorizontalAlignment="Left" Height="13" Margin="370.703,100.238,0,0" TextWrapping="Wrap" Text="{Binding WocSupervisor}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy4" HorizontalAlignment="Left" Margin="300.703,119.238,0,0" TextWrapping="Wrap" Text="Found Value:" VerticalAlignment="Top" Foreground="White" Height="16" Width="70" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy3" HorizontalAlignment="Left" Height="13" Margin="372.703,122.238,0,0" TextWrapping="Wrap" Text="{Binding WocFoundValue}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy5" HorizontalAlignment="Left" Margin="253.703,140.238,0,0" TextWrapping="Wrap" Text="Increased Confidence:" VerticalAlignment="Top" Foreground="White" Height="16" Width="117" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy4" HorizontalAlignment="Left" Height="13" Margin="372.703,143.238,0,0" TextWrapping="Wrap" Text="{Binding WocIncreasedConfidence}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy6" HorizontalAlignment="Left" Margin="266.703,161.238,0,0" TextWrapping="Wrap" Text="Prepared For Goals:" VerticalAlignment="Top" Foreground="White" Height="16" Width="104" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy5" HorizontalAlignment="Left" Height="13" Margin="372.703,164.238,0,0" TextWrapping="Wrap" Text="{Binding WocPreparedForGoals}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy7" HorizontalAlignment="Left" Margin="260.703,182.238,0,0" TextWrapping="Wrap" Text="Stimulated Thinking:" VerticalAlignment="Top" Foreground="White" Height="16" Width="110" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy6" HorizontalAlignment="Left" Height="13" Margin="372.703,185.238,0,0" TextWrapping="Wrap" Text="{Binding WocStimulatedThinking}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy8" HorizontalAlignment="Left" Margin="286.703,203.238,0,0" TextWrapping="Wrap" Text="Improved Skills:" VerticalAlignment="Top" Foreground="White" Height="16" Width="84" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy7" HorizontalAlignment="Left" Height="13" Margin="372.703,206.238,0,0" TextWrapping="Wrap" Text="{Binding WocImprovedSkills}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy9" HorizontalAlignment="Left" Margin="270.703,224.238,0,0" TextWrapping="Wrap" Text="Recommend Class:" VerticalAlignment="Top" Foreground="White" Height="16" Width="100" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy8" HorizontalAlignment="Left" Height="13" Margin="372.703,227.238,0,0" TextWrapping="Wrap" Text="{Binding WocRecommendClass}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy11" HorizontalAlignment="Left" Margin="286.703,245.238,0,0" TextWrapping="Wrap" Text="Apply Learning:" VerticalAlignment="Top" Foreground="White" Height="16" Width="84" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy9" HorizontalAlignment="Left" Height="13" Margin="372.703,248.238,0,0" TextWrapping="Wrap" Text="{Binding WocApplyLearning}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockDOB_Copy12" HorizontalAlignment="Left" Margin="276.703,266.238,0,0" TextWrapping="Wrap" Text="Met Expectations:" VerticalAlignment="Top" Foreground="White" Height="16" Width="94" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="textBoxHomeHousingStatus_Copy10" HorizontalAlignment="Left" Height="13" Margin="372.703,269.238,0,0" TextWrapping="Wrap" Text="{Binding WocMetExpectations}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="textBlockLableComments_Copy1" HorizontalAlignment="Left" Margin="310.703,287.238,0,0" TextWrapping="Wrap" Text="Comments:" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Foreground="White" Grid.Column="2" Grid.Row="1"/>
+            <RichTextBox x:Name="richTextBox_Copy2" HorizontalAlignment="Left" Height="129" Margin="376.703,290.238,0,0" 
             	VerticalAlignment="Top" Width="324" BorderThickness="0" 
-            	AcceptsTab="True" AcceptsReturn="True" FontSize="9.333" Grid.Column="2">
+            	AcceptsTab="True" AcceptsReturn="True" FontSize="9.333" Grid.Column="2" KeyDown="checkForEnter" Grid.Row="1">
                 <FlowDocument>
                     <Paragraph>
                         <Run  Text="{Binding WocFutureDesc}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <TextBlock x:Name="textBlockDOB_Copy4" HorizontalAlignment="Left" Margin="301,226,0,0" TextWrapping="Wrap" Text="Found Value:" VerticalAlignment="Top" Foreground="White" Height="16" Width="70" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy5" HorizontalAlignment="Left" Margin="255,247,0,0" TextWrapping="Wrap" Text="Increased Confidence:" VerticalAlignment="Top" Foreground="White" Height="16" Width="116" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy6" HorizontalAlignment="Left" Margin="267,268,0,0" TextWrapping="Wrap" Text="Prepared For Goals:" VerticalAlignment="Top" Foreground="White" Height="16" Width="104" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy7" HorizontalAlignment="Left" Margin="261,289,0,0" TextWrapping="Wrap" Text="Stimulated Thinking:" VerticalAlignment="Top" Foreground="White" Height="16" Width="110" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy8" HorizontalAlignment="Left" Margin="287,310,0,0" TextWrapping="Wrap" Text="Improved Skills:" VerticalAlignment="Top" Foreground="White" Height="16" Width="84" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy9" HorizontalAlignment="Left" Margin="271,331,0,0" TextWrapping="Wrap" Text="Recommend Class:" VerticalAlignment="Top" Foreground="White" Height="16" Width="100" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy10" HorizontalAlignment="Left" Margin="271,331,0,0" TextWrapping="Wrap" Text="Recommend Class:" VerticalAlignment="Top" Foreground="White" Height="16" Width="100" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy11" HorizontalAlignment="Left" Margin="287,352,0,0" TextWrapping="Wrap" Text="Apply Learning:" VerticalAlignment="Top" Foreground="White" Height="16" Width="84" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockDOB_Copy12" HorizontalAlignment="Left" Margin="277,373,0,0" TextWrapping="Wrap" Text="Met Expectations:" VerticalAlignment="Top" Foreground="White" Height="16" Width="94" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy3" HorizontalAlignment="Left" Height="13" Margin="373,229,0,0" TextWrapping="Wrap" Text="{Binding WocFoundValue}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy4" HorizontalAlignment="Left" Height="13" Margin="373,250,0,0" TextWrapping="Wrap" Text="{Binding WocIncreasedConfidence}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy5" HorizontalAlignment="Left" Height="13" Margin="373,271,0,0" TextWrapping="Wrap" Text="{Binding WocPreparedForGoals}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy6" HorizontalAlignment="Left" Height="13" Margin="373,292,0,0" TextWrapping="Wrap" Text="{Binding WocStimulatedThinking}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy7" HorizontalAlignment="Left" Height="13" Margin="373,313,0,0" TextWrapping="Wrap" Text="{Binding WocImprovedSkills}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy8" HorizontalAlignment="Left" Height="13" Margin="373,334,0,0" TextWrapping="Wrap" Text="{Binding WocRecommendClass}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy9" HorizontalAlignment="Left" Height="13" Margin="373,355,0,0" TextWrapping="Wrap" Text="{Binding WocApplyLearning}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBox x:Name="textBoxHomeHousingStatus_Copy10" HorizontalAlignment="Left" Height="13" Margin="373,376,0,0" TextWrapping="Wrap" Text="{Binding WocMetExpectations}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockLablePersonsInHome_Copy" HorizontalAlignment="Left" Margin="250,4,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="WOC Class Info" VerticalAlignment="Top" RenderTransformOrigin="0.038,0.312" Width="452" FontSize="16" Foreground="White" TextDecorations="Underline" Grid.Column="2"/>
-            <TextBlock x:Name="textBlockTotalMonthlyIncome_Copy" HorizontalAlignment="Left" Margin="29.892,414,0,0" TextWrapping="Wrap" Text="Children Under 18:" VerticalAlignment="Top" Height="17" Foreground="White" Width="100" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <TextBox x:Name="textBoxTotalMonthlyIncome_Copy" HorizontalAlignment="Left" Height="17" Margin="18,414,0,0" TextWrapping="Wrap" Text="{Binding WocChildrenUnder18}" VerticalAlignment="Top" Width="100"  GotFocus="GotFocus" BorderThickness="0" FontSize="9.333" Grid.Column="2"/>
+            <Button x:Name="buttonUpdateADVP" Content="" Margin="0,485,0,0" VerticalAlignment="Top" Height="16" BorderThickness="0" FontSize="10.667"  HorizontalAlignment="Right" Width="56" Click="buttonUpdate_Click" Foreground="White" Grid.Column="2" Grid.Row="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/update_button.png"/>
+                </Button.Background>
+            </Button>
 
-            <!--///////////////////////////////////////////////////////////////////////////// End ADVP Info /////////////////////////////////////////////////////////////////////////////-->
+            <Button x:Name="buttonBack" Content="" Margin="664.703,25,0,0" VerticalAlignment="Top" BorderThickness="0" Height="37" FontSize="10.667" HorizontalAlignment="Left" Width="38" Click="buttonBack_Click" Foreground="White" Grid.Column="2" RenderTransformOrigin="-3.864,0.532">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/back_button.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
     </Viewbox>
 </Window>
